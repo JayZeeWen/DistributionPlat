@@ -1,3 +1,6 @@
 IP:122.114.53.214:3389
 用户名：administrator
 密码：85WB5Y8F33TK4JR2
+
+
+SQLServer: 服务器 122.114.53.214  登录名 sa   密码 admin12345
