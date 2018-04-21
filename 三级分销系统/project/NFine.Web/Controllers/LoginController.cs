@@ -15,6 +15,7 @@ using NFine.Domain.Entity.SystemManage;
 using NFine.Application.SystemManage;
 using NFine.Code;
 using NFine.Application;
+using Distribution.DB;
 
 namespace NFine.Web.Controllers
 {
@@ -24,6 +25,10 @@ namespace NFine.Web.Controllers
         public virtual ActionResult Index()
         {
             var test = string.Format("{0:E2}", 1);
+            using (DistributionContext context = new DistributionContext())
+            {
+                var list = context.t_agent.ToList();
+            }
             return View();
         }
         [HttpGet]
