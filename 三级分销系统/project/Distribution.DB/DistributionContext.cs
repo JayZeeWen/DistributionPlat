@@ -4,6 +4,7 @@ namespace Distribution.DB
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Distribution.Model;
 
     public partial class DistributionContext : DbContext
     {

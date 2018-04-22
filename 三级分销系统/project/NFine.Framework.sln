@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFine.Mapping", "NFine.Mapp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.DB", "Distribution.DB\Distribution.DB.csproj", "{A9995726-5841-45D4-89AA-3A8BD7D10291}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Model", "Distribution.Model\Distribution.Model.csproj", "{CF8D70CC-131D-4380-ABDF-768F001BE10D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Logic", "Distribution.Logic\Distribution.Logic.csproj", "{648F84BB-7352-4216-8A8E-EB739E26B5E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{A9995726-5841-45D4-89AA-3A8BD7D10291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9995726-5841-45D4-89AA-3A8BD7D10291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9995726-5841-45D4-89AA-3A8BD7D10291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF8D70CC-131D-4380-ABDF-768F001BE10D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF8D70CC-131D-4380-ABDF-768F001BE10D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF8D70CC-131D-4380-ABDF-768F001BE10D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF8D70CC-131D-4380-ABDF-768F001BE10D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

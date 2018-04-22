@@ -72,3 +72,7 @@ E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\zh
 E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Configs\system.config
 E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Configs\log4net.config
 E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Configs\database.config
+E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Distribution.Logic.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Distribution.Model.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Distribution.Logic.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\NFine.Web\bin\Distribution.Model.pdb

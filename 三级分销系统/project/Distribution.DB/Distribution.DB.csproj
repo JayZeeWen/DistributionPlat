@@ -53,15 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DistributionContext.cs" />
-    <Compile Include="Entity\Agent.cs" />
-    <Compile Include="Entity\AgentRelation.cs" />
-    <Compile Include="Entity\CommConfig.cs" />
-    <Compile Include="Entity\LevelConfig.cs" />
-    <Compile Include="Entity\ScoreDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Distribution.Model\Distribution.Model.csproj">
+      <Project>{cf8d70cc-131d-4380-abdf-768f001be10d}</Project>
+      <Name>Distribution.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

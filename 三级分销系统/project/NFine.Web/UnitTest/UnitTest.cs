@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Distribution.DB;
-using ComHelper;
+using Distribution.Logic;
+using Distribution.Model;
 
 namespace NFine.Web.UnitTest
 {
@@ -14,10 +14,27 @@ namespace NFine.Web.UnitTest
         [TestMethod]
         public void TestMethod1()
         {
-            using (DistributionContext context = new DistributionContext ())
-            {
-                ScoreLogic.DealRewardScore(context, 5, RewartType.Recommend);
-            }
+            #region Insert
+            //Agent newAg = new Agent();
+            //newAg.c_name = "代理商E2";
+            //newAg.c_state = 1;
+            //newAg.c_levle = 1;
+            //newAg.c_agent_level = 1;
+            //AgentLogic.InsertNewEntiy(newAg);
+            #endregion
+
+            #region Update
+            //Agent ag =  AgentLogic.GetEnityById(5);
+            //ag.c_login_pwd = "233333";
+            //AgentLogic.UpdateEntity(ag); 
+            #endregion
+
+            #region Delete
+            //AgentLogic.DeleteEntity(7);
+            #endregion
+            //var list = ScoreLogic.DealProvinceReward(ag);
+
+
         }
     }
 }

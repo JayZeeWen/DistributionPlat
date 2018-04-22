@@ -141,8 +141,6 @@
     <Compile Include="Areas\SystemSecurity\Controllers\LogController.cs" />
     <Compile Include="Areas\SystemSecurity\Controllers\ServerMonitoringController.cs" />
     <Compile Include="Areas\SystemSecurity\SystemSecurityAreaRegistration.cs" />
-    <Compile Include="CommHelper\LevelHelper.cs" />
-    <Compile Include="CommHelper\ScoreLogic.cs" />
     <Compile Include="Controllers\ClientsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -431,9 +429,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Distribution.DB\Distribution.DB.csproj">
-      <Project>{a9995726-5841-45d4-89aa-3a8bd7d10291}</Project>
-      <Name>Distribution.DB</Name>
+    <ProjectReference Include="..\Distribution.Logic\Distribution.Logic.csproj">
+      <Project>{648f84bb-7352-4216-8a8e-eb739e26b5e1}</Project>
+      <Name>Distribution.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Distribution.Model\Distribution.Model.csproj">
+      <Project>{cf8d70cc-131d-4380-abdf-768f001be10d}</Project>
+      <Name>Distribution.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\NFine.Application\NFine.Application.csproj">
       <Project>{f2035ee2-b73d-4fb8-a433-cab465de6a2a}</Project>

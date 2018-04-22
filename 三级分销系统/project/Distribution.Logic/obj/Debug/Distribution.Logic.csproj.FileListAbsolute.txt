@@ -1,0 +1,13 @@
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.Logic.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.Logic.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.DB.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.Model.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\EntityFramework.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\EntityFramework.SqlServer.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.DB.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\Distribution.Model.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\EntityFramework.xml
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\bin\Debug\EntityFramework.SqlServer.xml
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\obj\Debug\Distribution.Logic.csprojResolveAssemblyReference.cache
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\obj\Debug\Distribution.Logic.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.Logic\obj\Debug\Distribution.Logic.pdb

@@ -8,3 +8,6 @@ E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\
 E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
 E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\obj\Debug\Distribution.DB.dll
 E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\obj\Debug\Distribution.DB.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\bin\Debug\Distribution.Model.dll
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\bin\Debug\Distribution.Model.pdb
+E:\Personal Project\DistributionPlat\三级分销系统\project\Distribution.DB\obj\Debug\Distribution.DB.csprojResolveAssemblyReference.cache
