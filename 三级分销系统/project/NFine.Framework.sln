@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFine.Application", "NFine.Application\NFine.Application.csproj", "{F2035EE2-B73D-4FB8-A433-CAB465DE6A2A}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Model", "Distribution.Model\Distribution.Model.csproj", "{CF8D70CC-131D-4380-ABDF-768F001BE10D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Logic", "Distribution.Logic\Distribution.Logic.csproj", "{648F84BB-7352-4216-8A8E-EB739E26B5E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distribution.Web", "Distribution.Web\Distribution.Web.csproj", "{DF905E57-719A-4D4B-B759-A7859FC4C468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{648F84BB-7352-4216-8A8E-EB739E26B5E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF905E57-719A-4D4B-B759-A7859FC4C468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF905E57-719A-4D4B-B759-A7859FC4C468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF905E57-719A-4D4B-B759-A7859FC4C468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF905E57-719A-4D4B-B759-A7859FC4C468}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{875233BF-EA15-49E0-9A9C-77884A897FF6} = {F2C0CC86-CD58-4803-B43A-10FA559A355B}
 		{F71003E8-A836-48F4-9DF6-DF9095CEBD18} = {DE2A9A88-E15C-4E3D-AB28-B97879149854}
 		{4E642CBE-F6C5-4CB9-9474-6B349652FE77} = {F2C0CC86-CD58-4803-B43A-10FA559A355B}
+		{DF905E57-719A-4D4B-B759-A7859FC4C468} = {748B2C30-CB38-49EE-AD5A-391272786FA7}
 	EndGlobalSection
 EndGlobal
