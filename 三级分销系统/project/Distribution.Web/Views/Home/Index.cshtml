@@ -1,31 +1,561 @@
-﻿@{
+﻿@using Distribution.Model;
+@model Distribution.Model.Agent
+@{
     ViewBag.Title = "Home Page";
+    Layout = null;
 }
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <title>xxxxx生物科技有限公司</title>
+    <meta name="author" content="XX|XX官方唯一认证平台">
+    <meta name="keywords" content="XX|XX官方唯一认证平台">
+    <meta name="description" content="XX|XX官方唯一认证平台">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/idangerous.swiper.css" media="all">
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2"></script>
+    <script type="text/javascript" src="~/Content/copy/idangerous.swiper.min.js"></script>
+    <script type="text/javascript" src="~/Content/copy/layer.js"></script>
+    @*<link rel="stylesheet" href="file:///C:/Users/JayZee/Desktop/demo/%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF_files/skin/default/layer.css?v=1110" id="layuicss-skinlayercss">
+        <link rel="stylesheet" href="http://mozhoumozhou.com/pc/js/skin/default/layer.css?v=1110" id="layuicss-skinlayercss">*@
+</head>
+
+<body class="bBg">
+    <div class="bHeader_bg">
+        <div class="bHeader">
+            <label>您好，欢迎来到广州XX生物科技有限公司！</label><!-- <a class="bHeader1"></a><a class="bHeader2"></a> -->
+            <div class="bHeader3">
+                <a href="~/Home/Index" class="bHeader3_1">@ViewBag.User</a>
+                <a href="http://mozhoumozhou.com/pc/member.php?type=logout" class="bHeader3_2">退出</a>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div class="bNav_bg">
+        <div class="bNav">
+            <a class="bNav1"><img src="./个人信息_files/14992457201499245720.png"></a>
+            <ul>
+                <li><a href="http://mozhoumozhou.com/pc/">首页</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_team">我的客户</a></li>
+                <li><a href="./个人信息_files/个人信息.html">个人资料</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_finance">积分管理</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_goods">我的产品</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_reward">固定补助</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <script>
+        var bSwiper = new Swiper('.bSwiper', {
+            pagination: '.bPosi',
+            loop: true,
+            autoplay: 3000,
+            grabCursor: true,
+            paginationClickable: true
+        });
+        $(".green_top_ul li:last-child").css("border", "none");
+    </script>
+    <style>
+        .grDiv1_21 input {
+            text-indent: 10px;
+        }
+    </style>
+    <script src="~/Content/copy/jquery.form.js"></script>
+
+    <div class="bMain">
+        ﻿<div class="bLeft">
+
+            <h2>广州XX生物科技</h2>
+            <div class="bLeft1">
+                <img src="~/Content/img/samples/scarlet-159.png" />
+                <label>用户名称</label>
+            </div>
+            <div class="bLeft2">
+                <p><label>我的级别：</label><span>县级代理</span></p>
+
+
+                <p style="height: 29px;line-height: 29px;"><a class="level-prom" style="display: block;text-align: center;" href="javascript:void(0)">级别晋升</a></p>        
+                <p><label>代&nbsp;理&nbsp; 码：</label><span>8546127441</span></p>
+                <p><label>总业绩额：</label><span>0</span></p>
+                <p><label>业绩1：</label><span>0</span></p>
+                <p><label>业绩2：</label><span>0</span></p>
+                <p><label>业绩3：</label><span>0</span></p>
+                <p><label>当前积分：</label><span>0.00分</span></p>
+                <p><label>所在地区：</label><span>湖南省娄底市</span></p>
+
+                @*<input type="button" value="积分兑换" onclick="tqOk()">*@
+            </div>
+        </div>
+
+        @*
+            <div class="tqjeDiaBg">
+                <div class="tqjeDia">
+                    <h2>积分兑换</h2>
+                    <div class="tqjeDia1">
+                        <div class="tqjeDia1_1">填写申请折现积分与打款银行卡信息，我们将在三个工作日内将积分打到您的银行卡中。</div>
+                        <div class="tqjeDia1_2"><label>可折现积分：</label><span>0.00</span></div>
+                        <div class="tqjeDia1_3"><label>兑换积分：</label><input type="text" value="" id="money" pattern="金额"></div>
+                    </div>
+                    <div class="tqjeDia2">银行卡信息<!-- <label>修改</label> --></div>
+                    <div class="tqjeDia3">
+                        <p>开户行：<input type="text" value="建设银行陕西省户县沣京路支行" id="bank_aXX" pattern="开户行"></p>
+                        <p>卡　号：<input type="text" value="6236684220003566305" id="bank_num" pattern="卡　号"></p>
+                        <p>持卡人：<input type="text" value="蒋青梅" id="bank_holder" pattern="持卡人" readonly="true"></p>
+                    </div>
+                    <div class="tqjeDia4">
+                        <input class="tqjeDia4_1" type="button" value="确认">
+                        <input class="tqjeDia4_2" onclick="tqClose()" type="button" value="返回">
+                    </div>
+                </div>
+            </div> *@
+
+        <script>
+            function tqOk() {
+                $(".tqjeDiaBg").show();
+            }
+            function tqClose() {
+                $(".tqjeDiaBg").hide();
+            }
+
+            $('#money').on('blur', chk_money);
+
+            function chk_money() {
+                var money = $('#money').val();
+                if (money && parseInt(money) < 100) {
+                    alert('100起提');
+                    throw '';
+                }
+            }
+            $('.tqjeDia4_1').click(function () {
+                chk_money();
+                var money = $('#money').val();
+                var bank_aXX = $('#bank_aXX').val();
+                var bank_num = $('#bank_num').val();
+                var bank_holder = $('#bank_holder').val();
+                $.post('http://mozhoumozhou.com/pc/member.php', {
+                    action: 'drawmoney',
+                    money: money,
+                    bank_aXX: bank_aXX,
+                    bank_num: bank_num,
+                    bank_holder: bank_holder
+                }, function (data) {
+                    console.log(data);
+                    layer.msg(data.message);
+                    if (data.errno == 0) {
+                        location.reload();
+                    }
+                }, 'json');
+            });
+
+            $(function () {
+                $('.level-prom').on('click', function () {
+                    $("#prom").show();
+                    $.get('http://mozhoumozhou.com/pc/member.php?type=promotion', function (data) {
+                        $('#prom').html(data).show();
+                    }, 'html');
+                });
+            });
+        </script>
+        <!--弹出层_提取金额_end-->
+
+
+        <div class="bRight">
+
+            <!--右侧开始-->
+
+            <div class="grDiv1">
+                <div class="grDiv1_1"><label>基本信息</label></div>
+                <div class="grDiv1_2">
+                    <div class="grDiv1_21">
+                        <p><label>真实姓名：</label><input type="text" name="name" class="name" disabled="" value="将青梅"></p>
+                        <!--<p><label>真实姓名：</label><input type="text" name="name" class="name" value="将青梅" readOnly="true" /></p>-->
+                        <p><label>手<i>空空</i>机：</label><input type="text" name="email" class="email" value="281767626@qq.com"></p>
+                        <p style="position: relative;">
+                            <label>推  荐  人：</label><input type="text" name="tj" disabled="" class="tj" value="张凯博">
+                            <span style="position: absolute;width:160px;left: 375px;top: 9px;font-size: 14px;color: #666;"></span>
+                        </p>
+                    </div>
+                    @*<div class="grDiv1_22" style="position: relative;">
+                            <span style="position:absolute;;bottom: -30px;display: block;width:100%;height: 20px;line-height: 20px;">头像</span>
+                            <img id="imghead" border="0" src="./个人信息_files/no_picture.gif" width="100%" height="100%" onclick="$('#previewImg').click();">
+                        </div>*@
+                    <form id="myupload" action="http://mozhoumozhou.com/m/uploadajax/action.php" method="post" enctype="multipart/form-data"><form id="myupload" action="/m/uploadajax/action.php" method="post" enctype="multipart/form-data"><input type="file" name="mypic" id="previewImg" style="display: none;"></form></form>
+                    <input type="hidden" name="head_img" id="head_img" value="">
+                </div>
+            </div>
+
+            <div class="grDiv2">
+                <div class="grDiv2_1"><label>地址管理</label></div>
+                <div class="grDiv2_2">
+                    <p><label>联系地址：</label><input type="text" name="address" class="address" disabled="" value="湖南省娄底市新星南路娄兴彩钢附近"></p>
+                    <p><label>收件人：</label><input type="text" name="addressee" class="addressee" disabled="" value="张凯博"></p>
+                    <p><label>联系方式：</label><input type="text" name="tel" class="tel" disabled="" value="17096750086"></p>
+                </div>
+            </div>
+
+            <div class="grDiv3">
+                <div class="grDiv3_1"><label>银行卡管理</label></div>
+                <div class="grDiv3_2">
+                    <!-- <div class="grDiv3_21"><i></i><span>建设银行</span><span>工商银行</span><span>农业银行</span></div> -->
+                    <p><label>开户行：</label><input type="text" name="bank_aXX" class="bank_aXX" value="建设银行陕西省户县沣京路支行"></p>
+                    <p><label>持卡人：</label><input type="text" name="bank_holder" class="bank_holder" value="蒋青梅"></p>
+                    <!--<p><label>持卡人：</label><input type="text" name="bank_holder" class="bank_holder" value="蒋青梅"  /></p>-->
+                    <p><label>卡<i>空</i>号：</label><input type="text" name="bank_num" class="bank_num" value="6236684220003566305"></p>
+                </div>
+            </div>
+
+            <!--<div class="grDiv3">
+              <div class="grDiv3_1"><label>密码管理（如需修改密码填写）</label></div>
+                <div class="grDiv3_2">
+                  <p><label>旧密码：</label><input type="password" name="old_pass" class="old_pass" value="" /></p>
+                  <p><label>新密码：</label><input type="password" name="new_pass" class="new_pass" value="" /></p>
+                  <p><label>确认密码：</label><input type="password" name="re_pass" class="re_pass" value="" /></p>
+                </div>
+            </div>-->
+
+            <div class="grDiv4">
+                <input type="submit" class="grDiv4_1" value="提交"><!-- <input type="button" class="grDiv4_2" value="返回" /> -->
+            </div>
+            <script>
+                var is_tj_code = false;
+                function isChinese(temp) {
+                    var re = /[^\u4e00-\u9fa5]/;
+                    if (re.test(temp)) return false;
+                    return true;
+                }
+                $('input[name="tj"]').change(function () {
+                    var tj_code = $(this).val();
+                    if (tj_code == null) return;
+                    var self = $(this);
+                    $.post("http://mozhoumozhou.com/pc/member.php", { action: 'tj_name', tj_code: tj_code }, function (data) {
+                        if (data == "无此推荐人") {
+
+                            is_tj_code = false;
+                        } else {
+                            is_tj_code = true;
+                        }
+                        self.parent().find('span').text(data);
+                    }, 'text');
+                });
+
+
+                $(".selectKh").click(function (event) {
+                    $(".grDiv3_21").show();
+                    event.stopPropagation();
+                })
+                $(document).click(function () {
+                    $(".grDiv3_21").hide();
+                })
+                $(".grDiv3_21 span").click(function () {
+                    $('.selectKh').val($(this).text());
+                })
+
+                $("#previewImg").wrap("<form id='myupload' action='/m/uploadajax/action.php' method='post' enctype='multipart/form-data'></form>");
+                $("#previewImg").change(function () {
+                    $("#myupload").ajaxSubmit({
+                        dataType: 'json',
+                        suXXess: function (data) {
+                            if (data.error == '1') {
+                                layer.msg(data.name);
+                                return false;
+                            } else {
+                                $("#imghead").attr("src", '../' + data.pic);
+                                $("#head_img").val(data.pic);
+                                layer.msg('头像上传成功');
+                            }
+                        },
+                        error: function (xhr) {
+                            layer.msg('上传失败');
+                        }
+                    });
+                });
+
+                $('.grDiv4_1').click(function () {
+                    var name = $('.name').val();
+                    var email = $('.email').val();
+                    var address = $('.address').val();
+                    var addressee = $('.addressee').val();
+                    var tel = $('.tel').val();
+                    var bank_aXX = $('.bank_aXX').val();
+                    var bank_holder = $('.bank_holder').val();
+                    var bank_num = $('.bank_num').val();
+                    var head_img = $('#head_img').val();
+                    if (name == '') {
+                        layer.msg('请输入真实姓名');
+                        return false;
+                    }
+                    if (email == '') {
+                        layer.msg('请输入邮箱');
+                        return false;
+                    }
+                    if (address == '') {
+                        layer.msg('请输入联系地址');
+                        return false;
+                    }
+                    if (addressee == '') {
+                        layer.msg('请输入收件人');
+                        return false;
+                    }
+                    if (tel == '') {
+                        layer.msg('请输入联系方式');
+                        return false;
+                    }
+                    if (bank_aXX == '') {
+                        layer.msg('请输入开户行');
+                        return false;
+                    }
+                    if (bank_holder == '') {
+                        layer.msg('请输入持卡人');
+                        return false;
+                    }
+                    if (bank_num == '') {
+                        layer.msg('请输入卡号');
+                        return false;
+                    }
+
+                    if (!isChinese(name)) {
+                        layer.msg('姓名只允许输入纯中文');
+                        return false;
+                    }
+                    if (!isChinese(bank_aXX)) {
+                        layer.msg('开户行只允许输入纯中文');
+                        return false;
+                    }
+                    if (!isChinese(bank_holder)) {
+                        layer.msg('持卡人只允许输入纯中文');
+                        return false;
+                    }
+
+                    if (!(/^1[34578]\d{9}$/.test(tel))) {
+                        layer.msg("联系方式有误，请重填");
+                        return false;
+                    }
+
+
+                    var post_data = { action: 'index', name: name, email: email, address: address, addressee: addressee, tel: tel, bank_aXX: bank_aXX, bank_holder: bank_holder, bank_num: bank_num, head_img: head_img };
+                    if (!$('.tj').prop("disabled")) {
+                        if (is_tj_code == false) {
+                            layer.msg("请输入正确的推荐码");
+                            return false;
+                        }
+                        post_data.ad_tj_code = $('.tj').val();
+                    }
+                    //     	var old_pass = $('.old_pass').val();
+                    //     	var new_pass = $('.new_pass').val();
+                    //     	var re_pass = $('.re_pass').val();
+                    //      if(old_pass != "" || new_pass != "" || re_pass!=""){
+                    //      	if(old_pass == ''){
+                    //      		layer.msg("请输入旧密码");
+                    //      		return false;
+                    //      	}
+                    //      	if(new_pass == ''){
+                    //      		layer.msg("请输入新密码");
+                    //      		return false;
+                    //      	}
+                    //      	if(re_pass == ''){
+                    //      		layer.msg("请确认密码");
+                    //      		return false;
+                    //      	}
+                    //
+                    //      	if(new_pass.length >16 || new_pass.length <6 ){
+                    //      		layer.msg("请输入6-16 个字符的密码");
+                    //      		return false;
+                    //      	}
+                    //
+                    //      	if(re_pass != new_pass){
+                    //      		layer.msg("请确认密码 不正确");
+                    //      		return false;
+                    //      	}
+                    //
+                    //      	post_data.old_pass  = old_pass;
+                    //      	post_data.new_pass  = new_pass;
+                    //
+                    //      }
+                    $.post('http://mozhoumozhou.com/pc/member.php', post_data, function (data) {
+                        layer.msg(data.message);
+                        if (data.errno == 0) {
+                            window.location.reload();
+                        }
+                    }, 'json');
+                })
+            </script>
+            <!--右侧结束-->
+
+        </div>
+        <div class="clearB"></div>
     </div>
-</div>
+    <script src="~/Content/copy/pagemsg.js"></script>
+    <!--底部-->
+    <div class="footer_box">
+        <div class="footer">
+            <p></p>
+            <p>Copyright © 2016 Inc. All rights reserved 2017-2020 <span style="color:#666666;font-family:Verdana, Arial, Vrinda, Tahoma;font-weight:bold;text-align:right;background-color:#eef2f5;">XX官方版权所有</span>&nbsp;All Rights Reserved &nbsp; </p>
+            <p><!--电话：400-0000-000 -->粤ICP备17102192号</p>
+        </div>
+    </div>
+
+    <style>
+        .tqjeDiaBg, #prom {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            display: none;
+        }
+
+        .tqjeDia {
+            width: 530px;
+            height: 536px;
+            overflow: hidden;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 7px;
+        }
+
+            .tqjeDia h2 {
+                line-height: 50px;
+                padding-left: 20px;
+                font-weight: bold;
+                background: #eee;
+                font-size: 20px;
+                color: #333;
+            }
+
+        .tqjeDia1 {
+            height: 211px;
+        }
+
+        .tqjeDia1_1 {
+            font-size: 16px;
+            height: 74px;
+            color: #333;
+            line-height: 27px;
+            padding: 26px 2px 0 24px;
+        }
+
+        .tqjeDia1_2 {
+            text-align: center;
+        }
+
+            .tqjeDia1_2 label {
+                font-size: 18px;
+                font-weight: bold;
+                color: #292929;
+            }
+
+            .tqjeDia1_2 span {
+                font-size: 18px;
+                font-weight: bold;
+                color: #fe6c00;
+            }
+
+        .tqjeDia1_3 {
+            text-align: center;
+            line-height: 30px;
+            padding-top: 26px;
+        }
+
+            .tqjeDia1_3 label {
+                font-size: 14px;
+                color: #333;
+            }
+
+            .tqjeDia1_3 input {
+                width: 93px;
+                padding-left: 5px;
+                margin: 0 19px;
+                height: 30px;
+                border: 1px solid #e1e1e1;
+            }
+
+            .tqjeDia1_3 span {
+                font-size: 16px;
+                color: #1da75f;
+            }
+
+        .tqjeDia2 {
+            width: 490px;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 58px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+            .tqjeDia2 label {
+                float: right;
+                color: #1da75f;
+                font-size: 16px;
+                font-weight: 100;
+            }
+
+        .tqjeDia3 {
+            width: 490px;
+            height: 130px;
+            padding-top: 13px;
+            margin-left: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .tqjeDia3 p {
+                font-size: 18px;
+                color: #999;
+                line-height: 39px;
+            }
+
+            .tqjeDia3 input {
+                width: 300px;
+                padding-left: 5px;
+                margin: 0 19px;
+                height: 30px;
+                border: 1px solid #e1e1e1;
+            }
+
+        .tqjeDia4 {
+            width: 375px;
+            height: 50px;
+            text-align: center;
+            padding-left: 115px;
+            padding-top: 20px;
+            margin-left: 20px;
+            border-top: 1px dashed #eeeeee;
+        }
+
+            .tqjeDia4 input {
+                width: 78px;
+                height: 30px;
+                font-size: 14px;
+                border-radius: 5px;
+                display: block;
+                float: left;
+            }
+
+        input.tqjeDia4_1 {
+            border: 1px solid #1da75f;
+            color: #fff;
+            background: #1da75f;
+            margin-right: 100px;
+        }
+
+        input.tqjeDia4_2 {
+            border: 1px solid #1da75f;
+            color: #1da75f;
+            background: #fff;
+        }
+    </style>
+
+    <div class="promotion" id="prom"></div>
+
+
+</body>
+</html>

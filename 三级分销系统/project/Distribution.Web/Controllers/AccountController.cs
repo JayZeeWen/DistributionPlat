@@ -102,7 +102,6 @@ namespace Distribution.Web.Controllers
                     logEntity.F_Description = "登录成功";
                     new LogApp().WriteDbLog(logEntity);
                 }
-                var a = NFine.Code.OperatorProvider.Provider.GetCurrent();
                 return Content(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" }.ToJson());
             }
             catch (Exception ex)
@@ -177,34 +176,40 @@ namespace Distribution.Web.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        ////
+        //// POST: /Account/Register
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+            
+
+        //    // 如果我们进行到这一步时某个地方出错，则重新显示表单
+        //    return View(model);
+        //}
+
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        [HandlerAjaxOnly]
+        public ActionResult Register(string username, string password, string recMobile)
         {
-            if (ModelState.IsValid)
+            LogEntity logEntity = new LogEntity();
+            logEntity.F_ModuleName = "系统登录";
+            logEntity.F_Type = DbLogType.Login.ToString();
+            try
             {
-                var user = new ApplicationUser { UserName = model.RegisterMobile, Email = model.RegisterMobile };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771
-                    // 发送包含此链接的电子邮件
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "确认你的帐户", "请通过单击 <a href=\"" + callbackUrl + "\">這裏</a>来确认你的帐户");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                AddErrors(result);
+                AgentLogic.CheckRegist(username, recMobile, password);
+                return Content(new AjaxResult { state = ResultType.success.ToString(), message = "注册成功。" }.ToJson());
             }
-
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
-            return View(model);
+            catch (Exception ex)
+            {
+                logEntity.F_Account = username;
+                logEntity.F_NickName = username;
+                logEntity.F_Result = false;
+                logEntity.F_Description = "注册失败，" + ex.Message;
+                new LogApp().WriteDbLog(logEntity);
+                return Content(new AjaxResult { state = ResultType.error.ToString(), message = ex.Message }.ToJson());
+            }
         }
 
         //

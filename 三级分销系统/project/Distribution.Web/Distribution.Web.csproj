@@ -177,6 +177,13 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\copy\idangerous.swiper.css" />
+    <Content Include="Content\copy\idangerous.swiper.min.js" />
+    <Content Include="Content\copy\jquery.form.js" />
+    <Content Include="Content\copy\layer.js" />
+    <Content Include="Content\copy\pagemsg.js" />
+    <Content Include="Content\copy\style.css" />
+    <Content Include="Content\copy\z.css" />
     <Content Include="Content\css\framework-about.css" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -464,8 +471,7 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login2.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Register3.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -479,6 +485,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,6 +10,8 @@ namespace Distribution.Web.Controllers
     {
         public ActionResult Index()
         {
+            var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
+            ViewBag.User = UserInfo.UserCode;
             return View();
         }
 

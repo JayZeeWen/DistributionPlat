@@ -11,11 +11,12 @@ namespace Distribution.Logic
 {
     public static class AgentLogic
     {
-        public static Agent GetEnityById(int id )
+        #region BasicMethod
+        public static Agent GetEnityById(int id)
         {
             using (DistributionContext context = new DistributionContext())
             {
-                return  context.t_agent.Find(id);
+                return context.t_agent.Find(id);
             }
         }
 
@@ -37,7 +38,7 @@ namespace Distribution.Logic
 
         public static void InsertNewEntiy(Agent NewAgent)
         {
-            using (DistributionContext context = new DistributionContext ())
+            using (DistributionContext context = new DistributionContext())
             {
                 context.t_agent.Add(NewAgent);
                 context.SaveChanges();
@@ -62,7 +63,8 @@ namespace Distribution.Logic
                 context.t_agent.Remove(DelAgent);
                 context.SaveChanges();
             }
-        }
+        } 
+        #endregion
 
         public static Agent CheckLogin(string mobile, string password)
         {
@@ -91,5 +93,30 @@ namespace Distribution.Logic
                 throw new Exception("账户不存在，请重新输入");
             }
         }
+
+        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd)
+        {
+            bool result = true;
+            Agent rec_ag = FindEntity(t => t.c_mobile == reco_Mobile);
+            if (rec_ag == null)
+            {
+                throw new Exception("未找到推荐人，请输入正确的推荐人手机号码");
+            }
+            Agent reg_ag = FindEntity(t => t.c_mobile == reg_Mobile);
+            if(reg_ag != null )
+            {
+                throw new Exception("该手机已被注册，请输入正确的手机号码或联系管理员");
+            }
+            reg_ag = new Agent();
+            reg_ag.c_mobile = reg_Mobile;
+            reg_ag.c_login_pwd = pwd;
+            reg_ag.c_levle = 1;
+            reg_ag.c_state = 0;
+            reg_ag.c_create_date = DateTime.Now;
+            reg_ag.c_score = 0;
+            InsertNewEntiy(reg_ag);
+            return result;
+        }
+
     }
 }
