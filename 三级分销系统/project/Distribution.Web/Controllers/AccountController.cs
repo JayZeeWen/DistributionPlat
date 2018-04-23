@@ -18,6 +18,7 @@ using NFine.Application.SystemSecurity;
 using Distribution.Logic;
 using Distribution.Model;
 using System.Web.Services;
+using System.IO;
 
 namespace Distribution.Web.Controllers
 {
@@ -176,18 +177,6 @@ namespace Distribution.Web.Controllers
             return View();
         }
 
-        ////
-        //// POST: /Account/Register
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> Register(RegisterViewModel model)
-        //{
-            
-
-        //    // 如果我们进行到这一步时某个地方出错，则重新显示表单
-        //    return View(model);
-        //}
 
         [HttpPost]
         [HandlerAjaxOnly]
@@ -212,71 +201,40 @@ namespace Distribution.Web.Controllers
             }
         }
 
-        //
-        // GET: /Account/ConfirmEmail
-        [AllowAnonymous]
-        public async Task<ActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return View("Error");
-            }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
 
-        //
-        // GET: /Account/ForgotPassword
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
+        public ActionResult UploadFile()
         {
-            return View();
-        }
-
-        //
-        // POST: /Account/ForgotPassword
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                HttpPostedFileBase hpf = Request.Files["fileUpload"]; //主要是这个地方获取到值就没问题了  
+                if(hpf.ContentLength == 0)
                 {
-                    // 请不要显示该用户不存在或者未经确认
-                    return View("ForgotPasswordConfirmation");
+                    throw new Exception("未找到上传的文件");
                 }
-
-                // 有关如何启用帐户确认和密码重置的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=320771
-                // 发送包含此链接的电子邮件
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "重置密码", "请通过单击 <a href=\"" + callbackUrl + "\">此处</a>来重置你的密码");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string fileName = hpf.FileName;
+                string basePath = "F:/private_wenjun.zhang/practice/MVCTest/MVCTest/File/";
+                //if (!Directory.Exists(Server.MapPath(basePath)))
+                //    Directory.CreateDirectory(Server.MapPath(basePath));
+                string fullPath = basePath + fileName;
+                hpf.SaveAs(fullPath);
+                //string binaryString = MyCommon.FileToBinary(Server.MapPath(fullPath));
+                //FileModel model = new FileModel();
+                //model.EventId = "1";
+                //model.FileData = binaryString;
+                //model.FileName = fileName;
+                //model.FileExtension = fileName.Substring(fileName.LastIndexOf("."));
+                //model.Flag = 0;
+                return Content(new AjaxResult { state = ResultType.success.ToString(), message = "成功" }.ToJson());
             }
-
-            // 如果我们进行到这一步时某个地方出错，则重新显示表单
-            return View(model);
+            catch (Exception ex )
+            {
+                return Content(new AjaxResult { state = ResultType.error.ToString(), message = ex.Message  }.ToJson());
+                throw;
+            }
         }
+        
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public ActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        //
-        // GET: /Account/ResetPassword
-        [AllowAnonymous]
-        public ActionResult ResetPassword(string code)
-        {
-            return code == null ? View("Error") : View();
-        }
-
+        
         //
         // POST: /Account/ResetPassword
         [HttpPost]

@@ -53,6 +53,11 @@
                 <div class="row">
                 </div>
             </form>
+            @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
+            {
+                <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
+                <button  type="button" onclick="fileUploadMethod2()"><span>上传</span></button>
+            }
             <div class="login_tips"></div>
         </div>
         <ul class="bg-bubbles">
@@ -74,6 +79,7 @@
         适用浏览器：IE8以上、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.
     </div>
     <script type="text/javascript">
+        var isFileUpload = 0;
         (function ($) {
             $.login = {
                 formMessage: function (msg) {
@@ -86,7 +92,10 @@
                     var $confirm_password = $("#txt_confirm_password");
                     var $recomm_mobile = $("#txt_recomm_account");
                     var $code = $("#txt_code");
-                    if ($username.val() == "") {
+                    if (isFileUpload == 0) {
+                        $.login.formMessage('请先上传文件。');
+                        return false;
+                    } else if ($username.val() == "") {
                         $username.focus();
                         $.login.formMessage('请输入手机号。');
                         return false;
@@ -172,6 +181,35 @@
                 $.login.init();
             });
         })(jQuery);
+
+        function fileUploadMethod2() {
+            @*alert('@HttpContext.Current.')*@
+            var odata = new FormData($("#formFileUpload")[0]);
+            
+            $.ajax({
+                contentType: false,
+                cache: false,
+                processData: false,
+                url: '../Account/UploadFile',
+                dataType: "json",
+                async: false,
+                type: "post",
+                data: odata,
+                success: function (data) {
+                    if (data.state == "success") {
+                        isFileUpload = 1;
+                        $.login.formMessage('');
+                    } else {
+                        isFileUpload = 0;
+                        $.login.formMessage('文件上传失败。');
+                        return false;
+                    }
+                }
+            }).fail(
+             function (xhr, textstatus, err) {
+                 alert('error: ' + err);
+             });
+        }
     </script>
 </body>
 </html>

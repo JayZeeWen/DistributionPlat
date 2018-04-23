@@ -115,6 +115,12 @@ namespace Distribution.Logic
             reg_ag.c_create_date = DateTime.Now;
             reg_ag.c_score = 0;
             InsertNewEntiy(reg_ag);
+
+            AgentRelation ar = new AgentRelation();
+            ar.c_parent_id = reg_ag.c_id;
+            ar.c_child_id = rec_ag.c_id;
+            ar.c_create_date = DateTime.Now;
+            AgentRelationLogic.InsertNewEntiy(ar);
             return result;
         }
 
