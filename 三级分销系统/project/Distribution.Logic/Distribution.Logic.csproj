@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentRelationLogic.cs" />
     <Compile Include="AgentLogic.cs" />
     <Compile Include="CommLogic.cs" />
     <Compile Include="LevelLogic.cs" />

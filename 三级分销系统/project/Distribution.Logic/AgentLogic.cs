@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Distribution.DB;
 using Distribution.Model;
+using System.Linq.Expressions;
 
 namespace Distribution.Logic
 {
@@ -17,6 +18,12 @@ namespace Distribution.Logic
                 return  context.t_agent.Find(id);
             }
         }
+
+        public static Agent FindEntity(Expression<Func<Agent, bool>> predicate)
+        {
+            return CommLogic.FindEntity<Agent>(predicate);
+        }
+
 
         public static List<Agent> GetList()
         {
@@ -54,6 +61,34 @@ namespace Distribution.Logic
                 Agent DelAgent = context.t_agent.Find(AgentId);
                 context.t_agent.Remove(DelAgent);
                 context.SaveChanges();
+            }
+        }
+
+        public static Agent CheckLogin(string mobile, string password)
+        {
+            Agent userEntity = AgentLogic.FindEntity(t => t.c_mobile == mobile);
+            if (userEntity != null)
+            {
+                if (userEntity.c_state  == 1)
+                {
+                    string dbPassword = userEntity.c_login_pwd;
+                    if (dbPassword == password)
+                    {
+                        return userEntity;
+                    }
+                    else
+                    {
+                        throw new Exception("密码不正确，请重新输入");
+                    }
+                }
+                else
+                {
+                    throw new Exception("账户未审核,请等待审核通过");
+                }
+            }
+            else
+            {
+                throw new Exception("账户不存在，请重新输入");
             }
         }
     }

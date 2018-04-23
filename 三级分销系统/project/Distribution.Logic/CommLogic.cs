@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
+using System.Linq.Expressions;
+using Distribution.DB;
 
 namespace Distribution.Logic
 {
@@ -20,5 +22,14 @@ namespace Distribution.Logic
                 p.SetValue(OriEntity, value);
             }
         }
+
+        public static TEntity FindEntity<TEntity>(Expression<Func<TEntity, bool>> predicate) where TEntity : class,new()
+        {
+            using (DistributionContext dbcontext = new DistributionContext ())
+            {
+                return dbcontext.Set<TEntity>().FirstOrDefault(predicate);
+            }
+        }
+
     }
 }
