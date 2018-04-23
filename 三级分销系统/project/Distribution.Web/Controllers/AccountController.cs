@@ -19,6 +19,7 @@ using Distribution.Logic;
 using Distribution.Model;
 using System.Web.Services;
 using System.IO;
+using System.Configuration;
 
 namespace Distribution.Web.Controllers
 {
@@ -180,7 +181,7 @@ namespace Distribution.Web.Controllers
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult Register(string username, string password, string recMobile)
+        public ActionResult Register(string username, string password, string recMobile,string savePath)
         {
             LogEntity logEntity = new LogEntity();
             logEntity.F_ModuleName = "系统登录";
@@ -212,9 +213,14 @@ namespace Distribution.Web.Controllers
                     throw new Exception("未找到上传的文件");
                 }
                 string fileName = hpf.FileName;
-                string basePath = "F:/private_wenjun.zhang/practice/MVCTest/MVCTest/File/";
-                //if (!Directory.Exists(Server.MapPath(basePath)))
-                //    Directory.CreateDirectory(Server.MapPath(basePath));
+                string path = ConfigurationManager.AppSettings["SaveFilePath"];
+                string datePath = DateTime.Now.ToString("yyyyMM") + "/";
+                path += datePath;
+                string basePath = path;
+                if (!Directory.Exists(basePath))
+                {
+                    Directory.CreateDirectory(basePath);
+                }
                 string fullPath = basePath + fileName;
                 hpf.SaveAs(fullPath);
                 //string binaryString = MyCommon.FileToBinary(Server.MapPath(fullPath));
@@ -224,7 +230,7 @@ namespace Distribution.Web.Controllers
                 //model.FileName = fileName;
                 //model.FileExtension = fileName.Substring(fileName.LastIndexOf("."));
                 //model.Flag = 0;
-                return Content(new AjaxResult { state = ResultType.success.ToString(), message = "成功" }.ToJson());
+                return Content(new AjaxResult { state = ResultType.success.ToString(), message = fullPath }.ToJson());
             }
             catch (Exception ex )
             {

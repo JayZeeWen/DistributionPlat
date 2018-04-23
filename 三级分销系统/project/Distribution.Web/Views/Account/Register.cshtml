@@ -21,16 +21,17 @@
 <body>
 
     @*<div style="position: absolute; z-index: 999; top: 20px; left: 20px; color: #fff; font-size: 13px; line-height: 22px;">
-        在线体验，基于阿里巴巴云主机，采用独立运行环境，提供持续稳定安全服务，24小时均可以访问<br>
-        用户名 admin 或 guest，密码 0000，请勿在系统内发表不文明信息
-    </div>*@
+            在线体验，基于阿里巴巴云主机，采用独立运行环境，提供持续稳定安全服务，24小时均可以访问<br>
+            用户名 admin 或 guest，密码 0000，请勿在系统内发表不文明信息
+        </div>*@
     <div class="wrapper">
         <div class="container">
             <div class="logo">
                 <i class="fa fa-modx"></i>
                 <h1>三级分销平台</h1>
             </div>
-            <form class="form">
+            @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
+            {
                 <div class="row">
                     <input id="txt_account" type="text" placeholder="手机号">
                     <i class="fa fa-user"></i>
@@ -48,16 +49,20 @@
                     <i class="fa fa-key"></i>
                 </div>
                 <div class="row">
+                    <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
+                    <button type="button" id="btnUpload" onclick="fileUploadMethod2()" >上传</button>
+                </div>
+                <div class="row">
                     <button id="login_button" type="button"><span>注册</span></button>
                 </div>
                 <div class="row">
-                </div>
-            </form>
-            @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
-            {
-                <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
-                <button  type="button" onclick="fileUploadMethod2()"><span>上传</span></button>
-            }
+                </div>}
+            @*@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
+                {
+                    <div class="tips_msg"><i class="fa fa-question-circle"></i></div>
+                    <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
+                    <button  type="button" onclick="fileUploadMethod2()"><span>上传</span></button>
+                }*@
             <div class="login_tips"></div>
         </div>
         <ul class="bg-bubbles">
@@ -73,19 +78,16 @@
             <li></li>
         </ul>
     </div>
-    <div class="copyright">
-        @*<a href="http://www.nfine.cn" style="text-decoration:none;color:#fff;">NFine开发团队出品</a>
-        <br>*@
-        适用浏览器：IE8以上、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.
-    </div>
     <script type="text/javascript">
         var isFileUpload = 0;
+        var filePath = "";
         (function ($) {
             $.login = {
                 formMessage: function (msg) {
                     $('.login_tips').find('.tips_msg').remove();
                     $('.login_tips').append('<div class="tips_msg"><i class="fa fa-question-circle"></i>' + msg + '</div>');
                 },
+
                 loginClick: function () {
                     var $username = $("#txt_account");
                     var $password = $("#txt_password");
@@ -109,7 +111,7 @@
                         return false;
                     } else if ($confirm_password.val() == "") {
                         $confirm_password.focus();
-                        $.login.formMessage('请输入确认密码。');                        
+                        $.login.formMessage('请输入确认密码。');
                         return false;
                     } else if ($password.val() != $confirm_password.val()) {
                         $.login.formMessage('两次输入密码不一致，请重新输入。');
@@ -120,7 +122,8 @@
                             data: {
                                 username: $.trim($username.val())
                                 , password: $.trim($password.val())
-                                , recMobile: $.trim($recomm_mobile.val())                       
+                                , recMobile: $.trim($recomm_mobile.val())
+                                , savePath:filePath
                             },
                             type: "post",
                             dataType: "json",
@@ -185,7 +188,7 @@
         function fileUploadMethod2() {
             @*alert('@HttpContext.Current.')*@
             var odata = new FormData($("#formFileUpload")[0]);
-            
+
             $.ajax({
                 contentType: false,
                 cache: false,
@@ -198,7 +201,9 @@
                 success: function (data) {
                     if (data.state == "success") {
                         isFileUpload = 1;
-                        $.login.formMessage('');
+                        filePath = data.message;
+                        document.getElementById('btnUpload').innerHTML = '文件上传成功'
+                        $('#btnUpload').attr("disabled", true);
                     } else {
                         isFileUpload = 0;
                         $.login.formMessage('文件上传失败。');
