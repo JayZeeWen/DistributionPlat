@@ -13,8 +13,7 @@ namespace Distribution.Logic
         /// <summary>
         /// 代理等级提升判断并执行
         /// </summary>
-        /// <param name="RecomAgent">代理商</param>
-        /// <param name="context"></param>
+        /// <param name="RecomAgent">需要判断升级的代理商</param>
         /// <returns></returns>
         public static bool  IsLevelUpWithCondition(Agent RecomAgent)
         {

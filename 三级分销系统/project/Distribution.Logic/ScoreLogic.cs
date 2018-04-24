@@ -12,6 +12,12 @@ namespace Distribution.Logic
 
     public static class ScoreLogic
     {
+        /// <summary>
+        /// 处理积分奖励逻辑
+        /// </summary>
+        /// <param name="AgentId">代理商（被推荐人或是产品购买人）</param>
+        /// <param name="reType">奖励类型：推荐奖励   购买奖励</param>
+        /// <returns></returns>
         public static bool DealRewardScore( int AgentId, RewartType reType)
         {
             bool result = true;
@@ -70,6 +76,11 @@ namespace Distribution.Logic
             return result;
         }
 
+        /// <summary>
+        /// 省级代理奖励
+        /// </summary>
+        /// <param name="BeRecommAgent">被推荐代理商</param>
+        /// <returns></returns>
         public static bool DealProvinceReward(Agent BeRecommAgent)
         {
 
@@ -106,7 +117,12 @@ namespace Distribution.Logic
             context.SaveChanges();
         }
 
-        //(递归)找到代理商的所有上级中的最高级别
+        /// <summary>
+        /// (递归)找到代理商的所有上级中的最高级别
+        /// </summary>
+        /// <param name="AgentId"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static int GetMaxLevel(int AgentId,DistributionContext context = null )
         {
             if(context == null )
@@ -126,7 +142,13 @@ namespace Distribution.Logic
             return max_Level;
         }
 
-        //(递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励
+        /// <summary>
+        /// (递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励
+        /// </summary>
+        /// <param name="ParAgent"></param>
+        /// <param name="RewardScore"></param>
+        /// <param name="reType"></param>
+        /// <param name="context"></param>
         private static void RewardForCorreLevel(Agent ParAgent,ref int RewardScore,RewartType reType, DistributionContext context)
         {
             string desc = "";

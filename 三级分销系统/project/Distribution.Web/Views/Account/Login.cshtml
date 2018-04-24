@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>三级分销平台</title>
+    <title>分销平台</title>
     <link href="~/Content/css/framework-font.css" rel="stylesheet" />
     <link href="~/Content/css/framework-login.css" rel="stylesheet" />
     <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
@@ -32,7 +32,7 @@
             </div>
             <form class="form">
                 <div class="row">
-                    <input id="txt_account" type="text" placeholder="用户名/手机号/邮箱">
+                    <input id="txt_account" type="text" placeholder="手机号">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="row">
@@ -42,7 +42,9 @@
                 <div class="row">
                     <button id="login_button" type="button"><span>登录</span></button>
                 </div>
-                <div class="row">
+                <br />
+                <div class="row pull-right" >
+                    <a href="Register" style="font-size:16px">注册</a>
                 </div>
             </form>
             <div class="login_tips"></div>
@@ -87,7 +89,7 @@
                     }  else {
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
-                            url: "~/../../Account/CheckLogin",
+                            url: "Account/CheckLogin",
                             data: { username: $.trim($username.val()), password: $.trim($password.val()) },
                             type: "post",
                             dataType: "json",
@@ -95,7 +97,7 @@
                                 if (data.state == "success") {
                                     $("#login_button").find('span').html("登录成功，正在跳转...");
                                     window.setTimeout(function () {
-                                        window.location.href = "~/../../Home/Index";
+                                        window.location.href = "Home/Index";
                                     }, 500);
                                 } else {
                                     $("#login_button").removeAttr('disabled').find('span').html("登录");
