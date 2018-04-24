@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Distribution.DB;
 using Distribution.Model;
+using System.Linq.Expressions;
 
 namespace Distribution.Logic
 {
@@ -18,6 +19,10 @@ namespace Distribution.Logic
             }
         }
 
+        public static AgentRelation FindEntity(Expression<Func<AgentRelation, bool>> predicate)
+        {
+            return CommLogic.FindEntity<AgentRelation>(predicate);
+        }
         public static List<AgentRelation> GetList()
         {
             List<AgentRelation> list = new List<AgentRelation>();

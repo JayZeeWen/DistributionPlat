@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>xxxxx生物科技有限公司</title>
+    <meta name="author" content="XX|XX官方唯一认证平台">
+    <meta name="keywords" content="XX|XX官方唯一认证平台">
+    <meta name="description" content="XX|XX官方唯一认证平台">
+
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-login.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/cookie/jquery.cookie.js"></script>
+    <script src="~/Content/js/md5/jquery.md5.js"></script>
+    <script src="~/Content/js/Share.js"></script>
+   
+</head>
+<body>
+    <div class="bHeader_bg">
+        <div class="bHeader">
+            <label>您好，欢迎来到广州XX生物科技有限公司！</label><!-- <a class="bHeader1"></a><a class="bHeader2"></a> -->
+            <div class="bHeader3">
+                <a href="~/Home/Index" class="bHeader3_1">@ViewBag.User</a>
+                <a href="~/Account/LogOut" class="bHeader3_2">退出</a>
+            </div>
+        </div>
+    </div>
+    <div class="bNav_bg">
+        <div class="bNav">
+            <a class="bNav1"><img src="~/favicon.ico"></a>
+            <ul>
+                <li><a href="http://mozhoumozhou.com/pc/">首页</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_team">我的客户</a></li>
+                <li><a href="~/Home/Index">个人资料</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_finance">积分管理</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_goods">我的产品</a></li>
+                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_reward">固定补助</a></li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

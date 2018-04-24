@@ -71,7 +71,7 @@ namespace Distribution.Logic
             Agent userEntity = AgentLogic.FindEntity(t => t.c_mobile == mobile);
             if (userEntity != null)
             {
-                if (userEntity.c_state  == 1)
+                if (userEntity.c_state  >= 1)
                 {
                     string dbPassword = userEntity.c_login_pwd;
                     if (dbPassword == password)
