@@ -12,9 +12,9 @@ namespace Distribution.Model
         [Key]
         public int c_id { get; set; }
 
-        public int? c_parent_id { get; set; }
+        public string c_parent_id { get; set; }
 
-        public int? c_child_id { get; set; }
+        public string  c_child_id { get; set; }
 
         [ForeignKey("c_parent_id")]
         public virtual Agent ParentAgent { get; set; }

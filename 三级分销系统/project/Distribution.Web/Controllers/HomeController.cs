@@ -26,11 +26,11 @@ namespace Distribution.Web.Controllers
 
 
 
-            Agent ag = AgentLogic.GetEnityById(Convert.ToInt32(UserInfo.UserId));
+            Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
             if(ar != null)
             {
-                ViewBag.RecomAgent = AgentLogic.GetEnityById((int)ar.c_parent_id).c_name;
+                ViewBag.RecomAgent = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
             }
             
 
@@ -53,7 +53,7 @@ namespace Distribution.Web.Controllers
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult SubmitInfo(int agentId, string realName, string address, string addressee, string tel, string bank_aXX, string bank_holder, string bank_num)
+        public ActionResult SubmitInfo(string agentId, string realName, string address, string addressee, string tel, string bank_aXX, string bank_holder, string bank_num)
         {
             AjaxResult result = new AjaxResult();
             Agent ag = AgentLogic.GetEnityById(agentId);

@@ -12,7 +12,7 @@ namespace Distribution.Model
         [Key]
         public int c_id { get; set; }
 
-        public int? c_user_id { get; set; }
+        public string c_user_id { get; set; }
 
         public int? c_amount { get; set; }
 

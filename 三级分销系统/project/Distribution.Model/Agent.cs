@@ -11,7 +11,7 @@ namespace Distribution.Model
     {
         [Column("F_Id")]
         [Key]
-        public int c_id { get; set; }
+        public string c_id { get; set; }
 
         [StringLength(50)]
         public string c_name { get; set; }
