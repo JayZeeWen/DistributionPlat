@@ -22,9 +22,7 @@ namespace Distribution.Web.Controllers
                 return View();                
             }
             ViewBag.User = UserInfo.UserCode;
-
-
-
+            
 
             Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
