@@ -116,6 +116,7 @@
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
+    <Compile Include="Areas\AgentManage\AgentManageAreaRegistration.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Controllers\ClientsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Areas\AgentManage\Controllers\AgentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -631,6 +633,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Agent\Details.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Agent\Form.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Agent\Index.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Agent\Info.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Agent\RevisePassword.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Web.config" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <ItemGroup>

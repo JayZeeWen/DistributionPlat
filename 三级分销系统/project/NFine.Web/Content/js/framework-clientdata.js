@@ -5,8 +5,8 @@ $(function () {
 $.clientsInit = function () {
     var dataJson = {
         dataItems: [],
-        organize: [],
-        role: [],
+        organize: [],//代理商 市级代理 省级代理
+        role: [],//加盟商 部门经理 副总监 总监 总经理
         duty: [],
         user: [],
         authorizeMenu: [],

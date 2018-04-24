@@ -9,47 +9,24 @@
     function gridList() {
         var $gridList = $("#gridList");
         $gridList.dataGrid({
-            url: "/SystemManage/User/GetGridJson",
+            url: "/AgentManage/Agent/GetGridJson",
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
-                { label: '账户', name: 'F_Account', width: 80, align: 'left' },
-                { label: '姓名', name: 'F_RealName', width: 80, align: 'left' },
-                {
-                    label: '性别', name: 'F_Gender', width: 60, align: 'center',
-                    formatter: function (cellvalue, options, rowObject) {
-                        if (cellvalue == true) {
-                            return '男';
-                        } else {
-                            return '女';
-                        }
-                    }
-                },
-                { label: '手机', name: 'F_MobilePhone', width: 80, align: 'left' },
-                {
-                    label: '公司', name: 'F_OrganizeId', width: 150, align: 'left',
-                    formatter: function (cellvalue, options, rowObject) {
-                        return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
-                    }
-                },
-                {
-                    label: '部门', name: 'F_DepartmentId', width: 80, align: 'left',
-                    formatter: function (cellvalue, options, rowObject) {
-                        return top.clients.organize[cellvalue] == null ? "" : top.clients.organize[cellvalue].fullname;
-                    }
-                },
-                {
-                    label: '岗位', name: 'F_DutyId', width: 80, align: 'left',
-                    formatter: function (cellvalue, options, rowObject) {
-                        return top.clients.duty[cellvalue] == null ? "" : top.clients.duty[cellvalue].fullname;
-                    }
-                },
+                { label: '姓名', name: 'c_name', width: 80, align: 'left' },
+                { label: '手机', name: 'c_mobile', width: 80, align: 'left' },
+                { label: '持卡人姓名', name: 'c_bank_person', width: 80, align: 'left' },
+                { label: '开户行', name: 'c_bank_name', width: 120, align: 'left' },
+                { label: '银行账号', name: 'c_bank_account', width: 100, align: 'left' },
+                { label: '收货人姓名', name: 'c_rec_person', width: 80, align: 'left' },
+                { label: '收货人手机', name: 'c_rec_mobile', width: 150, align: 'left' },
+                { label: '收货人地址', name: 'c_address', width: 80, align: 'left' },
                 {
                     label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
                 {
-                    label: "允许登录", name: "F_EnabledMark", width: 60, align: "center",
+                    label: "允许登录", name: "c_state", width: 60, align: "center",
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1) {
                             return '<span class=\"label label-success\">正常</span>';
@@ -61,7 +38,7 @@
                 { label: '备注', name: 'F_Description', width: 200, align: 'left' }
             ],
             pager: "#gridPager",
-            sortname: 'F_DepartmentId asc,F_CreatorTime desc',
+            sortname: 'F_CreatorTime desc',
             viewrecords: true
         });
         $("#btn_search").click(function () {
@@ -74,7 +51,7 @@
         $.modalOpen({
             id: "Form",
             title: "新增用户",
-            url: "/SystemManage/User/Form",
+            url: "/AgentManage/Agent/Form",
             width: "700px",
             height: "510px",
             callBack: function (iframeId) {
@@ -87,7 +64,7 @@
         $.modalOpen({
             id: "Form",
             title: "修改用户",
-            url: "/SystemManage/User/Form?keyValue=" + keyValue,
+            url: "/AgentManage/Agent/Form?keyValue=" + keyValue,
             width: "700px",
             height: "510px",
             callBack: function (iframeId) {
@@ -97,7 +74,7 @@
     }
     function btn_delete() {
         $.deleteForm({
-            url: "/SystemManage/User/DeleteForm",
+            url: "/AgentManage/Agent/DeleteForm",
             param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
             success: function () {
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
@@ -109,7 +86,7 @@
         $.modalOpen({
             id: "Details",
             title: "查看用户",
-            url: "/SystemManage/User/Details?keyValue=" + keyValue,
+            url: "/AgentManage/Agent/Details?keyValue=" + keyValue,
             width: "700px",
             height: "550px",
             btn: null,
@@ -122,7 +99,7 @@
         $.modalOpen({
             id: "RevisePassword",
             title: '重置密码',
-            url: '/SystemManage/User/RevisePassword?keyValue=' + keyValue + "&account=" + escape(Account) + '&realName=' + escape(RealName),
+            url: '/AgentManage/Agent/RevisePassword?keyValue=' + keyValue + "&account=" + escape(Account) + '&realName=' + escape(RealName),
             width: "450px",
             height: "260px",
             callBack: function (iframeId) {
@@ -135,7 +112,7 @@
         $.modalConfirm("注：您确定要【禁用】该项账户吗？", function (r) {
             if (r) {
                 $.submitForm({
-                    url: "/SystemManage/User/DisabledAccount",
+                    url: "/AgentManage/Agent/DisabledAccount",
                     param: { keyValue: keyValue },
                     success: function () {
                         $.currentWindow().$("#gridList").trigger("reloadGrid");
@@ -149,7 +126,7 @@
         $.modalConfirm("注：您确定要【启用】该项账户吗？", function (r) {
             if (r) {
                 $.submitForm({
-                    url: "/SystemManage/User/EnabledAccount",
+                    url: "/AgentManage/Agent/EnabledAccount",
                     param: { keyValue: keyValue },
                     success: function () {
                         $.currentWindow().$("#gridList").trigger("reloadGrid");

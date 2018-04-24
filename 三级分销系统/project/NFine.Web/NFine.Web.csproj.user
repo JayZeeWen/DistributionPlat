@@ -3,7 +3,7 @@
   <PropertyGroup>
     <NameOfLastUsedPublishProfile>NFine.Framework.Release</NameOfLastUsedPublishProfile>
     <ProjectView>ProjectFiles</ProjectView>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -35,7 +35,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54694</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54694/</IISUrl>
+          <IISUrl>http://localhost:8081</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

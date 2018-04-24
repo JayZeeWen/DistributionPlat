@@ -24,8 +24,8 @@ namespace NFine.Web.Controllers
             var data = new
             {
                 dataItems = this.GetDataItemList(),
-                organize = this.GetOrganizeList(),
-                role = this.GetRoleList(),
+                organize = this.GetOrganizeList(),//代理商 市级代理 省级代理
+                role = this.GetRoleList(),//加盟商 部门经理 副总监 总监 总经理
                 duty = this.GetDutyList(),
                 user = "",
                 authorizeMenu = this.GetMenuList(),
@@ -65,7 +65,7 @@ namespace NFine.Web.Controllers
             }
             return dictionary;
         }
-        private object GetRoleList()
+        private object GetRoleList()//加盟商 部门经理 副总监 总监 总经理
         {
             RoleApp roleApp = new RoleApp();
             var data = roleApp.GetList();
