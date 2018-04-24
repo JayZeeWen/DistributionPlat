@@ -42,5 +42,7 @@ namespace Distribution.Model
         public int? c_agent_level { get; set; }
 
         public DateTime? c_create_date { get; set; }
+
+        public string c_voucher_path { get; set; }
     }
 }

@@ -135,10 +135,7 @@ namespace NFine.Code
         {
             if (key.IsEmpty())
                 return;
-            if (HttpContext.Current.Session == null)
-            {
-                HttpContext.Current.Session.Add(key, value);
-            }
+            
             HttpContext.Current.Session[key] = value;
         }
 

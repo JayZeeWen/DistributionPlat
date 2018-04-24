@@ -57,12 +57,6 @@
                 </div>
                 <div class="row">
                 </div>}
-            @*@using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
-                {
-                    <div class="tips_msg"><i class="fa fa-question-circle"></i></div>
-                    <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
-                    <button  type="button" onclick="fileUploadMethod2()"><span>上传</span></button>
-                }*@
             <div class="login_tips"></div>
         </div>
         <ul class="bg-bubbles">
@@ -132,7 +126,7 @@
                                     $("#login_button").find('span').html("注册成功，正在跳转...");
                                     window.setTimeout(function () {
                                         window.location.href = "~/../../Account/Login";
-                                    }, 500);
+                                    }, 1000);
                                 } else {
                                     $("#login_button").removeAttr('disabled').find('span').html("注册");
                                     $("#switchCode").trigger("click");

@@ -94,7 +94,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd)
+        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd,string voucherPath)
         {
             bool result = true;
             Agent rec_ag = FindEntity(t => t.c_mobile == reco_Mobile);
@@ -114,11 +114,12 @@ namespace Distribution.Logic
             reg_ag.c_state = 0;
             reg_ag.c_create_date = DateTime.Now;
             reg_ag.c_score = 0;
+            reg_ag.c_voucher_path = voucherPath;
             InsertNewEntiy(reg_ag);
 
             AgentRelation ar = new AgentRelation();
-            ar.c_parent_id = reg_ag.c_id;
-            ar.c_child_id = rec_ag.c_id;
+            ar.c_parent_id = rec_ag.c_id;
+            ar.c_child_id = reg_ag.c_id;
             ar.c_create_date = DateTime.Now;
             AgentRelationLogic.InsertNewEntiy(ar);
             return result;

@@ -127,48 +127,6 @@ namespace Distribution.Web.Controllers
 
 
 
-        //
-        // GET: /Account/VerifyCode
-        [AllowAnonymous]
-        public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
-        {
-            // 要求用户已通过使用用户名/密码或外部登录名登录
-            if (!await SignInManager.HasBeenVerifiedAsync())
-            {
-                return View("Error");
-            }
-            return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
-        }
-
-        //
-        // POST: /Account/VerifyCode
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            // 以下代码可以防范双重身份验证代码遭到暴力破解攻击。
-            // 如果用户输入错误代码的次数达到指定的次数，则会将
-            // 该用户帐户锁定指定的时间。
-            // 可以在 IdentityConfig 中配置帐户锁定设置
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(model.ReturnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "代码无效。");
-                    return View(model);
-            }
-        }
 
         //
         // GET: /Account/Register
@@ -188,7 +146,7 @@ namespace Distribution.Web.Controllers
             logEntity.F_Type = DbLogType.Login.ToString();
             try
             {
-                AgentLogic.CheckRegist(username, recMobile, password);
+                AgentLogic.CheckRegist(username, recMobile, password, savePath);
                 return Content(new AjaxResult { state = ResultType.success.ToString(), message = "注册成功。" }.ToJson());
             }
             catch (Exception ex)
@@ -223,13 +181,6 @@ namespace Distribution.Web.Controllers
                 }
                 string fullPath = basePath + fileName;
                 hpf.SaveAs(fullPath);
-                //string binaryString = MyCommon.FileToBinary(Server.MapPath(fullPath));
-                //FileModel model = new FileModel();
-                //model.EventId = "1";
-                //model.FileData = binaryString;
-                //model.FileName = fileName;
-                //model.FileExtension = fileName.Substring(fileName.LastIndexOf("."));
-                //model.Flag = 0;
                 return Content(new AjaxResult { state = ResultType.success.ToString(), message = fullPath }.ToJson());
             }
             catch (Exception ex )
