@@ -83,6 +83,7 @@
                 },
 
                 loginClick: function () {
+                    var url = '@Url.Action("Register", "Account")';
                     var $username = $("#txt_account");
                     var $password = $("#txt_password");
                     var $confirm_password = $("#txt_confirm_password");
@@ -112,7 +113,7 @@
                     } else {
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
-                            url: "~/../../Account/Register",
+                            url: url,
                             data: {
                                 username: $.trim($username.val())
                                 , password: $.trim($password.val())
@@ -209,6 +210,6 @@
                  alert('error: ' + err);
              });
         }
-    </script>
+</script>
 </body>
 </html>
