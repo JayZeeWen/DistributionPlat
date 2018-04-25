@@ -19,9 +19,12 @@
     <script src="~/Content/js/cookie/jquery.cookie.js"></script>
     <script src="~/Content/js/md5/jquery.md5.js"></script>
     <script src="~/Content/js/Share.js"></script>
+
+
    
 </head>
 <body>
+    <script src="~/Content/js/bootstrap/bootstrap.js"></script>
     <div class="bHeader_bg">
         <div class="bHeader">
             <label>您好，欢迎来到深圳XX生物科技有限公司！</label><!-- <a class="bHeader1"></a><a class="bHeader2"></a> -->
@@ -35,12 +38,11 @@
         <div class="bNav">
             <a class="bNav1"><img src="~/Content/timg.jpg"></a>
             <ul>
-                <li><a href="http://mozhoumozhou.com/pc/">首页</a></li>
-                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_team">我的客户</a></li>
+                <li><a href="~/Home/Index">首页</a></li>
+                <li><a href="~/Home/MyCustomer">我的客户</a></li>
                 <li><a href="~/Home/UserInfo">个人资料</a></li>
-                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_finance">积分管理</a></li>
-                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_goods">我的产品</a></li>
-                <li><a href="http://mozhoumozhou.com/pc/member.php?type=my_reward">固定补助</a></li>
+                <li><a href="~/Home/ScoreManager">积分管理</a></li>
+                <li><a href="~/Home/Product">我的产品</a></li>
             </ul>
         </div>
     </div>
@@ -50,6 +52,6 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
 </body>
 </html>

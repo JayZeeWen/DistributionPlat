@@ -182,7 +182,7 @@ namespace Distribution.Web.Controllers
                 }
                 string fullPath = basePath + fileName;
                 hpf.SaveAs(fullPath);
-                return Content(new AjaxResult { state = ResultType.success.ToString(), message = fullPath }.ToJson());
+                return Content(new AjaxResult { state = ResultType.success.ToString(), message = datePath + fileName }.ToJson());
             }
             catch (Exception ex)
             {

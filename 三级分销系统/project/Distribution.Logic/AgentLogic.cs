@@ -115,6 +115,7 @@ namespace Distribution.Logic
             reg_ag.c_state = 0;
             reg_ag.c_create_date = DateTime.Now;
             reg_ag.c_score = 0;
+            reg_ag.c_agent_level = 1;
             reg_ag.c_voucher_path = voucherPath;
             InsertNewEntiy(reg_ag);
 

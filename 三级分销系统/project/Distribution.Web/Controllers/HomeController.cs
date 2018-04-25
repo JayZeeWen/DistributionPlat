@@ -28,6 +28,8 @@ namespace Distribution.Web.Controllers
             ViewBag.User = "";
             ViewBag.RecomAgent = "";
             ViewBag.TotalScore = 0;
+            ViewBag.Level= "";
+            ViewBag.AgLevel = "";
             if (UserInfo == null)
             {
                 return RedirectToAction("Login", "Account");
@@ -37,8 +39,14 @@ namespace Distribution.Web.Controllers
 
             Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
-            ViewBag.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
-            ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
+            if(ag.c_levle != null)
+            {
+                ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
+            }
+            if(ag.c_agent_level != null )
+            {
+                ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
+            }
             if(ar != null)
             {
                 ViewBag.RecomAgent = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
