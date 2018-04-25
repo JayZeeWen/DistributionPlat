@@ -26,6 +26,8 @@ namespace Distribution.Logic
         }
 
 
+
+
         public static List<ScoreDetail> GetList()
         {
             List<ScoreDetail> list = new List<ScoreDetail>();
@@ -35,6 +37,7 @@ namespace Distribution.Logic
             }
             return list;
         }
+
 
         public static void InsertNewEntiy(ScoreDetail NewScoreDetail)
         {
@@ -66,6 +69,19 @@ namespace Distribution.Logic
         } 
         #endregion
 
+        public static int GetTotalScore(string agentId)
+        {
+            int result = 0;
+            using (DistributionContext context = new DistributionContext ())
+            {
+                int? score  =  context.t_score_detail.Where(t => t.c_user_id == agentId && t.c_amount > 0).Sum(t => t.c_amount);
+                if(score != null)
+                {
+                    result = (int)score;
+                }
+            }
+            return result;
+        }
 
     }
 }

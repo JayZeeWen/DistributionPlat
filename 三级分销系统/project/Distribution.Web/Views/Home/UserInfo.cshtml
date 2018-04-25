@@ -1,5 +1,5 @@
 ﻿@using Distribution.Model;
-@model Distribution.Model.Agent
+@model Distribution.Web.Models.AgentInfoModel
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutForWeb.cshtml";
@@ -13,66 +13,81 @@
 <body class="bBg">
     <div class="bMain">
         ﻿<div class="bLeft">
-
             <h2>深圳XX生物科技</h2>
             <div class="bLeft1">
                 <img src="~/Content/img/samples/scarlet-159.png" />
                 <label>用户名称</label>
             </div>
             <div class="bLeft2">
-                <p><label>职位级别：</label><span>@ViewBag.Level</span></p>
-                <p><label>代理商级别：</label><span>@ViewBag.AgLevel</span></p>  
-                
-                <p><label>总业绩额：</label><span>@ViewBag.TotalScore</span></p>
-                <p><label>当前积分：</label><span>@Model.c_score 分</span></p>
+                <p><label>职位级别：</label><span>@Model.Level</span></p>
+                <p><label>代理商级别：</label><span>@Model.AgLevel</span></p>
 
-                @*<input type="button" value="积分兑换" onclick="tqOk()">*@
+                <p><label>总业绩额：</label><span>@Model.TotalScore</span></p>
+                <p><label>当前积分：</label><span>@Model.agent.c_score 分</span></p>
+                <input type="button" value="积分兑换" onclick="tqOk()">
             </div>
         </div>
-        
 
         <div class="bRight">
-
             <!--右侧开始-->
             <div class="grDiv1">
                 <div class="grDiv1_1"><label>基本信息</label></div>
                 <div class="grDiv1_2">
                     <div class="grDiv1_21">
-                        <p><label>真实姓名：</label><input type="text" name="name" class="name"  value="@Model.c_name"></p>
-                        <p><label>手<i>空空</i>机：</label><input type="text" disabled="" name="mobile" class="mobile" value="@Model.c_mobile"></p>
-                        <p><label>支付宝：</label><input type="text" class="aliAccount"  value="@Model.c_ali_account"></p>
+                        <p><label>真实姓名：</label><input type="text" name="name" class="name" value="@Model.agent.c_name"></p>
+                        <p><label>手<i>空空</i>机：</label><input type="text" disabled="" name="mobile" class="mobile" value="@Model.agent.c_mobile"></p>
+                        <p><label>支付宝：</label><input type="text" class="aliAccount" value="@Model.agent.c_ali_account"></p>
                         <p style="position: relative;">
-                            <label>推  荐  人：</label><input type="text" name="tj" disabled="" class="tj" value="@ViewBag.RecomAgent">
+                            <label>推  荐  人：</label><input type="text" name="tj" disabled="" class="tj" value="@Model.RecomAgentName">
                             <span style="position: absolute;width:160px;left: 375px;top: 9px;font-size: 14px;color: #666;"></span>
                         </p>
                     </div>
                 </div>
             </div>
-
             <div class="grDiv2">
                 <div class="grDiv2_1"><label>地址管理</label></div>
                 <div class="grDiv2_2">
-                    <p><label>联系地址：</label><input type="text" name="address" class="address"  value="@Model.c_address"></p>
-                    <p><label>收件人：</label><input type="text" name="addressee" class="addressee"  value="@Model.c_rec_person"></p>
-                    <p><label>联系方式：</label><input type="text" name="tel" class="tel"  value="@Model.c_rec_mobile"></p>
+                    <p><label>联系地址：</label><input type="text" name="address" class="address" value="@Model.agent.c_address"></p>
+                    <p><label>收件人：</label><input type="text" name="addressee" class="addressee" value="@Model.agent.c_rec_person"></p>
+                    <p><label>联系方式：</label><input type="text" name="tel" class="tel" value="@Model.agent.c_rec_mobile"></p>
                 </div>
             </div>
-
             <div class="grDiv3">
                 <div class="grDiv3_1"><label>银行卡管理</label></div>
                 <div class="grDiv3_2">
-                    <p><label>开户行：</label><input type="text" name="bank_aXX" class="bank_aXX" value="@Model.c_bank_name"></p>
-                    <p><label>持卡人：</label><input type="text" name="bank_holder" class="bank_holder" value="@Model.c_bank_person"></p>
-                    <p><label>卡<i>空</i>号：</label><input type="text" name="bank_num" class="bank_num" value="@Model.c_bank_account"></p>
+                    <p><label>开户行：</label><input type="text" name="bank_aXX" class="bank_aXX" value="@Model.agent.c_bank_name"></p>
+                    <p><label>持卡人：</label><input type="text" name="bank_holder" class="bank_holder" value="@Model.agent.c_bank_person"></p>
+                    <p><label>卡<i>空</i>号：</label><input type="text" name="bank_num" class="bank_num" value="@Model.agent.c_bank_account"></p>
                 </div>
             </div>
+            <div class="grDiv4">
+                <input type="submit" id="btnSubmit" onclick="SubmitInfo()" class="grDiv4_1" value="提交">
+            </div>
 
-            <div class="grDiv4" >
-                <input type="submit" id="btnSubmit" onclick="SubmitInfo()"   class="grDiv4_1" value="提交">
+            <div class="tqjeDiaBg">
+                <div class="tqjeDia">
+                    <h2>积分兑换</h2>
+                    <div class="tqjeDia1">
+                        <div class="tqjeDia1_1">填写申请折现积分与打款银行卡信息，我们将在三个工作日内将积分打到您的银行卡中。</div>
+                        <div class="tqjeDia1_2"><label>可折现积分：</label><span>@Model.agent.c_score</span></div>
+                        <div class="tqjeDia1_3"><label>兑换积分：</label><input type="text" value="" id="money" pattern="金额"></div>
+                    </div>
+                    <div class="tqjeDia2">银行卡信息<!-- <label>修改</label> --></div>
+                    <div class="tqjeDia3">
+                        <p>开户行：<input type="text" value="@Model.agent.c_bank_name" id="bank_acc" pattern="开户行"></p>
+                        <p>卡　号：<input type="text" value="@Model.agent.c_bank_account" id="bank_num" pattern="卡　号"></p>
+                        <p>持卡人：<input type="text" value="@Model.agent.c_bank_person" id="bank_holder" pattern="持卡人" readonly="true"></p>
+                    </div>
+                    <div class="tqjeDia4">
+                        <input class="tqjeDia4_1" type="button" value="确认">
+                        <input class="tqjeDia4_2" onclick="tqClose()" type="button" value="返回">
+                    </div>
+                </div>
             </div>
             <script>
+                var state = @Model.agent.c_state;
+                var ag_id = '@Model.agent.c_id';
                 $(document).ready(function(){
-                    var state = @Model.c_state;
                     if(state == 2 ){
                         $("#btnSubmit").attr("disabled","");
                         $("#btnSubmit").css("background","grey");
@@ -89,7 +104,7 @@
                 }
 
                 function SubmitInfo() {
-                    var ag_id = '@Model.c_id';
+
                     var name = $('.name').val();
                     var mobile = $('.mobile').val();
                     var aliAccount = $('.aliAccount').val();
@@ -154,43 +169,256 @@
                     if (r) {
                         $.ajax({
                             url: '@Url.Action("SubmitInfo", "Home")',
-                            data: {
-                                realName: name
-                                , address: address
-                                , addressee: addressee
-                                , tel: tel
-                                , bank_aXX: bank_aXX
-                                , bank_holder: bank_holder
-                                , bank_num:bank_num
-                                ,agentId:ag_id
-                                ,aliAccount : aliAccount
-                            },
-                            type: "post",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.state == "success") {
-                                    alert("信息保存成功");
-                                    window.setTimeout(function () {
+                data: {
+                    realName: name
+                    , address: address
+                    , addressee: addressee
+                    , tel: tel
+                    , bank_aXX: bank_aXX
+                    , bank_holder: bank_holder
+                    , bank_num:bank_num
+                    ,agentId:ag_id
+                    ,aliAccount : aliAccount
+                },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data.state == "success") {
+                        alert("信息保存成功");
+                        window.setTimeout(function () {
 
-                                        var indexUrl = '@Url.Action("UserInfo", "Home")';
-                                        window.location.href = indexUrl;
-                                    }, 1000);
-                                    return true;
-                                } else {
-                                    alert("提交失败 ： " +  data.message)
-                                }
-                            }
-                        });
+                            var indexUrl = '@Url.Action("UserInfo", "Home")';
+                            window.location.href = indexUrl;
+                        }, 1000);
+                        return true;
+                    } else {
+                        alert("提交失败 ： " +  data.message)
                     }
-                    
                 }
+            });
+        }
+    }
+
+    function tqOk() {
+        if(state == 2){
+            $("#money").removeAttr("disabled");
+            $(".tqjeDiaBg").show();
+        }else {
+            alert("请先完善资料!");
+        }
+
+    }
+    function tqClose() {
+        $(".tqjeDiaBg").hide();
+    }
+
+
+    function chk_money() {
+        var money = $('#money').val();
+        var currentScore = @Model.agent.c_score;
+        if(money && parseInt(money) < 100){
+            alert('100起提');
+            return false;
+        } else if(money > currentScore){
+            alert('兑换积分大于可折现积分');
+            return false;
+        }
+        return true;
+    }
+    $('.tqjeDia4_1').click(function () {
+        chk_money();
+        var money = $('#money').val();
+        var bank_acc = $('#bank_acc').val();
+        var bank_num = $('#bank_num').val();
+        var bank_holder = $('#bank_holder').val();
+        $.ajax({
+            url: '@Url.Action("ScoreCash", "Home")',
+            data: {
+                amount: money
+                , bankName: bank_acc
+                , bankAccount: bank_num
+                , bankPerson: bank_holder
+                ,agentId : ag_id
+            },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.state == "success") {
+                    alert("信息保存成功");
+                    window.setTimeout(function () {
+
+                        var indexUrl = '@Url.Action("UserInfo", "Home")';
+                        window.location.href = indexUrl;
+                    }, 1000);
+                    return true;
+                } else {
+                    alert("提交失败 ： " +  data.message)
+                }
+            }
+        });
+    });
             </script>
             <!--右侧结束-->
-
         </div>
         <div class="clearB"></div>
     </div>
+    <style>
+        .tqjeDiaBg, #prom {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            display: none;
+        }
 
+        .tqjeDia {
+            width: 530px;
+            height: 536px;
+            overflow: hidden;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 7px;
+        }
 
+            .tqjeDia h2 {
+                line-height: 50px;
+                padding-left: 20px;
+                font-weight: bold;
+                background: #eee;
+                font-size: 20px;
+                color: #333;
+            }
+
+        .tqjeDia1 {
+            height: 211px;
+        }
+
+        .tqjeDia1_1 {
+            font-size: 16px;
+            height: 74px;
+            color: #333;
+            line-height: 27px;
+            padding: 26px 2px 0 24px;
+        }
+
+        .tqjeDia1_2 {
+            text-align: center;
+        }
+
+            .tqjeDia1_2 label {
+                font-size: 18px;
+                font-weight: bold;
+                color: #292929;
+            }
+
+            .tqjeDia1_2 span {
+                font-size: 18px;
+                font-weight: bold;
+                color: #fe6c00;
+            }
+
+        .tqjeDia1_3 {
+            text-align: center;
+            line-height: 30px;
+            padding-top: 26px;
+        }
+
+            .tqjeDia1_3 label {
+                font-size: 14px;
+                color: #333;
+            }
+
+            .tqjeDia1_3 input {
+                width: 93px;
+                padding-left: 5px;
+                margin: 0 19px;
+                height: 30px;
+                border: 1px solid #e1e1e1;
+            }
+
+            .tqjeDia1_3 span {
+                font-size: 16px;
+                color: #1da75f;
+            }
+
+        .tqjeDia2 {
+            width: 490px;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            line-height: 58px;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+            .tqjeDia2 label {
+                float: right;
+                color: #1da75f;
+                font-size: 16px;
+                font-weight: 100;
+            }
+
+        .tqjeDia3 {
+            width: 490px;
+            height: 130px;
+            padding-top: 13px;
+            margin-left: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .tqjeDia3 p {
+                font-size: 18px;
+                color: #999;
+                line-height: 39px;
+            }
+
+            .tqjeDia3 input {
+                width: 300px;
+                padding-left: 5px;
+                margin: 0 19px;
+                height: 30px;
+                border: 1px solid #e1e1e1;
+            }
+
+        .tqjeDia4 {
+            width: 375px;
+            height: 50px;
+            text-align: center;
+            padding-left: 115px;
+            padding-top: 20px;
+            margin-left: 20px;
+            border-top: 1px dashed #eeeeee;
+        }
+
+            .tqjeDia4 input {
+                width: 78px;
+                height: 30px;
+                font-size: 14px;
+                border-radius: 5px;
+                display: block;
+                float: left;
+            }
+
+        input.tqjeDia4_1 {
+            border: 1px solid #1da75f;
+            color: #fff;
+            background: #1da75f;
+            margin-right: 100px;
+        }
+
+        input.tqjeDia4_2 {
+            border: 1px solid #1da75f;
+            color: #1da75f;
+            background: #fff;
+        }
+    </style>
 </body>
 </html>

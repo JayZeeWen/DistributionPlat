@@ -20,6 +20,9 @@ namespace Distribution.DB
 
         public virtual DbSet<LevelConfig> t_level_config { get; set; }
 
+
+        public virtual DbSet<ScoreCash> t_score_cash { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }

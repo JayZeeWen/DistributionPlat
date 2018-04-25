@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Distribution.Model;
 using Distribution.Logic;
+using Distribution.Web.Models;
 
 namespace Distribution.Web.Controllers
 {
@@ -22,14 +23,11 @@ namespace Distribution.Web.Controllers
 
             return View();
         }
-        public ActionResult UserInfo(Agent model)
+        public ActionResult UserInfo(AgentInfoModel model)
         {
             var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
             ViewBag.User = "";
-            ViewBag.RecomAgent = "";
-            ViewBag.TotalScore = 0;
-            ViewBag.Level= "";
-            ViewBag.AgLevel = "";
+            
             if (UserInfo == null)
             {
                 return RedirectToAction("Login", "Account");
@@ -38,20 +36,24 @@ namespace Distribution.Web.Controllers
             
 
             Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
+            AgentInfoModel viewModel = new AgentInfoModel();
+            viewModel.agent = ag;
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
             if(ag.c_levle != null)
             {
-                ViewBag.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
+                viewModel.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
             }
             if(ag.c_agent_level != null )
             {
-                ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
+                viewModel.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
             }
             if(ar != null)
             {
-                ViewBag.RecomAgent = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
+                viewModel.RecomAgentName = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
             }
-            return View(ag);
+            viewModel.TotalScore = ScoreDetailLogic.GetTotalScore(ag.c_id).ToString();
+                ;
+            return View(viewModel);
         }
 
 
@@ -79,6 +81,36 @@ namespace Distribution.Web.Controllers
             result.state = ResultType.success.ToString();
             result.message = "成功";
             return Content(result.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult ScoreCash(string agentId ,int amount,string bankAccount ,string bankPerson,string bankName)
+        {
+            AjaxResult result = new AjaxResult();
+            try
+            {
+                ScoreCash sc = new ScoreCash();
+                sc.F_Id = Guid.NewGuid().ToString();
+                sc.c_user_id = agentId.ToString();
+                sc.c_cash_state = 0;
+                sc.c_amount = 100;
+                sc.c_bank_name = bankName;
+                sc.c_bank_person = bankPerson;
+                sc.c_bank_account = bankAccount;
+                sc.F_CreatorTime = DateTime.Now;
+                ScoreCashLogic.InsertNewEntiy(sc);
+                result.state = ResultType.success.ToString();
+                result.message = "成功";
+                return Content(result.ToJson());
+            }
+            catch (Exception ex)
+            {
+                result.state = ResultType.error.ToString();
+                result.message = string.Format("提交失败({0})",ex.Message);
+                return Content(result.ToJson());
+                throw;
+            }
         }
     }
 }
