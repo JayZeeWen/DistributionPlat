@@ -11,7 +11,18 @@ namespace Distribution.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index(Agent model)
+        public ActionResult Index()
+        {
+            var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
+            ViewBag.User = "";
+            if (UserInfo != null)
+            {
+                ViewBag.User = UserInfo.UserCode; 
+            }
+
+            return View();
+        }
+        public ActionResult UserInfo(Agent model)
         {
             var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
             ViewBag.User = "";
@@ -19,39 +30,26 @@ namespace Distribution.Web.Controllers
             ViewBag.TotalScore = 0;
             if (UserInfo == null)
             {
-                return View();                
+                return RedirectToAction("Login", "Account");
             }
             ViewBag.User = UserInfo.UserCode;
             
 
             Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
+            ViewBag.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
+            ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
             if(ar != null)
             {
                 ViewBag.RecomAgent = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
             }
-            
-
             return View(ag);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult SubmitInfo(string agentId, string realName, string address, string addressee, string tel, string bank_aXX, string bank_holder, string bank_num)
+        public ActionResult SubmitInfo(string agentId, string realName, string address, string addressee, string tel, string bank_aXX, string bank_holder, string bank_num, string aliAccount)
         {
             AjaxResult result = new AjaxResult();
             Agent ag = AgentLogic.GetEnityById(agentId);
@@ -67,6 +65,7 @@ namespace Distribution.Web.Controllers
             ag.c_bank_name = bank_aXX;
             ag.c_bank_person = bank_holder;
             ag.c_bank_account = bank_num;
+            ag.c_ali_account = aliAccount;
             ag.c_state = 2;
             AgentLogic.UpdateEntity(ag);
             result.state = ResultType.success.ToString();

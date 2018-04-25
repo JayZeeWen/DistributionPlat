@@ -66,6 +66,9 @@ namespace Distribution.Logic
         } 
         #endregion
 
-
+        public static string GetValueFromConfig(int categoryId,int? key)
+        {
+            return FindEntity(t => t.c_category_id == categoryId && t.c_key == key).c_value;
+        }
     }
 }

@@ -54,14 +54,32 @@ namespace Distribution.Model
 
         public int? c_state { get; set; }
 
+        /// <summary>
+        /// 积分
+        /// </summary>
         public int? c_score { get; set; }
 
+        /// <summary>
+        /// 职位级别
+        /// </summary>
         public int? c_levle { get; set; }
 
+        /// <summary>
+        /// 代理商级别（省、市代理）
+        /// </summary>
         public int? c_agent_level { get; set; }
+
+        /// <summary>
+        /// 凭证地址
+        /// </summary>
+        public string c_voucher_path { get; set; }
+
+        /// <summary>
+        /// 支付宝账号
+        /// </summary>
+        public string c_ali_account { get; set; }
 
         public DateTime? c_create_date { get; set; }
 
-        public string c_voucher_path { get; set; }
     }
 }

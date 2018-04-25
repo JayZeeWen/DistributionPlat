@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* CSS Document */
 .bHeader_bg{ width:100%; min-width:1200px; height:35px; background:#000;}
 .bHeader{ width:1200px; height:100%; margin:0 auto;}
@@ -51,7 +51,7 @@ a.bNav1 img{ display:block; max-height: 100%;max-width: 100%;}
 .grDiv1{ background:#fff; border:1px solid #e5e5e5; border-radius:5px;}
 .grDiv1_1{ border-bottom:1px solid #e5e5e5; padding:18px 0;}
 .grDiv1_1 label{ height:26px; line-height:26px; display:block; padding-left:26px; border-left:4px solid #47ab4f; font-size:20px; color:#111;}
-.grDiv1_2{ height:216px;}
+.grDiv1_2{ height:260px;}
 .grDiv1_21{ width:375px; float:left; padding-top:34px;}
 .grDiv1_21 p{ width:375px; height:38px; margin-bottom:20px;}
 .grDiv1_21 label{ font-size:18px; color:#111; text-align:right; width:112px; float:left; display:block; line-height:38px;}
