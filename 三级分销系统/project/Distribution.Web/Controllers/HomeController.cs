@@ -41,7 +41,7 @@ namespace Distribution.Web.Controllers
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
             if(ag.c_levle != null)
             {
-                ViewBag.AgLevel = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
+                ViewBag.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
             }
             if(ag.c_agent_level != null )
             {
