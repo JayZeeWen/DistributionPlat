@@ -82,7 +82,6 @@ namespace Distribution.Web.Controllers
             try
             {
                 ScoreCash sc = new ScoreCash();
-                sc.F_Id = Guid.NewGuid().ToString();
                 sc.c_user_id = agentId.ToString();
                 sc.c_cash_state = 0;
                 sc.c_amount = amount;

@@ -40,25 +40,10 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext())
             {
-                try
-                {
-                    NewScoreCash.F_CreatorTime = DateTime.Now;
-                    NewScoreCash.F_CreatorUserId = "999";
-                    NewScoreCash.F_DeleteMark = "0";
-                    NewScoreCash.F_DeleteTime = DateTime.Now;
-                    NewScoreCash.F_DeleteUserId = "999";
-                    NewScoreCash.F_LastModifyUserId = "999";
-                    NewScoreCash.F_LastModifyTime = DateTime.Now;
-                    context.t_score_cash.Add(NewScoreCash);
+                NewScoreCash.F_Id = Guid.NewGuid().ToString();
+                context.t_score_cash.Add(NewScoreCash);
+                context.SaveChanges();
 
-
-                    context.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    string s = e.Message;
-                    throw;
-                }
             }
         }
 
@@ -80,16 +65,16 @@ namespace Distribution.Logic
                 context.t_score_cash.Remove(DelScoreCash);
                 context.SaveChanges();
             }
-        } 
+        }
         #endregion
 
-        public static int GetTotalCashScoreByState(string agentId,CashScoreState state)
+        public static int GetTotalCashScoreByState(string agentId, CashScoreState state)
         {
             int result = 0;
-            using (DistributionContext context = new DistributionContext ())
+            using (DistributionContext context = new DistributionContext())
             {
-               var sum  =  context.t_score_cash.Where(t => t.c_user_id == agentId &&  t.c_cash_state == (int)state).Sum(t => t.c_amount);
-                if(sum != null)
+                var sum = context.t_score_cash.Where(t => t.c_user_id == agentId && t.c_cash_state == (int)state).Sum(t => t.c_amount);
+                if (sum != null)
                 {
                     result = (int)sum;
                 }

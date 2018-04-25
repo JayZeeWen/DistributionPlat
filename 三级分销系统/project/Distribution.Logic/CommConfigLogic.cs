@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class CommConfigLogic
     {
         #region BasicMethod
-        public static CommConfig GetEnityById(int id)
+        public static CommConfig GetEnityById(string  id)
         {
             using (DistributionContext context = new DistributionContext())
             {
@@ -40,6 +40,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext())
             {
+                NewCommConfig.c_id = Guid.NewGuid().ToString();
                 context.t_common_config.Add(NewCommConfig);
                 context.SaveChanges();
             }
@@ -55,7 +56,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static void DeleteEntity(int CommConfigId)
+        public static void DeleteEntity(string CommConfigId)
         {
             using (DistributionContext context = new DistributionContext())
             {

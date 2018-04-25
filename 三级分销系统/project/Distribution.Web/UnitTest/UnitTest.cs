@@ -16,12 +16,10 @@ namespace NFine.Web.UnitTest
         public void TestMethod1()
         {
             #region Insert
-            //Agent newAg = new Agent();
-            //newAg.c_name = "代理商E2";
-            //newAg.c_state = 1;
-            //newAg.c_levle = 1;
-            //newAg.c_agent_level = 1;
-            //AgentLogic.InsertNewEntiy(newAg);
+            AgentRelation newAg = new AgentRelation();
+            newAg.c_child_id = "03db06d5-4f9e-44e1-a448-027316ed3dcd";
+            newAg.c_parent_id = "10";
+            AgentRelationLogic.InsertNewEntiy(newAg);
             #endregion
 
             #region Update

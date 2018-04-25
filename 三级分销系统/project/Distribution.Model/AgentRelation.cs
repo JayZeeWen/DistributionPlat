@@ -10,11 +10,14 @@ namespace Distribution.Model
     public partial class AgentRelation
     {
         [Key]
-        public int c_id { get; set; }
+        [Column("F_Id")]
+        public string  c_id { get; set; }
 
+        [StringLength(50)]
         public string c_parent_id { get; set; }
 
-        public string  c_child_id { get; set; }
+        [StringLength(50)]
+        public string c_child_id { get; set; }
 
         [ForeignKey("c_parent_id")]
         public virtual Agent ParentAgent { get; set; }

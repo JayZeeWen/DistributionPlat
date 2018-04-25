@@ -10,7 +10,8 @@ namespace Distribution.Model
     public partial class CommConfig
     {
         [Key]
-        public int c_id { get; set; }
+        [Column("F_Id")]
+        public string  c_id { get; set; }
 
         public int? c_category_id { get; set; }
 

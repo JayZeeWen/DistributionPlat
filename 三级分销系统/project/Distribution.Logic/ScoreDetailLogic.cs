@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class ScoreDetailLogic
     {
         #region BasicMethod
-        public static ScoreDetail GetEnityById(int id)
+        public static ScoreDetail GetEnityById(string  id)
         {
             using (DistributionContext context = new DistributionContext())
             {
@@ -43,6 +43,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext())
             {
+                NewScoreDetail.c_id = Guid.NewGuid().ToString();
                 context.t_score_detail.Add(NewScoreDetail);
                 context.SaveChanges();
             }
@@ -58,7 +59,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static void DeleteEntity(int ScoreDetailId)
+        public static void DeleteEntity(string ScoreDetailId)
         {
             using (DistributionContext context = new DistributionContext())
             {

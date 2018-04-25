@@ -109,6 +109,7 @@ namespace Distribution.Logic
             ag.c_score = ag.c_score + ChangeScore;
 
             ScoreDetail sd = new ScoreDetail();
+            sd.c_id = Guid.NewGuid().ToString();
             sd.c_amount = ChangeScore;
             sd.c_reason = reason;
             sd.c_user_id = AgentId;

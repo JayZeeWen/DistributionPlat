@@ -11,7 +11,7 @@ namespace Distribution.Logic
 {
     public static class AgentRelationLogic
     {
-        public static AgentRelation GetEnityById(int id )
+        public static AgentRelation GetEnityById(string  id )
         {
             using (DistributionContext context = new DistributionContext())
             {
@@ -37,6 +37,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext ())
             {
+                NewAgentRelation.c_id = Guid.NewGuid().ToString();
                 context.t_agent_relation.Add(NewAgentRelation);
                 context.SaveChanges();
             }
@@ -52,7 +53,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static void DeleteEntity(int AgentRelationId)
+        public static void DeleteEntity(string AgentRelationId)
         {
             using (DistributionContext context = new DistributionContext())
             {

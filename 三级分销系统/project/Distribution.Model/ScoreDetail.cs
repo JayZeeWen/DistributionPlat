@@ -10,7 +10,8 @@ namespace Distribution.Model
     public partial class ScoreDetail
     {
         [Key]
-        public int c_id { get; set; }
+        [Column("F_Id")]
+        public string  c_id { get; set; }
 
         public string c_user_id { get; set; }
 

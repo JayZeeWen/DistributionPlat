@@ -56,7 +56,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static void DeleteEntity(int AgentId)
+        public static void DeleteEntity(string  AgentId)
         {
             using (DistributionContext context = new DistributionContext())
             {
