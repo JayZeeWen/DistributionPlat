@@ -1,7 +1,9 @@
-﻿/*******************************************************************************
+﻿using Distribution.Logic;
+using Distribution.Model;
+/*******************************************************************************
  * Copyright © 2016 NFine.Framework 版权所有
  * Author: NFine
- * Description: 三级分销平台
+ * Description: 分销平台
  * Website：http://www.nfine.cn
 *********************************************************************************/
 using NFine.Application.SystemManage;
@@ -93,6 +95,23 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             userEntity.F_Id = keyValue;
             userEntity.c_state = 1;//0：未审核   1：审核通过
             agentApp.UpdateForm(userEntity);
+
+            #region 推荐奖励
+
+            //被推荐人
+            Agent ag = AgentLogic.GetEnityById(keyValue);
+
+            //积分奖励
+            ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
+            ScoreLogic.DealProvinceReward(ag);
+
+
+            //升级
+            AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
+            Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
+            LevelLogic.IsLevelUpWithCondition(recomm_ag);
+            #endregion
+
             return Success("账户启用成功。");
         }
 
