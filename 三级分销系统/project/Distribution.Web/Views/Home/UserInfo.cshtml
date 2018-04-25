@@ -69,7 +69,7 @@
                     <h2>积分兑换</h2>
                     <div class="tqjeDia1">
                         <div class="tqjeDia1_1">填写申请折现积分与打款银行卡信息，我们将在三个工作日内将积分打到您的银行卡中。</div>
-                        <div class="tqjeDia1_2"><label>可折现积分：</label><span>@Model.agent.c_score</span></div>
+                        <div class="tqjeDia1_2"><label>可折现积分：</label><span>@Model.CanCashScore</span></div>
                         <div class="tqjeDia1_3"><label>兑换积分：</label><input type="text" value="" id="money" pattern="金额"></div>
                     </div>
                     <div class="tqjeDia2">银行卡信息<!-- <label>修改</label> --></div>
@@ -169,94 +169,96 @@
                     if (r) {
                         $.ajax({
                             url: '@Url.Action("SubmitInfo", "Home")',
-                data: {
-                    realName: name
-                    , address: address
-                    , addressee: addressee
-                    , tel: tel
-                    , bank_aXX: bank_aXX
-                    , bank_holder: bank_holder
-                    , bank_num:bank_num
-                    ,agentId:ag_id
-                    ,aliAccount : aliAccount
-                },
-                type: "post",
-                dataType: "json",
-                success: function (data) {
-                    if (data.state == "success") {
-                        alert("信息保存成功");
-                        window.setTimeout(function () {
+                            data: {
+                                realName: name
+                                , address: address
+                                , addressee: addressee
+                                , tel: tel
+                                , bank_aXX: bank_aXX
+                                , bank_holder: bank_holder
+                                , bank_num:bank_num
+                                ,agentId:ag_id
+                                ,aliAccount : aliAccount
+                            },
+                            type: "post",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.state == "success") {
+                                    alert("信息保存成功");
+                                    window.setTimeout(function () {
 
-                            var indexUrl = '@Url.Action("UserInfo", "Home")';
-                            window.location.href = indexUrl;
-                        }, 1000);
-                        return true;
-                    } else {
-                        alert("提交失败 ： " +  data.message)
+                                        var indexUrl = '@Url.Action("UserInfo", "Home")';
+                                        window.location.href = indexUrl;
+                                    }, 1000);
+                                    return true;
+                                } else {
+                                    alert("提交失败 ： " +  data.message)
+                                }
+                            }
+                        });
                     }
                 }
-            });
-        }
-    }
 
-    function tqOk() {
-        if(state == 2){
-            $("#money").removeAttr("disabled");
-            $(".tqjeDiaBg").show();
-        }else {
-            alert("请先完善资料!");
-        }
+                function tqOk() {
+                    if(state == 2){
+                        $("#money").removeAttr("disabled");
+                        $(".tqjeDiaBg").show();
+                    }else {
+                        alert("请先完善资料!");
+                    }
 
-    }
-    function tqClose() {
-        $(".tqjeDiaBg").hide();
-    }
-
-
-    function chk_money() {
-        var money = $('#money').val();
-        var currentScore = @Model.agent.c_score;
-        if(money && parseInt(money) < 100){
-            alert('100起提');
-            return false;
-        } else if(money > currentScore){
-            alert('兑换积分大于可折现积分');
-            return false;
-        }
-        return true;
-    }
-    $('.tqjeDia4_1').click(function () {
-        chk_money();
-        var money = $('#money').val();
-        var bank_acc = $('#bank_acc').val();
-        var bank_num = $('#bank_num').val();
-        var bank_holder = $('#bank_holder').val();
-        $.ajax({
-            url: '@Url.Action("ScoreCash", "Home")',
-            data: {
-                amount: money
-                , bankName: bank_acc
-                , bankAccount: bank_num
-                , bankPerson: bank_holder
-                ,agentId : ag_id
-            },
-            type: "post",
-            dataType: "json",
-            success: function (data) {
-                if (data.state == "success") {
-                    alert("信息保存成功");
-                    window.setTimeout(function () {
-
-                        var indexUrl = '@Url.Action("UserInfo", "Home")';
-                        window.location.href = indexUrl;
-                    }, 1000);
-                    return true;
-                } else {
-                    alert("提交失败 ： " +  data.message)
                 }
-            }
-        });
-    });
+                function tqClose() {
+                    $(".tqjeDiaBg").hide();
+                }
+
+
+                function chk_money() {
+                    var money = $('#money').val();
+                    var currentScore = @Model.CanCashScore;
+                    if(money && parseInt(money) < 100){
+                        alert('100起提');
+                        return false;
+                    } else if(money > currentScore){
+                        alert('兑换积分大于可折现积分');
+                        return false;
+                    }
+                    return true;
+                }
+                $('.tqjeDia4_1').click(function () {
+                    chk_money();
+                    var money = $('#money').val();
+                    var bank_acc = $('#bank_acc').val();
+                    var bank_num = $('#bank_num').val();
+                    var bank_holder = $('#bank_holder').val();
+                    var r = confirm("确认提交吗？");
+                    if (r) {
+                        $.ajax({
+                            url: '@Url.Action("ScoreCash", "Home")',
+                            data: {
+                                amount: money
+                                , bankName: bank_acc
+                                , bankAccount: bank_num
+                                , bankPerson: bank_holder
+                                ,agentId : ag_id
+                            },
+                            type: "post",
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.state == "success") {
+                                    alert("积分兑换提交成功，3个工作日内到账");
+                                    window.setTimeout(function () {
+                                        var indexUrl = '@Url.Action("UserInfo", "Home")';
+                                        window.location.href = indexUrl;
+                                    }, 1000);
+                                    return true;
+                                } else {
+                                    alert("提交失败 ： " +  data.message)
+                                }
+                            }
+                        });
+                    }
+                });
             </script>
             <!--右侧结束-->
         </div>

@@ -83,5 +83,18 @@ namespace Distribution.Logic
         } 
         #endregion
 
+        public static int GetTotalCashScoreByState(string agentId,CashScoreState state)
+        {
+            int result = 0;
+            using (DistributionContext context = new DistributionContext ())
+            {
+               var sum  =  context.t_score_cash.Where(t => t.c_user_id == agentId &&  t.c_cash_state == (int)state).Sum(t => t.c_amount);
+                if(sum != null)
+                {
+                    result = (int)sum;
+                }
+            }
+            return result;
+        }
     }
 }

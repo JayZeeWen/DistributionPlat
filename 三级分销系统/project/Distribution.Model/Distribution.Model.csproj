@@ -50,7 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonModel.cs" />
+    <Compile Include="BasicModel.cs" />
     <Compile Include="ScoreCash.cs" />
     <Compile Include="Agent.cs" />
     <Compile Include="AgentRelation.cs" />

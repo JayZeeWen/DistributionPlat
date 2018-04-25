@@ -10,31 +10,19 @@ using Distribution.Web.Models;
 
 namespace Distribution.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BasicController
     {
         public ActionResult Index()
         {
-            var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
-            ViewBag.User = "";
-            if (UserInfo != null)
-            {
-                ViewBag.User = UserInfo.UserCode; 
-            }
-
             return View();
         }
         public ActionResult UserInfo(AgentInfoModel model)
         {
             var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
-            ViewBag.User = "";
-            
             if (UserInfo == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            ViewBag.User = UserInfo.UserCode;
-            
-
             Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentInfoModel viewModel = new AgentInfoModel();
             viewModel.agent = ag;
@@ -51,7 +39,10 @@ namespace Distribution.Web.Controllers
             {
                 viewModel.RecomAgentName = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
             }
-            viewModel.TotalScore = ScoreDetailLogic.GetTotalScore(ag.c_id).ToString();
+            int totalScore = ScoreDetailLogic.GetTotalScore(ag.c_id);
+            viewModel.TotalScore = totalScore.ToString();
+            int dealingScore = ScoreCashLogic.GetTotalCashScoreByState(ag.c_id, CashScoreState.Dealing);
+            viewModel.CanCashScore = (totalScore - dealingScore);
                 ;
             return View(viewModel);
         }
@@ -94,7 +85,7 @@ namespace Distribution.Web.Controllers
                 sc.F_Id = Guid.NewGuid().ToString();
                 sc.c_user_id = agentId.ToString();
                 sc.c_cash_state = 0;
-                sc.c_amount = 100;
+                sc.c_amount = amount;
                 sc.c_bank_name = bankName;
                 sc.c_bank_person = bankPerson;
                 sc.c_bank_account = bankAccount;

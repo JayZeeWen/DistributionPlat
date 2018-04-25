@@ -22,6 +22,9 @@ namespace Distribution.Model
         Purchase = 2
     }
 
+    /// <summary>
+    /// 代理商等级
+    /// </summary>
     public enum AgentLevel
     {
         /// <summary>
@@ -38,5 +41,37 @@ namespace Distribution.Model
         /// 省级代理
         /// </summary>
         ProvieceAgent = 3
+    }
+
+    /// <summary>
+    /// 积分提现处理状态
+    /// </summary>
+    public enum CashScoreState
+    {
+        /// <summary>
+        /// 受理中
+        /// </summary>
+        Dealing = 0,
+
+        /// <summary>
+        /// 已受理
+        /// </summary>
+        Succ = 1
+    }
+
+    /// <summary>
+    /// 公共配置目录id
+    /// </summary>
+    public enum ConfigCategory
+    {
+        /// <summary>
+        /// 职位等级
+        /// </summary>
+        PostitionLevel = 1 ,
+
+        /// <summary>
+        /// 代理商等级
+        /// </summary>
+        AgentLevel = 2 
     }
 }

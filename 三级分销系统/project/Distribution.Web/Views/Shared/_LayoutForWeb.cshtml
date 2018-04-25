@@ -31,8 +31,16 @@
         <div class="bHeader">
             <label>您好，欢迎来到深圳XX生物科技有限公司！</label><!-- <a class="bHeader1"></a><a class="bHeader2"></a> -->
             <div class="bHeader3">
-                <a href="~/Home/UserInfo" class="bHeader3_1">@ViewBag.User</a>
-                <a href="~/Account/LogOut" class="bHeader3_2">退出</a>
+                @if (!string.IsNullOrEmpty( ViewBag.UserId))
+                {
+                    <a href="~/Home/UserInfo" class="bHeader3_1">@ViewBag.User</a>
+                    <a href="~/Account/LogOut" class="bHeader3_2">退出</a>
+                }
+                else
+                {
+                    <a href="~/Account/Login" class="bHeader3_2">登陆</a>
+                }
+
             </div>
         </div>
     </div>
