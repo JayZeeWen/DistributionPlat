@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Configuration;
+@{
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
@@ -13,6 +14,7 @@
             async: false,
             success: function (data) {
                 $("#form1").formSerialize(data);
+                $("#imgid").attr('src', '@ConfigurationManager.AppSettings["SaveFilePath"]' +data.c_voucher_path);//http://localhost:8081/FilePath/201804/Tulips.jpg
                 $("#form1").find('.form-control,select,input').attr('readonly', 'readonly');
                 $("#form1").find('div.ckbox label').attr('for', '');
                 $("#F_UserPassword").val("******");
@@ -109,6 +111,14 @@
                     </th>
                     <td class="formValue" colspan="3">
                         <textarea id="c_address" name="c_address" class="form-control" style="height: 60px;"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        转账凭证
+                    </th>
+                    <td class="formValue" colspan="3">
+                        <img id="imgid" src="" alt="" />
                     </td>
                 </tr>
             </table>
