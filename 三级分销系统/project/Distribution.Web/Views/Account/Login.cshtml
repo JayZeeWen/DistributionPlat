@@ -68,13 +68,14 @@
         适用浏览器：IE8以上、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗.
     </div>
     <script type="text/javascript">
-        (function ($) {
-            $.login = {
-                formMessage: function (msg) {
-                    $('.login_tips').find('.tips_msg').remove();
-                    $('.login_tips').append('<div class="tips_msg"><i class="fa fa-question-circle"></i>' + msg + '</div>');
-                },
-                loginClick: function () {
+    (function ($) {
+        $.login = {
+            formMessage: function (msg) {
+                $('.login_tips').find('.tips_msg').remove();
+                $('.login_tips').append('<div class="tips_msg"><i class="fa fa-question-circle"></i>' + msg + '</div>');
+            },
+            loginClick: function () {
+                var url = '@Url.Action("CheckLogin", "Account")';
                     var $username = $("#txt_account");
                     var $password = $("#txt_password");
                     var $code = $("#txt_code");
@@ -89,7 +90,7 @@
                     }  else {
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
-                            url: "Account/CheckLogin",
+                            url: url,
                             data: { username: $.trim($username.val()), password: $.trim($password.val()) },
                             type: "post",
                             dataType: "json",
@@ -97,7 +98,7 @@
                                 if (data.state == "success") {
                                     $("#login_button").find('span').html("登录成功，正在跳转...");
                                     window.setTimeout(function () {
-                                        window.location.href = "Home/Index";
+                                        window.location.href = '@Url.Action("UserInfo", "Home")';
                                     }, 500);
                                 } else {
                                     $("#login_button").removeAttr('disabled').find('span').html("登录");
