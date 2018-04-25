@@ -7,7 +7,7 @@
     $(function () {
         initControl();
         $.ajax({
-            url: "/SystemManage/User/GetFormJson",
+            url: "/AgentManage/Agent/GetFormJson",
             data: { keyValue: keyValue },
             dataType: "json",
             async: false,
@@ -45,123 +45,70 @@
     <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#">基本信息</a></li>
-            <li><a href="javascript:void()">扩展信息</a></li>
+            @*<li><a href="javascript:void()">扩展信息</a></li>
             <li><a href="javascript:void()">登录日志</a></li>
-            <li><a href="javascript:void()">操作日志</a></li>
+            <li><a href="javascript:void()">操作日志</a></li>*@
         </ul>
         <div style="padding-top: 20px; margin-right: 30px;">
             <table class="form">
                 <tr>
-                    <th class="formTitle">账户</th>
-                    <td class="formValue">
-                        <input id="F_Account" name="F_Account" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">密码</th>
-                    <td class="formValue">
-                        <input id="F_UserPassword" name="F_UserPassword" type="password" class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">公司</th>
-                    <td class="formValue">
-                        <select id="F_OrganizeId" name="F_OrganizeId" class="form-control">
-                        </select>
-                    </td>
-                    <th class="formTitle">部门</th>
-                    <td class="formValue">
-                        <select id="F_DepartmentId" name="F_DepartmentId" class="form-control">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">角色</th>
-                    <td class="formValue">
-                        <select id="F_RoleId" name="F_RoleId" class="form-control">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                    <th class="formTitle">岗位</th>
-                    <td class="formValue">
-                        <select id="F_DutyId" name="F_DutyId" class="form-control">
-                            <option value="">==请选择==</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
                     <th class="formTitle">姓名</th>
                     <td class="formValue">
-                        <input id="F_RealName" name="F_RealName" type="text" class="form-control"/>
+                        <input id="c_name" name="c_name" type="text" class="form-control" />
                     </td>
-                    <th class="formTitle">性别</th>
-                    <td class="formValue">
-                        <select id="F_Gender" name="F_Gender" class="form-control">
-                            <option value="true">男</option>
-                            <option value="false">女</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
                     <th class="formTitle">手机</th>
                     <td class="formValue">
-                        <input id="F_MobilePhone" name="F_MobilePhone" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">生日</th>
-                    <td class="formValue">
-                        <input id="F_Birthday" name="F_Birthday" type="text" class="form-control"/>
+                        <input id="c_mobile" name="c_mobile" class="form-control" />
                     </td>
                 </tr>
-                <tr>
-                    <th class="formTitle">微信</th>
+                @*<tr>
+                    <th class="formTitle">等级类型</th>
                     <td class="formValue">
-                        <input id="F_WeChat" name="F_WeChat" type="text" class="form-control" />
+                        <select id="c_levle" name="c_levle" class="form-control"></select>
                     </td>
-                    <th class="formTitle">邮箱</th>
+                    <th class="formTitle">代理类型</th>
                     <td class="formValue">
-                        <input id="F_Email" name="F_Email" type="text" class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">类型</th>
-                    <td class="formValue">
-                        <select id="F_IsAdministrator" name="F_IsAdministrator" class="form-control">
-                            <option value="false">普通用户</option>
-                            <option value="true">系统管理员</option>
+                        <select id="c_agent_level" name="c_agent_level" class="form-control">
+                            <option value="">==请选择==</option>
                         </select>
                     </td>
-                    <th class="formTitle">允许登录</th>
+                </tr>*@
+                <tr>
+                    <th class="formTitle">持卡人姓名</th>
                     <td class="formValue">
-                        <select id="F_EnabledMark" name="F_EnabledMark" class="form-control">
-                            <option value="true">是</option>
-                            <option value="false">否</option>
-                        </select>
+                        <input id="c_bank_person" name="c_bank_person" type="text" class="form-control"/>
+                    </td>
+                    <th class="formTitle">开户行</th>
+                    <td class="formValue">
+                        <input id="c_bank_name" name="c_bank_name" type="text" class="form-control"/>
                     </td>
                 </tr>
                 <tr>
-                    <th class="formTitle" valign="top" style="padding-top: 5px;">备注
+                    <th class="formTitle">银行账号</th>
+                    <td class="formValue">
+                        <input id="c_bank_account" name="c_bank_account" type="text" class="form-control"/>
+                    </td>
+                    <th class="formTitle">积分</th>
+                    <td class="formValue">
+                        <input id="c_score" name="c_score" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">收货人姓名</th>
+                    <td class="formValue">
+                        <input id="c_rec_person" name="c_rec_person" type="text" class="form-control" />
+                    </td>
+                    <th class="formTitle">收货人手机</th>
+                    <td class="formValue">
+                        <input id="c_rec_mobile" name="c_rec_mobile" type="text" class="form-control" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle" valign="top" style="padding-top: 5px;">
+                        收货人地址
                     </th>
                     <td class="formValue" colspan="3">
-                        <textarea id="F_Description" name="F_Description" class="form-control" style="height: 60px;"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">创建人员</th>
-                    <td class="formValue">
-                        <input id="F_CreatorUserId" name="F_CreatorUserId" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">创建时间</th>
-                    <td class="formValue">
-                        <input id="F_CreatorTime" name="F_CreatorTime" type="text" class="form-control" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">修改人员</th>
-                    <td class="formValue">
-                        <input id="F_LastModifyUserId" name="F_LastModifyUserId" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">修改时间</th>
-                    <td class="formValue">
-                        <input id="F_LastModifyTime" name="F_LastModifyTime" type="text" class="form-control" />
+                        <textarea id="c_address" name="c_address" class="form-control" style="height: 60px;"></textarea>
                     </td>
                 </tr>
             </table>

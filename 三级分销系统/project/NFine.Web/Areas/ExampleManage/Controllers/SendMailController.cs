@@ -1,7 +1,7 @@
 ﻿/*******************************************************************************
  * Copyright © 2016 NFine.Framework 版权所有
  * Author: NFine
- * Description: 三级分销平台
+ * Description: 分销平台
  * Website：http://www.nfine.cn
 *********************************************************************************/
 using NFine.Code;
@@ -25,7 +25,7 @@ namespace NFine.Web.Areas.ExampleManage.Controllers
             mail.MailServer = Configs.GetValue("MailHost");
             mail.MailUserName = Configs.GetValue("MailUserName");
             mail.MailPassword = Configs.GetValue("MailPassword");
-            mail.MailName = "三级分销平台";
+            mail.MailName = "分销平台";
             mail.Send(account, title, content);
             return Success("发送成功。");
         }

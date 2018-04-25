@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class AgentLogic
     {
         #region BasicMethod
-        public static Agent GetEnityById(int id)
+        public static Agent GetEnityById(string id)
         {
             using (DistributionContext context = new DistributionContext())
             {
@@ -40,6 +40,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext())
             {
+                NewAgent.c_id = Guid.NewGuid().ToString();
                 context.t_agent.Add(NewAgent);
                 context.SaveChanges();
             }

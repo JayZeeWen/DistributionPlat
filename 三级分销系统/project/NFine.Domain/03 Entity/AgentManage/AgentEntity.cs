@@ -32,6 +32,23 @@ namespace NFine.Domain.Entity.AgentManage
 
         public int? c_agent_level { get; set; }
 
+        /// <summary>
+        /// 收件人
+        /// </summary>
+        public string c_rec_person { get; set; }
+
+        /// <summary>
+        /// 收件人电话
+        /// </summary>
+        public string c_rec_mobile { get; set; }
+
+        /// <summary>
+        /// 持卡人
+        /// </summary>
+        public string c_bank_person { get; set; }
+
+        public string c_voucher_path { get; set; }
+
         public DateTime? c_create_date { get; set; }
 
         public DateTime? F_CreatorTime { get; set; }

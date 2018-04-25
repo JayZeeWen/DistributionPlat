@@ -18,12 +18,12 @@ namespace Distribution.Logic
         /// <param name="AgentId">代理商（被推荐人或是产品购买人）</param>
         /// <param name="reType">奖励类型：推荐奖励   购买奖励</param>
         /// <returns></returns>
-        public static bool DealRewardScore( int AgentId, RewartType reType)
+        public static bool DealRewardScore( string AgentId, RewartType reType)
         {
             bool result = true;
             using (DistributionContext context = new DistributionContext())
             {
-                int RecommId = context.t_agent_relation.Where(c => c.c_child_id == AgentId).First().ParentAgent.c_id;
+                string RecommId = context.t_agent_relation.Where(c => c.c_child_id == AgentId).First().ParentAgent.c_id;
                 int firsSc;//直推奖励
                 int secoSc;//二代奖励
                 string desc = "";
@@ -99,7 +99,7 @@ namespace Distribution.Logic
         /// <param name="ChangeScore"></param>
         /// <param name="context"></param>
         /// <param name="reason"></param>
-        public static void UpdateAgentScore(int AgentId, int ChangeScore,DistributionContext context = null,string reason = "操作变更")
+        public static void UpdateAgentScore(string AgentId, int ChangeScore,DistributionContext context = null,string reason = "操作变更")
         {
             if(context == null)
             {
@@ -123,7 +123,7 @@ namespace Distribution.Logic
         /// <param name="AgentId"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static int GetMaxLevel(int AgentId,DistributionContext context = null )
+        public static int GetMaxLevel(string AgentId,DistributionContext context = null )
         {
             if(context == null )
             {
