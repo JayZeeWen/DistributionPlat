@@ -42,7 +42,7 @@ namespace NFine.Web.UnitTest
             #region 推荐奖励
 
             //被推荐人
-            Agent ag = AgentLogic.GetEnityById(5);
+            Agent ag = AgentLogic.GetEnityById("5");
 
             //积分奖励
             ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
@@ -50,11 +50,11 @@ namespace NFine.Web.UnitTest
 
 
             //升级
-            AgentRelation ar = AgentRelationLogic.FindEntity( t=> t.c_child_id == ag.c_id);
-            Agent recomm_ag = AgentLogic.GetEnityById((int)ar.c_parent_id);
+            AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
+            Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
             LevelLogic.IsLevelUpWithCondition(recomm_ag);
             #endregion
-            
+
         }
     }
 }
