@@ -23,27 +23,42 @@ namespace Distribution.Web.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
             AgentInfoModel viewModel = new AgentInfoModel();
-            viewModel.agent = ag;
-            AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
-            if(ag.c_levle != null)
+            if(base.agentInfo != null)
             {
-                viewModel.Level = CommConfigLogic.GetValueFromConfig(1, ag.c_levle);
+                viewModel = agentInfo;
             }
-            if(ag.c_agent_level != null )
+            return View(viewModel);
+        }
+
+        public ActionResult ScoreManager(ScoreManageModel model)
+        {
+            var pageIndex = Request.QueryString["pageindex"];
+            int index = 0 ;
+            int pageSize = 15;
+            Int32.TryParse(pageIndex, out index);
+            if(index == 0 )
             {
-                viewModel.AgLevel = CommConfigLogic.GetValueFromConfig(2, ag.c_agent_level);
+                index = 1;
             }
-            if(ar != null)
+            var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
+            if (UserInfo == null)
             {
-                viewModel.RecomAgentName = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
+                return RedirectToAction("Login", "Account");
             }
-            int totalScore = ScoreDetailLogic.GetTotalScore(ag.c_id);
-            viewModel.TotalScore = totalScore.ToString();
-            int dealingScore = ScoreCashLogic.GetTotalCashScoreByState(ag.c_id, CashScoreState.Dealing);
-            viewModel.CanCashScore = (totalScore - dealingScore);
-                ;
+            ScoreManageModel viewModel = new ScoreManageModel();
+            if (base.agentInfo != null)
+            {
+                CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
+                List<ScoreDetail> list = ScoreDetailLogic.GetList().Where(t => t.c_user_id == agentInfo.agent.c_id).ToList();
+                viewModel.scoreList = new PagerResult<ScoreDetail>();
+                viewModel.scoreList.DataList = list.Skip<ScoreDetail>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.c_create_date);
+                viewModel.scoreList.Code = 0;
+                viewModel.scoreList.Total = list.Count();
+                viewModel.scoreList.PageIndex = index;
+                viewModel.scoreList.PageSize = pageSize;
+                viewModel.scoreList.RequestUrl = "ScoreManager?pageindex=" + index;
+            }
             return View(viewModel);
         }
 

@@ -6,7 +6,7 @@ using Distribution.Model;
 
 namespace Distribution.Web.Models
 {
-    public class AgentInfoModel
+    public class AgentInfoModel 
     {
         public Agent agent { get; set; }
 

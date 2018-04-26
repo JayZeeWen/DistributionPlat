@@ -1,24 +1,55 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+
+.jpager {
+    height: 40px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    .jpager a {
+        display: inline-block;
+        height: 30px;
+        width: 35px;
+        text-align: center;
+        line-height: 30px;
+        border: 1px solid #008b8b;
+        margin: 2px;
+        color: black;
+    }
+
+        .jpager a[cur] {
+            color: black;
+            border: none;
+        }
+
+        .jpager a:hover {
+            text-decoration: none;
+        }
+
+
+.myPager {
+    height: 40px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
-}
+    .myPager a {
+        display: inline-block;
+        border-radius: 18px;
+        height: 36px;
+        width: 36px;
+        text-align: center;
+        line-height: 36px;
+        border: 1px solid #008b8b;
+        margin: 2px;
+        color: black;
+    }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+        .myPager a[cur] {
+            background: #008b8b;
+            color: white;
+        }
+
+        .myPager a:hover {
+            color: white;
+            background: #008b8b;
+            text-decoration: none;
+            -webkit-transition: width .25s ease-in-out, background-color .25s linear;
+            transitiona: width .25s ease-in-out, background-color .25s linear;
+        }
