@@ -7,6 +7,7 @@
 using NFine.Data;
 using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
+using System.Collections.Generic;
 
 namespace NFine.Domain.IRepository.SystemManage
 {
@@ -14,5 +15,7 @@ namespace NFine.Domain.IRepository.SystemManage
     {
         void DeleteForm(string keyValue);
         void SubmitForm(AgentEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
+
+        List<AgentEntity> GetAgentList(string state);
     }
 }

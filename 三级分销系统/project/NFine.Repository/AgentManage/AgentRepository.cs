@@ -10,6 +10,10 @@ using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace NFine.Repository.SystemManage
 {
@@ -43,6 +47,25 @@ namespace NFine.Repository.SystemManage
                 }
                 db.Commit();
             }
+        }
+
+        public List<AgentEntity> GetAgentList(string state)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"select ap.c_name as parent_name,a.* 
+                             from t_agent a 
+                             left join t_agent_relation ar 
+                              on a.f_id = ar.c_child_id 
+                             left join t_agent ap 
+                              on ap.f_id = ar.c_parent_id
+                              where 1=1
+                                    and a.c_state=@state
+                              order by a.c_create_date asc;");
+            DbParameter[] parameter = 
+            {
+                 new SqlParameter("@state",state)
+            };
+            return this.FindList(strSql.ToString(), parameter);
         }
     }
 }

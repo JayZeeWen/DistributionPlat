@@ -31,6 +31,12 @@ namespace NFine.Application.SystemManage
             expression = expression.And(t => t.c_name != "admin");
             return service.FindList(expression, pagination);
         }
+
+        public List<AgentEntity> GetAgentList(string state)
+        {
+            return service.GetAgentList(state);
+        }
+
         public AgentEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
