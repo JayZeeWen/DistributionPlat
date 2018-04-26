@@ -1,0 +1,56 @@
+﻿@using Distribution.Model;
+@model Distribution.Web.Models.ScoreManageModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutForward.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+</head>
+<body class="bBg">
+    @*<div class="bMain">*@
+    ﻿
+
+    <div class="bRight" style="height:800px">
+        <!--右侧开始-->
+        <div class="grDiv1">
+            <div class="grDiv1_1"><label>积分明细</label></div>
+            <div class="grDiv1_2">
+
+                <table class="cwTab">
+                    <tbody>
+                        <tr>
+                            <th>变更积分</th>
+                            <th>变更原因</th>
+                            <th>变更时间</th>
+                        </tr>
+                        @foreach(ScoreDetail item in Model.scoreList.DataList)
+                        {
+                            <tr>
+                                <td>@item.c_amount</td>
+                                <td>@item.c_reason</td>
+                                <td>@Convert.ToDateTime(item.c_create_date).ToString("yyyy-MM-dd hh:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div style="padding-left:20%;padding-top:20px">
+                    @Html.Raw(Model.scoreList.PagerHtml(size: 5)) 共 @Model.scoreList.Total 条
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+        </script>
+        <!--右侧结束-->
+    </div>
+    <div class="clearB"></div>
+    @*</div>*@
+
+</body>
+</html>
