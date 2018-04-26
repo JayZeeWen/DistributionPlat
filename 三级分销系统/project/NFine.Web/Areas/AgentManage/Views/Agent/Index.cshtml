@@ -13,29 +13,57 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
-                { label: '姓名', name: 'c_name', width: 80, align: 'left' },
+                { label: '姓名', name: 'c_name', width: 60, align: 'left' },
                 { label: '手机', name: 'c_mobile', width: 80, align: 'left' },
-                { label: '持卡人姓名', name: 'c_bank_person', width: 80, align: 'left' },
-                { label: '开户行', name: 'c_bank_name', width: 120, align: 'left' },
+                {
+                    label: '等级类型', name: 'c_levle', width: 60, align: 'left',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '加盟商';
+                        } else if (cellvalue == 2) {
+                            return '部门经理';
+                        } else if (cellvalue == 3) {
+                            return '副总监';
+                        } else if (cellvalue == 4) {
+                            return '总监';
+                        } else if (cellvalue == 5) {
+                            return '总经理';
+                        }
+                    }
+                },
+                {
+                    label: '代理类型', name: 'c_agent_level', width: 60, align: 'left',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '代理商';
+                        } else if (cellvalue == 2) {
+                            return '市级代理';
+                        } else if (cellvalue == 3) {
+                            return '省级代理';
+                        }
+                    }
+                },
+                { label: '持卡人姓名', name: 'c_bank_person', width: 70, align: 'left' },
+                { label: '开户行', name: 'c_bank_name', width: 80, align: 'left' },
                 { label: '银行账号', name: 'c_bank_account', width: 100, align: 'left' },
-                { label: '收货人姓名', name: 'c_rec_person', width: 80, align: 'left' },
-                { label: '收货人手机', name: 'c_rec_mobile', width: 150, align: 'left' },
+                { label: '积分', name: 'c_score', width: 50, align: 'left' },
+                { label: '收货人姓名', name: 'c_rec_person', width: 60, align: 'left' },
+                { label: '收货人手机', name: 'c_rec_mobile', width: 80, align: 'left' },
                 { label: '收货人地址', name: 'c_address', width: 80, align: 'left' },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    label: '创建时间', name: 'c_create_date', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
                 {
                     label: "允许登录", name: "c_state", width: 60, align: "center",
                     formatter: function (cellvalue, options, rowObject) {
-                        if (cellvalue == 1) {
+                        if (cellvalue == 1 || cellvalue == 2) {
                             return '<span class=\"label label-success\">正常</span>';
                         } else if (cellvalue == 0) {
                             return '<span class=\"label label-default\">禁用</span>';
                         }
                     }
-                },
-                { label: '备注', name: 'F_Description', width: 200, align: 'left' }
+                }
             ],
             pager: "#gridPager",
             sortname: 'F_CreatorTime desc',
