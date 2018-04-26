@@ -22,24 +22,13 @@
         }
     });
     function initControl() {
-        $("#F_Gender").bindSelect()
-        $("#F_IsAdministrator").bindSelect()
-        $("#F_EnabledMark").bindSelect()
-        $("#F_OrganizeId").bindSelect({
-            url: "/SystemManage/Organize/GetTreeSelectJson"
+        $("#c_levle").bindSelect({
+            url: "/AgentManage/Agent/GetLevelJson",
+            param: { enCode: 1 }
         });
-        $("#F_DepartmentId").bindSelect({
-            url: "/SystemManage/Organize/GetTreeSelectJson",
-        });
-        $("#F_RoleId").bindSelect({
-            url: "/SystemManage/Role/GetGridJson",
-            id: "F_Id",
-            text: "F_FullName"
-        });
-        $("#F_DutyId").bindSelect({
-            url: "/SystemManage/Duty/GetGridJson",
-            id: "F_Id",
-            text: "F_FullName"
+        $("#c_agent_level").bindSelect({
+            url: "/AgentManage/Agent/GetLevelJson",
+            param: { enCode: 2 }
         });
     }
     function submitForm() {
@@ -73,18 +62,16 @@
                         <input id="c_mobile" name="c_mobile" class="form-control required" placeholder="请输入手机" />
                     </td>
                 </tr>
-                @*<tr>
-                        <th class="formTitle">等级类型</th>
-                        <td class="formValue">
-                            <select id="c_levle" name="c_levle" class="form-control required"></select>
-                        </td>
-                        <th class="formTitle">代理类型</th>
-                        <td class="formValue">
-                            <select id="c_agent_level" name="c_agent_level" class="form-control required">
-                                <option value="">==请选择==</option>
-                            </select>
-                        </td>
-                    </tr>*@
+                <tr>
+                    <th class="formTitle">等级类型</th>
+                    <td class="formValue">
+                        <select id="c_levle" name="c_levle" class="form-control required"></select>
+                    </td>
+                    <th class="formTitle">代理类型</th>
+                    <td class="formValue">
+                        <select id="c_agent_level" name="c_agent_level" class="form-control required"></select>
+                    </td>
+                </tr>
                 <tr>
                     <th class="formTitle">持卡人姓名</th>
                     <td class="formValue">

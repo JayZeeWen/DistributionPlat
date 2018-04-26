@@ -20,6 +20,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
     public class AgentController : ControllerBase
     {
         private AgentApp agentApp = new AgentApp();
+        private CommConfigApp commApp = new CommConfigApp();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
         [HttpGet]
@@ -119,6 +120,20 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         public ActionResult Info()
         {
             return View();
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetLevelJson(int enCode)
+        {
+
+            var data = CommConfigLogic.GetConfigListByCate(enCode);
+            List<object> list = new List<object>();
+            foreach (var item in data)
+            {
+                list.Add(new { id = item.c_key, text = item.c_value });
+            }
+            return Content(list.ToJson());
         }
     }
 }

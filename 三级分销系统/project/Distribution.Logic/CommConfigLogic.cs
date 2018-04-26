@@ -71,5 +71,15 @@ namespace Distribution.Logic
         {
             return FindEntity(t => t.c_category_id == categoryId && t.c_key == key).c_value;
         }
+
+        public static List<CommConfig> GetConfigListByCate(int categoryId)
+        {
+            List<CommConfig> list = new List<CommConfig>();
+            using (DistributionContext context = new DistributionContext ())
+            {
+                list = context.t_common_config.Where(t => t.c_category_id == categoryId).ToList();
+            }
+            return list;
+        }
     }
 }
