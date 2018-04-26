@@ -18,7 +18,7 @@
       <publishTime>04/25/2018 15:00:02</publishTime>
     </File>
     <File Include="Areas/AgentManage/Views/Agent/Index.cshtml">
-      <publishTime>04/25/2018 13:53:06</publishTime>
+      <publishTime>04/25/2018 19:22:08</publishTime>
     </File>
     <File Include="Areas/AgentManage/Views/Agent/Info.cshtml">
       <publishTime>04/23/2018 17:54:01</publishTime>
@@ -225,13 +225,13 @@
       <publishTime>04/25/2018 14:53:29</publishTime>
     </File>
     <File Include="bin/Distribution.DB.dll">
-      <publishTime>04/25/2018 15:19:50</publishTime>
+      <publishTime>04/26/2018 10:48:55</publishTime>
     </File>
     <File Include="bin/Distribution.Logic.dll">
-      <publishTime>04/25/2018 15:19:51</publishTime>
+      <publishTime>04/26/2018 10:48:56</publishTime>
     </File>
     <File Include="bin/Distribution.Model.dll">
-      <publishTime>04/25/2018 15:19:50</publishTime>
+      <publishTime>04/26/2018 10:48:55</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>05/29/2016 20:39:24</publishTime>
@@ -255,25 +255,25 @@
       <publishTime>08/01/2016 14:46:10</publishTime>
     </File>
     <File Include="bin/NFine.Application.dll">
-      <publishTime>04/25/2018 15:19:52</publishTime>
+      <publishTime>04/26/2018 10:48:57</publishTime>
     </File>
     <File Include="bin/NFine.Code.dll">
-      <publishTime>04/25/2018 15:19:50</publishTime>
+      <publishTime>04/26/2018 10:48:55</publishTime>
     </File>
     <File Include="bin/NFine.Data.dll">
-      <publishTime>04/25/2018 15:19:50</publishTime>
+      <publishTime>04/26/2018 10:48:56</publishTime>
     </File>
     <File Include="bin/NFine.Domain.dll">
-      <publishTime>04/25/2018 15:19:51</publishTime>
+      <publishTime>04/26/2018 10:48:56</publishTime>
     </File>
     <File Include="bin/NFine.Mapping.dll">
-      <publishTime>04/25/2018 15:19:51</publishTime>
+      <publishTime>04/26/2018 10:48:56</publishTime>
     </File>
     <File Include="bin/NFine.Repository.dll">
-      <publishTime>04/25/2018 15:19:51</publishTime>
+      <publishTime>04/26/2018 10:48:56</publishTime>
     </File>
     <File Include="bin/NFine.Web.dll">
-      <publishTime>04/25/2018 15:22:42</publishTime>
+      <publishTime>04/26/2018 10:48:58</publishTime>
     </File>
     <File Include="bin/NPOI.dll">
       <publishTime>05/30/2016 15:02:00</publishTime>
