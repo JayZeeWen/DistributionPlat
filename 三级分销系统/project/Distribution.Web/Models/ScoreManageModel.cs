@@ -10,4 +10,9 @@ namespace Distribution.Web.Models
     {
         public PagerResult<ScoreDetail> scoreList { get; set; }
     }
+
+    public class ScoreCashModel : AgentInfoModel
+    {
+        public PagerResult<ScoreCash> cashList { get; set; }
+    }
 }

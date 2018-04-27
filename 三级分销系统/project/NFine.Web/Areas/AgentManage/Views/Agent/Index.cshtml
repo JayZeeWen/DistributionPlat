@@ -1,4 +1,5 @@
-﻿@{
+﻿@using NFine.Code
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
@@ -64,6 +65,7 @@
                         }
                     }
                 }
+
             ],
             pager: "#gridPager",
             sortname: 'F_CreatorTime desc',
@@ -163,6 +165,31 @@
             }
         });
     }
+
+    function LoginForward() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var state = $("#gridList").jqGridRowValue().c_state;
+        if (isContains (state,"禁用")) {
+            alert("账户处于禁用状态")
+        } else {
+            $.modalConfirm("注：您确定要【登陆】该账户吗？", function (r) {
+                if (r) {
+                    $.submitForm({
+                        url: "/AgentManage/Agent/LoginForward",
+                        param: { keyValue: keyValue },
+                        success: function () {
+                            window.open("@Configs.GetValue("ForDireLogin")");
+                            $.currentWindow().$("#gridList").trigger("reloadGrid");
+                        }
+                    })
+                }
+            });
+        }
+    }
+
+    function isContains(str, substr) {
+        return str.indexOf(substr) >= 0;
+    }
 </script>
 
 <div class="topPanel">
@@ -179,6 +206,7 @@
                 <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改用户</a></li>
                 <li><a id="NF-delete" authorize="yes" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除用户</a></li>
                 <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看用户</a></li>
+                <li><a  onclick="LoginForward()"><i class="fa fa-search-plus"></i>登陆用户</a></li>
                 <li class="split"></li>
                 <li><a id="NF-revisepassword" authorize="yes" onclick="btn_revisepassword()"><i class="fa fa-key"></i>密码重置</a></li>
                 <li class="split"></li>

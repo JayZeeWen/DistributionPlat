@@ -10,6 +10,7 @@ using NFine.Application.SystemManage;
 using NFine.Code;
 using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -135,5 +136,28 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             }
             return Content(list.ToJson());
         }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [HandlerAuthorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult LoginForward(string keyValue)
+        {
+            AgentEntity data = agentApp.GetForm(keyValue);
+
+            OperatorModel operatorModel = new OperatorModel();
+            operatorModel.UserId = data.F_Id.ToString();
+            operatorModel.UserCode = data.c_mobile;
+            operatorModel.UserName = data.c_name;
+            operatorModel.LoginIPAddress = Net.Ip;
+            operatorModel.LoginIPAddressName = Net.GetLocation(operatorModel.LoginIPAddress);
+            operatorModel.LoginTime = DateTime.Now;
+            operatorModel.LoginToken = DESEncrypt.Encrypt(Guid.NewGuid().ToString());
+            operatorModel.IsSystem = false;
+            OperatorProvider.Provider.AddCurrent(operatorModel, Configs.GetValue("LoginForwardKey"));
+            
+            return Success("账户登陆成功。");
+        }
+        
     }
 }
