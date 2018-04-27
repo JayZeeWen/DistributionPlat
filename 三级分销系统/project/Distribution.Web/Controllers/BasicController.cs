@@ -23,6 +23,10 @@ namespace Distribution.Web.Controllers
                 ViewBag.UserId = UserInfo.UserId;
                 ViewBag.User = UserInfo.UserCode;
                 Agent ag = AgentLogic.GetEnityById(UserInfo.UserId);
+                if(ag == null)
+                {
+                    return;
+                }
                 agentInfo.agent = ag;
                 AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
                 if (ag.c_levle != null)

@@ -62,6 +62,37 @@ namespace Distribution.Web.Controllers
             return View(viewModel);
         }
 
+        public ActionResult ScoreCashManager(ScoreCashModel model)
+        {
+            var pageIndex = Request.QueryString["pageindex"];
+            int index = 0;
+            int pageSize = 15;
+            Int32.TryParse(pageIndex, out index);
+            if (index == 0)
+            {
+                index = 1;
+            }
+            var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
+            if (UserInfo == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            ScoreCashModel viewModel = new ScoreCashModel();
+            if (base.agentInfo != null)
+            {
+                CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
+                List<ScoreCash> list = ScoreCashLogic.GetList().Where(t => t.c_user_id == agentInfo.agent.c_id).ToList();
+                viewModel.cashList = new PagerResult<ScoreCash>();
+                viewModel.cashList.DataList = list.Skip<ScoreCash>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.F_CreatorTime);
+                viewModel.cashList.Code = 0;
+                viewModel.cashList.Total = list.Count();
+                viewModel.cashList.PageIndex = index;
+                viewModel.cashList.PageSize = pageSize;
+                viewModel.cashList.RequestUrl = "ScoreCashManager?pageindex=" + index;
+            }
+            return View(viewModel);
+        }
+
 
         [HttpPost]
         [HandlerAjaxOnly]

@@ -117,6 +117,13 @@ namespace Distribution.Web.Controllers
             }
         }
 
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult CheckLoginForBack(string keyValue)
+        {
+            return Content(new AjaxResult { state = ResultType.success.ToString(), message = "登录成功。" }.ToJson());
+        }
+
         [WebMethod(EnableSession = true)]
         [HttpGet]
         public ActionResult GetAuthCode()

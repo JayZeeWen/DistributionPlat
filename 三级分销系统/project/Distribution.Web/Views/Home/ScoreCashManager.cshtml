@@ -1,5 +1,5 @@
 ﻿@using Distribution.Model;
-@model Distribution.Web.Models.ScoreManageModel
+@model Distribution.Web.Models.ScoreCashModel
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutForward.cshtml";
@@ -16,8 +16,8 @@
 
     <div class="bRight" style="height:800px">
         <div class="cwNav">
-            <a href="" style="background: #fe6c00; color:#FFF;">积分明细</a>
-            <a href="ScoreCashManager">积分提现记录</a>
+            <a href="ScoreManager">积分明细</a>
+            <a href="" style="background: #fe6c00; color:#FFF;" >积分提现记录</a>
         </div>
         <!--右侧开始-->
         <div class="grDiv1">
@@ -28,25 +28,25 @@
                     <tbody>
                         <tr>
                             <th style="width:6%"></th>
-                            <th>变更积分</th>
-                            <th>变更原因</th>
-                            <th>变更时间</th>
+                            <th>提现积分</th>
+                            <th>提现状态</th>
+                            <th>申请时间</th>
                         </tr>
                         @{int index = 1;}
-                        @foreach(ScoreDetail item in Model.scoreList.DataList)
+                        @foreach(ScoreCash item in Model.cashList.DataList)
                         {
                             <tr>
                                 <td style="width:6%">@index</td>
                                 <td>@item.c_amount</td>
-                                <td>@item.c_reason</td>
-                                <td>@Convert.ToDateTime(item.c_create_date).ToString("yyyy-MM-dd hh:mm")</td>
+                                <td>@item.c_cash_state </td>
+                                <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd hh:mm")</td>
                                 @{index += 1;}
                             </tr>
                         }
                     </tbody>
                 </table>
                 <div style="padding-left:20%;padding-top:20px">
-                    @Html.Raw(Model.scoreList.PagerHtml(size: 5)) 共 @Model.scoreList.Total 条
+                    @Html.Raw(Model.cashList.PagerHtml(size: 5)) 共 @Model.cashList.Total 条
                 </div>
             </div>
         </div>

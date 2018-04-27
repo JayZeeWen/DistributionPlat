@@ -501,6 +501,7 @@
     <Content Include="Views\Home\UserInfo.cshtml" />
     <Content Include="Views\Shared\_LayoutForward.cshtml" />
     <Content Include="Views\Home\ScoreManager.cshtml" />
+    <Content Include="Views\Home\ScoreCashManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
