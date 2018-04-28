@@ -38,7 +38,16 @@
                             <tr>
                                 <td style="width:6%">@index</td>
                                 <td>@item.c_amount</td>
-                                <td>@item.c_cash_state </td>
+                                @if (item.c_cash_state == 0)
+                                {
+                                    <td>受理中</td>
+                                }
+                                else
+                                {
+                                    <td>已受理</td>
+                                }
+                                
+                                
                                 <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd hh:mm")</td>
                                 @{index += 1;}
                             </tr>
