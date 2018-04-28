@@ -6,9 +6,14 @@ IP:122.114.53.214:59159  端口：3389/59159/65138/59
 SQLServer: 服务器 122.114.53.214  登录名 sa   密码 admin12345
 
 
-您新购买的云服务器(共1台)已分配成功（订单号：20180425149679）,感谢您对腾讯云的支持!
+腾讯云:
+IP:193.112.205.187
+默认账户为:Administrator
+初始密码为:GCMeC9zKAqH
 
-服务器操作系统为 Windows Server 2008 R2 企业版 SP1 64位 ，默认账户为 Administrator ，初始密码为 GCMeC9zKAqH
 
-服务器名称	 云主机ID	        所在网络ID	内网IP	        公网IP
-u672au547du540d	 ins-d6m3itog	        vpc-6vjv9thf	172.16.0.15	193.112.205.187
+新服务器：
+IP：122.10.87.14
+端口：3389
+用户名：administrator
+密码：qmRdSxWVV3Ynoh0C
