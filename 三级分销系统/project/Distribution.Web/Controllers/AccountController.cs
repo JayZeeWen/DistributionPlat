@@ -178,7 +178,7 @@ namespace Distribution.Web.Controllers
                 {
                     throw new Exception("未找到上传的文件");
                 }
-                string fileName = hpf.FileName;
+                string fileName = string.Format("{0}_{1}", DateTime.Now.ToString("HHmmss") + Guid.NewGuid().ToString().Substring(0, 4), hpf.FileName);
                 string path = ConfigurationManager.AppSettings["SaveFilePath"];
                 string datePath = DateTime.Now.ToString("yyyyMM") + "/";
                 path += datePath;

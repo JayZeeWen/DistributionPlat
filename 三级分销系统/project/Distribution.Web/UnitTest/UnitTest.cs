@@ -32,7 +32,9 @@ namespace NFine.Web.UnitTest
             //AgentLogic.DeleteEntity(7);
             #endregion
             //var list = ScoreLogic.DealProvinceReward(ag);
-            var ag2 = AgentLogic.FindEntity(t => t.c_mobile == "15012341234");
+            //var ag2 = AgentLogic.FindEntity(t => t.c_mobile == "15012341234");
+
+            string str = DateTime.Now.ToString("HHmmss");
 
         }
     }
