@@ -84,5 +84,18 @@ namespace Distribution.Logic
             return result;
         }
 
+        /// <summary>
+        /// 更新代理商积分并增加积分明细记录
+        /// </summary>
+        /// <param name="AgentId"></param>
+        /// <param name="ChangeScore"></param>
+        /// <param name="context"></param>
+        /// <param name="reason"></param>
+        public static void UpdateAgentScore(string AgentId, int ChangeScore, string reason = "操作变更")
+        {
+            ScoreLogic.UpdateAgentScore(AgentId, ChangeScore, reason);
+        }
+
+
     }
 }

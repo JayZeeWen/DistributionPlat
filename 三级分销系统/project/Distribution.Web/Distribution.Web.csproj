@@ -166,6 +166,7 @@
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,6 +180,7 @@
     <Compile Include="UnitTest\UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\15058144861505814486.jpg" />
     <Content Include="Content\timg.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -502,6 +504,8 @@
     <Content Include="Views\Shared\_LayoutForward.cshtml" />
     <Content Include="Views\Home\ScoreManager.cshtml" />
     <Content Include="Views\Home\ScoreCashManager.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\OrderRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

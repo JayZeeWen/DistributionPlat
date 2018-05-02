@@ -74,4 +74,22 @@ namespace Distribution.Model
         /// </summary>
         AgentLevel = 2 
     }
+
+    public enum OrderState
+    {
+        /// <summary>
+        /// 未下单
+        /// </summary>
+        InShoppingCard = 0 ,
+
+        /// <summary>
+        /// 未发货
+        /// </summary>
+        NoDeliver = 1 ,
+
+        /// <summary>
+        /// 已处理
+        /// </summary>
+        HadDeal = 2 
+    }
 }

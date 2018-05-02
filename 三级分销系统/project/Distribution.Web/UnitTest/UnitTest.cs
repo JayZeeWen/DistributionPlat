@@ -36,6 +36,8 @@ namespace NFine.Web.UnitTest
 
             string str = DateTime.Now.ToString("HHmmss");
 
+            OrderLogic.GetNopayOrderByAgentId("3");
+
         }
     }
 }

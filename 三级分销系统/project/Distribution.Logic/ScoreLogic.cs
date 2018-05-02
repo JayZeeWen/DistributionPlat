@@ -41,7 +41,7 @@ namespace Distribution.Logic
                 }
 
                 //1、直推人更新积分
-                UpdateAgentScore(RecommId, firsSc, context, "直推人【" + desc + "】积分奖励");
+                UpdateAgentScore(RecommId, firsSc, "直推人【" + desc + "】积分奖励", context);
 
                 //2、二代更新积分
                 var sec_list = context.t_agent_relation.Where(c => c.c_child_id == RecommId);
@@ -50,7 +50,7 @@ namespace Distribution.Logic
                     return result;
                 }
                 Agent SeconAgent = sec_list.FirstOrDefault().ParentAgent;
-                UpdateAgentScore(SeconAgent.c_id, secoSc, context, "二代【" + desc + "】积分奖励");
+                UpdateAgentScore(SeconAgent.c_id, secoSc, "二代【" + desc + "】积分奖励", context);
 
                 #region 二代外积分更改逻辑
                 int maxLevel = GetMaxLevel(AgentId, context);
@@ -99,7 +99,7 @@ namespace Distribution.Logic
         /// <param name="ChangeScore"></param>
         /// <param name="context"></param>
         /// <param name="reason"></param>
-        public static void UpdateAgentScore(string AgentId, int ChangeScore,DistributionContext context = null,string reason = "操作变更")
+        public static void UpdateAgentScore(string AgentId, int ChangeScore, string reason = "操作变更", DistributionContext context = null)
         {
             if(context == null)
             {
@@ -178,7 +178,7 @@ namespace Distribution.Logic
             needReward = Math.Min(RewardScore, needReward);
             if(needReward != 0 )
             {
-                UpdateAgentScore(ag.c_id, needReward, context, "二代外【"+ desc +"】积分奖励");
+                UpdateAgentScore(ag.c_id, needReward, "二代外【" + desc + "】积分奖励", context);
                 RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
             }            
             RewardForCorreLevel(ag,ref RewardScore, reType, context);
@@ -195,7 +195,7 @@ namespace Distribution.Logic
             Agent parAgent = list.First().ParentAgent;
             if(parAgent.c_agent_level == (int)AgentLevel.ProvieceAgent)
             {
-                UpdateAgentScore(parAgent.c_id, ProReward, context, "省代理部门推荐奖励");
+                UpdateAgentScore(parAgent.c_id, ProReward, "省代理部门推荐奖励", context);
                 return;
             }
             RewardForProvice(parAgent, ProReward, context);

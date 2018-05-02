@@ -44,7 +44,7 @@ namespace Distribution.Web.Controllers
                 int totalScore = ScoreDetailLogic.GetTotalScore(ag.c_id);
                 agentInfo.TotalScore = totalScore.ToString();
                 int dealingScore = ScoreCashLogic.GetTotalCashScoreByState(ag.c_id, CashScoreState.Dealing);
-                agentInfo.CanCashScore = (totalScore - dealingScore);
+                agentInfo.CanCashScore = ((int)agentInfo.agent.c_score - dealingScore);
             }
         }
     }

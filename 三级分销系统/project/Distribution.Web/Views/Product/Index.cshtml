@@ -1,0 +1,200 @@
+﻿@using Distribution.Model;
+@model Distribution.Web.Models.ProductModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutForward.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+</head>
+<body class="bBg">
+    @*<div class="bMain">*@
+    ﻿
+
+    <div class="bRight" style="height:800px">
+        <div class="cwNav">
+            <a href="" style="background: #fe6c00; color:#FFF;">产品商城</a>
+            <a href="OrderRecord">订单记录</a>
+        </div>
+        <!--右侧开始-->
+        <div class="grDiv1">
+            <div class="grDiv1_1"><label>货品信息</label></div>
+            <div class="spList">
+                @foreach (Product item in Model.productList.DataList)
+                {
+                    <div class="spLi">
+                        <div class="img"><img src="@item.c_image" width="160" height="160" alt=""></div>
+                        <div class="spName">@item.c_name</div>
+                        <div class="spPrice">积分 @item.c_price</div>
+                        <div class="spBtm">
+                            <button class="spBtn-buy" onclick="showF('@item.F_Id','@item.c_price')">购买</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="padding-left:20%;padding-top:20px">
+                @Html.Raw(Model.productList.PagerHtml(size: 5)) 共 @Model.productList.Total 条
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+        </script>
+        <!--右侧结束-->
+    </div>
+    <div class="purPro">
+        <div class="tqjeDiaPro">
+            <h2>产品购买</h2>
+            <div class="tqjeDia1Pro">
+
+                <div class="tqjeDia1_2"><label>可用积分：</label><span>@Model.CanCashScore</span></div>
+                <div class="tqjeDia1_3">
+                    <label>购买数量：</label><input type="text" value="" id="amount" oninput="changeTotal()">  
+                    <label>总金额：</label> <label id="lblTotal"></label>
+                </div>
+            </div>
+
+            <div class="tqjeDia4">
+                <input class="okPurPro" id="btnSubmitPur" type="button" value="加入购物车">
+                <input class="closePurPro" onclick="proClose()" type="button" value="返回">
+            </div>
+        </div>
+    </div>
+    <div class="clearB"></div>
+    @*</div>*@
+    <script type="text/javascript">
+
+        var singlePrice = 0;
+        function showF(goods_id, money) {
+            var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
+            singlePrice = money;
+            $("#lblTotal").html(singlePrice);
+            $("#amount").val(1);
+            $("#btnSubmitPur").removeAttr("onclick");
+            $("#btnSubmitPur").attr("onclick", onclick)
+            $(".purPro").show();
+        }
+
+
+        function changeTotal() {
+            var amount = $("#amount").val();
+            if (isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
+                $("#amount").val(0);
+                amount = 0;
+            }
+            var total = singlePrice * amount;
+            $("#lblTotal").html(total);
+        }
+
+        function proClose() {
+            $(".purPro").hide();
+        }
+
+
+        function submitPurPro(ProId,Price) {
+            var amount = $("#amount").val();
+            //alert('ProId: ' + ProId + "amoutn : " + amount);
+
+            $.ajax({
+                url: '@Url.Action("AddProToCard", "Product")',
+                data: {
+                    Amount: amount
+                    , productId: ProId
+                    , Price: Price
+                },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data.state == "success") {
+                        alert("添加至购物车成功");
+                        proClose();
+                    } else {
+                        alert("添加失败 ： " + data.message)
+                    }
+                }
+            });
+        }
+
+
+    </script>
+
+    <style>
+        .cwNav {
+            width: 100%;
+            height: 36px;
+            margin-bottom: 15px;
+        }
+
+            .cwNav a {
+                font-size: 16px;
+                height: 36px;
+                line-height: 36px;
+                padding: 0 15px;
+                display: block;
+                float: left;
+                background: #f2f2f2;
+                color: #292929;
+                border: 1px solid #e1e1e1;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+
+        .purPro, #prom {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            display: none;
+        }
+
+        .tqjeDiaPro {
+            width: 530px;
+            height: 200px;
+            overflow: hidden;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 7px;
+        }
+
+            .tqjeDiaPro h2 {
+                line-height: 50px;
+                padding-left: 20px;
+                font-weight: bold;
+                background: #eee;
+                font-size: 20px;
+                color: #333;
+            }
+
+        .tqjeDia1Pro {
+            height: 80px;
+        }
+
+
+        input.okPurPro {
+            border: 1px solid #1da75f;
+            color: #fff;
+            background: #1da75f;
+            margin-right: 100px;
+        }
+
+        input.closePurPro {
+            border: 1px solid #1da75f;
+            color: #1da75f;
+            background: #fff;
+        }
+    </style>
+
+
+</body>
+</html>

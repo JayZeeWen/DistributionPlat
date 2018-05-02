@@ -15,4 +15,14 @@ namespace Distribution.Web.Models
     {
         public PagerResult<ScoreCash> cashList { get; set; }
     }
+
+    public class ProductModel : AgentInfoModel
+    {
+        public PagerResult<Product> productList { get; set; }
+    }
+
+    public class OrderModel : AgentInfoModel
+    {
+        public PagerResult<Order> orderList { get; set; }
+    }
 }

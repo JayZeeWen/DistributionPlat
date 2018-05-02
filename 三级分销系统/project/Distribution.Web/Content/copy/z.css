@@ -24,7 +24,7 @@ a.bNav1 img{ display:block; max-height: 100%;max-width: 100%;}
 .messDiv{ width:1200px; height:58px; margin:0 auto; line-height:58px; background:url(../images/bimg6.png) no-repeat left center;}
 .messAni{ font-size:16px; color:#7a7a7a; margin-left:32px;}
 
-.bMain{ width:1200px; margin:0 auto;}
+.bMain{ width:100%; margin:0 auto; margin-left:20px;}
 .bLeft{ width:280px; float:left; border:2px solid #e5e5e5; border-radius:5px; background:#fff;}
 .bLeft h2{ line-height:60px; text-align:center; font-size:24px; color:#111; font-weight:100; border-bottom:1px solid #e5e5e5;}
 .bLeft1{ width:100%; padding:30px 0 10px;}
@@ -35,7 +35,7 @@ a.bNav1 img{ display:block; max-height: 100%;max-width: 100%;}
 .bLeft2 p label{ width:118px; float:left; text-align:right; color:#6f6f6f;}
 .bLeft2 p span{ width:140px; float:left; color:#fe6c00;}
 .bLeft2 input{ width:124px; height:48px; background:#fe6c00; margin:15px 0 0 77px; color:#fff; border-radius:8px; font-size:18px;}
-.bRight{ width:900px; float:right; }
+.bRight{ width:70%; float:left; margin-left: 20px;}
 .cwTab{ width:100%;border-collapse: collapse;background:#fff; font-size:16px;}
 .cwTab th{ height:48px; color:#111; font-weight:100; background:#f2f2f2;}
 .cwTab td{ height:50px; color:#666;}
@@ -153,7 +153,7 @@ input.grDiv4_2{ background:#a3a3a3;}
 	border: 1px solid #e1e1e1;
 	background: #fff;
 	width: 160px;
-	height: 160px;
+	height: 180px;
 	padding: 19px;
 }
 .spName,
