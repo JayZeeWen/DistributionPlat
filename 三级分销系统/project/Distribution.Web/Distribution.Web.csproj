@@ -506,6 +506,7 @@
     <Content Include="Views\Home\ScoreCashManager.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\OrderRecord.cshtml" />
+    <Content Include="Views\Product\OrderDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
