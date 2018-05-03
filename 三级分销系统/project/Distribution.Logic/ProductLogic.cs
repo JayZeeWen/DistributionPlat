@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class ProductLogic
     {
         #region BasicMethod
-        public static Product GetEnityById(int id)
+        public static Product GetEnityById(string id)
         {
             using (DistributionContext context = new DistributionContext())
             {

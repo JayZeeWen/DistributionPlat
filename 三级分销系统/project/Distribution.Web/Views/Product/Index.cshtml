@@ -22,11 +22,11 @@
         <!--右侧开始-->
         <div class="grDiv1">
             <div class="grDiv1_1"><label>货品信息</label></div>
-            <div class="spList">
+            <div class="spList" style="overflow:auto;height:600px">
                 @foreach (Product item in Model.productList.DataList)
                 {
                     <div class="spLi">
-                        <div class="img"><img src="@item.c_image" width="160" height="160" alt=""></div>
+                        <div class="img"><img src="~/Content/img/15058144861505814486.jpg" width="180" height="180" alt=""></div>
                         <div class="spName">@item.c_name</div>
                         <div class="spPrice">积分 @item.c_price</div>
                         <div class="spBtm">

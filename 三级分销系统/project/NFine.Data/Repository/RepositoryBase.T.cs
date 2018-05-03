@@ -87,6 +87,10 @@ namespace NFine.Data
         {
             return dbcontext.Database.SqlQuery<TEntity>(strSql, dbParameter).ToList<TEntity>();
         }
+        public List<T> FindList<T>(string strSql, DbParameter[] dbParameter)
+        {
+            return dbcontext.Database.SqlQuery<T>(strSql, dbParameter).ToList<T>();
+        }
         public List<TEntity> FindList(Pagination pagination)
         {
             bool isAsc = pagination.sord.ToLower() == "asc" ? true : false;

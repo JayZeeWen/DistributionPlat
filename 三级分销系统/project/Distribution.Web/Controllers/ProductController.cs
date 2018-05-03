@@ -17,7 +17,7 @@ namespace Distribution.Web.Controllers
         {
             var pageIndex = Request.QueryString["pageindex"];
             int index = 0;
-            int pageSize = 9;
+            int pageSize = 10;
             Int32.TryParse(pageIndex, out index);
             if (index == 0)
             {
@@ -48,7 +48,7 @@ namespace Distribution.Web.Controllers
         {
             var pageIndex = Request.QueryString["pageindex"];
             int index = 0;
-            int pageSize = 9;
+            int pageSize = 10;
             Int32.TryParse(pageIndex, out index);
             if (index == 0)
             {
@@ -136,6 +136,53 @@ namespace Distribution.Web.Controllers
             {
                 result.state = ResultType.error.ToString();
                 result.message = string.Format("提交失败({0})", ex.Message);
+                return Content(result.ToJson());
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult GetOrderDetail(string OrderId)
+        {
+            AjaxResult result = new AjaxResult();
+            try
+            {
+                var list = OrderDetailLogic.GetList().Where(t => t.c_order_id == OrderId).ToList();
+                foreach (var item in list)
+                {
+                    item.Pro = ProductLogic.GetEnityById(item.c_product_id);
+                }
+                result.data = list;
+                result.state = ResultType.success.ToString();
+                result.message = "成功";
+                return Content(result.ToJson());
+            }
+            catch (Exception ex)
+            {
+                result.state = ResultType.error.ToString();
+                result.message = string.Format("({0})", ex.Message);
+                return Content(result.ToJson());
+                throw;
+            }
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult DelOrderDetail(string DetailId)
+        {
+            AjaxResult result = new AjaxResult();
+            try
+            {
+                OrderDetailLogic.DeleteEntity(DetailId);
+                result.state = ResultType.success.ToString();
+                result.message = "成功";
+                return Content(result.ToJson());
+            }
+            catch (Exception ex)
+            {
+                result.state = ResultType.error.ToString();
+                result.message = string.Format("({0})", ex.Message);
                 return Content(result.ToJson());
                 throw;
             }

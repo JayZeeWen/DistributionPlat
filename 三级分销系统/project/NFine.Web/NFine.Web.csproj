@@ -117,6 +117,7 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\AgentManage\AgentManageAreaRegistration.cs" />
+    <Compile Include="Areas\AgentManage\Controllers\ScoreCashController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\BarCodeController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\PrintController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SendMailController.cs" />
@@ -639,6 +640,11 @@
     <Content Include="Areas\AgentManage\Views\Agent\Info.cshtml" />
     <Content Include="Areas\AgentManage\Views\Agent\RevisePassword.cshtml" />
     <Content Include="Areas\AgentManage\Views\Web.config" />
+    <Content Include="Areas\AgentManage\Views\ScoreCash\Details.cshtml" />
+    <Content Include="Areas\AgentManage\Views\ScoreCash\Form.cshtml" />
+    <Content Include="Areas\AgentManage\Views\ScoreCash\Index.cshtml" />
+    <Content Include="Areas\AgentManage\Views\ScoreCash\Info.cshtml" />
+    <Content Include="Areas\AgentManage\Views\ScoreCash\RevisePassword.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <ItemGroup>

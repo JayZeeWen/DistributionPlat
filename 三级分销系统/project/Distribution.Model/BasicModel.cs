@@ -19,8 +19,8 @@ namespace Distribution.Model
         [Column(TypeName = "date")]
         public DateTime? F_CreatorTime { get; set; }
 
-        [StringLength(50)]
-        public string F_DeleteMark { get; set; }
+        
+        public bool? F_DeleteMark { get; set; }
 
         [StringLength(50)]
         public string F_DeleteUserId { get; set; }

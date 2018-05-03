@@ -7,11 +7,8 @@ namespace Distribution.Model
     using System.Data.Entity.Spatial;
 
     [Table("t_product")]
-    public partial class Product
+    public partial class Product :BasicModel
     {
-        [Key]
-        [StringLength(50)]
-        public string F_Id { get; set; }
 
         [StringLength(50)]
         public string c_name { get; set; }
@@ -24,25 +21,5 @@ namespace Distribution.Model
         [StringLength(128)]
         public string c_image { get; set; }
 
-        [StringLength(50)]
-        public string F_CreatorUserId { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? F_CreatorTime { get; set; }
-
-        [StringLength(50)]
-        public string F_DeleteMark { get; set; }
-
-        [StringLength(50)]
-        public string F_DeleteUserId { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? F_DeleteTime { get; set; }
-
-        [StringLength(50)]
-        public string F_LastModifyUserId { get; set; }
-
-        [Column(TypeName = "date")]
-        public DateTime? F_LastModifyTime { get; set; }
     }
 }

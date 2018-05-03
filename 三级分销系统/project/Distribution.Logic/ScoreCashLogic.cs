@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class ScoreCashLogic
     {
         #region BasicMethod
-        public static ScoreCash GetEnityById(int id)
+        public static ScoreCash GetEnityById(string id)
         {
             using (DistributionContext context = new DistributionContext())
             {
@@ -53,6 +53,7 @@ namespace Distribution.Logic
             {
                 ScoreCash ag = context.t_score_cash.Find(UpdateScoreCash.F_Id);
                 CommLogic.DeepClone<ScoreCash>(ag, UpdateScoreCash);
+                ag.F_LastModifyTime = DateTime.Now;
                 context.SaveChanges();
             }
         }

@@ -42,7 +42,7 @@ namespace Distribution.Logic
             {
                 NewOrder.F_Id = Guid.NewGuid().ToString();
                 NewOrder.F_CreatorTime = DateTime.Now;
-                NewOrder.F_DeleteMark = "0";
+                NewOrder.F_DeleteMark = false;
                 context.t_order_detail.Add(NewOrder);
                 context.SaveChanges();
 
@@ -59,7 +59,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static void DeleteEntity(int OrderId)
+        public static void DeleteEntity(string OrderId)
         {
             using (DistributionContext context = new DistributionContext())
             {

@@ -32,7 +32,8 @@ namespace NFine.Web.UnitTest
             #region Delete
             //AgentLogic.DeleteEntity(7);
             #endregion
-            //var list = ScoreLogic.DealProvinceReward(ag);
+
+            var list = ScoreCashLogic.GetList();
 
 
         }

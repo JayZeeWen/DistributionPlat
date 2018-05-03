@@ -17,3 +17,7 @@ IP：122.10.87.14
 端口：3389
 用户名：administrator
 密码：qmRdSxWVV3Ynoh0C
+
+
+前台：http://122.10.87.14/Pre
+ 后台：http://122.10.87.14:8080

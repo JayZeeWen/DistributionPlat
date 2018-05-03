@@ -80,7 +80,7 @@ namespace Distribution.Logic
                 order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
                 order.F_CreatorTime = DateTime.Now;
                 order.F_CreatorUserId = AgentId;
-                order.F_DeleteMark = "0";
+                order.F_DeleteMark = false;
                 InsertNewEntiy(order);
             }
             return order.F_Id;

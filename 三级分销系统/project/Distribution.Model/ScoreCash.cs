@@ -15,6 +15,8 @@ namespace Distribution.Model
         [StringLength(50)]
         public string c_user_id { get; set; }
 
+        [ForeignKey("c_user_id")]
+        public virtual Agent agent { get; set; }
         public int? c_amount { get; set; }
 
         public int? c_cash_state { get; set; }
