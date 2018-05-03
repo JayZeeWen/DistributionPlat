@@ -56,6 +56,32 @@ namespace NFine.Application.SystemManage
         {
             return service.GetCashList(page);
         }
-        
+
+        public List<CashListEntity> GetCashViewList(Pagination page)
+        {
+            var list = service.GetCashList(page);
+            List<CashListEntity> viewList = new List<CashListEntity>();
+            AgentApp app = new AgentApp();
+            foreach (var item in list)
+            {
+                CashListEntity entity = new CashListEntity();
+                var agent = app.GetForm(item.c_user_id);
+                if(agent != null )
+                {
+                    entity.c_agent_name = agent.c_name;
+                }
+                entity.F_Id = item.F_Id;
+                entity.c_user_id = item.c_user_id;
+                entity.c_amount = item.c_amount;
+                entity.c_cash_state = item.c_cash_state;
+                entity.c_bank_person = item.c_bank_person;
+                entity.c_bank_name = item.c_bank_name;
+                entity.c_bank_account = item.c_bank_account;
+                entity.F_CreatorTime = item.F_CreatorTime;
+                viewList.Add(entity);
+            }
+            return viewList;
+        }
+
     }
 }

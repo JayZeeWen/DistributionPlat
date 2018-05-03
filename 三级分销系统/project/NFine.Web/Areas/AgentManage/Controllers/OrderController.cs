@@ -15,14 +15,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Distribution.Logic;
 
 
 namespace NFine.Web.Areas.AgentManage.Controllers
 {
-    public class ScoreCashController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        private ScoreCashApp scoreApp = new ScoreCashApp();
+        private OrderApp orderApp = new OrderApp();
         private CommConfigApp commApp = new CommConfigApp();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
@@ -32,7 +31,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         {
             var data = new
             {
-                rows = scoreApp.GetCashViewList(pagination),
+                rows = orderApp.GetList(pagination,keyword),
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
@@ -45,7 +44,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
-            var data = scoreApp.GetForm(keyValue);
+            var data = orderApp.GetForm(keyValue);
             return Content(data.ToJson());
         }
         //[HttpPost]
@@ -53,7 +52,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         //[ValidateAntiForgeryToken]
         //public ActionResult SubmitForm(AgentEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
         //{
-        //    scoreApp.SubmitForm(userEntity, userLogOnEntity, keyValue);
+        //    orderApp.SubmitForm(userEntity, userLogOnEntity, keyValue);
         //    return Success("操作成功。");
         //}
         [HttpPost]
@@ -62,47 +61,11 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            scoreApp.DeleteForm(keyValue);
+            orderApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
         
-        //[HttpPost]
-        //[HandlerAjaxOnly]
-        //[HandlerAuthorize]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult SubmitRevisePassword(string userPassword, string keyValue)
-        //{
-        //    userLogOnApp.RevisePassword(userPassword, keyValue);
-        //    return Success("重置密码成功。");
-        //}
-        //[HttpPost]
-        //[HandlerAjaxOnly]
-        //[HandlerAuthorize]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DisabledAccount(string keyValue)
-        //{
-        //    AgentEntity userEntity = new AgentEntity();
-        //    userEntity.F_Id = keyValue;
-        //    userEntity.c_state = 0;//0：未审核   1：审核通过
-        //    scoreApp.UpdateForm(userEntity);
-        //    return Success("账户禁用成功。");
-        //}
-        [HttpPost]
-        [HandlerAjaxOnly]
-        [HandlerAuthorize]
-        [ValidateAntiForgeryToken]
-        public ActionResult DealScoreCash(string keyValue)
-        {
-            ScoreCashEntity entity = scoreApp.GetForm(keyValue);
-            entity.F_Id = keyValue;
-            entity.c_cash_state = (int)Distribution.Model.CashScoreState.Succ;//0：未审核   1：审核通过
-            scoreApp.UpdateForm(entity);
-
-            ScoreDetailLogic.UpdateAgentScore(entity.c_user_id, -(int)entity.c_amount, "积分提现");
-
-            
-            return Success("处理成功。");
-        }
+        
 
         [HttpGet]
         public ActionResult Info()

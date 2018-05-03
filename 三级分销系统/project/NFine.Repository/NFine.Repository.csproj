@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentManage\OrderRepository.cs" />
     <Compile Include="AgentManage\ScoreCashRepository.cs" />
     <Compile Include="AgentManage\CommConfigRepository.cs" />
     <Compile Include="AgentManage\AgentRepository.cs" />
