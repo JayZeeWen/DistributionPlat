@@ -120,6 +120,9 @@ namespace Distribution.Web.Controllers
                 order.c_total = OrderDetailLogic.SumOrderTotal(OrderId);
                 order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
                 order.c_state = (int)OrderState.NoDeliver;
+                order.c_rec_person = agentInfo.agent.c_rec_person;
+                order.c_mobile = agentInfo.agent.c_rec_mobile;
+                order.c_address = agentInfo.agent.c_address;
                 if(agentInfo.CanCashScore < order.c_total)
                 {
                     throw new Exception("剩余积分不足以支付订单内所有商品");

@@ -8,7 +8,7 @@
     $(function () {
         initControl();
         $.ajax({
-            url: "/AgentManage/Agent/GetFormJson",
+            url: "/AgentManage/Order/GetFormJson",
             data: { keyValue: keyValue },
             dataType: "json",
             async: false,
@@ -63,18 +63,6 @@
                         <input id="c_mobile" name="c_mobile" class="form-control" />
                     </td>
                 </tr>
-                @*<tr>
-                        <th class="formTitle">等级类型</th>
-                        <td class="formValue">
-                            <select id="c_levle" name="c_levle" class="form-control"></select>
-                        </td>
-                        <th class="formTitle">代理类型</th>
-                        <td class="formValue">
-                            <select id="c_agent_level" name="c_agent_level" class="form-control">
-                                <option value="">==请选择==</option>
-                            </select>
-                        </td>
-                    </tr>*@
                 <tr>
                     <th class="formTitle">持卡人姓名</th>
                     <td class="formValue">

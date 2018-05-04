@@ -14,16 +14,14 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
-                { label: '代理商姓名', name: 'c_agent_name',  align: 'center' },
-                { label: '订单编号', name: 'c_order_num',  align: 'center' },
-                
-                
-                { label: '总价', name: 'c_total',  align: 'left' },
-                { label: '收件人', name: 'c_rec_person', align: 'left' },
+                { label: '代理商姓名', name: 'c_agent_name', align: 'center', width: '100px' },
+                { label: '订单编号', name: 'c_order_num', align: 'center', width: '200px' },
+                { label: '总价', name: 'c_total',  align: 'left' ,width:'80px'},
+                { label: '收件人', name: 'c_rec_person',width:'80px', align: 'left' },
                 { label: '联系电话', name: 'c_mobile', align: 'left' },
-                { label: '地址', name: 'c_address',  align: 'left' },
+                { label: '地址', name: 'c_address', align: 'left', width: '200px' },
                 {
-                    label: '当前状态', name: 'c_state', align: 'left',
+                    label: '当前状态', name: 'c_state', align: 'left',width:'80px',
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 0) {
                             return '<span class=\"label label-info\">未下单</span>';
@@ -126,7 +124,16 @@
     }
     function btn_Deal() {
         var keyValue = $("#gridList").jqGridRowValue().F_Id;
-       
+        $.modalOpen({
+            id: "Form",
+            title: "订单处理",
+            url: "/AgentManage/Order/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
     }
 
 

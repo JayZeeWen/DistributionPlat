@@ -31,7 +31,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         {
             var data = new
             {
-                rows = orderApp.GetList(pagination,keyword),
+                rows = orderApp.GetViewList(pagination, keyword),
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records

@@ -9,7 +9,7 @@
         initControl();
         if (!!keyValue) {
             $.ajax({
-                url: "/AgentManage/ScoreCash/GetFormJson",
+                url: "/AgentManage/Order/GetFormJson",
                 data: { keyValue: keyValue },
                 dataType: "json",
                 async: false,
@@ -23,11 +23,11 @@
     });
     function initControl() {
         $("#c_levle").bindSelect({
-            url: "/AgentManage/ScoreCash/GetLevelJson",
+            url: "/AgentManage/Order/GetLevelJson",
             param: { enCode: 1 }
         });
         $("#c_agent_level").bindSelect({
-            url: "/AgentManage/ScoreCash/GetLevelJson",
+            url: "/AgentManage/Order/GetLevelJson",
             param: { enCode: 2 }
         });
     }
@@ -35,13 +35,18 @@
         if (!$('#form1').formValid()) {
             return false;
         }
-        $.submitForm({
-            url: "/AgentManage/ScoreCash/SubmitForm?keyValue=" + keyValue,
-            param: $("#form1").formSerialize(),
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
+        $.modalConfirm("确定发货？", function (r) {
+            if (r) {
+                $.submitForm({
+                    url: "/AgentManage/Order/SubmitForm?keyValue=" + keyValue,
+                    param: $("#form1").formSerialize(),
+                    success: function () {
+                        $.currentWindow().$("#gridList").trigger("reloadGrid");
+                    }
+                })
             }
-        })
+        });
+        
     }
 </script>
 <form id="form1">
@@ -53,53 +58,24 @@
         <div style="padding-top: 20px; margin-right: 30px;">
             <table class="form">
                 <tr>
-                    <th class="formTitle">姓名</th>
+                    <th class="formTitle">订单号</th>
                     <td class="formValue">
-                        <input id="c_name" name="c_name" type="text" class="form-control required" placeholder="请输入姓名" />
+                        <input id="c_order_num" name="c_order_num" type="text" class="form-control" readonly="readonly" />
                     </td>
-                    <th class="formTitle">手机</th>
+                    <th class="formTitle">总价</th>
                     <td class="formValue">
-                        <input id="c_mobile" name="c_mobile" class="form-control required" placeholder="请输入手机" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">等级类型</th>
-                    <td class="formValue">
-                        <select id="c_levle" name="c_levle" class="form-control required"></select>
-                    </td>
-                    <th class="formTitle">代理类型</th>
-                    <td class="formValue">
-                        <select id="c_agent_level" name="c_agent_level" class="form-control required"></select>
+                        <input id="c_total" name="c_total" type="text" class="form-control" readonly="readonly" />
                     </td>
                 </tr>
+               
                 <tr>
-                    <th class="formTitle">持卡人姓名</th>
+                    <th class="formTitle">收件人</th>
                     <td class="formValue">
-                        <input id="c_bank_person" name="c_bank_person" type="text" class="form-control required" placeholder="请输入持卡人姓名" />
+                        <input id="c_rec_person" name="c_rec_person" class="form-control" readonly="readonly" />
                     </td>
-                    <th class="formTitle">开户行</th>
+                    <th class="formTitle">联系电话</th>
                     <td class="formValue">
-                        <input id="c_bank_name" name="c_bank_name" type="text" class="form-control required" placeholder="请输入开户行" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">银行账号</th>
-                    <td class="formValue">
-                        <input id="c_bank_account" name="c_bank_account" type="text" class="form-control required" placeholder="请输入银行账号" />
-                    </td>
-                    <th class="formTitle">积分</th>
-                    <td class="formValue">
-                        <input id="c_score" name="c_score" type="text" class="form-control required" placeholder="请输入积分" />
-                    </td>
-                </tr>
-                <tr>
-                    <th class="formTitle">收货人姓名</th>
-                    <td class="formValue">
-                        <input id="c_rec_person" name="c_rec_person" type="text" class="form-control" />
-                    </td>
-                    <th class="formTitle">收货人手机</th>
-                    <td class="formValue">
-                        <input id="c_rec_mobile" name="c_rec_mobile" type="text" class="form-control input-wdatepicker" />
+                        <input id="c_mobile" name="c_mobile" type="text" class="form-control" readonly="readonly" />
                     </td>
                 </tr>
                 <tr>
@@ -107,17 +83,23 @@
                         收货人地址
                     </th>
                     <td class="formValue" colspan="3">
-                        <textarea id="c_address" name="c_address" class="form-control" style="height: 60px;"></textarea>
+                        <textarea id="c_address" name="c_address" class="form-control" readonly="readonly" style="height: 60px;"></textarea>
                     </td>
                 </tr>
 
                 <tr>
-                    <th class="formTitle" valign="top" style="padding-top: 5px;">
-                        转账凭证
-                    </th>
-                    <td class="formValue" colspan="3">
-                        <img id="imgid" src="" alt="" />
+                    <th class="formTitle">快递公司</th>
+                    <td class="formValue">
+                        <input id="c_express_name" name="c_express_name" class="form-control required" placeholder="请输入快递公司" />
                     </td>
+                    <th class="formTitle">快递单号</th>
+                    <td class="formValue">
+                        <input id="c_express_num" name="c_express_num" type="text" class="form-control required" placeholder="请输入快递单号" />
+                    </td>
+                </tr>
+
+                <tr>
+                    
                 </tr>
             </table>
         </div>

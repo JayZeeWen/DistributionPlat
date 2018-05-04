@@ -20,6 +20,13 @@ namespace Distribution.Model
 
         public int? c_state { get; set; }
 
+
+        public string c_rec_person { get; set; }
+
+        public string c_mobile { get; set; }
+
+        public string c_address { get; set; }
+
         [StringLength(64)]
         public string c_express_num { get; set; }
 

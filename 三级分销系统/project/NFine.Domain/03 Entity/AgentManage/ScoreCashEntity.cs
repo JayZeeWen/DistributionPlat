@@ -49,6 +49,9 @@ namespace NFine.Domain.Entity
 
         public string c_agent_name { get; set; }
 
+        public string c_agent_mobile { get; set; }
+
+
         public int c_amount { get; set; }
 
 
