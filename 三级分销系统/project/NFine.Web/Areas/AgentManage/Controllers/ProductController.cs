@@ -15,13 +15,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Distribution.Logic;
 
 
 namespace NFine.Web.Areas.AgentManage.Controllers
 {
-    public class OrderController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private OrderApp orderApp = new OrderApp();
+        private ProductApp productApp = new ProductApp();
         private CommConfigApp commApp = new CommConfigApp();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
@@ -31,7 +32,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         {
             var data = new
             {
-                rows = orderApp.GetViewList(pagination, keyword),
+                rows = productApp.GetList(pagination, keyword),
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
@@ -44,17 +45,8 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetFormJson(string keyValue)
         {
-            var data = orderApp.GetViewForm(keyValue);
+            var data = productApp.GetForm(keyValue);
             return Content(data.ToJson());
-        }
-        [HttpPost]
-        [HandlerAjaxOnly]
-        [ValidateAntiForgeryToken]
-        public ActionResult SubmitForm(OrderEntity orderEntity, UserLogOnEntity userLogOnEntity, string keyValue)
-        {
-            orderEntity.c_state = (int)OrderState.HadDeal;
-            orderApp.SubmitForm(orderEntity, userLogOnEntity, keyValue);
-            return Success("操作成功。");
         }
         [HttpPost]
         [HandlerAuthorize]
@@ -62,11 +54,11 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            orderApp.DeleteForm(keyValue);
-            return Success("删除成功。");
+            ProductEntity entity = productApp.GetForm(keyValue);
+            entity.F_DeleteMark = true;
+            productApp.SubmitForm(entity, keyValue);
+            return Success("下架成功。");
         }
-        
-        
 
         [HttpGet]
         public ActionResult Info()
@@ -74,20 +66,12 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             return View();
         }
 
-        [HttpGet]
-        [HandlerAjaxOnly]
-        public ActionResult GetLevelJson(int enCode)
-        {
-
-            var data = CommConfigLogic.GetConfigListByCate(enCode);
-            List<object> list = new List<object>();
-            foreach (var item in data)
-            {
-                list.Add(new { id = item.c_key, text = item.c_value });
-            }
-            return Content(list.ToJson());
+        public ActionResult SubmitForm(ProductEntity entity, UserLogOnEntity userLogOnEntity, string keyValue)
+        {   
+            productApp.SubmitForm(entity, keyValue);
+            return Success("操作成功。");
         }
 
-        
+
     }
 }

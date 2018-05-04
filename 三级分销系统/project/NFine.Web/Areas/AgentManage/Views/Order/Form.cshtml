@@ -17,6 +17,17 @@
                     $("#form1").formSerialize(data);
                     $("#imgid").attr('src', '@ConfigurationManager.AppSettings["SaveFilePath"]' + data.c_voucher_path);//http://localhost:8081/FilePath/201804/Tulips.jpg
                     $("#F_UserPassword").val("******").attr('disabled', 'disabled');
+                    var tableHtml = "";
+                    for (var i = 0 ; i < data.detailList.length ; i++) {
+                        var item = data.detailList[i];
+                        tableHtml += "<tr>";
+                        tableHtml += "<td>" + item.c_product_Name + "</td>";
+                        tableHtml += "<td>" + item.c_product_price + "</td>";
+                        tableHtml += "<td>" + item.c_amount + "</td>";
+                        tableHtml += "<td>" + item.c_total + "</td>";
+                        tableHtml += "</tr>";
+                    }
+                    $("#detailList").html(tableHtml);
                 }
             });
         }
@@ -67,7 +78,7 @@
                         <input id="c_total" name="c_total" type="text" class="form-control" readonly="readonly" />
                     </td>
                 </tr>
-               
+
                 <tr>
                     <th class="formTitle">收件人</th>
                     <td class="formValue">
@@ -97,10 +108,25 @@
                         <input id="c_express_num" name="c_express_num" type="text" class="form-control required" placeholder="请输入快递单号" />
                     </td>
                 </tr>
-
-                <tr>
-                    
-                </tr>
+            </table>
+            <table class="table table-bordered">
+                <caption>订单详情</caption>
+                <thead>
+                    <tr>
+                        <th >产品</th>
+                        <th >单价</th>
+                        <th >数量</th>
+                        <th >总价</th>
+                    </tr>
+                </thead>
+                <tbody id="detailList">
+                    <tr>
+                        <td >XXX提神套</td>
+                        <td >700</td>
+                        <td>2</td>
+                        <td >1400</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

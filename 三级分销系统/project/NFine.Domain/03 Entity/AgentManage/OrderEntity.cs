@@ -54,6 +54,7 @@ namespace NFine.Domain.Entity
 
         public string c_order_num { get; set; }
 
+        public List<OrderDetailViewEntity> detailList { get; set; }
 
         public decimal c_total { get; set; }
 
