@@ -15,8 +15,8 @@
                 async: false,
                 success: function (data) {
                     $("#form1").formSerialize(data);
-                    $("#imgid").attr('src', '@ConfigurationManager.AppSettings["SaveFilePath"]' + data.c_voucher_path);//http://localhost:8081/FilePath/201804/Tulips.jpg
-                    
+                    $("#imgid").attr('src', '@ConfigurationManager.AppSettings["ProductImagePath"]' + data.c_image);//http://localhost:8081/FilePath/201804/Tulips.jpg
+
                 }
             });
         }
@@ -34,6 +34,40 @@
                 $.currentWindow().$("#gridList").trigger("reloadGrid");
             }
         })
+    }
+
+    function fileUploadMethod2() {
+        @*alert('@HttpContext.Current.')*@
+        var odata = new FormData($("#form1")[0]);
+
+        $.ajax({
+            contentType: false,
+            cache: false,
+            processData: false,
+            url: '../Product/UploadFile',
+            dataType: "json",
+            async: false,
+            type: "post",
+            data: odata,
+            success: function (data) {
+                if (data.state == "success") {
+                    isFileUpload = 1;
+                    filePath = data.message;
+                    $("#c_image").val(filePath);
+
+                    $("#imgid").attr('src', '@ConfigurationManager.AppSettings["ProductImagePath"]' + filePath);//http://localhost:8081/FilePath/201804/Tulips.jpg
+                    document.getElementById('btnUpload').innerHTML = '文件上传成功'
+                    $('#btnUpload').attr("disabled", true);
+                } else {
+                    isFileUpload = 0;
+                    alert(data.message);
+                    return false;
+                }
+            }
+        }).fail(
+         function (xhr, textstatus, err) {
+             alert('error: ' + err);
+         });
     }
 </script>
 <form id="form1">
@@ -66,8 +100,19 @@
                     <th class="formTitle" valign="top" style="padding-top: 5px;">
                         图片
                     </th>
+                    <td colspan="3">
+                        <div style="float:left;width:100%">
+                            <div style="float:left;width:40%"><input type="file" value="请选择文件" id="fileUpload" name="fileUpload" /></div>
+                            <div style="float:right;width:60%"><button type="button" id="btnUpload" class="btn btn-primary" onclick="fileUploadMethod2()">上传</button></div>
+                        </div>
+                        <input type="hidden" id="c_image" name="c_image" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <th></th>
                     <td class="formValue" colspan="3">
-                        <img id="imgid" src="" alt="" />
+                        <img id="imgid" height="300" width="300" src="" alt="" />
                     </td>
                 </tr>
             </table>
