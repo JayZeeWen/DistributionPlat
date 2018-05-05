@@ -1,4 +1,5 @@
 ﻿@using Distribution.Model;
+@using System.Configuration;
 @model Distribution.Web.Models.ProductModel
 @{
     ViewBag.Title = "Index";
@@ -26,7 +27,7 @@
                 @foreach (Product item in Model.productList.DataList)
                 {
                     <div class="spLi">
-                        <div class="img"><img src="~/Content/img/15058144861505814486.jpg" width="180" height="180" alt=""></div>
+                        <div class="img"><img src="@ConfigurationManager.AppSettings["ProductImagePath"]@item.c_image" width="180" height="180" alt=""></div>
                         <div class="spName">@item.c_name</div>
                         <div class="spPrice">积分 @item.c_price</div>
                         <div class="spBtm">
