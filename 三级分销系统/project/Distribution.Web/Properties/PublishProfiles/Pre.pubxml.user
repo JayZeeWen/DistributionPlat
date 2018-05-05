@@ -19,7 +19,7 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="bin/Configs/system.config">
-      <publishTime>04/24/2018 18:23:24</publishTime>
+      <publishTime>04/27/2018 14:51:31</publishTime>
     </File>
     <File Include="bin/Distribution.DB.dll">
       <publishTime>04/26/2018 18:32:35</publishTime>
@@ -31,7 +31,7 @@
       <publishTime>04/26/2018 18:32:34</publishTime>
     </File>
     <File Include="bin/Distribution.Web.dll">
-      <publishTime>04/26/2018 18:32:58</publishTime>
+      <publishTime>04/28/2018 08:42:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -88,22 +88,22 @@
       <publishTime>08/01/2016 14:46:10</publishTime>
     </File>
     <File Include="bin/NFine.Application.dll">
-      <publishTime>04/26/2018 18:32:36</publishTime>
+      <publishTime>04/28/2018 08:42:11</publishTime>
     </File>
     <File Include="bin/NFine.Code.dll">
-      <publishTime>04/26/2018 10:48:55</publishTime>
+      <publishTime>04/28/2018 08:42:09</publishTime>
     </File>
     <File Include="bin/NFine.Data.dll">
-      <publishTime>04/26/2018 10:48:56</publishTime>
+      <publishTime>04/28/2018 08:42:09</publishTime>
     </File>
     <File Include="bin/NFine.Domain.dll">
-      <publishTime>04/26/2018 18:32:34</publishTime>
+      <publishTime>04/28/2018 08:42:10</publishTime>
     </File>
     <File Include="bin/NFine.Mapping.dll">
-      <publishTime>04/26/2018 18:32:35</publishTime>
+      <publishTime>04/28/2018 08:42:10</publishTime>
     </File>
     <File Include="bin/NFine.Repository.dll">
-      <publishTime>04/26/2018 18:32:35</publishTime>
+      <publishTime>04/28/2018 08:42:10</publishTime>
     </File>
     <File Include="bin/NPOI.dll">
       <publishTime>05/30/2016 15:02:00</publishTime>
@@ -199,7 +199,7 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="Configs/system.config">
-      <publishTime>04/24/2018 18:23:24</publishTime>
+      <publishTime>04/27/2018 14:51:31</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -1080,8 +1080,11 @@
     <File Include="Views/Home/Index.cshtml">
       <publishTime>04/25/2018 16:47:44</publishTime>
     </File>
+    <File Include="Views/Home/ScoreCashManager.cshtml">
+      <publishTime>04/27/2018 14:51:31</publishTime>
+    </File>
     <File Include="Views/Home/ScoreManager.cshtml">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>04/27/2018 14:51:31</publishTime>
     </File>
     <File Include="Views/Home/UserInfo.cshtml">
       <publishTime>04/26/2018 16:54:32</publishTime>
