@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using Distribution.Logic;
 using Distribution.Model;
+using NFine.Application.SystemManage;
+using NFine.Code;
 
 namespace NFine.Web.UnitTest
 {
@@ -33,7 +35,14 @@ namespace NFine.Web.UnitTest
             //AgentLogic.DeleteEntity(7);
             #endregion
 
-            var list = ScoreCashLogic.GetList();
+            OrderApp orderApp = new OrderApp();
+            Pagination pagination = new Pagination();
+            string keyword = "";
+            pagination.page = 1;
+            pagination.rows = 50;
+            pagination.sord = "asc";
+            pagination.sidx = "F_CreatorTime";
+            var list = orderApp.GetViewList(pagination, keyword);
 
 
         }

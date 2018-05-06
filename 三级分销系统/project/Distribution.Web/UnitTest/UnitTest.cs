@@ -16,10 +16,10 @@ namespace NFine.Web.UnitTest
         public void TestMethod1()
         {
             #region Insert
-            AgentRelation newAg = new AgentRelation();
-            newAg.c_child_id = "03db06d5-4f9e-44e1-a448-027316ed3dcd";
-            newAg.c_parent_id = "10";
-            AgentRelationLogic.InsertNewEntiy(newAg);
+            //AgentRelation newAg = new AgentRelation();
+            //newAg.c_child_id = "03db06d5-4f9e-44e1-a448-027316ed3dcd";
+            //newAg.c_parent_id = "10";
+            //AgentRelationLogic.InsertNewEntiy(newAg);
             #endregion
 
             #region Update
@@ -34,9 +34,11 @@ namespace NFine.Web.UnitTest
             //var list = ScoreLogic.DealProvinceReward(ag);
             //var ag2 = AgentLogic.FindEntity(t => t.c_mobile == "15012341234");
 
-            string str = DateTime.Now.ToString("HHmmss");
+            //string str = DateTime.Now.ToString("HHmmss");
 
-            OrderLogic.GetNopayOrderByAgentId("3");
+            //OrderLogic.GetNopayOrderByAgentId("3");
+
+            ScoreLogic.DealRewardScore("1", RewartType.Purchase);
 
         }
     }

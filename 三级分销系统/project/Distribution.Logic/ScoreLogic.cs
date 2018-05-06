@@ -23,7 +23,12 @@ namespace Distribution.Logic
             bool result = true;
             using (DistributionContext context = new DistributionContext())
             {
-                string RecommId = context.t_agent_relation.Where(c => c.c_child_id == AgentId).First().ParentAgent.c_id;
+                var parList = context.t_agent_relation.Where(c => c.c_child_id == AgentId);
+                if(parList.Count() < 1 )
+                {
+                    return result;
+                }
+                string RecommId = parList.FirstOrDefault().ParentAgent.c_id;
                 int firsSc;//直推奖励
                 int secoSc;//二代奖励
                 string desc = "";
