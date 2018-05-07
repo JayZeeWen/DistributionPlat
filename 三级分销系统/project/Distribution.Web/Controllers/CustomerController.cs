@@ -53,16 +53,16 @@ namespace Distribution.Web.Controllers
         {
             string s = @"{
 
-                    ""name"": ""China"",
-		            ""number"": 2000,
+                    ""name"": ""代理商"",
+		            ""number"": 1500000000,
 ""children"": [{
 
-          ""name"": ""浙江"",
-		""number"": 200},
+          ""name"": ""张啊啊啊"",
+		""number"": 138522222222},
 {
 
-          ""name"": ""上海"",
-		""number"": 200}]
+          ""name"": ""欧阳盛大"",
+		""number"": 15012341234}]
             }";
             return s;
         }

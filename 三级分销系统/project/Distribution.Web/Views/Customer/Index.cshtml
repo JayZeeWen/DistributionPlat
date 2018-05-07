@@ -68,11 +68,13 @@
 
           node.append("rect")
             .attr("width",100)
-            .attr("height",20)
+            .attr("height",40)
             .attr("x",0)
             .attr("y",0)
             .attr("style","fill:#35AD5B;");
 
+          node.append("table");
+          node.append("tr");
           node.append("text")
               .attr("dx", function(d) {
                 return 30;
