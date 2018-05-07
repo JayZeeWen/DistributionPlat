@@ -18,7 +18,7 @@ namespace Distribution.Logic
         /// <param name="AgentId">代理商（被推荐人或是产品购买人）</param>
         /// <param name="reType">奖励类型：推荐奖励   购买奖励</param>
         /// <returns></returns>
-        public static bool DealRewardScore( string AgentId, RewartType reType)
+        public static bool DealRewardScore( string AgentId, RewartType reType,int amount = 1 )
         {
             bool result = true;
             using (DistributionContext context = new DistributionContext())
@@ -46,7 +46,7 @@ namespace Distribution.Logic
                 }
 
                 //1、直推人更新积分
-                UpdateAgentScore(RecommId, firsSc, "直推人【" + desc + "】积分奖励", context);
+                UpdateAgentScore(RecommId, firsSc * amount, "直推人【" + desc + "】积分奖励", context);
 
                 //2、二代更新积分
                 var sec_list = context.t_agent_relation.Where(c => c.c_child_id == RecommId);
@@ -55,7 +55,7 @@ namespace Distribution.Logic
                     return result;
                 }
                 Agent SeconAgent = sec_list.FirstOrDefault().ParentAgent;
-                UpdateAgentScore(SeconAgent.c_id, secoSc, "二代【" + desc + "】积分奖励", context);
+                UpdateAgentScore(SeconAgent.c_id, secoSc * amount, "二代【" + desc + "】积分奖励", context);
 
                 #region 二代外积分更改逻辑
                 int maxLevel = GetMaxLevel(AgentId, context);
@@ -64,15 +64,15 @@ namespace Distribution.Logic
                 {
                     return result;
                 }
-                int rewardScore = (int)list_Config.First().c_recomm_reward;
+                int rewardScore = (int)list_Config.First().c_recomm_reward ;
                 if (reType == RewartType.Purchase)
                 {
-                    rewardScore = (int)list_Config.First().c_buy_reward;
+                    rewardScore = (int)list_Config.First().c_buy_reward * amount;
                 }
 
                 if (rewardScore > 0)
                 {
-                    RewardForCorreLevel(SeconAgent, ref rewardScore, reType, context);
+                    RewardForCorreLevel(SeconAgent, ref rewardScore, reType, context,amount);
                 }
 
                 #endregion
@@ -155,7 +155,7 @@ namespace Distribution.Logic
         /// <param name="RewardScore"></param>
         /// <param name="reType"></param>
         /// <param name="context"></param>
-        private static void RewardForCorreLevel(Agent ParAgent,ref int RewardScore,RewartType reType, DistributionContext context)
+        private static void RewardForCorreLevel(Agent ParAgent,ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
         {
             string desc = "";
             var list = context.t_agent_relation.Where(f => f.c_child_id == ParAgent.c_id);
@@ -175,7 +175,7 @@ namespace Distribution.Logic
                 }
                 else//购买产品奖励
                 {
-                    needReward = (int)list_config.First().c_buy_reward;
+                    needReward = (int)list_config.First().c_buy_reward * amount;
                     desc = "购买";
                 }
                 
@@ -186,7 +186,7 @@ namespace Distribution.Logic
                 UpdateAgentScore(ag.c_id, needReward, "二代外【" + desc + "】积分奖励", context);
                 RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
             }            
-            RewardForCorreLevel(ag,ref RewardScore, reType, context);
+            RewardForCorreLevel(ag,ref RewardScore, reType, context,amount);
 
         }
 

@@ -130,7 +130,13 @@ namespace Distribution.Web.Controllers
                 OrderLogic.UpdateEntity(order);
                 int changeScore = 0 -(int)order.c_total;
                 ScoreDetailLogic.UpdateAgentScore(agentInfo.agent.c_id, changeScore, "购买产品");
-                ScoreLogic.DealRewardScore(agentInfo.agent.c_id, RewartType.Purchase);
+                var detailList = OrderDetailLogic.GetList().Where(t => t.c_order_id == order.F_Id);
+                if(detailList.Count() > 0 )
+                {
+                    int totalAmount = (int)detailList.Sum(t => t.c_amount);
+                    ScoreLogic.DealRewardScore(agentInfo.agent.c_id, RewartType.Purchase, totalAmount);
+                }
+                
                 result.state = ResultType.success.ToString();
                 result.message = "成功";
                 return Content(result.ToJson());
@@ -177,9 +183,24 @@ namespace Distribution.Web.Controllers
             AjaxResult result = new AjaxResult();
             try
             {
-                OrderDetailLogic.DeleteEntity(DetailId);
+                var detail = OrderDetailLogic.GetEnityById(DetailId);
+                if (detail != null)
+                {
+                    string orderId = detail.c_order_id;
+                    OrderDetailLogic.DeleteEntity(DetailId);
+
+                    if(!string.IsNullOrEmpty(orderId))
+                    {
+                        var list = OrderDetailLogic.GetList().Where(t => t.c_order_id == orderId);
+                        if(list.Count() == 0 )
+                        {
+                            OrderLogic.DeleteEntity(orderId);
+                        }
+                    }
+                }                    
                 result.state = ResultType.success.ToString();
                 result.message = "成功";
+                
                 return Content(result.ToJson());
             }
             catch (Exception ex)

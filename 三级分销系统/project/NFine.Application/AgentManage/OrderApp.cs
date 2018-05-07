@@ -63,6 +63,7 @@ namespace NFine.Application.SystemManage
             if (agent != null)
             {
                 entity.c_agent_name = agent.c_name;
+                entity.c_agent_mobile = agent.c_mobile;
             }
             if(IsGetDetailList)
             {

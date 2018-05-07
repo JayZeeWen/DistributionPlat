@@ -52,6 +52,8 @@ namespace NFine.Domain.Entity
 
         public string c_agent_name { get; set; }
 
+        public string c_agent_mobile { get; set; }
+
         public string c_order_num { get; set; }
 
         public List<OrderDetailViewEntity> detailList { get; set; }

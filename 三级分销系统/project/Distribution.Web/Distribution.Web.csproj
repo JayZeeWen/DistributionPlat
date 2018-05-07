@@ -166,6 +166,7 @@
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -180,6 +181,8 @@
     <Compile Include="UnitTest\UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\d3\d3.js" />
+    <Content Include="Content\d3\d3.min.js" />
     <Content Include="Content\img\15058144861505814486.jpg" />
     <Content Include="Content\timg.jpg" />
     <Content Include="Content\bootstrap.css" />
@@ -451,6 +454,7 @@
     <Content Include="Content\js\simditor\css\editor.scss" />
     <Content Include="Content\js\simditor\css\fonticon.scss" />
     <Content Include="Content\js\simditor\css\simditor.scss" />
+    <Content Include="Content\d3\LICENSE" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -506,7 +510,10 @@
     <Content Include="Views\Home\ScoreCashManager.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\OrderRecord.cshtml" />
-    <Content Include="Views\Product\OrderDetail.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Content\data.json" />
+    <Content Include="Views\Customer\data.json" />
+    <Content Include="Views\Customer\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -62,5 +62,17 @@ namespace Distribution.Logic
                 context.SaveChanges();
             }
         }
+
+        public static int GetFirstCount(string agentId,out int secondCount ,out int otherCount)
+        {
+            var list = GetList();
+            var firstList = list.Where(t => t.c_parent_id == agentId).ToList();
+            var pIds = firstList.Select(t => t.c_child_id).ToList();
+            var secondList = list.Where(t => pIds.Contains(t.c_parent_id)).ToList();
+            secondCount = secondList.Count();//二代数量
+            var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
+            otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id)).Count();
+            return firstList.Count();
+        }
     }
 }
