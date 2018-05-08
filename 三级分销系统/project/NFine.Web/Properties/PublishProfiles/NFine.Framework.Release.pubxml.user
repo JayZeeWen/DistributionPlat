@@ -71,6 +71,51 @@
     <File Include="Areas/AgentManage/Views/ScoreCash/RevisePassword.cshtml">
       <publishTime>05/03/2018 22:39:40</publishTime>
     </File>
+    <File Include="Areas/AgentManage/Views/Order/Details.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Order/Form.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Order/Index.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Order/Info.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Order/RevisePassword.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Product/Details.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Product/Form.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Product/Index.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Product/Info.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/Product/RevisePassword.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/ScoreCash/Details.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/ScoreCash/Form.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/ScoreCash/Index.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/ScoreCash/Info.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="Areas/AgentManage/Views/ScoreCash/RevisePassword.cshtml">
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
     <File Include="Areas/AgentManage/Views/Web.config">
       <publishTime>04/24/2018 20:02:55</publishTime>
     </File>
@@ -267,6 +312,18 @@
       <publishTime>04/21/2018 14:57:51</publishTime>
     </File>
     <File Include="bin/Configs/system.config">
+<<<<<<< HEAD
+      <publishTime>05/05/2018 12:09:10</publishTime>
+    </File>
+    <File Include="bin/Distribution.DB.dll">
+      <publishTime>05/05/2018 13:35:56</publishTime>
+    </File>
+    <File Include="bin/Distribution.Logic.dll">
+      <publishTime>05/05/2018 13:35:57</publishTime>
+    </File>
+    <File Include="bin/Distribution.Model.dll">
+      <publishTime>05/05/2018 13:35:56</publishTime>
+=======
       <publishTime>05/05/2018 10:46:26</publishTime>
     </File>
     <File Include="bin/Distribution.DB.dll">
@@ -277,6 +334,7 @@
     </File>
     <File Include="bin/Distribution.Model.dll">
       <publishTime>05/06/2018 14:02:41</publishTime>
+>>>>>>> 5af2ed78935f9e510323a43173bbfd45a024c6a4
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/21/2018 14:57:52</publishTime>
@@ -315,6 +373,27 @@
       <publishTime>04/21/2018 14:57:53</publishTime>
     </File>
     <File Include="bin/NFine.Application.dll">
+<<<<<<< HEAD
+      <publishTime>05/05/2018 13:30:49</publishTime>
+    </File>
+    <File Include="bin/NFine.Code.dll">
+      <publishTime>05/05/2018 13:30:46</publishTime>
+    </File>
+    <File Include="bin/NFine.Data.dll">
+      <publishTime>05/05/2018 13:30:47</publishTime>
+    </File>
+    <File Include="bin/NFine.Domain.dll">
+      <publishTime>05/05/2018 13:30:48</publishTime>
+    </File>
+    <File Include="bin/NFine.Mapping.dll">
+      <publishTime>05/05/2018 13:30:49</publishTime>
+    </File>
+    <File Include="bin/NFine.Repository.dll">
+      <publishTime>05/05/2018 13:30:49</publishTime>
+    </File>
+    <File Include="bin/NFine.Web.dll">
+      <publishTime>05/05/2018 13:45:50</publishTime>
+=======
       <publishTime>05/06/2018 17:22:25</publishTime>
     </File>
     <File Include="bin/NFine.Code.dll">
@@ -334,6 +413,7 @@
     </File>
     <File Include="bin/NFine.Web.dll">
       <publishTime>05/06/2018 17:22:26</publishTime>
+>>>>>>> 5af2ed78935f9e510323a43173bbfd45a024c6a4
     </File>
     <File Include="bin/NPOI.dll">
       <publishTime>04/21/2018 14:57:53</publishTime>
@@ -417,7 +497,11 @@
       <publishTime>04/21/2018 14:57:51</publishTime>
     </File>
     <File Include="Configs/system.config">
+<<<<<<< HEAD
+      <publishTime>05/05/2018 12:09:10</publishTime>
+=======
       <publishTime>05/05/2018 10:46:26</publishTime>
+>>>>>>> 5af2ed78935f9e510323a43173bbfd45a024c6a4
     </File>
     <File Include="Content/css/framework-about.css">
       <publishTime>04/21/2018 14:57:51</publishTime>
