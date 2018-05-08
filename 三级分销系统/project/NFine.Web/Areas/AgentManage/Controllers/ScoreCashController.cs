@@ -91,16 +91,20 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [HandlerAjaxOnly]
         [HandlerAuthorize]
         [ValidateAntiForgeryToken]
-        public ActionResult DealScoreCash(string keyValue)
+        public ActionResult DealScoreCash(string keyValue,int state)
         {
             ScoreCashEntity entity = scoreApp.GetForm(keyValue);
             entity.F_Id = keyValue;
-            entity.c_cash_state = (int)Distribution.Model.CashScoreState.Succ;//0：未审核   1：审核通过
+            if(state ==  1 )
+            {
+                entity.c_cash_state = (int)Distribution.Model.CashScoreState.Succ;//0：未审核   1：审核通过
+                ScoreDetailLogic.UpdateAgentScore(entity.c_user_id, -entity.c_amount, "积分提现");
+            }
+            else if(state == 2 )
+            {
+                entity.c_cash_state = (int)Distribution.Model.CashScoreState.Back;//0：未审核   1：审核通过
+            }            
             scoreApp.UpdateForm(entity);
-
-            ScoreDetailLogic.UpdateAgentScore(entity.c_user_id, -(int)entity.c_amount, "积分提现");
-
-            
             return Success("处理成功。");
         }
 

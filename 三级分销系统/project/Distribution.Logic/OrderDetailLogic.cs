@@ -12,7 +12,7 @@ namespace Distribution.Logic
     public static class OrderDetailLogic
     {
         #region BasicMethod
-        public static OrderDetail GetEnityById(int id)
+        public static OrderDetail GetEnityById(string id)
         {
             using (DistributionContext context = new DistributionContext())
             {

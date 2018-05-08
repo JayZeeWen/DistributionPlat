@@ -42,6 +42,10 @@ namespace Distribution.Web.Controllers
                     agentInfo.RecomAgentName = AgentLogic.GetEnityById(ar.c_parent_id).c_name;
                 }
                 int totalScore = ScoreDetailLogic.GetTotalScore(ag.c_id);
+                int secondCount = 0, otherCount = 0;
+                agentInfo.FirstCount = AgentRelationLogic.GetFirstCount(ag.c_id,out secondCount, out otherCount);
+                agentInfo.SecondCount = secondCount;
+                agentInfo.OtherCount = otherCount;
                 agentInfo.TotalScore = totalScore.ToString();
                 int dealingScore = ScoreCashLogic.GetTotalCashScoreByState(ag.c_id, CashScoreState.Dealing);
                 agentInfo.CanCashScore = ((int)agentInfo.agent.c_score - dealingScore);

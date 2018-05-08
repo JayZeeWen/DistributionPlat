@@ -28,5 +28,11 @@ namespace Distribution.Web.Models
         /// 可折现积分
         /// </summary>
         public int CanCashScore { get; set; }
+
+        public int FirstCount { get; set; }
+
+        public int SecondCount { get; set; }
+
+        public int OtherCount { get; set; }
     }
 }

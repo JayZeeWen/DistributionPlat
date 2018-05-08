@@ -56,7 +56,12 @@ namespace Distribution.Model
         /// <summary>
         /// 已受理
         /// </summary>
-        Succ = 1
+        Succ = 1 ,
+
+        /// <summary>
+        /// 已回退
+        /// </summary>
+         Back = 2,
     }
 
     /// <summary>

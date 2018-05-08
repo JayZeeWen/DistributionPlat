@@ -30,6 +30,7 @@ namespace Distribution.Web.Controllers
             }
             return View(viewModel);
         }
+        
 
         public ActionResult ScoreManager(ScoreManageModel model)
         {
