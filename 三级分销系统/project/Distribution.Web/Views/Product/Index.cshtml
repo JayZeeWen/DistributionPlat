@@ -73,18 +73,20 @@
             var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
             singlePrice = money;
             $("#lblTotal").html(singlePrice);
-            $("#amount").val(1);
+            $("#amount").val(5);
             $("#btnSubmitPur").removeAttr("onclick");
             $("#btnSubmitPur").attr("onclick", onclick)
             $(".purPro").show();
+            changeTotal();
         }
 
 
         function changeTotal() {
             var amount = $("#amount").val();
-            if (isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
-                $("#amount").val(0);
-                amount = 0;
+            if (isNaN(parseFloat(amount)) || parseFloat(amount) < 5) {
+                alert("5盒起购")
+                $("#amount").val(5);
+                amount = 5;
             }
             var total = singlePrice * amount;
             $("#lblTotal").html(total);

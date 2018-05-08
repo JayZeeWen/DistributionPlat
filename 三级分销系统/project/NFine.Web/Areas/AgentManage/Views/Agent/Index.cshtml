@@ -76,6 +76,7 @@
                 postData: { keyword: $("#txt_keyword").val() },
             }).trigger('reloadGrid');
         });
+
     }
     function btn_add() {
         $.modalOpen({
@@ -226,6 +227,19 @@
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>
+                        
+                    </div>
+                    
+                    
+                </td>
+                <td>
+                    <div style="margin-left:10px">
+                        会员总数：<label id="lblTotal"><span class="navTotal">@ViewBag.TotalCount</span></label>    
+                    </div>
+                </td>
+                <td>
+                    <div style="margin-left:10px">
+                        今日加入会数量：<label id="lblToday"><span class="navTotal">@ViewBag.TodayCount</span> </label>
                     </div>
                 </td>
             </tr>
@@ -236,3 +250,10 @@
     <table id="gridList"></table>
     <div id="gridPager"></div>
 </div>
+<style>
+    .navTotal{
+        font-size : 14px;
+        font-weight:600;
+        color:blue;
+    }
+</style>

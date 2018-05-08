@@ -83,7 +83,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext ())
             {
-                var list = context.t_agent_relation.Where(t => t.c_parent_id == agentId).ToList();
+                var list = context.t_agent_relation.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null ).ToList();
                 return list.Select(t => t.ChildrenAgent).ToList();
                 
             }

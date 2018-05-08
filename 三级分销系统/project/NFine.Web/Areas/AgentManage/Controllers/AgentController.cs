@@ -25,6 +25,16 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
         [HttpGet]
+        [HandlerAuthorize]
+        public override ActionResult Index()
+        {
+            var lsit =  AgentLogic.GetList();
+            ViewBag.TotalCount = lsit.Count();
+            ViewBag.TodayCount = lsit.Where(t => t.c_create_date >= DateTime.Now.Date).Count();
+            return View();
+        }
+
+        [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
@@ -49,7 +59,15 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(AgentEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
         {
+
+            var orgAge = agentApp.GetForm(keyValue);
+            if (orgAge != null && userEntity.c_score != orgAge.c_score)
+            {
+                int changeScore = (int)(userEntity.c_score - orgAge.c_score);
+                ScoreDetailLogic.UpdateAgentScore(keyValue,changeScore, "管理员后台变更积分");
+            }            
             agentApp.SubmitForm(userEntity, userLogOnEntity, keyValue);
+            
             return Success("操作成功。");
         }
         [HttpPost]
@@ -58,6 +76,12 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
+            var orgAge = agentApp.GetForm(keyValue);
+            int firstCount =  AgentRelationLogic.GetFirstCustomer(keyValue).Count();
+            if (orgAge.c_state != 0 || firstCount > 0 )
+            {
+                return Error("删除失败，审核已通过或伞下有会员。");
+            }
             agentApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
