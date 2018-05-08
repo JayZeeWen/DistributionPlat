@@ -182,9 +182,19 @@
     <Compile Include="UnitTest\UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\common.css" />
     <Content Include="Content\d3\d3.js" />
     <Content Include="Content\d3\d3.min.js" />
     <Content Include="Content\img\15058144861505814486.jpg" />
+    <Content Include="Content\img\a.png" />
+    <Content Include="Content\img\l02.png" />
+    <Content Include="Content\img\l04.png" />
+    <Content Include="Content\img\l05.png" />
+    <Content Include="Content\img\l06.png" />
+    <Content Include="Content\img\ll04.png" />
+    <Content Include="Content\img\ll05.png" />
+    <Content Include="Content\img\ll06.png" />
+    <Content Include="Content\img\weixin.jpg" />
     <Content Include="Content\timg.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
