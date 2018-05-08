@@ -19,19 +19,19 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="bin/Configs/system.config">
-      <publishTime>04/27/2018 14:51:31</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="bin/Distribution.DB.dll">
-      <publishTime>04/26/2018 18:32:35</publishTime>
+      <publishTime>05/05/2018 13:35:56</publishTime>
     </File>
     <File Include="bin/Distribution.Logic.dll">
-      <publishTime>04/26/2018 18:32:35</publishTime>
+      <publishTime>05/05/2018 13:35:57</publishTime>
     </File>
     <File Include="bin/Distribution.Model.dll">
-      <publishTime>04/26/2018 18:32:34</publishTime>
+      <publishTime>05/05/2018 13:35:56</publishTime>
     </File>
     <File Include="bin/Distribution.Web.dll">
-      <publishTime>04/28/2018 08:42:12</publishTime>
+      <publishTime>05/05/2018 13:45:32</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -88,22 +88,22 @@
       <publishTime>08/01/2016 14:46:10</publishTime>
     </File>
     <File Include="bin/NFine.Application.dll">
-      <publishTime>04/28/2018 08:42:11</publishTime>
+      <publishTime>05/05/2018 13:30:49</publishTime>
     </File>
     <File Include="bin/NFine.Code.dll">
-      <publishTime>04/28/2018 08:42:09</publishTime>
+      <publishTime>05/05/2018 13:30:46</publishTime>
     </File>
     <File Include="bin/NFine.Data.dll">
-      <publishTime>04/28/2018 08:42:09</publishTime>
+      <publishTime>05/05/2018 13:30:47</publishTime>
     </File>
     <File Include="bin/NFine.Domain.dll">
-      <publishTime>04/28/2018 08:42:10</publishTime>
+      <publishTime>05/05/2018 13:30:48</publishTime>
     </File>
     <File Include="bin/NFine.Mapping.dll">
-      <publishTime>04/28/2018 08:42:10</publishTime>
+      <publishTime>05/05/2018 13:30:49</publishTime>
     </File>
     <File Include="bin/NFine.Repository.dll">
-      <publishTime>04/28/2018 08:42:10</publishTime>
+      <publishTime>05/05/2018 13:30:49</publishTime>
     </File>
     <File Include="bin/NPOI.dll">
       <publishTime>05/30/2016 15:02:00</publishTime>
@@ -199,7 +199,7 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="Configs/system.config">
-      <publishTime>04/27/2018 14:51:31</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -226,7 +226,7 @@
       <publishTime>04/24/2018 18:23:24</publishTime>
     </File>
     <File Include="Content/copy/z.css">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Content/css/framework-about.css">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -293,6 +293,9 @@
     </File>
     <File Include="Content/fonts/weathericons-regular-webfontd41d.eot">
       <publishTime>04/23/2018 15:16:45</publishTime>
+    </File>
+    <File Include="Content/img/15058144861505814486.jpg">
+      <publishTime>05/05/2018 12:09:10</publishTime>
     </File>
     <File Include="Content/img/ajax-loader.gif">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -967,7 +970,7 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Content/timg.jpg">
       <publishTime>04/25/2018 13:53:06</publishTime>
@@ -1081,13 +1084,13 @@
       <publishTime>04/25/2018 16:47:44</publishTime>
     </File>
     <File Include="Views/Home/ScoreCashManager.cshtml">
-      <publishTime>04/27/2018 14:51:31</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Views/Home/ScoreManager.cshtml">
-      <publishTime>04/27/2018 14:51:31</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Views/Home/UserInfo.cshtml">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Views/Manage/AddPhoneNumber.cshtml">
       <publishTime>04/23/2018 15:16:45</publishTime>
@@ -1107,6 +1110,12 @@
     <File Include="Views/Manage/VerifyPhoneNumber.cshtml">
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
+    <File Include="Views/Product/Index.cshtml">
+      <publishTime>05/05/2018 13:33:34</publishTime>
+    </File>
+    <File Include="Views/Product/OrderRecord.cshtml">
+      <publishTime>05/05/2018 13:33:34</publishTime>
+    </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
@@ -1117,10 +1126,10 @@
       <publishTime>04/23/2018 15:16:45</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutForward.cshtml">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutForWeb.cshtml">
-      <publishTime>04/26/2018 16:54:32</publishTime>
+      <publishTime>05/05/2018 13:33:34</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>04/23/2018 15:16:45</publishTime>
