@@ -67,34 +67,34 @@
               })
 
           node.append("rect")
-            .attr("width",100)
+            .attr("width",85)
             .attr("height",40)
             .attr("x",0)
             .attr("y",0)
             .attr("style","fill:#35AD5B;");
 
-          node.append("table");
-          node.append("tr");
           node.append("text")
               .attr("dx", function(d) {
-                return 30;
+                return 40;
               })
-              .attr("dy", 14)
+              .attr("dy", 16)
               .style("text-anchor", function(d) {
                 return "middle";
               })
-              .style("fill","#fff")
+              .style("fill", "#fff")
+              .style("font-size", "16px")
+              .style("font-weight", "600")
               .text(function(d) { return d.name; });
-
            node.append("text")
               .attr("dx", function(d) {
-                return 80;
+                return 42;
               })
-              .attr("dy", 14)
+              .attr("dy", 32)
               .style("text-anchor", function(d) {
                 return "middle";
               })
-              .style("fill","#fff")
+              .style("fill", "#fff")
+              .style("font-size", "14px")
               .text(function(d) { return d.number; });
         });
 

@@ -49,22 +49,48 @@ namespace Distribution.Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取客户关系数据
+        /// </summary>
+        /// <returns></returns>
         public string data()
         {
-            string s = @"{
+            string ageId = agentInfo.agent.c_id;
 
-                    ""name"": ""代理商"",
-		            ""number"": 1500000000,
-""children"": [{
 
-          ""name"": ""张啊啊啊"",
-		""number"": 138522222222},
-{
+            RelationModel relation = new RelationModel();
+            relation.name = agentInfo.agent.c_name;
+            relation.number = agentInfo.agent.c_mobile;
+            List<RelationModel> children = new List<RelationModel>();
+            var list = AgentRelationLogic.GetFirstCustomer(ageId);
+            foreach (var item in list)
+            {
+                if(item != null )
+                {
+                    RelationModel m = new RelationModel();
+                    m.name = item.c_name;
+                    m.number = item.c_mobile;
+                    List<RelationModel> secondList = new List<RelationModel>();
+                    var sList = AgentRelationLogic.GetFirstCustomer(item.c_id);
+                    foreach (var second in sList)
+                    {
+                        if(second != null)
+                        {
+                            RelationModel m2 = new RelationModel();
+                            m2.name = second.c_name;
+                            m2.number = second.c_mobile;
+                            secondList.Add(m2);
+                        }                        
+                    }
+                    m.children = secondList;
+                    children.Add(m);
+                }
+               
+            }
+            relation.children = children;
 
-          ""name"": ""欧阳盛大"",
-		""number"": 15012341234}]
-            }";
-            return s;
+            string json = relation.ToJson();
+            return json;
         }
         
         

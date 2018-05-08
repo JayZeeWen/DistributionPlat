@@ -172,6 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\RelationModel.cs" />
     <Compile Include="Models\ScoreManageModel.cs" />
     <Compile Include="Models\AgentInfoModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
