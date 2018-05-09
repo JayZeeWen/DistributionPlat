@@ -46,6 +46,7 @@
     <Compile Include="01 Infrastructure\DbLogType.cs" />
     <Compile Include="AgentManage\ProductApp.cs" />
     <Compile Include="AgentManage\OrderApp.cs" />
+    <Compile Include="AgentManage\ScoreDetailApp.cs" />
     <Compile Include="AgentManage\ScoreCashApp.cs" />
     <Compile Include="AgentManage\CommConfigApp.cs" />
     <Compile Include="AgentManage\AgentApp.cs" />

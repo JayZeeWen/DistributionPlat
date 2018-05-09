@@ -33,6 +33,11 @@ namespace NFine.Domain.Entity.AgentManage
         public int? c_agent_level { get; set; }
 
         /// <summary>
+        /// 是否已经奖励
+        /// </summary>
+        public bool? c_had_reward { get; set; }
+
+        /// <summary>
         /// 收件人
         /// </summary>
         public string c_rec_person { get; set; }

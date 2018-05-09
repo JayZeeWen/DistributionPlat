@@ -5,20 +5,18 @@
  * Website：http://www.nfine.cn
 *********************************************************************************/
 using NFine.Data;
+using NFine.Domain.Entity;
 using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
 using System.Collections.Generic;
+using NFine.Code;
 
 namespace NFine.Domain.IRepository.SystemManage
 {
-    public interface IAgentRepository : IRepositoryBase<AgentEntity>
+    public interface IScoreDetailRepository : IRepositoryBase<ScoreDetailEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(AgentEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
-
-        List<AgentEntity> GetAgentList(string state);
-        bool? GetAgentHadReward(string agentId);
-
-
+        void SubmitForm(ScoreDetailEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
+        List<ScoreDetailEntity> GetDetailList(Pagination page);
     }
 }

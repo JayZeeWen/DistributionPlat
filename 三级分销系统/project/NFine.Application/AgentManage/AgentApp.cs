@@ -41,6 +41,10 @@ namespace NFine.Application.SystemManage
         {
             return service.FindEntity(keyValue);
         }
+        public AgentEntity GetFormWithoutTrack(string keyValue)
+        {
+            return service.FindEntity(keyValue);
+        }
         public void DeleteForm(string keyValue)
         {
             service.DeleteForm(keyValue);
@@ -60,6 +64,13 @@ namespace NFine.Application.SystemManage
         public void UpdateForm(AgentEntity userEntity)
         {
             service.Update(userEntity);
+        }
+
+        public bool hadReward(string agentId)
+        {
+            var result  = service.GetAgentHadReward(agentId);
+            bool hadReward = result == true ? true : false;
+            return hadReward;
         }
         public AgentEntity CheckLogin(string username, string password)
         {

@@ -67,5 +67,16 @@ namespace NFine.Repository.SystemManage
             };
             return this.FindList(strSql.ToString(), parameter);
         }
+
+        public bool? GetAgentHadReward(string agentId)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(@"select * from t_agent  where F_id = '"+ agentId +"'");
+            DbParameter[] parameter =
+            {
+            };
+            var entity =  this.FindList(strSql.ToString(), parameter).Find(t => t.F_Id == agentId);
+            return entity.c_had_reward;
+        }
     }
 }

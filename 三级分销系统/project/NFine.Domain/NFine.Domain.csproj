@@ -47,6 +47,7 @@
     <Compile Include="03 Entity\AgentManage\ProductEntity.cs" />
     <Compile Include="03 Entity\AgentManage\OrderDetailEntity.cs" />
     <Compile Include="03 Entity\AgentManage\OrderEntity.cs" />
+    <Compile Include="03 Entity\AgentManage\ScoreDetailEntity.cs" />
     <Compile Include="03 Entity\AgentManage\ScoreCashEntity.cs" />
     <Compile Include="03 Entity\AgentManage\CommConfigEntity.cs" />
     <Compile Include="03 Entity\AgentManage\AgentEntity.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
     <Compile Include="04 IRepository\SystemManage\IProductRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IOrderRepository.cs" />
+    <Compile Include="04 IRepository\SystemManage\IScoreDetailRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IScoreCashRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\ICommConfigRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IAgentRepository.cs" />

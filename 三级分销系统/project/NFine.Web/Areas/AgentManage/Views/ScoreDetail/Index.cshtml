@@ -1,0 +1,182 @@
+﻿@using NFine.Code
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/AgentManage/ScoreDetail/GetGridJson",
+            height: $(window).height() - 128,
+            colModel: [
+                { label: '主键', name: 'F_Id', hidden: true },
+                { label: '状态', name: 'c_cash_state', hidden: true },
+                { label: '代理商姓名', name: 'c_agent_name', width: 100, align: 'center' },
+                { label: '手机', name: 'c_agent_mobile', width: 100, align: 'center' },                
+                { label: '变更积分', name: 'c_amount', width: 100, align: 'center' },
+                { label: '变更原因', name: 'c_reason', width: 200, align: 'center' },                
+                {
+                    label: '变更时间', name: 'c_create_date', width: 80, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                }
+
+            ],
+            pager: "#gridPager",
+            sortname: 'F_CreatorTime desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+    function btn_add() {
+        $.modalOpen({
+            id: "Form",
+            title: "新增用户",
+            url: "/AgentManage/ScoreCash/Form",
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_edit() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Form",
+            title: "修改用户",
+            url: "/AgentManage/ScoreCash/Form?keyValue=" + keyValue,
+            width: "700px",
+            height: "510px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_delete() {
+        $.deleteForm({
+            url: "/AgentManage/ScoreCash/DeleteForm",
+            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+    function btn_details() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalOpen({
+            id: "Details",
+            title: "查看用户",
+            url: "/AgentManage/ScoreCash/Details?keyValue=" + keyValue,
+            width: "700px",
+            height: "550px",
+            btn: null,
+        });
+    }
+    function btn_revisepassword() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var Account = $("#gridList").jqGridRowValue().F_Account;
+        var RealName = $("#gridList").jqGridRowValue().F_RealName;
+        $.modalOpen({
+            id: "RevisePassword",
+            title: '重置密码',
+            url: '/AgentManage/ScoreCash/RevisePassword?keyValue=' + keyValue + "&account=" + escape(Account) + '&realName=' + escape(RealName),
+            width: "450px",
+            height: "260px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].submitForm();
+            }
+        });
+    }
+    function btn_disabled() {
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        $.modalConfirm("注：您确定要【禁用】该项账户吗？", function (r) {
+            if (r) {
+                $.submitForm({
+                    url: "/AgentManage/ScoreCash/DisabledAccount",
+                    param: { keyValue: keyValue },
+                    success: function () {
+                        $.currentWindow().$("#gridList").trigger("reloadGrid");
+                    }
+                })
+            }
+        });
+    }
+    function btn_Deal(dealState) {
+        
+        var keyValue = $("#gridList").jqGridRowValue().F_Id;
+        var state = $("#gridList").jqGridRowValue().c_cash_state;
+        stateName = "受理";
+        if (dealState == 2) {
+            stateName = "回退";
+        }
+        if (state.indexOf("受理中") != -1) {
+            $.modalConfirm("注：您确定【" + stateName + "】该笔提现吗？", function (r) {
+                if (r) {
+                    $.submitForm({
+                        url: "/AgentManage/ScoreCash/DealScoreCash",
+                        param: { keyValue: keyValue, state: dealState },
+                        success: function () {
+                            $.currentWindow().$("#gridList").trigger("reloadGrid");
+                        }
+                    })
+                }
+            });
+        } else {
+            alert("该笔提现已处理，请勿重复处理");
+            $.currentWindow().$("#gridList").trigger("reloadGrid");
+            return false;
+        }
+        
+    }
+
+
+    function isContains(str, substr) {
+        return str.indexOf(substr) >= 0;
+    }
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建用户</a>
+        </div>
+        <div class="operate">
+            <ul class="nav nav-pills">
+                <li class="first">已选中<span>1</span>项</li>                
+                <li><a id="NF-enabled" onclick="btn_Deal(1)"><i class="fa fa-play-circle"></i>受理</a></li>
+                <li><a id="NF-enabled" onclick="btn_Deal(2)"><i class="fa fa-stop-circle"></i>回退</a></li>
+            </ul>
+            <a href="javascript:;" class="close"></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="账户/姓名/手机" style="width: 200px;">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+    <div id="gridPager"></div>
+</div>

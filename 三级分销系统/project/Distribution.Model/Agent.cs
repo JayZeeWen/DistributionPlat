@@ -55,6 +55,12 @@ namespace Distribution.Model
         public int? c_state { get; set; }
 
         /// <summary>
+        /// 是否已经奖励
+        /// </summary>
+        public bool? c_had_reward { get; set; }
+
+
+        /// <summary>
         /// 积分
         /// </summary>
         public int? c_score { get; set; }
