@@ -12,6 +12,7 @@ using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace NFine.Application.SystemManage
 {
@@ -29,7 +30,8 @@ namespace NFine.Application.SystemManage
 
         public List<OrderViewEntity> GetViewList(Pagination pagination, string keyword)
         {
-            var expression = ExtLinq.True<OrderEntity>();
+            Expression<Func<OrderEntity, bool>> e = t => t.c_state != 0 ;
+            var expression = e;
 
             var list =  service.FindList(expression, pagination);
 
