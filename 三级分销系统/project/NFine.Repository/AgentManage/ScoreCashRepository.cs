@@ -55,13 +55,11 @@ namespace NFine.Repository.SystemManage
 	                        left join t_agent as agent
 		                        on agent.f_id = score.c_user_id 
 		                        )  as t 
-                          where t.rowNum between {1} and {2} 
-",page.sidx,(page.page -1 ) * page.rows,page.page * page.rows));
+",page.sidx));
             DbParameter[] parameter = 
             {
                  
             };
-
 
             return FindList(strSql.ToString(), parameter);
         }

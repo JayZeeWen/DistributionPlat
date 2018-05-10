@@ -60,6 +60,7 @@ namespace NFine.Application.SystemManage
         public List<CashListEntity> GetCashViewList(Pagination page)
         {
             var list = service.GetCashList(page);
+            page.records = list.Count;
             List<CashListEntity> viewList = new List<CashListEntity>();
             AgentApp app = new AgentApp();
             foreach (var item in list)
