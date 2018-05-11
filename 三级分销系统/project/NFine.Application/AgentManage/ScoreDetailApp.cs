@@ -76,7 +76,7 @@ namespace NFine.Application.SystemManage
                 entity.c_user_id = item.c_user_id;
                 entity.c_amount = item.c_amount;
                 entity.c_reason = item.c_reason;
-                entity.c_create_date = item.F_CreatorTime;
+                entity.c_create_date = item.c_create_date;
                 viewList.Add(entity);
             }
             return viewList;

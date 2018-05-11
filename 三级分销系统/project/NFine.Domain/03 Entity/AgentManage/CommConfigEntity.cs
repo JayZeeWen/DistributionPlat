@@ -31,5 +31,7 @@ namespace NFine.Domain.Entity.AgentManage
         public string F_DeleteUserId { get; set; }
 
         public bool? F_DeleteMark { get; set; }
+
+        public string c_desc { get; set; }
     }
 }

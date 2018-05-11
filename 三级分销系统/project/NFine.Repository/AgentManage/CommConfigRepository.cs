@@ -28,7 +28,7 @@ namespace NFine.Repository.SystemManage
                 db.Commit();
             }
         }
-        public void SubmitForm(CommConfigEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
+        public void SubmitForm(CommConfigEntity userEntity, string keyValue)
         {
             using (var db = new RepositoryBase().BeginTrans())
             {

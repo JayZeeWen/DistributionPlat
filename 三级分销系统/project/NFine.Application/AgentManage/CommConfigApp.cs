@@ -46,7 +46,7 @@ namespace NFine.Application.SystemManage
         {
             return service.GetItemList(enCode);
         }
-        public void SubmitForm(CommConfigEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
+        public void SubmitForm(CommConfigEntity userEntity,  string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
@@ -56,7 +56,7 @@ namespace NFine.Application.SystemManage
             {
                 userEntity.Create();
             }
-            service.SubmitForm(userEntity, userLogOnEntity, keyValue);
+            service.SubmitForm(userEntity, keyValue);
         }
         public void UpdateForm(CommConfigEntity userEntity)
         {

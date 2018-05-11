@@ -77,7 +77,12 @@ namespace Distribution.Model
         /// <summary>
         /// 代理商等级
         /// </summary>
-        AgentLevel = 2 
+        AgentLevel = 2 ,
+
+        /// <summary>
+        /// 积分奖励配置
+        /// </summary>
+        ScoreConfigCate = 3 
     }
 
     public enum OrderState
@@ -96,5 +101,33 @@ namespace Distribution.Model
         /// 已处理
         /// </summary>
         HadDeal = 2 
+    }
+
+    public enum RewardConfigKey
+    {
+        /// <summary>
+        /// 直推奖励
+        /// </summary>
+        firstRecomm = 1 ,
+        
+        /// <summary>
+        /// 二代奖励
+        /// </summary>
+        secondRecomm = 2 ,
+
+        /// <summary>
+        /// 直推购买奖励
+        /// </summary>
+        firstBuy = 3 ,
+
+        /// <summary>
+        /// 二代购买奖励
+        /// </summary>
+        secondBuy = 4,
+
+        /// <summary>
+        /// 省级代理推荐奖励
+        /// </summary>
+        provinceRecomm = 5 
     }
 }

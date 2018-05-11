@@ -31,7 +31,10 @@ namespace NFine.Web.UnitTest
             #region Delete
             //AgentLogic.DeleteEntity(7);
             #endregion
-            //var list = ScoreLogic.DealProvinceReward(ag);
+
+            //var configLisg = CommConfigLogic.GetConfigListByCate((int)ConfigCategory.ScoreConfigCate);
+            //int  firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstRecomm).FirstOrDefault().c_value);
+            //int  secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);
             //var ag2 = AgentLogic.FindEntity(t => t.c_mobile == "15012341234");
 
             //string str = DateTime.Now.ToString("HHmmss");

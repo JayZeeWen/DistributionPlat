@@ -20,6 +20,7 @@ namespace Distribution.Logic
         /// <returns></returns>
         public static bool DealRewardScore( string AgentId, RewartType reType,int amount = 1 )
         {
+            var configLisg = CommConfigLogic.GetConfigListByCate((int)ConfigCategory.ScoreConfigCate);
             bool result = true;
             using (DistributionContext context = new DistributionContext())
             {
@@ -34,14 +35,14 @@ namespace Distribution.Logic
                 string desc = "";
                 if (reType == RewartType.Recommend)
                 {
-                    firsSc = 3500;
-                    secoSc = 1000;
+                    firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstRecomm).FirstOrDefault().c_value);
+                    secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);
                     desc = "推荐";
                 }
                 else
                 {
-                    firsSc = 75;
-                    secoSc = 25;
+                    firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstBuy).FirstOrDefault().c_value);
+                    secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondBuy).FirstOrDefault().c_value);
                     desc = "购买";
                 }
 
@@ -88,9 +89,9 @@ namespace Distribution.Logic
         /// <returns></returns>
         public static bool DealProvinceReward(Agent BeRecommAgent)
         {
-
+            var configLisg = CommConfigLogic.GetConfigListByCate((int)ConfigCategory.ScoreConfigCate);
             bool result = true;
-            int ProReward = 100;
+            int ProReward = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.provinceRecomm).FirstOrDefault().c_value); ;
             using (DistributionContext context = new DistributionContext())
             {
                 RewardForProvice(BeRecommAgent, ProReward, context); 

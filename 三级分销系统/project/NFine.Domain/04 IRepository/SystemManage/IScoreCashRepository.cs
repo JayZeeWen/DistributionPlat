@@ -14,7 +14,7 @@ namespace NFine.Domain.IRepository.SystemManage
     public interface ICommConfigRepository : IRepositoryBase<CommConfigEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(CommConfigEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
+        void SubmitForm(CommConfigEntity userEntity,string keyValue);
 
         List<CommConfigEntity> GetItemList(string categoryId);
 
