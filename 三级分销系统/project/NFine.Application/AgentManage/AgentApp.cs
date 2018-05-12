@@ -32,6 +32,27 @@ namespace NFine.Application.SystemManage
             return service.FindList(expression, pagination);
         }
 
+        public List<AgentEntity> GetList(Pagination pagination, string keyword,int level,int  agentLevel)
+        {
+            var expression = ExtLinq.True<AgentEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.c_name.Contains(keyword));
+                expression = expression.Or(t => t.c_bank_name.Contains(keyword));
+                expression = expression.Or(t => t.c_mobile.Contains(keyword));
+            }
+            if (level != 0 )
+            {
+                expression = expression.And(t => t.c_levle == level);
+            }
+            if (agentLevel != 0 )
+            {
+                expression = expression.And(t => t.c_agent_level == agentLevel);
+            }
+            expression = expression.And(t => t.c_name != "admin");
+            return service.FindList(expression, pagination);
+        }
+
         public List<AgentEntity> GetAgentList(string state)
         {
             return service.GetAgentList(state);

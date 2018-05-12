@@ -59,6 +59,11 @@ namespace Distribution.Model
         /// </summary>
         public bool? c_had_reward { get; set; }
 
+        /// <summary>
+        /// 代理类型：0：体验店  1：加盟店
+        /// </summary>
+        public int? c_agnet_type { get; set; }
+
 
         /// <summary>
         /// 积分

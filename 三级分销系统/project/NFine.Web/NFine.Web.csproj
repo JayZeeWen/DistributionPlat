@@ -663,6 +663,8 @@
     <Content Include="Areas\AgentManage\Views\ScoreDetail\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\Form.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Config\LevelConfigIndex.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Config\LevelForm.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <ItemGroup>

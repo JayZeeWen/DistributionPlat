@@ -11,12 +11,13 @@ using System.Collections.Generic;
 
 namespace NFine.Domain.IRepository.SystemManage
 {
-    public interface ICommConfigRepository : IRepositoryBase<CommConfigEntity>
+    public interface ILevelConfigRepository : IRepositoryBase<LevelConfigEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(CommConfigEntity userEntity,string keyValue);
+        void SubmitForm(LevelConfigEntity userEntity, string keyValue);
 
-        List<CommConfigEntity> GetItemList( string categoryId);
+        List<LevelConfigEntity> GetLevelConfigList(string state);
+
 
     }
 }

@@ -24,7 +24,6 @@ namespace NFine.Repository.SystemManage
             using (var db = new RepositoryBase().BeginTrans())
             {
                 db.Delete<ProductEntity>(t => t.F_Id == keyValue);
-                db.Delete<UserLogOnEntity>(t => t.F_UserId == keyValue);
                 db.Commit();
             }
         }

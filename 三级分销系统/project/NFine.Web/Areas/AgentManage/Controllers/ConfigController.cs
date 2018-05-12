@@ -22,19 +22,23 @@ namespace NFine.Web.Areas.AgentManage.Controllers
     public class ConfigController : ControllerBase
     {
         private CommConfigApp configApp = new CommConfigApp();
+        private LevelConfigApp levelApp = new LevelConfigApp();
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
+            var list = configApp.GetItemList(pagination,((int)ConfigCategory.ScoreConfigCate).ToString());
             var data = new
             {
-                rows = configApp.GetItemList(((int)ConfigCategory.ScoreConfigCate).ToString()),
+                rows = list,
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
             };
             return Content(data.ToJson());
         }
+
+        
 
 
         [HttpGet]
@@ -51,6 +55,49 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         public ActionResult SubmitForm(CommConfigEntity commEntity, string keyValue)
         {
             configApp.SubmitForm(commEntity, keyValue);
+            return Success("操作成功。");
+        }
+
+
+        public ActionResult LevelConfigIndex()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetLevelJson(Pagination pagination, string keyword)
+        {
+            var data = new
+            {
+                rows = levelApp.GetItemList(pagination),
+                total = pagination.total,
+                page = pagination.page,
+                records = pagination.records
+            };
+            return Content(data.ToJson());
+        }
+
+        public ActionResult LevelForm()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetLevelFormJson(string keyValue)
+        {
+            var data = levelApp.GetDetailForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitLevelForm(LevelConfigEntity commEntity, string keyValue)
+        {
+            levelApp.SubmitForm(commEntity, keyValue);
             return Success("操作成功。");
         }
     }

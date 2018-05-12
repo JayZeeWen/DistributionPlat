@@ -103,6 +103,19 @@ namespace Distribution.Model
         HadDeal = 2 
     }
 
+    public enum AgentyType
+    {
+        /// <summary>
+        /// 体验店
+        /// </summary>
+        Exp =  0 ,
+
+        /// <summary>
+        /// 加盟店
+        /// </summary>
+        Fran = 1 
+    }
+
     public enum RewardConfigKey
     {
         /// <summary>
@@ -128,6 +141,30 @@ namespace Distribution.Model
         /// <summary>
         /// 省级代理推荐奖励
         /// </summary>
-        provinceRecomm = 5 
+        provinceRecomm = 5 ,
+
+
+        /// <summary>
+        /// 体验店直推奖励
+        /// </summary>
+        expFirstRecomm = 6,
+
+
+        /// <summary>
+        /// 体验店二代奖励
+        /// </summary>
+        expSecondRecomm = 7,
+
+
+        /// <summary>
+        /// 体验店直推购买奖励
+        /// </summary>
+        expFirstBuy = 8,
+
+
+        /// <summary>
+        /// 体验店二代购买奖励
+        /// </summary>
+        expSecondBuy = 9,
     }
 }

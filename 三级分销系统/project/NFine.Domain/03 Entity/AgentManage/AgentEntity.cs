@@ -38,6 +38,11 @@ namespace NFine.Domain.Entity.AgentManage
         public bool? c_had_reward { get; set; }
 
         /// <summary>
+        /// 代理类型：0：体验店  1：加盟店
+        /// </summary>
+        public int? c_agnet_type { get; set; }
+
+        /// <summary>
         /// 收件人
         /// </summary>
         public string c_rec_person { get; set; }
@@ -55,6 +60,7 @@ namespace NFine.Domain.Entity.AgentManage
         public string c_voucher_path { get; set; }
 
         public DateTime? c_create_date { get; set; }
+
 
         public DateTime? F_CreatorTime { get; set; }
         public string F_CreatorUserId { get; set; }

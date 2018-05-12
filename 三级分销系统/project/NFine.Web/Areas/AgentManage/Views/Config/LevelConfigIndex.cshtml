@@ -10,12 +10,48 @@
     function gridList() {
         var $gridList = $("#gridList");
         $gridList.dataGrid({
-            url: "/AgentManage/Config/GetGridJson",
+            url: "/AgentManage/Config/GetLevelJson",
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
-                { label: '项目', name: 'c_desc', width: 200, align: 'center' },
-                { label: '参数', name: 'c_value', width: 100, align: 'center' }
+                {
+                    label: '对应等级', name: 'c_level', width: 200, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '加盟商';
+                        } else if (cellvalue == 2) {
+                            return '部门经理';
+                        } else if (cellvalue == 3) {
+                            return '副总监';
+                        } else if (cellvalue == 4) {
+                            return '总监';
+                        } else if (cellvalue == 5) {
+                            return '总经理';
+                        }
+                    }
+                },
+                { label: '升级需要人数', name: 'c_need_nums', width: 100, align: 'center' },
+                {
+                    label: '升级需求等级', name: 'c_need_level', width: 100, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1) {
+                            return '加盟商';
+                        } else if (cellvalue == 2) {
+                            return '部门经理';
+                        } else if (cellvalue == 3) {
+                            return '副总监';
+                        } else if (cellvalue == 4) {
+                            return '总监';
+                        } else if (cellvalue == 5) {
+                            return '总经理';
+                        } else {
+                            return '';
+                        }
+                    }
+                },
+                { label: '升级需求等级人数', name: 'c_level_num', width: 100, align: 'center' },
+                { label: '推荐奖励', name: 'c_recomm_reward', width: 100, align: 'center' },
+                { label: '购买奖励', name: 'c_buy_reward', width: 100, align: 'center' }
             ],
             pager: "#gridPager",
             sortname: 'F_CreatorTime desc',
@@ -32,7 +68,7 @@
         $.modalOpen({
             id: "Form",
             title: "修改配置",
-            url: "/AgentManage/Config/Form?keyValue=" + keyValue,
+            url: "/AgentManage/Config/LevelForm?keyValue=" + keyValue,
             width: "700px",
             height: "510px",
             callBack: function (iframeId) {
@@ -57,7 +93,7 @@
         <div class="operate">
             <ul class="nav nav-pills">
                 <li class="first">已选中<span>1</span>项</li>  
-                <li><a id="NF-enabled"  onclick="btn_edit()"><i class="fa fa-play-circle"></i>修改配置</a></li>              
+                <li><a id="NF-enabled"  onclick="btn_edit()"><i class="fa fa-play-circle"></i>修改</a></li>              
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>

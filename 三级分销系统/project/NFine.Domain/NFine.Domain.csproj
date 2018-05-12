@@ -44,6 +44,7 @@
     <Compile Include="01 Infrastructure\IDeleteAudited.cs" />
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
+    <Compile Include="03 Entity\AgentManage\LevelConfigEntity.cs" />
     <Compile Include="03 Entity\AgentManage\ProductEntity.cs" />
     <Compile Include="03 Entity\AgentManage\OrderDetailEntity.cs" />
     <Compile Include="03 Entity\AgentManage\OrderEntity.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="03 Entity\SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
+    <Compile Include="04 IRepository\SystemManage\ILevelConfigRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IProductRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IOrderRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IScoreDetailRepository.cs" />

@@ -19,7 +19,6 @@
     <![endif]-->
 </head>
 <body>
-
     @*<div style="position: absolute; z-index: 999; top: 20px; left: 20px; color: #fff; font-size: 13px; line-height: 22px;">
             在线体验，基于阿里巴巴云主机，采用独立运行环境，提供持续稳定安全服务，24小时均可以访问<br>
             用户名 admin 或 guest，密码 0000，请勿在系统内发表不文明信息
@@ -49,11 +48,26 @@
                     <i class="fa fa-key"></i>
                 </div>
                 <div class="row">
-                    <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
-                    <button type="button" id="btnUpload" onclick="fileUploadMethod2()" >上传</button>
+                    <select id="agentType">
+                        <option value="1">加盟店</option>
+                        <option value="0">体验店</option>
+                    </select>
+                    <i class="fa fa-user"></i>
                 </div>
                 <div class="row">
-                    <button id="login_button" type="button"><span>注册</span></button>
+                    <div>
+                        <input type="checkbox" id="cbxAgree" onchange="changeAgree()" checked style="float:right" />
+                        我已经阅读并同意<a href="#">《注册协议》</a>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
+                    <button type="button" id="btnUpload" onclick="fileUploadMethod2()">上传</button>
+                </div>
+                <div class="row">
+                    <button id="login_button" type="button">注册</button>
                 </div>
                 <br />
                 <div class="row pull-right">
@@ -92,6 +106,7 @@
                     var $confirm_password = $("#txt_confirm_password");
                     var $recomm_mobile = $("#txt_recomm_account");
                     var $code = $("#txt_code");
+                    var agentType = $("#agentType option:selected").val();
                     if (isFileUpload == 0) {
                         $.login.formMessage('请先上传文件。');
                         return false;
@@ -121,7 +136,8 @@
                                 username: $.trim($username.val())
                                 , password: $.trim($password.val())
                                 , recMobile: $.trim($recomm_mobile.val())
-                                , savePath:filePath
+                                , savePath: filePath
+                                , agentType: agentType
                             },
                             type: "post",
                             dataType: "json",
@@ -213,6 +229,15 @@
                  alert('error: ' + err);
              });
         }
-</script>
+
+
+        function changeAgree() {
+            if ($("#cbxAgree").is(":checked")) {
+                $("#login_button").attr("disabled", false);
+            } else {
+                $("#login_button").attr("disabled", true);
+            }
+        }
+    </script>
 </body>
 </html>

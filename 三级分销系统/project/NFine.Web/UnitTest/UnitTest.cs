@@ -35,16 +35,7 @@ namespace NFine.Web.UnitTest
             //AgentLogic.DeleteEntity(7);
             #endregion
 
-            //OrderApp orderApp = new OrderApp();
-            //Pagination pagination = new Pagination();
-            //string keyword = "";
-            //pagination.page = 1;
-            //pagination.rows = 50;
-            //pagination.sord = "asc";
-            //pagination.sidx = "F_CreatorTime";
-            //var list = orderApp.GetViewList(pagination, keyword);
-            CommConfigApp app = new CommConfigApp();
-            var list =  app.GetItemList("3");
+
 
 
         }

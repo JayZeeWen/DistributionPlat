@@ -29,20 +29,37 @@ namespace Distribution.Logic
                 {
                     return result;
                 }
-                string RecommId = parList.FirstOrDefault().ParentAgent.c_id;
-                int firsSc;//直推奖励
-                int secoSc;//二代奖励
+                Agent recommAg = parList.FirstOrDefault().ParentAgent;
+                string RecommId = recommAg.c_id;
+                int firsSc = 0 ;//直推奖励
+                int secoSc = 0 ;//二代奖励
                 string desc = "";
                 if (reType == RewartType.Recommend)
                 {
-                    firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstRecomm).FirstOrDefault().c_value);
-                    secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);
+                    if (recommAg.c_agnet_type == (int)AgentyType.Fran)
+                    {
+                        firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstRecomm).FirstOrDefault().c_value);
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);                        
+                    }
+                    else if(recommAg.c_agnet_type == (int)AgentyType.Exp)
+                    {
+                        firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expFirstRecomm).FirstOrDefault().c_value);
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expSecondRecomm).FirstOrDefault().c_value);                        
+                    }
                     desc = "推荐";
                 }
                 else
                 {
-                    firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstBuy).FirstOrDefault().c_value);
-                    secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondBuy).FirstOrDefault().c_value);
+                    if (recommAg.c_agnet_type == (int)AgentyType.Fran)
+                    {
+                        firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstBuy).FirstOrDefault().c_value);
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondBuy).FirstOrDefault().c_value);
+                    }
+                    else if (recommAg.c_agnet_type == (int)AgentyType.Exp)
+                    {
+                        firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expFirstBuy).FirstOrDefault().c_value);
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expSecondBuy).FirstOrDefault().c_value);
+                    }
                     desc = "购买";
                 }
 
@@ -150,7 +167,7 @@ namespace Distribution.Logic
         }
 
         /// <summary>
-        /// (递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励
+        /// (递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励   体验店不进行二代外奖励
         /// </summary>
         /// <param name="ParAgent"></param>
         /// <param name="RewardScore"></param>
@@ -165,6 +182,10 @@ namespace Distribution.Logic
                 return;
             }
             Agent ag = list.First().ParentAgent;//上级代理
+            if (ag.c_agnet_type == (int)AgentyType.Exp)//体验店不进行二代外奖励
+            {
+                return;
+            }
             var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0 );
             int needReward = 0;//等级奖励
             if (list_config.Count() != 0 )

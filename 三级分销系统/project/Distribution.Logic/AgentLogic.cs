@@ -95,7 +95,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd,string voucherPath)
+        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd,string voucherPath,int agentType)
         {
             bool result = true;
             Agent rec_ag = FindEntity(t => t.c_mobile == reco_Mobile);
@@ -117,6 +117,7 @@ namespace Distribution.Logic
             reg_ag.c_score = 0;
             reg_ag.c_agent_level = 1;
             reg_ag.c_voucher_path = voucherPath;
+            reg_ag.c_agnet_type = agentType;
             InsertNewEntiy(reg_ag);
 
             AgentRelation ar = new AgentRelation();

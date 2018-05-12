@@ -17,17 +17,17 @@ using System.Text;
 
 namespace NFine.Repository.SystemManage
 {
-    public class CommConfigRepository : RepositoryBase<CommConfigEntity>, ICommConfigRepository
+    public class LevelConfigRepository : RepositoryBase<LevelConfigEntity>, ILevelConfigRepository
     {
         public void DeleteForm(string keyValue)
         {
             using (var db = new RepositoryBase().BeginTrans())
             {
-                db.Delete<CommConfigEntity>(t => t.F_Id == keyValue);
+                db.Delete<LevelConfigEntity>(t => t.F_Id == keyValue);
                 db.Commit();
             }
         }
-        public void SubmitForm(CommConfigEntity userEntity, string keyValue)
+        public void SubmitForm(LevelConfigEntity userEntity, string keyValue)
         {
             using (var db = new RepositoryBase().BeginTrans())
             {
@@ -43,20 +43,12 @@ namespace NFine.Repository.SystemManage
             }
         }
 
-        public List<CommConfigEntity> GetItemList(string categoryId)
-        {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append(string.Format( @"SELECT  d.*
-                            FROM    t_common_config d
-                            WHERE   1 = 1
-                                    AND d.c_category_id = {0}
-                                    AND d.F_DeleteMark = 0 order by c_value", categoryId));
-            DbParameter[] parameter = 
-            {
-                 new SqlParameter("@enCode",categoryId)
-            };
-            return this.FindList(strSql.ToString(), parameter);
-        }
 
+
+
+        public List<LevelConfigEntity> GetLevelConfigList(string state)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -146,14 +146,15 @@ namespace Distribution.Web.Controllers
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult Register(string username, string password, string recMobile,string savePath)
+        public ActionResult Register(string username, string password, string recMobile,string savePath,string agentType)
         {
             LogEntity logEntity = new LogEntity();
             logEntity.F_ModuleName = "系统登录";
             logEntity.F_Type = DbLogType.Login.ToString();
             try
             {
-                AgentLogic.CheckRegist(username, recMobile, password, savePath);
+                int at = Convert.ToInt32(agentType);
+                AgentLogic.CheckRegist(username, recMobile, password, savePath, at);
                 return Content(new AjaxResult { state = ResultType.success.ToString(), message = "注册成功。" }.ToJson());
             }
             catch (Exception ex)

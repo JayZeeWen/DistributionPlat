@@ -32,7 +32,6 @@ namespace NFine.Application.SystemManage
         //    return service.FindList(expression, pagination);
         //}
 
-
         public CommConfigEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
@@ -42,9 +41,11 @@ namespace NFine.Application.SystemManage
             service.DeleteForm(keyValue);
         }
 
-        public List<CommConfigEntity> GetItemList(string enCode)
+        public List<CommConfigEntity> GetItemList(Pagination pagination,string enCode)
         {
-            return service.GetItemList(enCode);
+            var list =  service.GetItemList(enCode);
+            pagination.records = list.Count;
+            return list;
         }
         public void SubmitForm(CommConfigEntity userEntity,  string keyValue)
         {

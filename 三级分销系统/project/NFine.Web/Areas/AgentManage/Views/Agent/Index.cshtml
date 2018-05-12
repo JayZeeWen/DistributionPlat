@@ -6,6 +6,14 @@
 <script>
     $(function () {
         gridList();
+        $("#levle").bindSelect({
+            url: "/AgentManage/Agent/GetLevelJson",
+            param: { enCode: 1 }
+        });
+        $("#agent_level").bindSelect({
+            url: "/AgentManage/Agent/GetLevelJson",
+            param: { enCode: 2 }
+        });
     })
     function gridList() {
         var $gridList = $("#gridList");
@@ -36,7 +44,7 @@
                     label: '代理类型', name: 'c_agent_level', width: 60, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1) {
-                            return '代理商';
+                            return '加盟店';
                         } else if (cellvalue == 2) {
                             return '市级代理';
                         } else if (cellvalue == 3) {
@@ -51,6 +59,16 @@
                 { label: '收货人姓名', name: 'c_rec_person', width: 60, align: 'left' },
                 { label: '收货人手机', name: 'c_rec_mobile', width: 80, align: 'left' },
                 { label: '收货人地址', name: 'c_address', width: 80, align: 'left' },
+                {
+                    label: "是否已经奖励", name: "c_had_reward", width: 60, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 1 || cellvalue == 2) {
+                            return '<span class=\"label label-success\">是</span>';
+                        } else   {
+                            return '<span class=\"label label-default\">否</span>';
+                        } 
+                    }
+                },
                 {
                     label: '创建时间', name: 'c_create_date', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
@@ -73,7 +91,11 @@
         });
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
+                postData: {
+                    keyword: $("#txt_keyword").val()
+                    , level: $("#levle option:selected").val()
+                    , agentLevel: $("#agent_level option:selected").val()
+                },
             }).trigger('reloadGrid');
         });
 
@@ -240,6 +262,13 @@
                 <td>
                     <div class="input-group">
                         <input id="txt_keyword" type="text" class="form-control" placeholder="账户/姓名/手机" style="width: 200px;">
+                        
+                        <select id="levle" name="levle" class="form-control" style="width:150px" >
+                            <option value="">--请选择职位等级--</option>
+                        </select>
+                        <select id="agent_level" name="c_agent_level" class="form-control" style="width:150px">
+                            <option value="">--请选择代理商等级--</option>
+                        </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>

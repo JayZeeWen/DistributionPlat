@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AgentManage\LevelConfigMap.cs" />
     <Compile Include="AgentManage\OrderDetailMap.cs" />
     <Compile Include="AgentManage\ProductMap.cs" />
     <Compile Include="AgentManage\OrderMap.cs" />
