@@ -33,5 +33,14 @@ namespace Distribution.Model
         [StringLength(32)]
         public string c_express_name { get; set; }
 
+        /// <summary>
+        /// 订单类型 1：产品购买订单   2：加盟订单
+        /// </summary>
+        public int? c_order_type { get; set; }
+
+        [StringLength(128)]
+        public string c_remark { get; set; }
+
+
     }
 }

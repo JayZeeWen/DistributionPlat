@@ -116,6 +116,18 @@ namespace Distribution.Web.Controllers
             ag.c_ali_account = aliAccount;
             ag.c_state = 2;
             AgentLogic.UpdateEntity(ag);
+            AgentLogic.UpdateAgentOrder(ag);
+            result.state = ResultType.success.ToString();
+            result.message = "成功";
+            return Content(result.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult GetPubNotice(string keyValue)
+        {
+            AjaxResult result = new AjaxResult();
+            result.data = NoticeLogic.GetList().OrderByDescending(t => t.c_pub_time).FirstOrDefault();
             result.state = ResultType.success.ToString();
             result.message = "成功";
             return Content(result.ToJson());

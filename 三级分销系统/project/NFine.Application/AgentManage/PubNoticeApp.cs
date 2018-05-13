@@ -14,21 +14,20 @@ using System.Collections.Generic;
 
 namespace NFine.Application.SystemManage
 {
-    public class ProductApp
+    public class PubNoticeApp
     {
-        private IProductRepository service = new ProductRepository();
-        private UserLogOnApp userLogOnApp = new UserLogOnApp();
+        private IPubNoticeRepository service = new PubNoticeRepository();
 
-        public List<ProductEntity> GetList(Pagination pagination)
+        public List<PubNoticeEntity> GetList(Pagination pagination)
         {
-            var expression = ExtLinq.True<ProductEntity>();
+            var expression = ExtLinq.True<PubNoticeEntity>();
             
             return service.FindList(expression, pagination);
         }
         
 
 
-        public ProductEntity GetForm(string keyValue)
+        public PubNoticeEntity GetForm(string keyValue)
         {
             return service.FindEntity(keyValue);
         }
@@ -37,7 +36,7 @@ namespace NFine.Application.SystemManage
         {
             service.DeleteForm(keyValue);
         }
-        public void SubmitForm(ProductEntity userEntity, string keyValue)
+        public void SubmitForm(PubNoticeEntity userEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
@@ -49,7 +48,7 @@ namespace NFine.Application.SystemManage
             }
             service.SubmitForm(userEntity, keyValue);
         }
-        public void UpdateForm(ProductEntity userEntity)
+        public void UpdateForm(PubNoticeEntity userEntity)
         {
             service.Update(userEntity);
         }

@@ -60,7 +60,7 @@
                 { label: '收货人手机', name: 'c_rec_mobile', width: 80, align: 'left' },
                 { label: '收货人地址', name: 'c_address', width: 80, align: 'left' },
                 {
-                    label: "是否已经奖励", name: "c_had_reward", width: 60, align: "center",
+                    label: "是否已经奖励", name: "c_had_reward", width: 80, align: "center",
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1 || cellvalue == 2) {
                             return '<span class=\"label label-success\">是</span>';
@@ -249,7 +249,6 @@
                 <li class="split"></li>
                 <li><a id="NF-revisepassword" authorize="yes" onclick="btn_revisepassword()"><i class="fa fa-key"></i>密码重置</a></li>
                 <li class="split"></li>
-                <li><a id="NF-disabled" authorize="yes" onclick="btn_disabled()"><i class="fa fa-stop-circle"></i>禁用</a></li>
                 <li><a id="NF-enabled" authorize="yes" onclick="btn_enabled()"><i class="fa fa-play-circle"></i>启用</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>

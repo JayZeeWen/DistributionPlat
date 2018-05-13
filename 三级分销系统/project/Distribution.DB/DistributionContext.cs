@@ -25,6 +25,7 @@ namespace Distribution.DB
         public virtual DbSet<Product> t_product { get; set; }
         public virtual DbSet<Order> t_order { get; set; }
         public virtual DbSet<OrderDetail> t_order_detail { get; set; }
+        public virtual DbSet<PublicNotice> t_public_notice { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

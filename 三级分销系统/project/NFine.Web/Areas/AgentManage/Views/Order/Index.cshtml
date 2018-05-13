@@ -17,7 +17,19 @@
                 { label: '代理商姓名', name: 'c_agent_name', align: 'center', width: '100px' },
                 { label: '代理商手机号', name: 'c_agent_mobile', align: 'center', width: '100px' },
                 { label: '订单编号', name: 'c_order_num', align: 'center', width: '200px' },
-                { label: '总价', name: 'c_total',  align: 'left' ,width:'80px'},
+                { label: '总价', name: 'c_total', align: 'left', width: '80px' },
+                 {
+                     label: '订单类型', name: 'c_order_type', align: 'left', width: '80px',
+                     formatter: function (cellvalue, options, rowObject) {
+                         if (cellvalue == 1) {
+                             return '<span class=\"label label-info\">商城订单</span>';
+                         } else if (cellvalue == 2) {
+                             return '<span class=\"label label-warning\">代理商订单</span>';
+                         } else {
+                             return '';
+                         }
+                     }
+                 },
                 { label: '收件人', name: 'c_rec_person',width:'80px', align: 'left' },
                 { label: '联系电话', name: 'c_mobile', align: 'left' },
                 { label: '地址', name: 'c_address', align: 'left', width: '200px' },
@@ -34,8 +46,8 @@
                     }
                 },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
-                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                    label: '创建时间', name: 'F_CreatorTime', width: 120, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' }
                 }
 
             ],
@@ -45,7 +57,7 @@
         });
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
+                postData: { orderType: $("#levle option:selected").val() },
             }).trigger('reloadGrid');
         });
     }
@@ -172,7 +184,12 @@
             <tr>
                 <td>
                     <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="账户/姓名/手机" style="width: 200px;">
+                        
+                        <select id="levle" name="levle" class="form-control" style="width:150px">
+                            <option value="">--请选择订单类型--</option>
+                            <option value="1">商城订单</option>
+                            <option value="2">代理商订单</option>
+                        </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>

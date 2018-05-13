@@ -56,6 +56,19 @@ namespace Distribution.Logic
             }
         }
 
+        public static void UpdateAgentOrder(Agent agent)
+        {
+            Order o = OrderLogic.GetList().Where(t => t.c_agent_id == agent.c_id && t.c_order_type == (int)OrderType.Agent).FirstOrDefault();
+            if(o != null)
+            {
+                o.c_rec_person = agent.c_rec_person;
+                o.c_address = agent.c_address;
+                o.c_mobile = agent.c_rec_mobile;
+                o.F_LastModifyTime = DateTime.Now;
+                OrderLogic.UpdateEntity(o);
+            }
+        }
+
         public static void DeleteEntity(string  AgentId)
         {
             using (DistributionContext context = new DistributionContext())

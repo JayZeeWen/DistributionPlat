@@ -116,6 +116,19 @@ namespace Distribution.Model
         Fran = 1 
     }
 
+    public enum OrderType
+    {
+        /// <summary>
+        /// 产品订单
+        /// </summary>
+        Pro = 1 ,
+
+        /// <summary>
+        /// 加盟商订单
+        /// </summary>
+        Agent = 2 
+    }
+
     public enum RewardConfigKey
     {
         /// <summary>

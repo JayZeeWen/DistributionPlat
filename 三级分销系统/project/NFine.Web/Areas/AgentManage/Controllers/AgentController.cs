@@ -8,12 +8,14 @@ using Distribution.Model;
 *********************************************************************************/
 using NFine.Application.SystemManage;
 using NFine.Code;
+using NFine.Domain.Entity;
 using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Distribution.Logic;
 
 
 namespace NFine.Web.Areas.AgentManage.Controllers
@@ -137,12 +139,14 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             userEntity.c_state = 1;//0：未审核   1：审核通过
             userEntity.c_had_reward = true;
             agentApp.UpdateForm(userEntity);
-            if(!hadReward)
+
+            Agent ag = AgentLogic.GetEnityById(keyValue);
+            if (!hadReward)
             {
                 #region 推荐奖励
 
                 //被推荐人
-                Agent ag = AgentLogic.GetEnityById(keyValue);
+               
 
                 //积分奖励
                 ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
@@ -154,7 +158,19 @@ namespace NFine.Web.Areas.AgentManage.Controllers
                 Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
                 LevelLogic.IsLevelUpWithCondition(recomm_ag);
                 #endregion
+
+                #region 生成代理商订单
+                Order order = new Order();
+                order.c_agent_id = ag.c_id;
+                order.c_mobile = ag.c_mobile;
+                order.c_state = (int)OrderState.NoDeliver;
+                order.c_remark = "代理商订单";
+                order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
+                order.c_order_type = (int)OrderType.Agent;
+                OrderLogic.InsertNewEntiy(order);
+                #endregion
             }
+
 
             return Success("账户启用成功。");
         }

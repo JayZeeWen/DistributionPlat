@@ -31,6 +31,13 @@ namespace NFine.Domain.Entity
 
         public string c_address { get; set; }
 
+        /// <summary>
+        /// 订单类型 1：产品购买订单   2：加盟订单
+        /// </summary>
+        public int? c_order_type { get; set; }
+        
+        public string c_remark { get; set; }
+
         #region Interface
 
         public DateTime? F_CreatorTime { get; set; }
@@ -73,6 +80,13 @@ namespace NFine.Domain.Entity
         public string c_address { get; set; }
 
         public DateTime? F_CreatorTime { get; set; }
+
+        /// <summary>
+        /// 订单类型 1：产品购买订单   2：加盟订单
+        /// </summary>
+        public int? c_order_type { get; set; }
+
+        public string c_remark { get; set; }
     }
     
 }

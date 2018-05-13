@@ -21,19 +21,20 @@ using System.IO;
 
 namespace NFine.Web.Areas.AgentManage.Controllers
 {
-    public class ProductController : ControllerBase
+    public class PubNoticeController : ControllerBase
     {
-        private ProductApp productApp = new ProductApp();
+        private PubNoticeApp productApp = new PubNoticeApp();
         private CommConfigApp commApp = new CommConfigApp();
-        private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword)
+        public ActionResult GetGridJson(Pagination pagination)
         {
+            pagination.sidx = "c_pub_time desc";
+            var list = productApp.GetList(pagination);
             var data = new
             {
-                rows = productApp.GetList(pagination),
+                rows = list,
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
@@ -55,7 +56,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteForm(string keyValue)
         {
-            ProductEntity entity = productApp.GetForm(keyValue);
+            PubNoticeEntity entity = productApp.GetForm(keyValue);
             entity.F_DeleteMark = true;
             productApp.SubmitForm(entity, keyValue);
             return Success("下架成功。");
@@ -67,8 +68,9 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             return View();
         }
 
-        public ActionResult SubmitForm(ProductEntity entity, UserLogOnEntity userLogOnEntity, string keyValue)
-        {   
+        public ActionResult SubmitForm(PubNoticeEntity entity, string keyValue)
+        {
+            entity.c_state = 1;
             productApp.SubmitForm(entity, keyValue);
             return Success("操作成功。");
         }

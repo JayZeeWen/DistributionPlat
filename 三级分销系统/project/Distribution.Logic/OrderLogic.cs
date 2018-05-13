@@ -41,6 +41,7 @@ namespace Distribution.Logic
             using (DistributionContext context = new DistributionContext())
             {
                 NewOrder.F_Id = Guid.NewGuid().ToString();
+                NewOrder.F_CreatorTime = DateTime.Now;
                 context.t_order.Add(NewOrder);
                 context.SaveChanges();
 
@@ -68,7 +69,7 @@ namespace Distribution.Logic
         }
         #endregion
 
-        public static string GetNopayOrderByAgentId(string AgentId)
+        public static string GetNopayOrderByAgentId(string AgentId,OrderType ordertype = OrderType.Pro)
         {
             var order = FindEntity(t => t.c_agent_id == AgentId && t.c_state == (int)OrderState.InShoppingCard);
             if(order == null)
@@ -77,6 +78,7 @@ namespace Distribution.Logic
                 order.F_Id = Guid.NewGuid().ToString();
                 order.c_agent_id = AgentId;
                 order.c_state = (int)OrderState.InShoppingCard;
+                order.c_order_type = (int)ordertype;
                 order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
                 order.F_CreatorTime = DateTime.Now;
                 order.F_CreatorUserId = AgentId;
