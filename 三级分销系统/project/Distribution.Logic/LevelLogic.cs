@@ -32,13 +32,13 @@ namespace Distribution.Logic
                 {
                     //升级所需条件配置
                     LevelConfig config = list.First();
-                    var list_direct = context.t_agent_relation.Where(f => f.c_parent_id == RecomAgent.c_id);//直推人数
+                    var list_direct = context.t_agent_relation.Where(f => f.c_parent_id == RecomAgent.c_id && f.ChildrenAgent.c_agnet_type != (int)AgentType.Exp);//直推人数
                     if (list_direct.Count() < config.c_need_nums)
                     {
                         return false;
                     }
                     //达到相应等级的人数
-                    int levelCount = list_direct.Where(f => f.ChildrenAgent.c_levle >= config.c_need_level).Count();
+                    int levelCount = list_direct.Where(f => f.ChildrenAgent.c_levle >= config.c_need_level && f.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).Count();
                     if (config.c_need_level == null)
                     {
                         RecomAgent.c_levle = currentLevel + 1;

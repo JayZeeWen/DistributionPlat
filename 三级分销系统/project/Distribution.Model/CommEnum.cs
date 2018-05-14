@@ -42,6 +42,7 @@ namespace Distribution.Model
         /// </summary>
         ProvieceAgent = 3
     }
+    
 
     /// <summary>
     /// 积分提现处理状态
@@ -103,7 +104,7 @@ namespace Distribution.Model
         HadDeal = 2 
     }
 
-    public enum AgentyType
+    public enum AgentType
     {
         /// <summary>
         /// 体验店

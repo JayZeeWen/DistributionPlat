@@ -24,6 +24,7 @@ namespace Distribution.Logic
             bool result = true;
             using (DistributionContext context = new DistributionContext())
             {
+                var beRecomm = context.t_agent.Find(AgentId);
                 var parList = context.t_agent_relation.Where(c => c.c_child_id == AgentId);
                 if(parList.Count() < 1 )
                 {
@@ -36,29 +37,33 @@ namespace Distribution.Logic
                 string desc = "";
                 if (reType == RewartType.Recommend)
                 {
-                    if (recommAg.c_agnet_type == (int)AgentyType.Fran)
+                    desc = "推荐";
+                    if (beRecomm.c_agnet_type == (int)AgentType.Fran)//加盟店
                     {
                         firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstRecomm).FirstOrDefault().c_value);
-                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);                        
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondRecomm).FirstOrDefault().c_value);
+                        desc += "加盟店";
                     }
-                    else if(recommAg.c_agnet_type == (int)AgentyType.Exp)
+                    else if (beRecomm.c_agnet_type == (int)AgentType.Exp)//体验店
                     {
                         firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expFirstRecomm).FirstOrDefault().c_value);
-                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expSecondRecomm).FirstOrDefault().c_value);                        
-                    }
-                    desc = "推荐";
+                        secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expSecondRecomm).FirstOrDefault().c_value);
+                        desc += "体验店";
+                    }                    
                 }
                 else
                 {
-                    if (recommAg.c_agnet_type == (int)AgentyType.Fran)
+                    if (beRecomm.c_agnet_type == (int)AgentType.Fran)//加盟店
                     {
                         firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.firstBuy).FirstOrDefault().c_value);
                         secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.secondBuy).FirstOrDefault().c_value);
+                        desc += "加盟店";
                     }
-                    else if (recommAg.c_agnet_type == (int)AgentyType.Exp)
+                    else if (beRecomm.c_agnet_type == (int)AgentType.Exp)//体验店
                     {
                         firsSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expFirstBuy).FirstOrDefault().c_value);
                         secoSc = Convert.ToInt32(configLisg.Where(t => t.c_key == (int)RewardConfigKey.expSecondBuy).FirstOrDefault().c_value);
+                        desc += "体验店";
                     }
                     desc = "购买";
                 }
@@ -75,25 +80,29 @@ namespace Distribution.Logic
                 Agent SeconAgent = sec_list.FirstOrDefault().ParentAgent;
                 UpdateAgentScore(SeconAgent.c_id, secoSc * amount, "二代【" + desc + "】积分奖励", context);
 
-                #region 二代外积分更改逻辑
-                int maxLevel = GetMaxLevel(AgentId, context);
-                var list_Config = context.t_level_config.Where(f => f.c_level == maxLevel && f.c_is_delete == 0);
-                if (maxLevel == 1 || list_Config.Count() == 0)
+                if(beRecomm.c_agnet_type != (int)AgentType.Exp)
                 {
-                    return result;
-                }
-                int rewardScore = (int)list_Config.First().c_recomm_reward ;
-                if (reType == RewartType.Purchase)
-                {
-                    rewardScore = (int)list_Config.First().c_buy_reward * amount;
-                }
+                    #region 二代外积分更改逻辑
+                    int maxLevel = GetMaxLevel(AgentId, context);
+                    var list_Config = context.t_level_config.Where(f => f.c_level == maxLevel && f.c_is_delete == 0);
+                    if (maxLevel == 1 || list_Config.Count() == 0)
+                    {
+                        return result;
+                    }
+                    int rewardScore = (int)list_Config.First().c_recomm_reward;
+                    if (reType == RewartType.Purchase)
+                    {
+                        rewardScore = (int)list_Config.First().c_buy_reward * amount;
+                    }
 
-                if (rewardScore > 0)
-                {
-                    RewardForCorreLevel(SeconAgent, ref rewardScore, reType, context,amount);
-                }
+                    if (rewardScore > 0)
+                    {
+                        RewardForCorreLevel(SeconAgent, ref rewardScore, reType, context, amount);
+                    }
 
-                #endregion
+                    #endregion
+                }
+                
 
             }
             return result;
@@ -182,7 +191,7 @@ namespace Distribution.Logic
                 return;
             }
             Agent ag = list.First().ParentAgent;//上级代理
-            if (ag.c_agnet_type == (int)AgentyType.Exp)//体验店不进行二代外奖励
+            if (ag.c_agnet_type == (int)AgentType.Exp)//体验店不进行二代外奖励
             {
                 return;
             }

@@ -144,31 +144,30 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             if (!hadReward)
             {
                 #region 推荐奖励
-
-                //被推荐人
-               
-
                 //积分奖励
                 ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
                 ScoreLogic.DealProvinceReward(ag);
-
-
-                //升级
-                AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
-                Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
-                LevelLogic.IsLevelUpWithCondition(recomm_ag);
                 #endregion
 
-                #region 生成代理商订单
-                Order order = new Order();
-                order.c_agent_id = ag.c_id;
-                order.c_mobile = ag.c_mobile;
-                order.c_state = (int)OrderState.NoDeliver;
-                order.c_remark = "代理商订单";
-                order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
-                order.c_order_type = (int)OrderType.Agent;
-                OrderLogic.InsertNewEntiy(order);
-                #endregion
+                if(ag.c_agnet_type != (int)AgentType.Exp)//体验店计算上下级奖励即可
+                {
+                    //升级
+                    AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
+                    Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
+                    LevelLogic.IsLevelUpWithCondition(recomm_ag);
+
+                    #region 生成代理商订单
+                    Order order = new Order();
+                    order.c_agent_id = ag.c_id;
+                    order.c_mobile = ag.c_mobile;
+                    order.c_state = (int)OrderState.NoDeliver;
+                    order.c_remark = "代理商订单";
+                    order.c_order_num = DateTime.Now.ToString("yyyyMMddHHmmss-") + Guid.NewGuid().ToString().Substring(0, 6);
+                    order.c_order_type = (int)OrderType.Agent;
+                    OrderLogic.InsertNewEntiy(order);
+                    #endregion
+                }
+                
             }
 
 

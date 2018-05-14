@@ -34,5 +34,10 @@ namespace Distribution.Web.Models
         public int SecondCount { get; set; }
 
         public int OtherCount { get; set; }
+
+        /// <summary>
+        /// 是否已体验
+        /// </summary>
+        public int HadExp { get; set; }
     }
 }
