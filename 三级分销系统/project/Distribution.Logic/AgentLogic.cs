@@ -131,6 +131,10 @@ namespace Distribution.Logic
             reg_ag.c_agent_level = 1;
             reg_ag.c_voucher_path = voucherPath;
             reg_ag.c_agnet_type = agentType;
+            if(agentType ==(int)AgentType.Exp)
+            {
+                reg_ag.c_exp_state = 0;
+            }
             InsertNewEntiy(reg_ag);
 
             AgentRelation ar = new AgentRelation();

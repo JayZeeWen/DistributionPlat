@@ -171,7 +171,18 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             }
 
 
-            return Success("账户启用成功。");
+            return Success("审核成功。");
+        }
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [HandlerAuthorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult expAgent(string keyValue)
+        {
+            AgentEntity entity = agentApp.GetForm(keyValue);
+            entity.c_exp_state = 1;
+            agentApp.UpdateForm(entity);
+            return Success("更改成功。");
         }
 
         [HttpGet]

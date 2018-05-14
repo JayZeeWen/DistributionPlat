@@ -42,6 +42,12 @@ namespace NFine.Domain.Entity.AgentManage
         /// </summary>
         public int? c_agnet_type { get; set; }
 
+
+        /// <summary>
+        /// 体验状态 0：未体验  1：已体验
+        /// </summary>
+        public int? c_exp_state { get; set; }
+
         /// <summary>
         /// 收件人
         /// </summary>

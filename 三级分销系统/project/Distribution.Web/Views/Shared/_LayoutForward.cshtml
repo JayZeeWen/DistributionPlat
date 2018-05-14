@@ -20,7 +20,31 @@
             </div>
             <div class="bLeft2">
                 <p><label>职位级别：</label><span>@Model.Level</span></p>
-                <p><label>代理商级别：</label><span>@Model.AgLevel</span></p>
+                <p><label>代理商级别：</label><span>
+                    @if (Model.agent.c_agnet_type == 0)
+                    {
+                        <span>体验店</span>
+                    }
+                    else
+                    {
+                        @Model.AgLevel
+                    }                    
+                    </span></p>
+                @if ( Model.agent.c_agnet_type == 0)
+                {
+                    <p>
+                        <label>体验状态：</label><span>
+                            @if (Model.agent.c_exp_state == null || Model.agent.c_exp_state == 0)
+                            {
+                                <span>未体验</span>
+                            }
+                            else
+                            {
+                                <span>已体验</span>
+                            }
+                        </span>
+                    </p>
+                }
                 <p><label>直推人数：</label><span>@Model.FirstCount</span></p>
                 <p><label>二代人数：</label><span>@Model.SecondCount</span></p>
                 <p><label>二代外人数：</label><span>@Model.OtherCount</span></p>
@@ -28,6 +52,10 @@
                 <p><label>总业绩额：</label><span>@Model.TotalScore</span></p>
                 <p><label>当前积分：</label><span>@Model.agent.c_score 分</span></p>
                 <input type="button" value="积分兑换" onclick="tqOk()">
+                @if (Model.agent.c_agnet_type == 0)
+                {
+                    <input type="button" value="申请成为加盟店" onclick="applyUp()">
+                }
                 <p></p>
                 <p></p>
                 <p></p>
@@ -76,6 +104,15 @@
             $(".tqjeDiaBg").hide();
         }
 
+        function applyUp(){
+            if(@Model.agent.c_score >= 10000){
+                alert("申请成为加盟店");
+            }else {
+                alert("积分不足10000，不可以申请成为加盟店");
+            }
+
+        }
+
 
         function chk_money() {
             var money = $('#money').val();
@@ -90,7 +127,7 @@
             return true;
         }
 
-         
+
         $('.tqjeDia4_1').click(function () {
             if(chk_money()){
                 var money = $('#money').val();
