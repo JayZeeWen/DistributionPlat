@@ -27,7 +27,7 @@
         <div class="container">
             <div class="logo">
                 <i class="fa fa-modx"></i>
-                <h1>三级分销平台</h1>
+                <h1>XX平台</h1>
             </div>
             @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
             {
@@ -52,18 +52,19 @@
                         <option value="1">加盟店</option>
                         <option value="0">体验店</option>
                     </select>
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="row">
-                    <div>
-                        <input type="checkbox" id="cbxAgree" onchange="changeAgree()" checked style="float:right" />
-                        我已经阅读并同意<a href="#">《注册协议》</a>
-                    </div>
-
-
+                    <i class="fa fa-tag"></i>
                 </div>
                 <div class="row">
                     <input type="file" value="请选择文件" id="fileUpload" name="fileUpload" />
+                   
+                </div>
+                <div class="row">
+                    <div>
+                        <input type="checkbox" id="cbxAgree" class="cbxAgree" onchange="changeAgree()" checked />
+                        我已经阅读并同意<a href="#">《注册协议》</a>
+                    </div>
+                </div>
+                <div class="row">
                     <button type="button" id="btnUpload" onclick="fileUploadMethod2()">上传</button>
                 </div>
                 <div class="row">
@@ -89,6 +90,14 @@
             <li></li>
         </ul>
     </div>
+    <style>
+        form select{font-size: 14px;outline: 0;border: 1px solid rgba(255, 255, 255, 0.4);background-color: #fff;width: 300px;border-radius: 5px;padding: 12px 15px;margin-bottom:20px;display: block;text-align: left;color: #929191;-webkit-transition-duration: 0.25s;transition-duration: 0.25s;font-weight: 300;}
+
+        .cbxAgree{
+            float:left;
+            width: 20px;               
+        }
+    </style>
     <script type="text/javascript">
         var isFileUpload = 0;
         var filePath = "";

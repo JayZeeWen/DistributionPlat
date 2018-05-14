@@ -98,7 +98,7 @@
                                 if (data.state == "success") {
                                     $("#login_button").find('span').html("登录成功，正在跳转...");
                                     window.setTimeout(function () {
-                                        window.location.href = '@Url.Action("UserInfo", "Home")';
+                                        window.location.href = '@Url.Action("UserInfo", "Home")'+'?ShowGG=1 ';
                                     }, 500);
                                 } else {
                                     $("#login_button").removeAttr('disabled').find('span').html("登录");

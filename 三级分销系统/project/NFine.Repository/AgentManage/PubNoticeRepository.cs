@@ -6,7 +6,7 @@
 *********************************************************************************/
 using NFine.Code;
 using NFine.Data;
-using NFine.Domain.Entity;
+using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
@@ -14,36 +14,44 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
+using System;
 
 namespace NFine.Repository.SystemManage
 {
-    public class OrderRepository : RepositoryBase<OrderEntity>, IOrderRepository
+    public class PubNoticeRepository : RepositoryBase<PubNoticeEntity>, IPubNoticeRepository
     {
         public void DeleteForm(string keyValue)
         {
             using (var db = new RepositoryBase().BeginTrans())
             {
-                db.Delete<OrderEntity>(t => t.F_Id == keyValue);
+                db.Delete<PubNoticeEntity>(t => t.F_Id == keyValue);
                 db.Commit();
             }
         }
-        public void SubmitForm(OrderEntity userEntity, string keyValue)
+        public void SubmitForm(PubNoticeEntity userEntity, string keyValue)
         {
             using (var db = new RepositoryBase().BeginTrans())
             {
-                db.Update(userEntity);
-                
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    db.Update(userEntity);
+                }
+                else
+                {
+                    db.Insert(userEntity);
+                }
                 db.Commit();
             }
         }
 
-        public List<OrderDetailEntity> GetDetailList(string orderId)
+        public List<PubNoticeEntity> GetDetailList(string orderId)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append(string.Format(@" select * from t_order_detail 
+            strSql.Append(string.Format(@" select * from t_product 
                                         where c_order_id = '{0}'",orderId));
             DbParameter[] parameter = { };
-            return FindList<OrderDetailEntity>(strSql.ToString(), parameter);
+            return FindList<PubNoticeEntity>(strSql.ToString(), parameter);
         }
+        
     }
 }

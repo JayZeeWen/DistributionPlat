@@ -27,11 +27,14 @@ namespace NFine.Web.Areas.AgentManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword)
+        public ActionResult GetGridJson(Pagination pagination, string orderType)
         {
+            int type = 0;
+            int.TryParse(orderType, out type);
+            var list = orderApp.GetViewList(pagination, type);
             var data = new
             {
-                rows = orderApp.GetViewList(pagination, keyword),
+                rows = list,
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records
@@ -53,7 +56,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         public ActionResult SubmitForm(OrderEntity orderEntity, UserLogOnEntity userLogOnEntity, string keyValue)
         {
             orderEntity.c_state = (int)OrderState.HadDeal;
-            orderApp.SubmitForm(orderEntity, userLogOnEntity, keyValue);
+            orderApp.SubmitForm(orderEntity, keyValue);
             return Success("操作成功。");
         }
         [HttpPost]

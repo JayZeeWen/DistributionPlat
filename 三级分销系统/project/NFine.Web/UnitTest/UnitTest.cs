@@ -7,6 +7,7 @@ using Distribution.Logic;
 using Distribution.Model;
 using NFine.Application.SystemManage;
 using NFine.Code;
+using NFine.Domain.Entity;
 
 namespace NFine.Web.UnitTest
 {
@@ -37,7 +38,15 @@ namespace NFine.Web.UnitTest
 
 
 
-
+            OrderApp oApp = new OrderApp();
+            OrderEntity order = new OrderEntity();
+            order.c_agent_id = "9e234a73-1d70-4991-abfe-2886cc8f1cc8";
+            order.c_mobile = "15077777777";
+            order.c_state = (int)OrderState.NoDeliver;
+            order.c_remark = "代理商订单";
+            order.c_order_num = DateTime.Now.ToString("YYYYMMDDhhmmss");
+            order.c_order_type = (int)OrderType.Agent;
+            oApp.SubmitForm(order, "");
         }
 
         public void TestRewardAndLevelUp()

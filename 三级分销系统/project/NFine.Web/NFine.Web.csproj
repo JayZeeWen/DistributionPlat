@@ -118,6 +118,7 @@
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\AgentManage\AgentManageAreaRegistration.cs" />
     <Compile Include="Areas\AgentManage\Controllers\OrderController.cs" />
+    <Compile Include="Areas\AgentManage\Controllers\PubNoticeController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\ProductController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\ConfigController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\ScoreDetailController.cs" />
@@ -653,18 +654,18 @@
     <Content Include="Areas\AgentManage\Views\Order\Form.cshtml" />
     <Content Include="Areas\AgentManage\Views\Order\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Order\Info.cshtml" />
-    <Content Include="Areas\AgentManage\Views\Order\RevisePassword.cshtml" />
     <Content Include="Areas\AgentManage\Views\Product\Details.cshtml" />
     <Content Include="Areas\AgentManage\Views\Product\Form.cshtml" />
     <Content Include="Areas\AgentManage\Views\Product\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Product\Info.cshtml" />
-    <Content Include="Areas\AgentManage\Views\Product\RevisePassword.cshtml" />
     <Content Include="Areas\AgentManage\Views\Agent\ChangeScore.cshtml" />
     <Content Include="Areas\AgentManage\Views\ScoreDetail\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\Form.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\LevelConfigIndex.cshtml" />
     <Content Include="Areas\AgentManage\Views\Config\LevelForm.cshtml" />
+    <Content Include="Areas\AgentManage\Views\PubNotice\Form.cshtml" />
+    <Content Include="Areas\AgentManage\Views\PubNotice\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <ItemGroup>

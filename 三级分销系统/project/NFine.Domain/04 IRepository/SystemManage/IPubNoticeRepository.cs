@@ -12,12 +12,12 @@ using System.Collections.Generic;
 
 namespace NFine.Domain.IRepository.SystemManage
 {
-    public interface IProductRepository : IRepositoryBase<ProductEntity>
+    public interface IPubNoticeRepository : IRepositoryBase<PubNoticeEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(ProductEntity userEntity,string keyValue);
+        void SubmitForm(PubNoticeEntity userEntity, string keyValue);
 
-        List<ProductEntity> GetDetailList(string orderId);
+        List<PubNoticeEntity> GetDetailList(string orderId);
 
     }
 }

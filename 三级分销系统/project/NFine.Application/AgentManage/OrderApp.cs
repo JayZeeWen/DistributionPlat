@@ -28,10 +28,14 @@ namespace NFine.Application.SystemManage
             return service.FindList(expression, pagination);
         }
 
-        public List<OrderViewEntity> GetViewList(Pagination pagination, string keyword)
+        public List<OrderViewEntity> GetViewList(Pagination pagination, int orderType)
         {
-            Expression<Func<OrderEntity, bool>> e = t => t.c_state != 0 ;
-            var expression = e;
+            var expression = ExtLinq.True<OrderEntity>();
+            expression = expression.And(t => t.c_state != 0 );
+            if (orderType != 0 )
+            {
+                expression = expression.And(t => t.c_order_type == orderType);
+            }
 
             var list =  service.FindList(expression, pagination);
 
@@ -81,6 +85,8 @@ namespace NFine.Application.SystemManage
             entity.c_rec_person = item.c_rec_person;
             entity.c_mobile = item.c_mobile;
             entity.c_address = item.c_address;
+            entity.c_order_type = item.c_order_type;
+            entity.c_remark = item.c_remark;
             entity.F_CreatorTime = item.F_CreatorTime;
         }
 
@@ -119,7 +125,7 @@ namespace NFine.Application.SystemManage
         {
             service.DeleteForm(keyValue);
         }
-        public void SubmitForm(OrderEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
+        public void SubmitForm(OrderEntity userEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
@@ -129,7 +135,7 @@ namespace NFine.Application.SystemManage
             {
                 userEntity.Create();
             }
-            service.SubmitForm(userEntity, userLogOnEntity, keyValue);
+            service.SubmitForm(userEntity, keyValue);
         }
         public void UpdateForm(OrderEntity userEntity)
         {

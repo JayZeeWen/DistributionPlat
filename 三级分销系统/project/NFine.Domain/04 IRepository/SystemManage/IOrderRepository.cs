@@ -15,7 +15,7 @@ namespace NFine.Domain.IRepository.SystemManage
     public interface IOrderRepository : IRepositoryBase<OrderEntity>
     {
         void DeleteForm(string keyValue);
-        void SubmitForm(OrderEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue);
+        void SubmitForm(OrderEntity userEntity, string keyValue);
 
         List<OrderDetailEntity> GetDetailList(string orderId);
 

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="01 Infrastructure\DbLogType.cs" />
     <Compile Include="AgentManage\LevelConfigApp.cs" />
+    <Compile Include="AgentManage\PubNoticeApp.cs" />
     <Compile Include="AgentManage\ProductApp.cs" />
     <Compile Include="AgentManage\OrderApp.cs" />
     <Compile Include="AgentManage\ScoreDetailApp.cs" />
