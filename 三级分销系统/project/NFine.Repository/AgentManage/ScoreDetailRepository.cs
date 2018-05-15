@@ -17,6 +17,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Text;
 using System;
+using System.Linq;
 
 namespace NFine.Repository.SystemManage
 {
@@ -39,8 +40,10 @@ namespace NFine.Repository.SystemManage
 
             };
 
-
-            return FindList(strSql.ToString(), parameter);
+            var list = FindList(strSql.ToString(), parameter);
+            page.records = list.Count;
+            list =  list.Skip((page.page - 1) * page.rows).Take(page.rows).ToList();
+            return list;
         }
 
         void IScoreDetailRepository.DeleteForm(string keyValue)

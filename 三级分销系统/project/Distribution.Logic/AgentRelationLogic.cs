@@ -63,20 +63,30 @@ namespace Distribution.Logic
             }
         }
 
-        public static int GetFirstCount(string agentId,out int secondCount ,out int otherCount)
+        /// <summary>
+        /// 统计人数
+        /// </summary>
+        /// <param name="agentId"></param>
+        /// <param name="secondCount">二代人数</param>
+        /// <param name="otherCount">二代外人数</param>
+        /// <param name="expCount">体验店数</param>
+        /// <returns></returns>
+        public static int GetFirstCount(string agentId,out int secondCount ,out int otherCount,out int expCount)
         {
             using (DistributionContext context = new DistributionContext ())
             {
+                expCount = 0;
                 var list = context.t_agent_relation.ToList();
-                var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null).ToList();
+                var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).ToList();
+                expCount += list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 var pIds = firstList.Select(t => t.c_child_id).ToList();
-                var secondList = list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null).ToList();
+                var secondList = list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).ToList();
+                expCount += list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 secondCount = secondList.Count();//二代数量
                 var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
-                otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null).Count();
+                otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).Count();
                 return firstList.Count();
             }
-            
         }
 
         public static List<Agent> GetFirstCustomer(string agentId)

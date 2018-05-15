@@ -108,7 +108,7 @@
 
             ],
             pager: "#gridPager",
-            sortname: 'F_CreatorTime desc',
+            sortname: 'F_CreatorTime desc,',
             viewrecords: true
         });
         $("#btn_search").click(function () {
@@ -307,6 +307,7 @@
                         
                         <select id="levle" name="levle" class="form-control" style="width:150px" >
                             <option value="">--请选择职位等级--</option>
+                            <option value="-1">体验店</option>
                         </select>
                         <select id="agent_level" name="c_agent_level" class="form-control" style="width:150px">
                             <option value="">--请选择代理商等级--</option>

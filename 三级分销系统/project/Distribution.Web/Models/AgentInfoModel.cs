@@ -35,6 +35,7 @@ namespace Distribution.Web.Models
 
         public int OtherCount { get; set; }
 
+        public int ExpCount { get; set; }
         /// <summary>
         /// 是否已体验
         /// </summary>

@@ -214,9 +214,9 @@ namespace Distribution.Logic
             needReward = Math.Min(RewardScore, needReward);
             if(needReward != 0 )
             {
-                UpdateAgentScore(ag.c_id, needReward, "二代外【" + desc + "】积分奖励", context);
+                UpdateAgentScore(ag.c_id, needReward, "部门【" + desc + "】积分奖励", context);
                 RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
-            }            
+            }
             RewardForCorreLevel(ag,ref RewardScore, reType, context,amount);
 
         }

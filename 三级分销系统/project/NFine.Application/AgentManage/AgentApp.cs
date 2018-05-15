@@ -43,7 +43,15 @@ namespace NFine.Application.SystemManage
             }
             if (level != 0 )
             {
-                expression = expression.And(t => t.c_levle == level);
+                if(level == -1 )
+                {
+                    expression = expression.And(t => t.c_agnet_type == 0 );
+                }
+                else
+                {
+                    expression = expression.And(t => t.c_levle == level);
+                }
+                
             }
             if (agentLevel != 0 )
             {

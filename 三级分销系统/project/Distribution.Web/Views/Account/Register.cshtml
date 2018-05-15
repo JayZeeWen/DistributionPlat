@@ -138,32 +138,36 @@
                     } else if ($password.val() != $confirm_password.val()) {
                         $.login.formMessage('两次输入密码不一致，请重新输入。');
                     } else {
-                        $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
-                        $.ajax({
-                            url: url,
-                            data: {
-                                username: $.trim($username.val())
-                                , password: $.trim($password.val())
-                                , recMobile: $.trim($recomm_mobile.val())
-                                , savePath: filePath
-                                , agentType: agentType
-                            },
-                            type: "post",
-                            dataType: "json",
-                            success: function (data) {
-                                if (data.state == "success") {
-                                    $("#login_button").find('span').html("注册成功，正在跳转...");
-                                    window.setTimeout(function () {
-                                        window.location.href = "~/../../Account/Login";
-                                    }, 1000);
-                                } else {
-                                    $("#login_button").removeAttr('disabled').find('span').html("注册");
-                                    $("#switchCode").trigger("click");
-                                    $code.val('');
-                                    $.login.formMessage(data.message);
+                        if (confirm("确定注册吗？")) {
+                            $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
+                            $.ajax({
+                                url: url,
+                                data: {
+                                    username: $.trim($username.val())
+                                    , password: $.trim($password.val())
+                                    , recMobile: $.trim($recomm_mobile.val())
+                                    , savePath: filePath
+                                    , agentType: agentType
+                                },
+                                type: "post",
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data.state == "success") {
+                                        $("#login_button").find('span').html("注册成功，正在跳转...");
+                                        alert("注册成功等待审核");
+                                        window.setTimeout(function () {
+                                            window.location.href = "~/../../Account/Login";
+                                        }, 3000);
+                                    } else {
+                                        $("#login_button").removeAttr('disabled').find('span').html("注册");
+                                        $("#switchCode").trigger("click");
+                                        $code.val('');
+                                        $.login.formMessage(data.message);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+                       
                     }
                 },
                 init: function () {

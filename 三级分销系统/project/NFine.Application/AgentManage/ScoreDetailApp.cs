@@ -59,8 +59,7 @@ namespace NFine.Application.SystemManage
         public List<ScoreDetaiListEntity> GetCashViewList(Pagination page)
         {
             page.sidx = "c_create_date desc";
-            var list = service.GetDetailList(page);
-            page.records = list.Count;
+            var list = service.FindList(page);
             List<ScoreDetaiListEntity> viewList = new List<ScoreDetaiListEntity>();
             AgentApp app = new AgentApp();
             foreach (var item in list)
