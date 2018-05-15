@@ -76,7 +76,7 @@
                 <li><a href="~/Customer/Index">我的客户</a></li>
                 <li><a href="~/Home/UserInfo">个人资料</a></li>
                 <li><a href="~/Home/ScoreManager">积分管理</a></li>
-                @if (Model.agent.c_agnet_type != 0)
+                @if (Model != null && Model.agent != null && Model.agent.c_agnet_type != 0)
                 {
                     <li><a href="~/Product/Index">产品</a></li>
                 }

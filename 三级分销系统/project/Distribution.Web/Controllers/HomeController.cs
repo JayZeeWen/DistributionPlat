@@ -161,5 +161,28 @@ namespace Distribution.Web.Controllers
                 throw;
             }
         }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult ApplyExpLevelUp(string keyValue)
+        {
+            AjaxResult result = new AjaxResult();
+            bool hasRecord = ExpApplyLogic.HasApplyingRecord(keyValue);
+            if(!hasRecord)
+            {
+                ExpApply entity = new ExpApply();
+                entity.c_agent_id = keyValue;
+                entity.c_apply_state = 0;
+                ExpApplyLogic.InsertNewEntiy(entity);
+                result.state = ResultType.success.ToString();
+                result.message = "成功";
+            }
+            else
+            {
+                result.state = ResultType.error.ToString();
+                result.message = "您已申请成为加盟店，无需重复申请";
+            }
+            return Content(result.ToJson());
+        }
     }
 }

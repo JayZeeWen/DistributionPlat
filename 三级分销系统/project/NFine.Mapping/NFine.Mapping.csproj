@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AgentManage\LevelConfigMap.cs" />
     <Compile Include="AgentManage\OrderDetailMap.cs" />
+    <Compile Include="AgentManage\ExpApplyMap.cs" />
     <Compile Include="AgentManage\PubNoticeMap.cs" />
     <Compile Include="AgentManage\ProductMap.cs" />
     <Compile Include="AgentManage\OrderMap.cs" />

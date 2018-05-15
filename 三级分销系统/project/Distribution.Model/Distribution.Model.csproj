@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicModel.cs" />
+    <Compile Include="ExpApply.cs" />
     <Compile Include="PublicNotice.cs" />
     <Compile Include="ScoreCash.cs" />
     <Compile Include="Agent.cs" />

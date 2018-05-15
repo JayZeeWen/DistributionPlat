@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OrderDetailLogic.cs" />
+    <Compile Include="ExpApplyLogic.cs" />
     <Compile Include="OrderLogic.cs" />
     <Compile Include="NoticeLogic.cs" />
     <Compile Include="ProductLogic.cs" />

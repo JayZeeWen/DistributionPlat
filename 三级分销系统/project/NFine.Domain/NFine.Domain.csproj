@@ -45,6 +45,7 @@
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
     <Compile Include="03 Entity\AgentManage\LevelConfigEntity.cs" />
+    <Compile Include="03 Entity\AgentManage\ExpApplyEntity.cs" />
     <Compile Include="03 Entity\AgentManage\PubNoticeEntity.cs" />
     <Compile Include="03 Entity\AgentManage\ProductEntity.cs" />
     <Compile Include="03 Entity\AgentManage\OrderDetailEntity.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
     <Compile Include="04 IRepository\SystemManage\ILevelConfigRepository.cs" />
+    <Compile Include="04 IRepository\SystemManage\IExpApplyRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IPubNoticeRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IProductRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IOrderRepository.cs" />
