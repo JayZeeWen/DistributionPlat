@@ -19,5 +19,5 @@ IP：122.10.87.14
 密码：qmRdSxWVV3Ynoh0C
 
 
-前台：http://122.10.87.14/Pre
- 后台：http://122.10.87.14:8080
+前台：jiwuhen.com
+ 后台：jiwuhen.com:8080
