@@ -117,6 +117,7 @@
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\ControllerBase.cs" />
     <Compile Include="Areas\AgentManage\AgentManageAreaRegistration.cs" />
+    <Compile Include="Areas\AgentManage\Controllers\ExpApplyController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\OrderController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\PubNoticeController.cs" />
     <Compile Include="Areas\AgentManage\Controllers\ProductController.cs" />
@@ -666,6 +667,7 @@
     <Content Include="Areas\AgentManage\Views\Config\LevelForm.cshtml" />
     <Content Include="Areas\AgentManage\Views\PubNotice\Form.cshtml" />
     <Content Include="Areas\AgentManage\Views\PubNotice\Index.cshtml" />
+    <Content Include="Areas\AgentManage\Views\ExpApply\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <ItemGroup>

@@ -21,7 +21,7 @@
             <div class="bLeft2">
                 <p><label>职位级别：</label><span>@Model.Level</span></p>
                 <p><label>代理商级别：</label><span>
-                    @if (Model.agent.c_agnet_type == 0)
+                    @if(Model.agent != null && Model.agent.c_agnet_type == 0)
                     {
                         <span>体验店</span>
                     }
@@ -30,7 +30,7 @@
                         @Model.AgLevel
                     }                    
                     </span></p>
-                @if ( Model.agent.c_agnet_type == 0)
+                @if (Model.agent != null && Model.agent.c_agnet_type == 0)
                 {
                     <p>
                         <label>体验状态：</label><span>
@@ -84,29 +84,49 @@
         </div>
     </div>
     <script>
-        var state = @Model.agent.c_state;
-        var ag_id = '@Model.agent.c_id';
-        $(document).ready(function(){
-            $('#money').attr("disabled","");
-            $('#bank_acc').attr("disabled","");
-            $('#bank_num').attr("disabled","");
-        })
-        function tqOk() {
-            if(state == 2){
-                $("#money").removeAttr("disabled");
-                $(".tqjeDiaBg").show();
-            }else {
-                alert("请先完善资料!");
-            }
-
-        }
-        function tqClose() {
-            $(".tqjeDiaBg").hide();
+    var state = @Model.agent.c_state;
+    var ag_id = '@Model.agent.c_id';
+    $(document).ready(function(){
+        $('#money').attr("disabled","");
+        $('#bank_acc').attr("disabled","");
+        $('#bank_num').attr("disabled","");
+    })
+    function tqOk() {
+        if(state == 2){
+            $("#money").removeAttr("disabled");
+            $(".tqjeDiaBg").show();
+        }else {
+            alert("请先完善资料!");
         }
 
-        function applyUp(){
-            if(@Model.agent.c_score >= 10000){
-                alert("申请成为加盟店");
+    }
+    function tqClose() {
+        $(".tqjeDiaBg").hide();
+    }
+
+    function applyUp(){
+        if(@Model.agent.c_score >= 10000){
+            if(confirm("确定申请成为加盟店吗？")){
+                $.ajax({
+                    url: '@Url.Action("ApplyExpLevelUp", "Home")',
+                    data: { keyValue:ag_id },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                alert("申请成功，等待管理员审核");
+                                window.setTimeout(function () {
+                                    var indexUrl = '@Url.Action("UserInfo", "Home")';
+                                    window.location.href = indexUrl;
+                                }, 1000);
+                                return true;
+                            } else if(data.state == "error"){
+                                alert(data.message);
+                            }
+                        }
+                    });
+                }
+
             }else {
                 alert("积分不足10000，不可以申请成为加盟店");
             }
@@ -117,52 +137,52 @@
         function chk_money() {
             var money = $('#money').val();
             var currentScore = @Model.CanCashScore;
-            if(money && parseInt(money) < 100){
-                alert('100起提');
-                return false;
-            } else if(money > currentScore){
-                alert('兑换积分大于可折现积分');
-                return false;
-            }
-            return true;
+        if(money && parseInt(money) < 100){
+            alert('100起提');
+            return false;
+        } else if(money > currentScore){
+            alert('兑换积分大于可折现积分');
+            return false;
         }
+        return true;
+    }
 
 
-        $('.tqjeDia4_1').click(function () {
-            if(chk_money()){
-                var money = $('#money').val();
-                var bank_acc = $('#bank_acc').val();
-                var bank_num = $('#bank_num').val();
-                var bank_holder = $('#bank_holder').val();
-                var r = confirm("确认提交吗？");
-                if (r) {
-                    $.ajax({
-                        url: '@Url.Action("ScoreCash", "Home")',
-                        data: {
-                            amount: money
-                            , bankName: bank_acc
-                            , bankAccount: bank_num
-                            , bankPerson: bank_holder
-                            ,agentId : ag_id
-                        },
-                        type: "post",
-                        dataType: "json",
-                        success: function (data) {
-                            if (data.state == "success") {
-                                alert("积分兑换提交成功，3个工作日内到账");
-                                window.setTimeout(function () {
-                                    var indexUrl = '@Url.Action("UserInfo", "Home")';
-                                    window.location.href = indexUrl;
-                                }, 1000);
-                                return true;
-                            } else {
-                                alert("提交失败 ： " +  data.message)
-                            }
+    $('.tqjeDia4_1').click(function () {
+        if(chk_money()){
+            var money = $('#money').val();
+            var bank_acc = $('#bank_acc').val();
+            var bank_num = $('#bank_num').val();
+            var bank_holder = $('#bank_holder').val();
+            var r = confirm("确认提交吗？");
+            if (r) {
+                $.ajax({
+                    url: '@Url.Action("ScoreCash", "Home")',
+                    data: {
+                        amount: money
+                        , bankName: bank_acc
+                        , bankAccount: bank_num
+                        , bankPerson: bank_holder
+                        ,agentId : ag_id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.state == "success") {
+                            alert("积分兑换提交成功，3个工作日内到账");
+                            window.setTimeout(function () {
+                                var indexUrl = '@Url.Action("UserInfo", "Home")';
+                                window.location.href = indexUrl;
+                            }, 1000);
+                            return true;
+                        } else {
+                            alert("提交失败 ： " +  data.message)
                         }
-                    });
-                }
+                    }
+                });
             }
-        });
+        }
+    });
 </script>
     <style>
         .tqjeDiaBg, #prom {
