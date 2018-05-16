@@ -9,11 +9,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NFine.Application.SystemManage;
 
 namespace NFine.Web.Areas.ReportManage.Controllers
 {
     public class HighchartsController : Controller
     {
+        #region demo
+		
         #region 折线图
         /// <summary>
         /// 折线图
@@ -188,6 +191,32 @@ namespace NFine.Web.Areas.ReportManage.Controllers
         {
             return View();
         }
+        #endregion 
+	#endregion
+
+
+        #region 分数报表
+        /// <summary>
+        /// 分数报表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ScoreReport()
+        {
+            ScoreDetailApp app = new ScoreDetailApp();
+            int fSum, sSum, dSum;
+            app.SumScore(out fSum,out sSum,out dSum);
+
+            ViewBag.FirstScore = fSum;
+            ViewBag.SecondScore = sSum;
+            ViewBag.DeptScore = dSum;
+            ViewBag.ProScore = 9000;
+            ViewBag.TotalScore = app.GetTotalAgentScore() ;
+
+            
+            return View();
+        }
+
+
         #endregion
     }
 }

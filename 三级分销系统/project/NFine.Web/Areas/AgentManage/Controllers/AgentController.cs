@@ -38,12 +38,21 @@ namespace NFine.Web.Areas.AgentManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword, string level, string agentLevel)
+        public ActionResult GetGridJson(Pagination pagination, string keyword, string level, string agentLevel, string   state)
         {
-            int l, al;
+            int l, al,st;
             int.TryParse(level, out l);
             int.TryParse(agentLevel, out al);
-            var list = agentApp.GetList(pagination, keyword, l, al);
+            if(string.IsNullOrEmpty(state))
+            {
+                st = -1;
+            }
+            else
+            {
+                int.TryParse(state, out st);
+            }
+            
+            var list = agentApp.GetList(pagination, keyword, l, al, st);
             var data = new
             {
                 rows = list ,

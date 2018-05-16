@@ -19,18 +19,19 @@ namespace NFine.Application.SystemManage
         private ICommConfigRepository service = new CommConfigRepository();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
-        //public List<CommConfigEntity> GetList(Pagination pagination, string keyword)
-        //{
-        //    var expression = ExtLinq.True<CommConfigEntity>();
-        //    if (!string.IsNullOrEmpty(keyword))
-        //    {
-        //        expression = expression.And(t => t.c_name.Contains(keyword));
-        //        expression = expression.Or(t => t.c_bank_name.Contains(keyword));
-        //        expression = expression.Or(t => t.c_mobile.Contains(keyword));
-        //    }
-        //    expression = expression.And(t => t.c_name != "admin");
-        //    return service.FindList(expression, pagination);
-        //}
+        public List<CommConfigEntity> GetList(Pagination pagination, int  categoryId,string key )
+        {
+            var expression = ExtLinq.True<CommConfigEntity>();
+            if (categoryId != 0 )
+            {
+                expression = expression.And(t => t.c_category_id == categoryId);
+            }
+            if(!string.IsNullOrEmpty(key))
+            {
+                expression = expression.And(t => t.c_desc.Contains(key));
+            }
+            return service.FindList(expression, pagination);
+        }
 
         public CommConfigEntity GetForm(string keyValue)
         {

@@ -27,7 +27,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
         {
-            var list = configApp.GetItemList(pagination,((int)ConfigCategory.ScoreConfigCate).ToString());
+            var list = configApp.GetList(pagination, ((int)ConfigCategory.ScoreConfigCate), keyword);
             var data = new
             {
                 rows = list,

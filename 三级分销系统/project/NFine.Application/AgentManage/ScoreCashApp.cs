@@ -57,9 +57,14 @@ namespace NFine.Application.SystemManage
             return service.GetCashList(page);
         }
 
-        public List<CashListEntity> GetCashViewList(Pagination page)
+        public List<CashListEntity> GetCashViewList(Pagination page,int state)
         {
-            var list = service.FindList(page);
+            var expression = ExtLinq.True<ScoreCashEntity>();
+            if(state != -1 )
+            {
+                expression = expression.And(t => t.c_cash_state == state);
+            }
+            var list = service.FindList(expression,page);
             List<CashListEntity> viewList = new List<CashListEntity>();
             AgentApp app = new AgentApp();
             foreach (var item in list)

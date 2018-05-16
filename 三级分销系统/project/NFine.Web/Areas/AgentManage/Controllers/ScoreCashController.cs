@@ -28,11 +28,17 @@ namespace NFine.Web.Areas.AgentManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string keyword)
+        public ActionResult GetGridJson(Pagination pagination, string dealState)
         {
+            int state = -1 ;
+            if(!string.IsNullOrEmpty(dealState))
+            {
+                int.TryParse(dealState,out state);
+            }
+            var list = scoreApp.GetCashViewList(pagination, state);
             var data = new
             {
-                rows = scoreApp.GetCashViewList(pagination),
+                rows = list ,
                 total = pagination.total,
                 page = pagination.page,
                 records = pagination.records

@@ -50,7 +50,7 @@ namespace NFine.Repository.SystemManage
                             FROM    t_common_config d
                             WHERE   1 = 1
                                     AND d.c_category_id = {0}
-                                    AND d.F_DeleteMark = 0 order by c_value", categoryId));
+                                    AND d.F_DeleteMark = 0 order by c_key", categoryId));
             DbParameter[] parameter = 
             {
                  new SqlParameter("@enCode",categoryId)

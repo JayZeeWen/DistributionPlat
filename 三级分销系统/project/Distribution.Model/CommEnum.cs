@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Distribution.Model
 {
+
     /// <summary>
     /// 奖励类型
     /// </summary>
@@ -21,7 +22,6 @@ namespace Distribution.Model
         /// </summary>
         Purchase = 2
     }
-
     /// <summary>
     /// 代理商等级
     /// </summary>
@@ -180,5 +180,17 @@ namespace Distribution.Model
         /// 体验店二代购买奖励
         /// </summary>
         expSecondBuy = 9,
+
+
+        /// <summary>
+        /// 体验店升级积分
+        /// </summary>
+        expLevelUpScore = 10,
+
+
+        /// <summary>
+        /// 产品起购数量
+        /// </summary>
+        productAmount = 11,
     }
 }

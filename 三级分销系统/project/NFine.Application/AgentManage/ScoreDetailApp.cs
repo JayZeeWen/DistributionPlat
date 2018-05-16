@@ -11,6 +11,7 @@ using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NFine.Application.SystemManage
 {
@@ -23,6 +24,28 @@ namespace NFine.Application.SystemManage
             var expression = ExtLinq.True<ScoreDetailEntity>();
             
             return service.FindList(expression, pagination);
+        }
+
+        public int  GetTotalAgentScore()
+        {
+            AgentApp agentLogic = new AgentApp ();
+            return agentLogic.GetTotalScore();
+        }
+
+        public void SumScore(out int fSum, out int sSum, out int dSum)
+        {
+            var list = service.FindList("select * from t_score_detail t where CONVERT(varchar(10),t.c_create_date,120) =  CONVERT(varchar(10),GETDATE()    ,120) ");
+            //一代每日积分
+            int firstSum = list.Where(t => t.c_reason.Contains("推荐") && t.c_reason.Contains("直推人")).Sum(t => t.c_amount);
+
+            //二代每日积分
+            int secondSum = list.Where(t => t.c_reason.Contains("推荐") && t.c_reason.Contains("二代")).Sum(t => t.c_amount);
+
+            //部门每日积分
+            int deptSum = list.Where(t => t.c_reason.Contains("推荐") && (t.c_reason.Contains("部门") || t.c_reason.Contains("二代外"))).Sum(t => t.c_amount);
+            fSum = firstSum;
+            sSum = secondSum;
+            dSum = deptSum;
         }
 
 

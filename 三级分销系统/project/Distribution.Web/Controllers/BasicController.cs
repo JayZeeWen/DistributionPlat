@@ -51,6 +51,8 @@ namespace Distribution.Web.Controllers
                 agentInfo.TotalScore = totalScore.ToString();
                 int dealingScore = ScoreCashLogic.GetTotalCashScoreByState(ag.c_id, CashScoreState.Dealing);
                 agentInfo.CanCashScore = ((int)agentInfo.agent.c_score - dealingScore);
+                agentInfo.expLevelUpScore = Convert.ToInt32(CommConfigLogic.GetValueFromConfig((int)ConfigCategory.ScoreConfigCate, (int)RewardConfigKey.expLevelUpScore)); ;
+                agentInfo.prodStartAmount = Convert.ToInt32(CommConfigLogic.GetValueFromConfig((int)ConfigCategory.ScoreConfigCate, (int)RewardConfigKey.productAmount));
             }
         }
     }

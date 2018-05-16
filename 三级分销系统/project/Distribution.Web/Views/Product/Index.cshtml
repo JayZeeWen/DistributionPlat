@@ -67,26 +67,28 @@
     <div class="clearB"></div>
     @*</div>*@
     <script type="text/javascript">
+        var startAmount = @Model.prodStartAmount;
 
-        var singlePrice = 0;
-        function showF(goods_id, money) {
-            var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
-            singlePrice = money;
-            $("#lblTotal").html(singlePrice);
-            $("#amount").val(5);
-            $("#btnSubmitPur").removeAttr("onclick");
-            $("#btnSubmitPur").attr("onclick", onclick)
-            $(".purPro").show();
-            changeTotal();
-        }
+    var singlePrice = 0;
+    function showF(goods_id, money) {
+        var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
+        singlePrice = money;
+        $("#lblTotal").html(singlePrice);
+        $("#amount").val(startAmount);
+        $("#btnSubmitPur").removeAttr("onclick");
+        $("#btnSubmitPur").attr("onclick", onclick)
+        $(".purPro").show();
+        changeTotal();
+    }
 
 
-        function changeTotal() {
+    function changeTotal() {
+           
             var amount = $("#amount").val();
-            if (isNaN(parseFloat(amount)) || parseFloat(amount) < 5) {
-                alert("5盒起购")
-                $("#amount").val(5);
-                amount = 5;
+            if (isNaN(parseFloat(amount)) || parseFloat(amount) < startAmount) {
+                alert(startAmount+"盒起购")
+                $("#amount").val(startAmount);
+                amount = startAmount;
             }
             var total = singlePrice * amount;
             $("#lblTotal").html(total);
@@ -103,23 +105,23 @@
 
             $.ajax({
                 url: '@Url.Action("AddProToCard", "Product")',
-                data: {
-                    Amount: amount
-                    , productId: ProId
-                    , Price: Price
-                },
-                type: "post",
-                dataType: "json",
-                success: function (data) {
-                    if (data.state == "success") {
-                        alert("添加至购物车成功");
-                        proClose();
-                    } else {
-                        alert("添加失败 ： " + data.message)
-                    }
+            data: {
+                Amount: amount
+                , productId: ProId
+                , Price: Price
+            },
+            type: "post",
+            dataType: "json",
+            success: function (data) {
+                if (data.state == "success") {
+                    alert("添加至购物车成功");
+                    proClose();
+                } else {
+                    alert("添加失败 ： " + data.message)
                 }
-            });
-        }
+            }
+        });
+    }
 
 
     </script>

@@ -49,7 +49,7 @@
                 <p><label>二代人数：</label><span>@Model.SecondCount</span></p>
                 <p><label>部门人数：</label><span>@Model.OtherCount</span></p>
                 <p><label>体验店数：</label><span>@Model.ExpCount</span></p>
-                <p><label>积分奖励总额：</label><span>@Model.TotalScore</span></p>
+                <p><label>奖励总额：</label><span>@Model.TotalScore</span></p>
                 <p><label>当前积分：</label><span>@Model.agent.c_score 分</span></p>
                 <input type="button" value="积分兑换" onclick="tqOk()">
                 @if (Model.agent.c_agnet_type == 0)
@@ -105,7 +105,8 @@
     }
 
     function applyUp(){
-        if(@Model.agent.c_score >= 10000){
+        var amount = @Model.expLevelUpScore;
+        if(@Model.agent.c_score >= amount){
             if(confirm("确定申请成为加盟店吗？")){
                 $.ajax({
                     url: '@Url.Action("ApplyExpLevelUp", "Home")',
@@ -128,7 +129,7 @@
                 }
 
             }else {
-                alert("积分不足10000，不可以申请成为加盟店");
+                alert("积分不足"+ amount +"，不可以申请成为加盟店");
             }
 
         }
