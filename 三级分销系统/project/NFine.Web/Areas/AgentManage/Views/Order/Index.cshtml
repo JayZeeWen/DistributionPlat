@@ -57,7 +57,10 @@
         });
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {
-                postData: { orderType: $("#levle option:selected").val() },
+                postData: {
+                    orderType: $("#levle option:selected").val()
+                    , orderState: $("#orderState option:selected").val()
+                },
             }).trigger('reloadGrid');
         });
     }
@@ -189,6 +192,11 @@
                             <option value="">--请选择订单类型--</option>
                             <option value="1">商城订单</option>
                             <option value="2">代理商订单</option>
+                        </select>
+                        <select id="orderState" name="orderState" class="form-control" style="width:150px">
+                            <option value="">--请选择订单状态--</option>
+                            <option value="1">未发货</option>
+                            <option value="2">已发货</option>
                         </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>

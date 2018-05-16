@@ -40,5 +40,9 @@ namespace Distribution.Web.Models
         /// 是否已体验
         /// </summary>
         public int HadExp { get; set; }
+
+        public int prodStartAmount { get; set; }
+
+        public int expLevelUpScore { get; set; }
     }
 }

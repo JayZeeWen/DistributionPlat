@@ -36,8 +36,8 @@
                 { label: '开户行', name: 'c_bank_name', align: 'left' },
                 { label: '银行账号', name: 'c_bank_account', width: 200, align: 'left' },
                 {
-                    label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
-                    formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
+                    label: '申请时间', name: 'F_CreatorTime', width: 80, align: 'left',
+                    formatter: "date", formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s' }
                 }
 
             ],
@@ -47,7 +47,7 @@
         });
         $("#btn_search").click(function () {
             $gridList.jqGrid('setGridParam', {
-                postData: { keyword: $("#txt_keyword").val() },
+                postData: { dealState: $("#dealState option:selected").val() },
             }).trigger('reloadGrid');
         });
     }
@@ -165,7 +165,7 @@
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
         <div class="btn-group">
-            <a id="NF-add" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_add()"><i class="fa fa-plus"></i>新建用户</a>
+            
         </div>
         <div class="operate">
             <ul class="nav nav-pills">
@@ -182,7 +182,13 @@
             <tr>
                 <td>
                     <div class="input-group">
-                        <input id="txt_keyword" type="text" class="form-control" placeholder="账户/姓名/手机" style="width: 200px;">
+
+                        <select id="dealState" name="dealState" class="form-control" style="width:150px">
+                            <option value="-1">--请选择处理状态--</option>
+                            <option value="0">受理中</option>
+                            <option value="1">已受理</option>
+                            <option value="2">已回退</option>
+                        </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
                         </span>

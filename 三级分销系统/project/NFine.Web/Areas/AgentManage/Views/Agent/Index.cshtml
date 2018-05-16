@@ -96,19 +96,19 @@
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
                 {
-                    label: "允许登录", name: "c_state", width: 60, align: "center",
+                    label: "审核状态", name: "c_state", width: 90, align: "center",
                     formatter: function (cellvalue, options, rowObject) {
                         if (cellvalue == 1 || cellvalue == 2) {
-                            return '<span class=\"label label-success\">正常</span>';
+                            return '<span class=\"label label-success\">已审核</span>';
                         } else if (cellvalue == 0) {
-                            return '<span class=\"label label-default\">禁用</span>';
+                            return '<span class=\"label label-default\">未审核</span>';
                         }
                     }
                 }
 
             ],
             pager: "#gridPager",
-            sortname: 'F_CreatorTime desc,',
+            sortname: 'c_state,c_agnet_type desc',
             viewrecords: true
         });
         $("#btn_search").click(function () {
@@ -117,6 +117,7 @@
                     keyword: $("#txt_keyword").val()
                     , level: $("#levle option:selected").val()
                     , agentLevel: $("#agent_level option:selected").val()
+                    , state: $("#state option:selected").val()
                 },
             }).trigger('reloadGrid');
         });
@@ -311,6 +312,11 @@
                         </select>
                         <select id="agent_level" name="c_agent_level" class="form-control" style="width:150px">
                             <option value="">--请选择代理商等级--</option>
+                        </select>
+                        <select id="state" name="state" class="form-control" style="width:100px">
+                            <option value="-1">--请选择审核状态--</option>
+                            <option value="0">未审核</option>
+                            <option value="1">已审核</option>
                         </select>
                         <span class="input-group-btn">
                             <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>

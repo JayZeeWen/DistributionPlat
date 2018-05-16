@@ -11,6 +11,7 @@ using NFine.Domain.IRepository.SystemManage;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NFine.Application.SystemManage
 {
@@ -32,7 +33,7 @@ namespace NFine.Application.SystemManage
             return service.FindList(expression, pagination);
         }
 
-        public List<AgentEntity> GetList(Pagination pagination, string keyword,int level,int  agentLevel)
+        public List<AgentEntity> GetList(Pagination pagination, string keyword,int level,int  agentLevel,int state)
         {
             var expression = ExtLinq.True<AgentEntity>();
             if (!string.IsNullOrEmpty(keyword))
@@ -57,6 +58,10 @@ namespace NFine.Application.SystemManage
             {
                 expression = expression.And(t => t.c_agent_level == agentLevel);
             }
+            if(state != -1 )
+            {
+                expression = expression.And(t => t.c_state == state);
+            }
             expression = expression.And(t => t.c_name != "admin");
             return service.FindList(expression, pagination);
         }
@@ -64,6 +69,13 @@ namespace NFine.Application.SystemManage
         public List<AgentEntity> GetAgentList(string state)
         {
             return service.GetAgentList(state);
+        }
+
+        public int GetTotalScore()
+        {
+            var list =  service.FindList(@"select * from t_agent ");
+            int sum = (int)list.Sum(t => t.c_score);
+            return sum;
         }
 
         public AgentEntity GetForm(string keyValue)

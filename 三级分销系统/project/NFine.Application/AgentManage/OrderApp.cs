@@ -28,13 +28,17 @@ namespace NFine.Application.SystemManage
             return service.FindList(expression, pagination);
         }
 
-        public List<OrderViewEntity> GetViewList(Pagination pagination, int orderType)
+        public List<OrderViewEntity> GetViewList(Pagination pagination, int orderType,int state)
         {
             var expression = ExtLinq.True<OrderEntity>();
             expression = expression.And(t => t.c_state != 0 );
             if (orderType != 0 )
             {
                 expression = expression.And(t => t.c_order_type == orderType);
+            }
+            if(state != 0 )
+            {
+                expression = expression.And(t => t.c_state == state);
             }
 
             var list =  service.FindList(expression, pagination);

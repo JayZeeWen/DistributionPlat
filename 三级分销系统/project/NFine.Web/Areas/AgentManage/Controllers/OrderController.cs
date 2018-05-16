@@ -27,11 +27,12 @@ namespace NFine.Web.Areas.AgentManage.Controllers
 
         [HttpGet]
         [HandlerAjaxOnly]
-        public ActionResult GetGridJson(Pagination pagination, string orderType)
+        public ActionResult GetGridJson(Pagination pagination, string orderType, string orderState)
         {
-            int type = 0;
+            int type = 0,state;
             int.TryParse(orderType, out type);
-            var list = orderApp.GetViewList(pagination, type);
+            int.TryParse(orderState, out state);
+            var list = orderApp.GetViewList(pagination, type,state);
             var data = new
             {
                 rows = list,
