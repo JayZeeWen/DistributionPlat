@@ -32,9 +32,9 @@ namespace NFine.Application.SystemManage
             return agentLogic.GetTotalScore();
         }
 
-        public void SumScore(out int fSum, out int sSum, out int dSum)
+        public void SumScore(out int fSum, out int sSum, out int dSum,out int proSum)
         {
-            var list = service.FindList("select * from t_score_detail t where CONVERT(varchar(10),t.c_create_date,120) =  CONVERT(varchar(10),GETDATE()    ,120) ");
+            var list = service.FindList("select * from t_score_detail t where CONVERT(varchar(10),t.c_create_date,120) =  CONVERT(varchar(10),GETDATE()     ,120) ");
             //一代每日积分
             int firstSum = list.Where(t => t.c_reason.Contains("推荐") && t.c_reason.Contains("直推人")).Sum(t => t.c_amount);
 
@@ -43,9 +43,12 @@ namespace NFine.Application.SystemManage
 
             //部门每日积分
             int deptSum = list.Where(t => t.c_reason.Contains("推荐") && (t.c_reason.Contains("部门") || t.c_reason.Contains("二代外"))).Sum(t => t.c_amount);
+
+            int prodSum = list.Where(t => t.c_reason.Contains("【购买】")).Sum(t => t.c_amount);
             fSum = firstSum;
             sSum = secondSum;
             dSum = deptSum;
+            proSum = prodSum;
         }
 
 

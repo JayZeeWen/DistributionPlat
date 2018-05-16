@@ -204,12 +204,12 @@ namespace NFine.Web.Areas.ReportManage.Controllers
         {
             ScoreDetailApp app = new ScoreDetailApp();
             int fSum, sSum, dSum;
-            app.SumScore(out fSum,out sSum,out dSum);
+            app.SumScore(out fSum,out sSum,out dSum,out int proSum );
 
             ViewBag.FirstScore = fSum;
             ViewBag.SecondScore = sSum;
             ViewBag.DeptScore = dSum;
-            ViewBag.ProScore = 9000;
+            ViewBag.ProScore = proSum;
             ViewBag.TotalScore = app.GetTotalAgentScore() ;
 
             
