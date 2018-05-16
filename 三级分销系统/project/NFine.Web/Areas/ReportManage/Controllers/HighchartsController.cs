@@ -203,8 +203,8 @@ namespace NFine.Web.Areas.ReportManage.Controllers
         public ActionResult ScoreReport()
         {
             ScoreDetailApp app = new ScoreDetailApp();
-            int fSum, sSum, dSum;
-            app.SumScore(out fSum,out sSum,out dSum,out int proSum );
+            int fSum, sSum, dSum,proSum;
+            app.SumScore(out fSum,out sSum,out dSum,out proSum );
 
             ViewBag.FirstScore = fSum;
             ViewBag.SecondScore = sSum;
