@@ -15,6 +15,8 @@
                 async: false,
                 success: function (data) {
                     $("#form1").formSerialize(data);
+                    $("#trpwd").hide();
+                    
                     $("#imgid").attr('src', '@ConfigurationManager.AppSettings["SaveFilePath"]' + data.c_voucher_path);//http://localhost:8081/FilePath/201804/Tulips.jpg
                     $("#F_UserPassword").val("******").attr('disabled', 'disabled');
                 }
@@ -30,6 +32,7 @@
             url: "/AgentManage/Agent/GetLevelJson",
             param: { enCode: 2 }
         });
+        $("#trpwd").show();
     }
     function submitForm() {
         if (!$('#form1').formValid()) {
@@ -60,6 +63,12 @@
                     <th class="formTitle">手机</th>
                     <td class="formValue">
                         <input id="c_mobile" name="c_mobile" class="form-control required" placeholder="请输入手机" />
+                    </td>
+                </tr>
+                <tr id="trpwd" style="display:none" >
+                    <th class="formTitle">密码</th>
+                    <td class="formValue">
+                        <input id="c_login_pwd" name="c_login_pwd" type="password" class="form-control required" placeholder="请输入密码" />
                     </td>
                 </tr>
                 <tr>

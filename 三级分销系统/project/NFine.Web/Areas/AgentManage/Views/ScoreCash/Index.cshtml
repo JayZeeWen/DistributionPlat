@@ -14,12 +14,13 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'F_Id', hidden: true },
+                { label: '代理商id', name: 'c_user_id', hidden: true },
                 { label: '状态', name: 'c_cash_state', hidden: true },
                 { label: '代理商姓名', name: 'c_agent_name', width: 100, align: 'center' },
                 { label: '手机', name: 'c_agent_mobile', width: 100, align: 'center' },
-                
+
                 { label: '提现积分', name: 'c_amount', width: 100, align: 'center' },
-                
+
                 {
                     label: '提现状态', name: 'c_cash_state', width: 100, align: 'left',
                     formatter: function (cellvalue, options, rowObject) {
@@ -126,7 +127,7 @@
         });
     }
     function btn_Deal(dealState) {
-        
+
         var keyValue = $("#gridList").jqGridRowValue().F_Id;
         var state = $("#gridList").jqGridRowValue().c_cash_state;
         stateName = "受理";
@@ -150,7 +151,25 @@
             $.currentWindow().$("#gridList").trigger("reloadGrid");
             return false;
         }
+
+    }
+
+
+    function LoginForward() {
+        var keyValue = $("#gridList").jqGridRowValue().c_user_id;
         
+            $.modalConfirm("注：您确定要【登陆】该账户吗？", function (r) {
+                if (r) {
+                    $.submitForm({
+                        url: "/AgentManage/Agent/LoginForward",
+                        param: { keyValue: keyValue },
+                        success: function () {
+                            window.open("@Configs.GetValue("ForDireLogin")");
+                            $.currentWindow().$("#gridList").trigger("reloadGrid");
+                        }
+                    })
+                }
+            });
     }
 
 
@@ -172,6 +191,8 @@
                 <li class="first">已选中<span>1</span>项</li>                
                 <li><a id="NF-enabled" onclick="btn_Deal(1)"><i class="fa fa-play-circle"></i>受理</a></li>
                 <li><a id="NF-enabled" onclick="btn_Deal(2)"><i class="fa fa-stop-circle"></i>回退</a></li>
+
+                <li><a onclick="LoginForward()"><i class="fa fa-search-plus"></i>登陆用户</a></li>
             </ul>
             <a href="javascript:;" class="close"></a>
         </div>
