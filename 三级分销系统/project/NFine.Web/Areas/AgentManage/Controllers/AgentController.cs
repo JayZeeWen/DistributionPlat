@@ -149,20 +149,22 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             agentApp.UpdateForm(userEntity);
 
             Agent ag = AgentLogic.GetEnityById(keyValue);
+
+            //升级
+            AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
+            Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
+            LevelLogic.IsLevelUpWithCondition(recomm_ag);
             if (!hadReward)
             {
                 #region 推荐奖励
                 //积分奖励
                 ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
-                ScoreLogic.DealProvinceReward(ag);
+                
                 #endregion
 
                 if(ag.c_agnet_type != (int)AgentType.Exp)//体验店计算上下级奖励即可
                 {
-                    //升级
-                    AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.c_id);
-                    Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);
-                    LevelLogic.IsLevelUpWithCondition(recomm_ag);
+                    ScoreLogic.DealProvinceReward(ag);
 
                     #region 生成代理商订单
                     Order order = new Order();

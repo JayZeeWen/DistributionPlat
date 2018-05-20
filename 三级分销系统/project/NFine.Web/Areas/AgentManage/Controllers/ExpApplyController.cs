@@ -66,6 +66,10 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             ScoreLogic.DealProvinceReward(ag2);
             #endregion
 
+            //扣减积分
+            int score = Convert.ToInt32( CommConfigLogic.GetValueFromConfig((int)ConfigCategory.ScoreConfigCate, (int)RewardConfigKey.expLevelUpScore));            
+            ScoreDetailLogic.UpdateAgentScore(entity.c_agent_id, -score, "体验店升级扣除");
+
             //升级
             AgentRelation ar = AgentRelationLogic.FindEntity(t => t.c_child_id == ag.F_Id);
             Agent recomm_ag = AgentLogic.GetEnityById(ar.c_parent_id);

@@ -55,10 +55,14 @@ namespace NFine.Application.SystemManage
             viewEntity.c_agent_id = eneity.c_agent_id;
             viewEntity.F_CreatorTime = eneity.F_CreatorTime;
             var agent = p.GetForm(eneity.c_agent_id);
-            viewEntity.c_agent_name = agent.c_name;
-            viewEntity.c_agent_mobile = agent.c_mobile;
-            viewEntity.c_exp_state = agent.c_exp_state;
-            viewEntity.c_score = agent.c_score;
+            if(agent != null)
+            {
+                viewEntity.c_agent_name = agent.c_name;
+                viewEntity.c_agent_mobile = agent.c_mobile;
+                viewEntity.c_exp_state = agent.c_exp_state;
+                viewEntity.c_score = agent.c_score;
+            }
+            
         }
 
 

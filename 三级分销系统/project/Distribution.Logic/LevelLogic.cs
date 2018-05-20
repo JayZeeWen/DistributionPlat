@@ -20,6 +20,8 @@ namespace Distribution.Logic
             bool result = false;
             using (DistributionContext context = new DistributionContext())
             {
+                
+                context.SaveChanges();
                 int currentLevel = (int)RecomAgent.c_levle;//当前等级
                 int maxLevel = (int)context.t_level_config.Where(t => t.c_is_delete == 0).Max(t => t.c_level);//当前系统的最高级别
                 if (currentLevel == maxLevel)
@@ -42,14 +44,14 @@ namespace Distribution.Logic
                     if (config.c_need_level == null)
                     {
                         RecomAgent.c_levle = currentLevel + 1;
-                        context.SaveChanges();
+                        AgentLogic.UpdateEntity(RecomAgent);
                         return true;
                     }
 
                     if (levelCount >= config.c_level_num)
                     {
                         RecomAgent.c_levle = currentLevel + 1;
-                        context.SaveChanges();
+                        AgentLogic.UpdateEntity(RecomAgent);
                         return true;
                     }
                 }
