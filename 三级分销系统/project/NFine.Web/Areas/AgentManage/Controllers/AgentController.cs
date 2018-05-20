@@ -15,7 +15,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using Distribution.Logic;
 
 
 namespace NFine.Web.Areas.AgentManage.Controllers
@@ -52,7 +51,7 @@ namespace NFine.Web.Areas.AgentManage.Controllers
                 int.TryParse(state, out st);
             }
             
-            var list = agentApp.GetList(pagination, keyword, l, al, st);
+            var list = agentApp.GetViewList(pagination, keyword, l, al, st);
             var data = new
             {
                 rows = list ,

@@ -22,11 +22,11 @@
         <!--右侧开始-->
         <script src="~/Content/d3/d3.min.js"></script>
         <script>
-            var width = 500,
-                height = 500;
+            var width = 800,
+                height = 1300;
 
-            var cluster = d3.layout.tree()
-            .size([width, height - 200]);
+            var cluster = d3.layout.cluster()
+            .size([width, height - 1000]);
 
             var diagonal = d3.svg.diagonal()
                 .projection(function (d) {
@@ -36,68 +36,104 @@
             var svg = d3.select(".grDiv1_2").append("svg")
                 .attr("width", width)
                 .attr("height", height)
-                .attr("style", "margin-left:5%;margin-top:5%")
+                .attr("style", "margin-left:60px;margin-top:1%")
                 .append("g")
-                .attr("transform", "translate(40,0)");
+                .attr("transform", "translate(150,0)");
 
             d3.json("data", function (error, root) {
                 var nodes = cluster.nodes(root);
                 var links = cluster.links(nodes);
+                //var link = svg.selectAll(".link")
+                //    .data(links)
+                //    .enter()
+                //    .append("path")
+                //    .attr("class", "link")
+                //    .attr("d", function (d) {
+                //        return "M" + d.source.y + " " + d.source.x +
+                //        "L" + (d.source.y + 120) + " " + d.source.x +
+                //        " L" + (d.source.y + 120) + " " + d.target.x + " L" +
+                //        d.target.y + " " + d.target.x;
+
+                //    })
+                //    .attr("style", function () {
+                //        return "stroke:#F7881F"
+                //    });
+                
+
+                //var node = svg.selectAll(".node")
+                //    .data(nodes)
+                //    .enter()
+                //    .append("g")
+                //    .attr("class", "node")
+                //    .attr("transform", function (d) {
+                //        return "translate(" + d.y + "," + (d.x + -10) + ")";
+                //    })
+
+                //node.append("rect")
+                //  .attr("width", 90)
+                //  .attr("height", 40)
+                //  .attr("x", 0)
+                //  .attr("y", 0)
+                //  .attr("style", "fill:#35AD5B;");
+
+                //node.append("text")
+                //    .attr("dx", function (d) {
+                //        return 40;
+                //    })
+                //    .attr("dy", 16)
+                //    .style("text-anchor", function (d) {
+                //        return "middle";
+                //    })
+                //    .style("fill", "#fff")
+                //    .style("font-size", "16px")
+                //    .style("font-weight", "600")
+                //    .text(function (d) { return d.name; });
+                //node.append("text")
+                //   .attr("dx", function (d) {
+                //       return 42;
+                //   })
+                //   .attr("dy", 32)
+                //   .style("text-anchor", function (d) {
+                //       return "middle";
+                //   })
+                //   .style("fill", "#fff")
+                //   .style("font-size", "14px")
+                //   .text(function (d) { return d.number; });
+
                 var link = svg.selectAll(".link")
                     .data(links)
                     .enter()
                     .append("path")
                     .attr("class", "link")
-                    .attr("d", function (d) {
-                        return "M" + d.source.y + " " + d.source.x +
-                        "L" + (d.source.y + 120) + " " + d.source.x +
-                        " L" + (d.source.y + 120) + " " + d.target.x + " L" +
-                        d.target.y + " " + d.target.x;
-
-                    })
-                    .attr("style", function () {
-                        return "stroke:#F7881F"
-                    });
+                    .attr("d", diagonal);
 
                 var node = svg.selectAll(".node")
-                    .data(nodes)
-                    .enter()
-                    .append("g")
-                    .attr("class", "node")
-                    .attr("transform", function (d) {
-                        return "translate(" + d.y + "," + (d.x + -10) + ")";
-                    })
+                  .data(nodes)
+                  .enter()
+                  .append("g")
+                  .attr("class", "node")
+                  .attr("transform", function (d) { return "translate(" + (d.y + 10) + "," + (d.x) + ")"; })
 
-                node.append("rect")
-                  .attr("width", 85)
-                  .attr("height", 40)
-                  .attr("x", 0)
-                  .attr("y", 0)
-                  .attr("style", "fill:#35AD5B;");
+                node.append("circle")
+                    .attr("r", 5.5);
 
                 node.append("text")
-                    .attr("dx", function (d) {
-                        return 40;
-                    })
-                    .attr("dy", 16)
-                    .style("text-anchor", function (d) {
-                        return "middle";
-                    })
-                    .style("fill", "#fff")
-                    .style("font-size", "16px")
-                    .style("font-weight", "600")
-                    .text(function (d) { return d.name; });
-                node.append("text")
-                   .attr("dx", function (d) {
-                       return 42;
-                   })
-                   .attr("dy", 32)
-                   .style("text-anchor", function (d) {
-                       return "middle";
-                   })
-                   .style("fill", "#fff")
-                   .style("font-size", "14px")
-                   .text(function (d) { return d.number; });
+                    .attr("dx", function (d) { return d.children ? -8 : 8; })
+                    .attr("dy", 3)
+                    .style("text-anchor", function (d) { return d.children ? "end" : "start"; })
+                    .style("font-size", "14px")
+                    .text(function (d) {
+                        var print = d.number;
+                        if (d.level != null) {
+                            print += "(" + d.level + ")";
+                        }
+                        if (d.name != null) {
+                            print += "(" + d.name + ")";
+                        }
+
+                        return print;
+                    });
+                
             });
 
 
@@ -108,7 +144,7 @@
 
 
     <style>
-        .node {
+        /*.node {
             font: 12px sans-serif;
         }
 
@@ -116,6 +152,21 @@
             fill: none;
             stroke: #ccc;
             stroke-width: 1.5px;
+        }*/
+        .node circle {
+          fill: #fff;
+          stroke: steelblue;
+          stroke-width: 1.5px;
+        }
+
+        .node {
+          font: 12px sans-serif;
+        }
+
+        .link {
+          fill: none;
+          stroke: #ccc;
+          stroke-width: 1.5px;
         }
     </style>
 </body>

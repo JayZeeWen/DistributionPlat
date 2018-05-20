@@ -15,14 +15,6 @@ namespace Distribution.Web.Controllers
         // GET: Product
         public ActionResult Index(ProductModel model)
         {
-            var pageIndex = Request.QueryString["pageindex"];
-            int index = 0;
-            int pageSize = 10;
-            Int32.TryParse(pageIndex, out index);
-            if (index == 0)
-            {
-                index = 1;
-            }
             var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
             if (UserInfo == null)
             {
@@ -32,14 +24,6 @@ namespace Distribution.Web.Controllers
             if (base.agentInfo != null)
             {
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
-                List<Product> list = ProductLogic.GetList().Where(t => t.F_DeleteMark == false || t.F_DeleteMark == null ).ToList();
-                viewModel.productList = new PagerResult<Product>();
-                viewModel.productList.DataList = list.Skip<Product>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.F_CreatorTime);
-                viewModel.productList.Code = 0;
-                viewModel.productList.Total = list.Count();
-                viewModel.productList.PageIndex = index;
-                viewModel.productList.PageSize = pageSize;
-                viewModel.productList.RequestUrl = "Index?pageindex=" + index;
             }
             return View(viewModel);
         }
@@ -70,19 +54,24 @@ namespace Distribution.Web.Controllers
                     RelationModel m = new RelationModel();
                     m.name = item.c_name;
                     m.number = item.c_mobile;
+                    m.level = CommConfigLogic.GetValueFromConfig((int)ConfigCategory.PostitionLevel, item.c_levle);
                     List<RelationModel> secondList = new List<RelationModel>();
                     var sList = AgentRelationLogic.GetFirstCustomer(item.c_id);
-                    foreach (var second in sList)
+                    if(sList.Count() > 0 )
                     {
-                        if(second != null)
+                        foreach (var second in sList)
                         {
-                            RelationModel m2 = new RelationModel();
-                            m2.name = second.c_name;
-                            m2.number = second.c_mobile;
-                            secondList.Add(m2);
-                        }                        
+                            if (second != null)
+                            {
+                                RelationModel m2 = new RelationModel();
+                                m2.name = second.c_name;
+                                m2.number = second.c_mobile;
+                                m2.level = CommConfigLogic.GetValueFromConfig((int)ConfigCategory.PostitionLevel, second.c_levle);
+                                secondList.Add(m2);
+                            }
+                        }
+                        m.children = secondList;
                     }
-                    m.children = secondList;
                     children.Add(m);
                 }
                
