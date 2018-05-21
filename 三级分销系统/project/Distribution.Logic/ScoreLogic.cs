@@ -221,6 +221,7 @@ namespace Distribution.Logic
             {
                 level = (int)ag.c_levle;
             }
+            level = Math.Max(currentLevel, level);
             RewardForCorreLevel(ag,level, ref RewardScore, reType, context,amount);
 
         }

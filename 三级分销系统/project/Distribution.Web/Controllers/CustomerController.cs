@@ -81,7 +81,44 @@ namespace Distribution.Web.Controllers
             string json = relation.ToJson();
             return json;
         }
-        
-        
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        public ActionResult GetAgentRelation(string ageId)
+        {
+            ListResult result = new ListResult();
+            try
+            {
+                var list  = AgentRelationLogic.GetList().Where(f => f.c_parent_id == ageId).Select(f => f.c_child_id).ToList();
+                var aList = AgentLogic.GetList().Where(f => list.Contains(f.c_id)).ToList();
+                result.data = aList;
+                result.state = ResultType.success.ToString();
+                return Content(result.ToJson());
+            }
+            catch (Exception ex)
+            {
+                result.state = ResultType.error.ToString();
+                result.message = string.Format("提交失败({0})", ex.Message);
+                return Content(result.ToJson());
+                throw;
+            }
+        }
+
+    }
+
+    public class ListResult
+    {
+        /// <summary>
+        /// 操作结果类型
+        /// </summary>
+        public object state { get; set; }
+        /// <summary>
+        /// 获取 消息内容
+        /// </summary>
+        public string message { get; set; }
+        /// <summary>
+        /// 获取 返回数据
+        /// </summary>
+        public List<Agent> data { get; set; }
     }
 }
