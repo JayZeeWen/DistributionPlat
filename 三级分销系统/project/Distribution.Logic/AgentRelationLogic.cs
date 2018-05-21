@@ -77,14 +77,21 @@ namespace Distribution.Logic
             {
                 expCount = 0;
                 var list = context.t_agent_relation.ToList();
-                var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).ToList();
+                var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null 
+                    && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
+                    && t.ChildrenAgent.c_state > 0
+                    ).ToList();
                 expCount += list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 var pIds = firstList.Select(t => t.c_child_id).ToList();
-                var secondList = list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).ToList();
+                var secondList = list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null
+                && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
+                && t.ChildrenAgent.c_state> 0 ).ToList();
                 expCount += list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 secondCount = secondList.Count();//二代数量
                 var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
-                otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).Count();
+                otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null 
+                && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
+                && t.ChildrenAgent.c_state > 0 ).Count();
                 return firstList.Count();
             }
         }
@@ -93,7 +100,7 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext ())
             {
-                var list = context.t_agent_relation.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null ).ToList();
+                var list = context.t_agent_relation.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null &&t.ChildrenAgent.c_state > 0  ).ToList();
                 return list.Select(t => t.ChildrenAgent).ToList();
                 
             }

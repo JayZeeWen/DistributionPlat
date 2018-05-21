@@ -19,6 +19,7 @@ namespace NFine.Application.SystemManage
     {
         private IAgentRepository service = new AgentRepository();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
+        private AgentRelationApp arApp = new AgentRelationApp();
 
         public List<AgentEntity> GetList(Pagination pagination, string keyword)
         {
@@ -64,6 +65,85 @@ namespace NFine.Application.SystemManage
             }
             expression = expression.And(t => t.c_name != "admin");
             return service.FindList(expression, pagination);
+        }
+
+        public List<AgentViewModel> GetViewList(Pagination pagination, string keyword, int level, int agentLevel, int state)
+        {
+            List<AgentViewModel> viewList = new List<AgentViewModel>();
+            var list = GetList(pagination, keyword, level, agentLevel, state);
+            foreach (var item in list )
+            {
+                AgentViewModel entity = new AgentViewModel();
+                SetViewEntity(item, entity);
+                viewList.Add(entity);
+            }
+            int i = 0;
+            List<string> pid = new List<string>();
+            pid.Add("b6cefce4-025f-4a7c-ba84-32a6a54ab666");
+            GetListGen(viewList,pid, ref i);
+            return viewList;
+        }
+
+        public void SetViewEntity(AgentEntity entity , AgentViewModel viewEntity)
+        {
+            viewEntity.F_Id = entity.F_Id;
+            viewEntity.c_name = entity.c_name;
+            viewEntity.c_mobile = entity.c_mobile;
+            viewEntity.c_login_pwd = entity.c_login_pwd;
+            viewEntity.c_safe_pwd = entity.c_safe_pwd;
+            viewEntity.c_bank_name = entity.c_bank_name;
+            viewEntity.c_bank_account = entity.c_bank_account;
+            viewEntity.c_address = entity.c_address;
+            viewEntity.c_state = entity.c_state;
+            viewEntity.c_score = entity.c_score;
+            viewEntity.c_levle = entity.c_levle;
+            viewEntity.c_agent_level = entity.c_agent_level;
+            viewEntity.c_had_reward = entity.c_had_reward;
+            viewEntity.c_agnet_type = entity.c_agnet_type;
+            viewEntity.c_exp_state = entity.c_exp_state;
+            viewEntity.c_rec_person = entity.c_rec_person;
+            viewEntity.c_rec_mobile = entity.c_rec_mobile;
+            viewEntity.c_bank_person = entity.c_bank_person;
+            viewEntity.c_voucher_path = entity.c_voucher_path;
+            viewEntity.c_create_date = entity.c_create_date;
+            viewEntity.F_CreatorUserId = entity.F_CreatorUserId;
+            viewEntity.F_LastModifyTime = entity.F_LastModifyTime;
+            viewEntity.F_CreatorTime = entity.F_CreatorTime;
+            viewEntity.F_LastModifyUserId = entity.F_LastModifyUserId;
+            viewEntity.F_DeleteTime = entity.F_DeleteTime;
+            viewEntity.F_DeleteUserId = entity.F_DeleteUserId;
+            viewEntity.F_DeleteMark = entity.F_DeleteMark;
+            
+        }
+        
+        public void GetListGen(List<AgentViewModel> viewList,List<string> parentIds , ref int genNum  )
+        {
+            genNum += 1;
+            if (parentIds.Count() == 0 )
+            {
+                return;
+            }
+            if (viewList.Where(t => t.agentGen == null ).Count() > 0 )
+            {
+                var pList =  arApp.GetListByParentId(parentIds);
+                List<string> cIds = pList.Select(f => f.c_child_id).ToList();
+                if (viewList.Where(f => cIds.Contains(f.F_Id)).Count() > 0 )
+                {
+                    foreach (var item in viewList)
+                    {
+                        if (cIds.Contains(item.F_Id))
+                        {
+                            item.agentGen = genNum;
+                        }
+                    }
+                }
+                GetListGen(viewList, cIds,ref  genNum);
+
+            }
+            else
+            {
+                return;
+            }
         }
 
         public List<AgentEntity> GetAgentList(string state)

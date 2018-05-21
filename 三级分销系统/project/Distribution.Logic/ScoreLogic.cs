@@ -96,7 +96,7 @@ namespace Distribution.Logic
 
                     if (rewardScore > 0)
                     {
-                        RewardForCorreLevel(SeconAgent, ref rewardScore, reType, context, amount);
+                        RewardForCorreLevel(SeconAgent, 1 , ref rewardScore, reType, context, amount);
                     }
 
                     #endregion
@@ -181,7 +181,7 @@ namespace Distribution.Logic
         /// <param name="RewardScore"></param>
         /// <param name="reType"></param>
         /// <param name="context"></param>
-        private static void RewardForCorreLevel(Agent ParAgent,ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
+        private static void RewardForCorreLevel(Agent ParAgent,int currentLevel , ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
         {
             string desc = "";
             var list = context.t_agent_relation.Where(f => f.c_child_id == ParAgent.c_id);
@@ -196,7 +196,7 @@ namespace Distribution.Logic
             }
             var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0 );
             int needReward = 0;//等级奖励
-            if (list_config.Count() != 0 )
+            if (list_config.Count() != 0  && currentLevel < ag.c_levle) 
             {
                 if(reType == RewartType.Recommend)//推荐代理商奖励
                 {
@@ -216,7 +216,12 @@ namespace Distribution.Logic
                 UpdateAgentScore(ag.c_id, needReward, "部门【" + desc + "】积分奖励", context);
                 RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
             }
-            RewardForCorreLevel(ag,ref RewardScore, reType, context,amount);
+            int level = 0;
+            if(ag.c_levle != null)
+            {
+                level = (int)ag.c_levle;
+            }
+            RewardForCorreLevel(ag,level, ref RewardScore, reType, context,amount);
 
         }
 

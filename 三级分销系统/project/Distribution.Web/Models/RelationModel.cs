@@ -12,6 +12,8 @@ namespace Distribution.Web.Models
 
         public string number { get; set; }
 
+        public string level { get; set; }
+
         public List<RelationModel> children { get; set; }
     }
 }
