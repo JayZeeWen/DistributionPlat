@@ -79,7 +79,7 @@ namespace NFine.Application.SystemManage
             }
             int i = 0;
             List<string> pid = new List<string>();
-            pid.Add("b6cefce4-025f-4a7c-ba84-32a6a54ab666");
+            pid.Add(Configs.GetValue("RootAgent"));
             GetListGen(viewList,pid, ref i);
             return viewList;
         }
