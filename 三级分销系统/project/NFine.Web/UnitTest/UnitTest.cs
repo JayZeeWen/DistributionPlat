@@ -49,16 +49,17 @@ namespace NFine.Web.UnitTest
             oApp.SubmitForm(order, "");
         }
 
+        [TestMethod]
         public void TestRewardAndLevelUp()
         {
             #region 推荐奖励
 
             //被推荐人
-            Agent ag = AgentLogic.GetEnityById("5");
+            Agent ag = AgentLogic.GetEnityById("b21c7112-f859-4915-bfdf-3d92b17fea0e");
 
             //积分奖励
-            ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
-            ScoreLogic.DealProvinceReward(ag);
+            //ScoreLogic.DealRewardScore(ag.c_id, RewartType.Recommend);
+            //ScoreLogic.DealProvinceReward(ag);
 
 
             //升级

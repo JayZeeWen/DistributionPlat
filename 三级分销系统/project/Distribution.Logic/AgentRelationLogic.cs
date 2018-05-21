@@ -75,7 +75,8 @@ namespace Distribution.Logic
         {
             using (DistributionContext context = new DistributionContext ())
             {
-                expCount = 0;
+                expCount = 0 ;
+                otherCount = 0;
                 var list = context.t_agent_relation.ToList();
                 var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null 
                     && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
@@ -89,7 +90,7 @@ namespace Distribution.Logic
                 expCount += list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 secondCount = secondList.Count();//二代数量
                 var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
-                otherCount = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null 
+                otherCount += list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null 
                 && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
                 && t.ChildrenAgent.c_state > 0 ).Count();
                 return firstList.Count();
