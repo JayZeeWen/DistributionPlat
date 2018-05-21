@@ -34,7 +34,7 @@ namespace Distribution.Web.Controllers
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
                 List<Product> list = ProductLogic.GetList().Where(t => t.F_DeleteMark == false || t.F_DeleteMark == null ).ToList();
                 viewModel.productList = new PagerResult<Product>();
-                viewModel.productList.DataList = list.Skip<Product>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.F_CreatorTime);
+                viewModel.productList.DataList = list.OrderByDescending(t => t.F_CreatorTime).Skip<Product>((index - 1) * pageSize).Take(pageSize);
                 viewModel.productList.Code = 0;
                 viewModel.productList.Total = list.Count();
                 viewModel.productList.PageIndex = index;
@@ -65,7 +65,7 @@ namespace Distribution.Web.Controllers
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
                 List<Order> list = OrderLogic.GetList().Where(t => t.c_agent_id == agentInfo.agent.c_id).ToList();
                 viewModel.orderList = new PagerResult<Order>();
-                viewModel.orderList.DataList = list.Skip<Order>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.F_CreatorTime);
+                viewModel.orderList.DataList = list.OrderByDescending(t => t.F_CreatorTime).Skip<Order>((index - 1) * pageSize).Take(pageSize);
                 viewModel.orderList.Code = 0;
                 viewModel.orderList.Total = list.Count();
                 viewModel.orderList.PageIndex = index;

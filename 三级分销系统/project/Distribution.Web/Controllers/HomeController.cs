@@ -52,8 +52,9 @@ namespace Distribution.Web.Controllers
             {
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
                 List<ScoreDetail> list = ScoreDetailLogic.GetList().Where(t => t.c_user_id == agentInfo.agent.c_id).ToList();
+                var dataList = list.OrderByDescending(t => t.c_create_date).Skip<ScoreDetail>((index - 1) * pageSize).Take(pageSize).ToList();
                 viewModel.scoreList = new PagerResult<ScoreDetail>();
-                viewModel.scoreList.DataList = list.Skip<ScoreDetail>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.c_create_date);
+                viewModel.scoreList.DataList = dataList;
                 viewModel.scoreList.Code = 0;
                 viewModel.scoreList.Total = list.Count();
                 viewModel.scoreList.PageIndex = index;
@@ -84,7 +85,7 @@ namespace Distribution.Web.Controllers
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
                 List<ScoreCash> list = ScoreCashLogic.GetList().Where(t => t.c_user_id == agentInfo.agent.c_id).ToList();
                 viewModel.cashList = new PagerResult<ScoreCash>();
-                viewModel.cashList.DataList = list.Skip<ScoreCash>((index - 1) * pageSize).Take(pageSize).OrderByDescending(t => t.F_CreatorTime);
+                viewModel.cashList.DataList = list.OrderByDescending(t => t.F_CreatorTime).Skip<ScoreCash>((index - 1) * pageSize).Take(pageSize);
                 viewModel.cashList.Code = 0;
                 viewModel.cashList.Total = list.Count();
                 viewModel.cashList.PageIndex = index;
