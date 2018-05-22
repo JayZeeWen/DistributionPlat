@@ -87,9 +87,9 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="tqjeDetail" style="margin-bottom:10px">
-                    <input class="okPurPro" id="btnSubmitPur" type="button" value="下单">
+                    <input class="okPurPro" id="btnSubmitPur" type="button" value="下单" />
+                   
                     <input class="closePurPro" onclick="proClose()" type="button" value="关闭">
                 </div>
             </div>
@@ -100,6 +100,9 @@
             function submitOrder(orderId) {
                 var r = confirm("确认下单吗？");
                 if (r) {
+                    $("#btnSubmitPur").attr("style","width:150px")
+                    $("#btnSubmitPur").attr("disabled", "disabled");
+                    $("#btnSubmitPur").val("正在提交订单...");
                     $.ajax({
                         url: '@Url.Action("PostOrder", "Product")',
                         data: {
