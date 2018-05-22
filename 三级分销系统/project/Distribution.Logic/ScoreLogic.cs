@@ -96,7 +96,8 @@ namespace Distribution.Logic
 
                     if (rewardScore > 0)
                     {
-                        RewardForCorreLevel(SeconAgent,SeconAgent, 1 , ref rewardScore, reType, context, amount);
+                        var list = context.t_agent_relation.ToList();
+                        RewardForCorreLevel(SeconAgent, SeconAgent, 1, ref rewardScore, reType, list , context, amount);
                     }
 
                     #endregion
@@ -149,7 +150,7 @@ namespace Distribution.Logic
             context.SaveChanges();
         }
 
-        
+
 
         /// <summary>
         /// (递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励   体验店不进行二代外奖励
@@ -158,11 +159,11 @@ namespace Distribution.Logic
         /// <param name="RewardScore">奖励总积分</param>
         /// <param name="reType">奖励类型</param>
         /// <param name="context"></param>
-        private static void RewardForCorreLevel(Agent ParAgent,Agent lowstAgent, int currentLevel , ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
+        private static void RewardForCorreLevel(Agent ParAgent, Agent lowstAgent, int currentLevel, ref int RewardScore, RewartType reType, List<AgentRelation> allRelationList , DistributionContext context,int amount = 1 )
         {
             string desc = "";
-            var list = context.t_agent_relation.Where(f => f.c_child_id == ParAgent.c_id);
-            if(list.Count() == 0 )
+            var list = allRelationList.Where(f => f.c_child_id == ParAgent.c_id);
+            if (list.Count() == 0 )
             {
                 return;
             }
@@ -216,7 +217,7 @@ namespace Distribution.Logic
                 level = (int)ag.c_levle;
             }
             level = Math.Max(currentLevel, level);
-            RewardForCorreLevel(ag,lowstAgent, level, ref RewardScore, reType, context,amount);
+            RewardForCorreLevel(ag,lowstAgent, level, ref RewardScore, reType, allRelationList, context,amount);
 
         }
 
