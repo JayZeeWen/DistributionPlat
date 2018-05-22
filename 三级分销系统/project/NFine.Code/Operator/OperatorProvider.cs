@@ -45,6 +45,31 @@ namespace NFine.Code
             WebHelper.WriteCookie("nfine_mac", Md5.md5(Net.GetMacByNetworkInterface().ToJson(), 32));
             WebHelper.WriteCookie("nfine_licence", Licence.GetLicence());
         }
+
+        public void AddCurrentAgentInfo(AgentInfo ag ,string key)
+        {
+            if (LoginProvider == "Cookie")
+            {
+                WebHelper.WriteCookie(key, ag.ToJson() , 60);
+            }
+            else
+            {
+                WebHelper.WriteSession(key, ag.ToJson());
+            }
+        }
+        public AgentInfo GetAgentInfo(string key)
+        {
+            AgentInfo s = new AgentInfo();
+            if (LoginProvider == "Cookie")
+            {
+                s = WebHelper.GetCookie(key).ToString().ToObject<AgentInfo>();
+            }
+            else
+            {
+                s = WebHelper.GetSession(key).ToString().ToObject<AgentInfo>();
+            }
+            return s;
+        }
         public void RemoveCurrent()
         {
             if (LoginProvider == "Cookie")

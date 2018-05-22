@@ -23,4 +23,15 @@ namespace NFine.Code
         public DateTime LoginTime { get; set; }
         public bool IsSystem { get; set; }
     }
+
+    public class AgentInfo
+    {
+        public string AgeId { get; set;  }
+
+        public int FirstCount { get; set; }
+        public int SecondCount { get; set; }
+        public int DeptCount { get; set; }
+
+        public int ExpCount { get; set; }
+    }
 }
