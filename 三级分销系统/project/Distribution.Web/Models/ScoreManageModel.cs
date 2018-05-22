@@ -25,4 +25,9 @@ namespace Distribution.Web.Models
     {
         public PagerResult<Order> orderList { get; set; }
     }
+
+    public class CustRelationModel : AgentInfoModel
+    {
+        public List<AgentJsonModel> fistList { get; set; }
+    }
 }

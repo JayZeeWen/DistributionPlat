@@ -13,18 +13,41 @@ namespace Distribution.Web.Controllers
     public class CustomerController : BasicController
     {
         // GET: Product
-        public ActionResult Index(ProductModel model)
+        public ActionResult Index(CustRelationModel model)
         {
             var UserInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
             if (UserInfo == null)
             {
                 return RedirectToAction("Login", "Account");
             }
-            ProductModel viewModel = new ProductModel();
+            CustRelationModel viewModel = new CustRelationModel();
             if (base.agentInfo != null)
             {
                 CommLogic.DeepClone<AgentInfoModel>(viewModel, agentInfo);
             }
+            var totalArList = AgentRelationLogic.GetList();
+            var agList = AgentLogic.GetList();
+            var list = totalArList.Where(f => f.c_parent_id == UserInfo.UserId).Select(f => f.c_child_id).ToList();
+            var aList = agList.Where(f => list.Contains(f.c_id)).ToList();
+            var viewList = AgentHelper.getJsonListFromEntityList(aList);
+            int firstGen = 1 ;
+            foreach (var item in viewList)
+            {
+                item.gender = "1 - " +  firstGen.ToString();
+                var sList = totalArList.Where(t => t.c_parent_id == item.id).Select(f => f.c_child_id).ToList();
+                var sAgentList = agList.Where(f => sList.Contains(f.c_id)).ToList();
+                var sViewList = AgentHelper.getJsonListFromEntityList(sAgentList);
+                item.secondList = sViewList;
+                int seconGen = 1;
+                foreach (var second in item.secondList)
+                {
+                    second.gender = item.gender + " - " + seconGen.ToString();
+                    seconGen++;
+                }
+
+                firstGen++;
+            }
+            viewModel.fistList = viewList;
             return View(viewModel);
         }
         

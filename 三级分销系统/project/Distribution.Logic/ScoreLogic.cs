@@ -176,6 +176,7 @@ namespace Distribution.Logic
                 var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0);
                 int needReward = 0;//等级奖励
                 int cMaxLevel = GetBetweenMaxLevel(ag, lowstAgent, context);//下级中最高等级
+                //极差制度提现，上级奖励= 配置奖励 - 下级最高级奖励
                 if (list_config.Count() != 0 && currentLevel < ag.c_levle)
                 {
                     if (reType == RewartType.Recommend)//推荐代理商奖励
