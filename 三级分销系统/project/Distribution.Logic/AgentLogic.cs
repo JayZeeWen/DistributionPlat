@@ -109,7 +109,7 @@ namespace Distribution.Logic
             }
         }
 
-        public static bool CheckRegist(string reg_Mobile ,string reco_Mobile,string pwd,string voucherPath,int agentType)
+        public static bool CheckRegist(string reg_Name, string reg_Mobile ,string reco_Mobile,string pwd,string voucherPath,int agentType)
         {
             bool result = true;
             Agent rec_ag = FindEntity(t => t.c_mobile == reco_Mobile);
@@ -123,6 +123,7 @@ namespace Distribution.Logic
                 throw new Exception("该手机已被注册，请输入正确的手机号码或联系管理员");
             }
             reg_ag = new Agent();
+            reg_ag.c_name = reg_Name;
             reg_ag.c_mobile = reg_Mobile;
             reg_ag.c_login_pwd = pwd;
             reg_ag.c_levle = 1;

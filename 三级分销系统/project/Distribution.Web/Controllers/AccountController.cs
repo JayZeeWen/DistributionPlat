@@ -146,7 +146,7 @@ namespace Distribution.Web.Controllers
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult Register(string username, string password, string recMobile,string savePath,string agentType)
+        public ActionResult Register(string agentName, string username, string password, string recMobile,string savePath,string agentType)
         {
             LogEntity logEntity = new LogEntity();
             logEntity.F_ModuleName = "系统登录";
@@ -154,7 +154,7 @@ namespace Distribution.Web.Controllers
             try
             {
                 int at = Convert.ToInt32(agentType);
-                AgentLogic.CheckRegist(username, recMobile, password, savePath, at);
+                AgentLogic.CheckRegist(agentName, username, recMobile, password, savePath, at);
                 return Content(new AjaxResult { state = ResultType.success.ToString(), message = "注册成功。" }.ToJson());
             }
             catch (Exception ex)

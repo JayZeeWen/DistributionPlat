@@ -27,14 +27,19 @@
         <div class="container">
             <div class="logo">
                 <i class="fa fa-modx"></i>
-                <h1>XX平台</h1>
+                <h1>季无痕</h1>
             </div>
             @using (Html.BeginForm("UploadFile", "Home", FormMethod.Post, new { enctype = "multipart/form-data", id = "formFileUpload" }))
             {
                 <div class="row">
+                    <input id="txt_name" type="text" placeholder="姓名">
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="row">
                     <input id="txt_account" type="text" placeholder="手机号">
                     <i class="fa fa-user"></i>
                 </div>
+                
                 <div class="row">
                     <input id="txt_recomm_account" type="text" placeholder="推荐人手机">
                     <i class="fa fa-user"></i>
@@ -110,6 +115,7 @@
 
                 loginClick: function () {
                     var url = '@Url.Action("Register", "Account")';
+                    var $agentName = $("#txt_name");
                     var $username = $("#txt_account");
                     var $password = $("#txt_password");
                     var $confirm_password = $("#txt_confirm_password");
@@ -118,6 +124,10 @@
                     var agentType = $("#agentType option:selected").val();
                     if (isFileUpload == 0) {
                         $.login.formMessage('请先上传文件。');
+                        return false;
+                    } else if ($agentName.val() == "") {
+                        $agentName.focus();
+                        $.login.formMessage('请输入姓名。');
                         return false;
                     } else if ($username.val() == "") {
                         $username.focus();
@@ -143,7 +153,8 @@
                             $.ajax({
                                 url: url,
                                 data: {
-                                    username: $.trim($username.val())
+                                    agentName: $.trim($agentName.val())
+                                    ,username: $.trim($username.val())
                                     , password: $.trim($password.val())
                                     , recMobile: $.trim($recomm_mobile.val())
                                     , savePath: filePath
