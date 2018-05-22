@@ -96,7 +96,7 @@ namespace Distribution.Logic
 
                     if (rewardScore > 0)
                     {
-                        RewardForCorreLevel(SeconAgent, 1 , ref rewardScore, reType, context, amount);
+                        RewardForCorreLevel(SeconAgent,SeconAgent, 1 , ref rewardScore, reType, context, amount);
                     }
 
                     #endregion
@@ -149,39 +149,16 @@ namespace Distribution.Logic
             context.SaveChanges();
         }
 
-        /// <summary>
-        /// (递归)找到代理商的所有上级中的最高级别
-        /// </summary>
-        /// <param name="AgentId"></param>
-        /// <param name="context"></param>
-        /// <returns></returns>
-        public static int GetMaxLevel(string AgentId,DistributionContext context = null )
-        {
-            if(context == null )
-            {
-                context = new DistributionContext();
-            }
-            int max_Level = 1;
-            int parLevel = 0;
-            var list = context.t_agent_relation.Where(f => f.c_child_id == AgentId);
-            if(list.Count() == 0 )
-            {
-                return (int)context.t_agent.Find(AgentId).c_levle;
-            }
-            max_Level = (int)list.First().ParentAgent.c_levle;
-            parLevel = GetMaxLevel(list.First().ParentAgent.c_id, context);
-            max_Level = parLevel > max_Level ? parLevel : max_Level;
-            return max_Level;
-        }
+        
 
         /// <summary>
         /// (递归)相应等级奖励相应积分（按照极差制度） 极差制度，上级奖励= 总奖励 - 下级奖励   体验店不进行二代外奖励
         /// </summary>
         /// <param name="ParAgent"></param>
-        /// <param name="RewardScore"></param>
-        /// <param name="reType"></param>
+        /// <param name="RewardScore">奖励总积分</param>
+        /// <param name="reType">奖励类型</param>
         /// <param name="context"></param>
-        private static void RewardForCorreLevel(Agent ParAgent,int currentLevel , ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
+        private static void RewardForCorreLevel(Agent ParAgent,Agent lowstAgent, int currentLevel , ref int RewardScore,RewartType reType, DistributionContext context,int amount = 1 )
         {
             string desc = "";
             var list = context.t_agent_relation.Where(f => f.c_child_id == ParAgent.c_id);
@@ -189,40 +166,56 @@ namespace Distribution.Logic
             {
                 return;
             }
-            Agent ag = list.First().ParentAgent;//上级代理
-            if (ag.c_agnet_type == (int)AgentType.Exp)//体验店不进行二代外奖励
+            if(RewardScore <= 0 )
             {
                 return;
             }
-            var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0 );
-            int needReward = 0;//等级奖励
-            if (list_config.Count() != 0  && currentLevel < ag.c_levle) 
+            Agent ag = list.First().ParentAgent;//上级代理
+            if (ag.c_agnet_type != (int)AgentType.Exp)//体验店不进行二代外奖励
             {
-                if(reType == RewartType.Recommend)//推荐代理商奖励
+                var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0);
+                int needReward = 0;//等级奖励
+                int cMaxLevel = GetBetweenMaxLevel(ag, lowstAgent, context);//下级中最高等级
+                if (list_config.Count() != 0 && currentLevel < ag.c_levle)
                 {
-                    needReward = (int)list_config.First().c_recomm_reward;
-                    desc = "推荐";
+                    if (reType == RewartType.Recommend)//推荐代理商奖励
+                    {
+                        needReward = (int)list_config.First().c_recomm_reward;
+                        if(cMaxLevel > 1 )
+                        {
+                            int cDeduReward = (int)LevelConfigLogic.FindEntity(f => f.c_level == cMaxLevel).c_recomm_reward;
+                            needReward -= cDeduReward;
+                        }
+                        
+                        desc = "推荐";
+                    }
+                    else//购买产品奖励
+                    {
+                        needReward = (int)list_config.First().c_buy_reward * amount;
+                        if (cMaxLevel > 1)
+                        {
+                            int cDeduReward = (int)LevelConfigLogic.FindEntity(f => f.c_level == cMaxLevel).c_buy_reward * amount;
+                            needReward -= cDeduReward;
+                        }
+                        desc = "购买";
+                    }
+
                 }
-                else//购买产品奖励
+                needReward = Math.Min(RewardScore, needReward);
+                if (needReward != 0)
                 {
-                    needReward = (int)list_config.First().c_buy_reward * amount;
-                    desc = "购买";
+                    UpdateAgentScore(ag.c_id, needReward, "部门【" + desc + "】积分奖励", context);
+                    RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
                 }
-                
             }
-            needReward = Math.Min(RewardScore, needReward);
-            if(needReward != 0 )
-            {
-                UpdateAgentScore(ag.c_id, needReward, "部门【" + desc + "】积分奖励", context);
-                RewardScore -= needReward;//极差制度，上级奖励= 总奖励 - 下级奖励
-            }
+            
             int level = 0;
             if(ag.c_levle != null)
             {
                 level = (int)ag.c_levle;
             }
             level = Math.Max(currentLevel, level);
-            RewardForCorreLevel(ag,level, ref RewardScore, reType, context,amount);
+            RewardForCorreLevel(ag,lowstAgent, level, ref RewardScore, reType, context,amount);
 
         }
 
@@ -240,6 +233,63 @@ namespace Distribution.Logic
                 return;
             }
             RewardForProvice(parAgent, ProReward, context);
+        }
+
+        /// <summary>
+        /// (递归)找到代理商的所有上级中的最高级别
+        /// </summary>
+        /// <param name="AgentId"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static int GetMaxLevel(string AgentId, DistributionContext context = null)
+        {
+            if (context == null)
+            {
+                context = new DistributionContext();
+            }
+            int max_Level = 1;
+            int parLevel = 0;
+            var list = context.t_agent_relation.Where(f => f.c_child_id == AgentId);
+            if (list.Count() == 0)
+            {
+                return (int)context.t_agent.Find(AgentId).c_levle;
+            }
+            max_Level = (int)list.First().ParentAgent.c_levle;
+            parLevel = GetMaxLevel(list.First().ParentAgent.c_id, context);
+            max_Level = parLevel > max_Level ? parLevel : max_Level;
+            return max_Level;
+        }
+
+        private static int GetBetweenMaxLevel(Agent topAgent, Agent lowestAge ,DistributionContext context = null )
+        {
+            context = new DistributionContext();
+            
+            int max_Level = 1;
+            int parLevel = 0;
+            var list = context.t_agent_relation.Where(f => f.c_child_id == lowestAge.c_id);
+            if(list.Count() ==0 )
+            {
+                return 0;
+            }
+            var p = list.First().ChildrenAgent ;
+            if(p.c_mobile == topAgent.c_mobile)
+            {
+                return 0 ; 
+            }
+            max_Level = (int)p.c_levle;
+            p = list.First().ParentAgent;
+            parLevel = GetBetweenMaxLevel(topAgent, p, context);
+            max_Level = Math.Max(parLevel,max_Level);
+            return max_Level;
+            
+        }
+
+        public static int GetLevel (Agent topAgent, Agent lowestAge )
+        {
+            using (DistributionContext context = new DistributionContext ())
+            {
+                return GetBetweenMaxLevel(topAgent, lowestAge, context);
+            }
         }
 
         

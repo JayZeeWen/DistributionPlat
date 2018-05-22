@@ -40,7 +40,11 @@ namespace NFine.Web.UnitTest
             //string str = DateTime.Now.ToString("HHmmss");
 
             //OrderLogic.GetNopayOrderByAgentId("3");
-            
+
+            var top = AgentLogic.FindEntity(f => f.c_mobile == "10022222222");
+            var lows = AgentLogic.FindEntity(f => f.c_mobile == "11005555555");
+
+            var i = ScoreLogic.GetLevel(top, lows);
 
         }
     }

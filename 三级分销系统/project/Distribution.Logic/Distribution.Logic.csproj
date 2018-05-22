@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LevelConfigLogic.cs" />
     <Compile Include="OrderDetailLogic.cs" />
     <Compile Include="ExpApplyLogic.cs" />
     <Compile Include="OrderLogic.cs" />

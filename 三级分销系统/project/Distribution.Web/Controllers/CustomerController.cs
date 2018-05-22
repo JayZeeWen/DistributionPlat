@@ -91,7 +91,15 @@ namespace Distribution.Web.Controllers
             {
                 var list  = AgentRelationLogic.GetList().Where(f => f.c_parent_id == ageId).Select(f => f.c_child_id).ToList();
                 var aList = AgentLogic.GetList().Where(f => list.Contains(f.c_id)).ToList();
-                result.data = aList;
+                var viewList = AgentHelper.getJsonListFromEntityList(aList);
+                int firstGen = 1 ;
+                foreach (var item in viewList)
+                {
+                    item.gender = "1 - " +  firstGen.ToString();
+                    firstGen++;
+                }
+
+                result.fistList = viewList;
                 result.state = ResultType.success.ToString();
                 return Content(result.ToJson());
             }
@@ -119,6 +127,7 @@ namespace Distribution.Web.Controllers
         /// <summary>
         /// 获取 返回数据
         /// </summary>
-        public List<Agent> data { get; set; }
+        public List<AgentJsonModel> fistList { get; set; }
     }
+
 }
