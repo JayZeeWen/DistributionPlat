@@ -97,7 +97,7 @@ namespace Distribution.Logic
                     if (rewardScore > 0)
                     {
                         var list = context.t_agent_relation.ToList();
-                        RewardForCorreLevel(SeconAgent, SeconAgent, 1, ref rewardScore, reType, list , context, amount);
+                        RewardForCorreLevel(SeconAgent, (int)SeconAgent.c_levle, 1, ref rewardScore, reType, list , context, amount);
                     }
 
                     #endregion
@@ -159,7 +159,7 @@ namespace Distribution.Logic
         /// <param name="RewardScore">奖励总积分</param>
         /// <param name="reType">奖励类型</param>
         /// <param name="context"></param>
-        private static void RewardForCorreLevel(Agent ParAgent, Agent lowstAgent, int currentLevel, ref int RewardScore, RewartType reType, List<AgentRelation> allRelationList , DistributionContext context,int amount = 1 )
+        private static void RewardForCorreLevel(Agent ParAgent, int beforeMaxLevel, int currentLevel, ref int RewardScore, RewartType reType, List<AgentRelation> allRelationList , DistributionContext context,int amount = 1 )
         {
             string desc = "";
             var list = allRelationList.Where(f => f.c_child_id == ParAgent.c_id);
@@ -176,7 +176,7 @@ namespace Distribution.Logic
             {
                 var list_config = context.t_level_config.Where(f => f.c_level == ag.c_levle && f.c_is_delete == 0);
                 int needReward = 0;//等级奖励
-                int cMaxLevel = GetBetweenMaxLevel(ag, lowstAgent, context);//下级中最高等级
+                int cMaxLevel = beforeMaxLevel;//下级中最高等级
                 //极差制度提现，上级奖励= 配置奖励 - 下级最高级奖励
                 if (list_config.Count() != 0 && currentLevel < ag.c_levle)
                 {
@@ -217,7 +217,8 @@ namespace Distribution.Logic
                 level = (int)ag.c_levle;
             }
             level = Math.Max(currentLevel, level);
-            RewardForCorreLevel(ag,lowstAgent, level, ref RewardScore, reType, allRelationList, context,amount);
+            beforeMaxLevel = Math.Max(beforeMaxLevel, level);
+            RewardForCorreLevel(ag, beforeMaxLevel, level, ref RewardScore, reType, allRelationList, context, amount);
 
         }
 
@@ -262,37 +263,6 @@ namespace Distribution.Logic
             return max_Level;
         }
 
-        private static int GetBetweenMaxLevel(Agent topAgent, Agent lowestAge ,DistributionContext context = null )
-        {
-            context = new DistributionContext();
-            
-            int max_Level = 1;
-            int parLevel = 0;
-            var list = context.t_agent_relation.Where(f => f.c_child_id == lowestAge.c_id);
-            if(list.Count() ==0 )
-            {
-                return 0;
-            }
-            var p = list.First().ChildrenAgent ;
-            if(p.c_mobile == topAgent.c_mobile)
-            {
-                return 0 ; 
-            }
-            max_Level = (int)p.c_levle;
-            p = list.First().ParentAgent;
-            parLevel = GetBetweenMaxLevel(topAgent, p, context);
-            max_Level = Math.Max(parLevel,max_Level);
-            return max_Level;
-            
-        }
-
-        public static int GetLevel (Agent topAgent, Agent lowestAge )
-        {
-            using (DistributionContext context = new DistributionContext ())
-            {
-                return GetBetweenMaxLevel(topAgent, lowestAge, context);
-            }
-        }
 
         
     }

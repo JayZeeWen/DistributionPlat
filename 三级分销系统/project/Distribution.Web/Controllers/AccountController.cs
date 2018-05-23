@@ -143,6 +143,11 @@ namespace Distribution.Web.Controllers
             return View();
         }
 
+        public ActionResult Protcol()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         [HandlerAjaxOnly]
