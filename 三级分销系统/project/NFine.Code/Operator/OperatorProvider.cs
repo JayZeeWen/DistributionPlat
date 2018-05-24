@@ -14,6 +14,9 @@ namespace NFine.Code
         }
         private string LoginUserKey = Configs.GetValue("LoginUserKey");
         private string LoginProvider = Configs.GetValue("LoginProvider");
+        private string AgentInfoKey = Configs.GetValue("AgentInfoKey");
+
+        
 
         public OperatorModel GetCurrent()
         {
@@ -48,17 +51,19 @@ namespace NFine.Code
 
         public void AddCurrentAgentInfo(AgentInfo ag ,string key)
         {
+            string k = AgentInfoKey + key;
             if (LoginProvider == "Cookie")
             {
-                WebHelper.WriteCookie(key, ag.ToJson() , 60);
+                WebHelper.WriteCookie(k , ag.ToJson(), 60);
             }
             else
             {
-                WebHelper.WriteSession(key, ag.ToJson());
+                WebHelper.WriteSession(k , ag.ToJson());
             }
         }
         public AgentInfo GetAgentInfo(string key)
         {
+            key = AgentInfoKey + key;
             AgentInfo s = new AgentInfo();
             if (LoginProvider == "Cookie")
             {
@@ -79,6 +84,18 @@ namespace NFine.Code
             else
             {
                 WebHelper.RemoveSession(LoginUserKey.Trim());
+            }
+        }
+        public void RemoveAgentInfo(string key )
+        {
+            key = AgentInfoKey + key;
+            if (LoginProvider == "Cookie")
+            {
+                WebHelper.RemoveCookie(key);
+            }
+            else
+            {
+                WebHelper.RemoveSession(key);
             }
         }
     }

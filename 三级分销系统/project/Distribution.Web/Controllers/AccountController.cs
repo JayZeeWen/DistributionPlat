@@ -219,6 +219,8 @@ namespace Distribution.Web.Controllers
             Session.Abandon();
             Session.Clear();
             OperatorProvider.Provider.RemoveCurrent();
+            var userInfo = NFine.Code.OperatorProvider.Provider.GetCurrent();
+            OperatorProvider.Provider.RemoveAgentInfo(userInfo.UserId);
             return RedirectToAction("Login", "Account");
         }
 

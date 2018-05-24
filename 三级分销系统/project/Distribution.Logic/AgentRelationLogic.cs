@@ -79,16 +79,14 @@ namespace Distribution.Logic
                 otherCount = 0;
                 var list = context.t_agent_relation.ToList();
                 var firstList = list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null 
-                    && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
                     && t.ChildrenAgent.c_state > 0
                     ).ToList();
                 expCount += list.Where(t => t.c_parent_id == agentId && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
                 var pIds = firstList.Select(t => t.c_child_id).ToList();
                 var secondList = list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null
-                && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
                 && t.ChildrenAgent.c_state> 0 ).ToList();
                 expCount += list.Where(t => pIds.Contains(t.c_parent_id) && t.ChildrenAgent != null && t.ChildrenAgent.c_agnet_type == (int)AgentType.Exp).Count();
-                secondCount = secondList.Count();//二代数量
+                secondCount = secondList.Where(t =>t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp ).Count();//二代数量
                 while(secondList.Count() > 0 )
                 {
                     var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
@@ -97,7 +95,7 @@ namespace Distribution.Logic
                     otherCount += secondList.Where(t => t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).Count();
                 }
                 
-                return firstList.Count();
+                return firstList.Where(t =>t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp ).Count();
             }
         }
 

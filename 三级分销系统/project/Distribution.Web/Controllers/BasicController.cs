@@ -46,7 +46,7 @@ namespace Distribution.Web.Controllers
                     }
                     int totalScore = ScoreDetailLogic.GetTotalScore(ag.c_id);
                     int fisrtCount = 0,  secondCount = 0, otherCount = 0, expCount = 0;
-                    var readSessionAgent = OperatorProvider.Provider.GetAgentInfo("ag" + agentInfo.agent.c_id);
+                    var readSessionAgent = OperatorProvider.Provider.GetAgentInfo( agentInfo.agent.c_id);
                     if (readSessionAgent != null )
                     {
                         fisrtCount = readSessionAgent.FirstCount;
@@ -63,9 +63,8 @@ namespace Distribution.Web.Controllers
                         sInfo.SecondCount = secondCount;
                         sInfo.DeptCount = otherCount;
                         sInfo.ExpCount = expCount;
-                        OperatorProvider.Provider.AddCurrentAgentInfo(sInfo, "ag" + agentInfo.agent.c_id);
+                        OperatorProvider.Provider.AddCurrentAgentInfo(sInfo, agentInfo.agent.c_id);
                     }
-                    var  ss = OperatorProvider.Provider.GetAgentInfo("ag" + agentInfo.agent.c_id);
                     agentInfo.FirstCount = fisrtCount;
                     agentInfo.SecondCount = secondCount;
                     agentInfo.OtherCount = otherCount;
