@@ -93,9 +93,8 @@ namespace Distribution.Logic
                 {
                     var otherParentIds = secondList.Select(t => t.c_child_id).ToList();
                     secondList = list.Where(t => otherParentIds.Contains(t.c_parent_id) && t.ChildrenAgent != null
-                    && t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp
                     && t.ChildrenAgent.c_state > 0).ToList();
-                    otherCount += secondList.Count();
+                    otherCount += secondList.Where(t => t.ChildrenAgent.c_agnet_type != (int)AgentType.Exp).Count();
                 }
                 
                 return firstList.Count();

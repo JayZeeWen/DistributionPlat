@@ -164,7 +164,6 @@ namespace NFine.Web.Areas.AgentManage.Controllers
 
                 if(ag.c_agnet_type != (int)AgentType.Exp)//体验店计算上下级奖励即可
                 {
-                    ScoreLogic.DealProvinceReward(ag);
 
                     #region 生成代理商订单
                     Order order = new Order();

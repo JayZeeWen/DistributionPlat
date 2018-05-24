@@ -99,6 +99,10 @@ namespace Distribution.Logic
                         var list = context.t_agent_relation.ToList();
                         RewardForCorreLevel(SeconAgent, (int)SeconAgent.c_levle, 1, ref rewardScore, reType, list , context, amount);
                     }
+                    if(reType == RewartType.Recommend)
+                    {
+                        DealProvinceReward(SeconAgent);
+                    }
 
                     #endregion
                 }

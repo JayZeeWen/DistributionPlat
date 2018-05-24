@@ -63,7 +63,6 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             ScoreLogic.DealRewardScore(ag.F_Id, RewartType.Recommend);
 
             Agent ag2 = AgentLogic.GetEnityById(entity.c_agent_id);
-            ScoreLogic.DealProvinceReward(ag2);
             #endregion
 
             //扣减积分
