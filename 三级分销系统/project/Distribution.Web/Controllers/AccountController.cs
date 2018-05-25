@@ -73,13 +73,18 @@ namespace Distribution.Web.Controllers
 
         [HttpPost]
         [HandlerAjaxOnly]
-        public ActionResult CheckLogin(string username, string password)
+        public ActionResult CheckLogin(string username, string password, string authCode)
         {
             LogEntity logEntity = new LogEntity();
             logEntity.F_ModuleName = "系统登录";
             logEntity.F_Type = DbLogType.Login.ToString();
             try
             {
+                if (Session["nfine_session_verifycode"].IsEmpty() || Md5.md5(authCode.ToLower(), 16) != Session["nfine_session_verifycode"].ToString())
+                {
+                    throw new Exception("验证码错误，请重新输入");
+                }
+
                 Agent user = AgentLogic.CheckLogin(username, password);
                 //UserEntity userEntity = new UserApp().CheckLogin(model.Mobile, model.Password);
                 if (user != null)

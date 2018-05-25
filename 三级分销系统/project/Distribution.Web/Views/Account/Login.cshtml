@@ -28,7 +28,7 @@
         <div class="container">
             <div class="logo">
                 @*<i class="fa fa-modx"></i>*@
-                <h2>广州季无痕生物科技有限公司版权所有</h2>
+                
             </div>
             <form class="form">
                 <div class="row">
@@ -40,14 +40,25 @@
                     <i class="fa fa-key"></i>
                 </div>
                 <div class="row">
+                    <input id="txt_code" maxlength="4" type="text" placeholder="验证码" style="width: 190px; float: left;">
+                    <div style="width: 110px; float: right; padding-top: 14px; padding-left: 14px;">
+                        看不清？<a id="switchCode" href="javascript:void();" style="text-decoration: none;">换一张</a>
+                        <img id="imgcode" class="authcode" src="~/Account/GetAuthCode" width="80" height="25" />
+                    </div>
+                </div>
+                <div class="row">
                     <button id="login_button" type="button"><span>登录</span></button>
                 </div>
+
                 <br />
                 <div class="row pull-right" >
                     <a href="Register" style="font-size:16px">注册</a>
                 </div>
             </form>
             <div class="login_tips"></div>
+
+            <br />
+            <h2 style="color:white">广州季无痕生物科技有限公司版权所有</h2>
         </div>
         <ul class="bg-bubbles">
             <li></li>
@@ -91,7 +102,11 @@
                         $("#login_button").attr('disabled', 'disabled').find('span').html("loading...");
                         $.ajax({
                             url: url,
-                            data: { username: $.trim($username.val()), password: $.trim($password.val()) },
+                            data: {
+                                username: $.trim($username.val())
+                                , password: $.trim($password.val())
+                                , authCode: $.trim($code.val())
+                            },
                             type: "post",
                             dataType: "json",
                             success: function (data) {
@@ -112,13 +127,16 @@
                 },
                 init: function () {
                     $('.wrapper').height($(window).height());
+                    $("#switchCode").click(function () {
+                        $("#imgcode").attr("src", "~/Account/GetAuthCode?time=" + Math.random());
+                    });
                     $(".container").css("margin-top", ($(window).height() - $(".container").height()) / 2 - 50);
                     $(window).resize(function (e) {
                         $('.wrapper').height($(window).height());
                         $(".container").css("margin-top", ($(window).height() - $(".container").height()) / 2 - 50);
                     });
                     $("#switchCode").click(function () {
-                        $("#imgcode").attr("src", "/Account/GetAuthCode?time=" + Math.random());
+                        $("#imgcode").attr("src", "GetAuthCode?time=" + Math.random());
                     });
                     var login_error = top.$.cookie('nfine_login_error');
                     if (login_error != null) {
