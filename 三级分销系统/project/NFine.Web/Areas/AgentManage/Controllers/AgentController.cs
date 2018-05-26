@@ -129,6 +129,11 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DisabledAccount(string keyValue)
         {
+            int firstCount = AgentRelationLogic.GetFirstCustomer(keyValue).Count();
+            if ( firstCount > 0)
+            {
+                return Error("禁用失败，伞下有会员。");
+            }
             AgentEntity userEntity = new AgentEntity();
             userEntity.F_Id = keyValue;
             userEntity.c_state = 0;//0：未审核   1：审核通过
