@@ -150,13 +150,17 @@
         });
     }
     function btn_delete() {
-        $.deleteForm({
-            url: "/AgentManage/Agent/DeleteForm",
-            param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
-            success: function () {
-                $.currentWindow().$("#gridList").trigger("reloadGrid");
+        $.modalConfirm("注：您确定要【删除】该用户吗？", function (r) {
+            if (r) {
+                $.deleteForm({
+                    url: "/AgentManage/Agent/DeleteForm",
+                    param: { keyValue: $("#gridList").jqGridRowValue().F_Id },
+                    success: function () {
+                        $.currentWindow().$("#gridList").trigger("reloadGrid");
+                    }
+                })
             }
-        })
+        });
     }
     function btn_details() {
         var keyValue = $("#gridList").jqGridRowValue().F_Id;
@@ -186,7 +190,7 @@
     }
     function btn_disabled() {
         var keyValue = $("#gridList").jqGridRowValue().F_Id;
-        $.modalConfirm("注：您确定要【禁用】该项账户吗？", function (r) {
+        $.modalConfirm("注：您确定要【禁用】该账户吗？", function (r) {
             if (r) {
                 $.submitForm({
                     url: "/AgentManage/Agent/DisabledAccount",
@@ -287,6 +291,7 @@
                 <li><a id="NF-edit" authorize="yes" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>修改用户</a></li>
                 <li><a id="NF-Details" onclick="btn_changeScore()"><i class="fa fa-pencil-square-o"></i>更改积分</a></li>
                 <li><a id="NF-delete"  onclick="btn_disabled()"><i class="fa fa-trash-o"></i>禁用</a></li>
+                <li><a id="NF-delete" onclick="btn_delete()"><i class="fa fa-trash-o"></i>删除</a></li>
                 <li><a id="NF-Details" authorize="yes" onclick="btn_details()"><i class="fa fa-search-plus"></i>查看用户</a></li>
                 
                 <li><a  onclick="LoginForward()"><i class="fa fa-search-plus"></i>登陆用户</a></li>
