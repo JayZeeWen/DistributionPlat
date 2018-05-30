@@ -1,0 +1,246 @@
+﻿@using Distribution.Model;
+@using System.Configuration;
+@model Distribution.Web.En.Models.CustRelationModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutForward.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+    <link href="~/Content/copy/layer.css" rel="stylesheet" />
+    <link href="~/Content/copy/idangerous.swiper.css" rel="stylesheet" />
+    <script src="~/Content/copy/idangerous.swiper.min.js"></script>
+    <script src="~/Content/copy/layer.js"></script>
+</head>
+<body class="bBg">
+    <div class="bRight" id="bRight" style="height:950px;overflow:auto">
+        <div class="grDiv1">
+            <div class="grDiv1_1"><label>客户关系图</label></div>
+            <div class="grDiv1_2" style="height:820px;overflow:auto">
+                <h1 style="text-align:center">一代</h1>
+                <div class="device">
+                    <a class="arrow-left" id="fistALeft"></a>
+                    <a class="arrow-right" id="firstARight"></a>
+                    <div class="swiper-container"  id="first" style="cursor: -webkit-grab;">
+                        <div id="ulFirst" class="swiper-wrapper" style="width: 30000px; height: 130px;  transform: translate3d(0px, 0px, 0px) ; transition-duration: 0.3s;">
+                            @foreach (var item in Model.fistList)
+                            {
+                                <div class="swiper-slide" style="width: 130px; height: 130px;">
+                                    <div class="slide1"><label>@item.gender</label><img src="~/Content/img/forwardWeb/relation.jpg"></div>
+                                    <p>@item.name  @item.level</p><p>代理人手机：@item.mobile</p>
+                                </div>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <h1 style="text-align:center">二代</h1>
+                <div class="device">
+                    <a class="arrow-left" id="secondALeft" ></a>
+                    <a class="arrow-right" id="secondARight"></a>
+                    <div class="swiper-container" id="second" style="cursor: -webkit-grab;">
+                        <div id="ulSecond" class="swiper-wrapper" style="width: 30000px; height: 130px;  transition-duration: 0.3s;">
+                            @foreach (var item in Model.fistList)
+                            {
+                                foreach (var second in item.secondList)
+                                {
+                                    <div class="swiper-slide" style="width: 130px; height: 130px;">
+                                        <div class="slide1"><label>@second.gender</label><img src="~/Content/img/forwardWeb/relation.jpg"></div>
+                                        <p>@second.name  @second.level</p><p>代理人手机：@second.mobile</p>
+                                    </div>
+                                }
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--右侧开始-->
+        <!--右侧结束-->
+    </div>
+    @*</div>*@
+    <script type="text/javascript">
+        
+        var fistSwiper = $('#first').swiper({
+            loop: false,
+            grabCursor: true,
+            paginationClickable: true,
+            slidesPerView: 5
+        });
+        $('#fistALeft').on('click', function (e) {
+           
+
+            fistSwiper.swipePrev();
+        });
+        $('#firstARight').on('click', function (e) {
+            fistSwiper.swipeNext();
+        });
+        var secondSwiper = $('#second').swiper({
+            loop: false,
+            grabCursor: true,
+            paginationClickable: true,
+            slidesPerView: 5
+        });
+        $('#secondALeft').on('click', function (e) {
+            e.preventDefault()
+
+            secondSwiper.swipePrev();
+        });
+        $('#secondARight').on('click', function (e) {
+            e.preventDefault()
+            secondSwiper.swipeNext();
+        });
+
+        $(document).ready(function () {
+            
+
+            @*$.ajax({
+                url: '@Url.Action("GetAgentRelation", "Customer")',
+                data: {
+                    ageId: '@Model.agent.c_id'
+                },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data.state == "success") {
+                        data.fistList.forEach(function (val, index) {
+                            
+                            html += "<div class='swiper-slide swiper-slide-visible swiper-slide-active' style='width: 130px; height: 130px;'>"
+                            html += "  <div class='slide1'><label>" + val.gender + "</label><img src='../Content/img/ll04.jpg'></div>"
+                            html+="    <p>"+ val.name +"  "+ val.level +"</p><p>代理人手机："+ val.mobile +"</p>"
+                            html+= "</div> "
+
+                            
+                        });
+                        $("#ulFirst").append(html);
+                        
+                    } else {
+                        alert("添加失败 ： " + data.message)
+                    }
+                }
+            });*@
+        });
+
+        
+        
+    </script>
+    <style>
+        .device {
+            width: 100%;
+            padding: 0 50px;
+            height: 150px;
+            border: 1px solid #999;
+            margin: 0 auto 20px;
+            position: relative;
+            margin-top:10px
+        }
+
+            .device .arrow-left {
+                background: url(../Content/img/j_left.png) no-repeat left top;
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                margin-top: -21px;
+                width: 22px;
+                height: 45px;
+            }
+
+            .device .arrow-right {
+                background: url(../Content/img/j_right.png) no-repeat left bottom;
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                margin-top: -21px;
+                width: 22px;
+                height: 45px;
+            }
+
+        .swiper-container {
+            height: 300px;
+            width: 640px;
+        }
+
+        .content-slide {
+            padding: 20px;
+            color: #fff;
+            position: relative;
+        }
+
+        .slide1 {
+            width: 90px;
+            height: 90px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+            .slide1 img {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .slide1 label {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+        .device .swiper-slide p {
+            width: 100%;
+            text-align: cetner;
+            margin-bottom: 0;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+    <style>
+        .deDiv {
+            width: 750px;
+            height: 130px;
+            border: 1px solid #999;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deDiv1 {
+            height: 130px;
+            float: left;
+        }
+
+        .deDiv1_1 {
+            width: 90px;
+            height: 90px;
+            position: relative;
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+        }
+
+            .deDiv1_1 label {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .deDiv1_1 img {
+                width: auto;
+                height: 100%;
+                display: block;
+            }
+
+        .deDiv1 p {
+            width: 100%;
+            text-align: cetner;
+            margin-bottom: 0;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>  
+</body>
+</html>

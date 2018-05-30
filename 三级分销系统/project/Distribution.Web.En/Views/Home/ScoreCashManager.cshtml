@@ -1,0 +1,80 @@
+﻿@using Distribution.Model;
+@model Distribution.Web.En.Models.ScoreCashModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutForward.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+</head>
+<body class="bBg">
+    @*<div class="bMain">*@
+    ﻿
+
+    <div class="bRight" style="height:950px">
+        <div class="cwNav">
+            <a href="ScoreManager">积分明细</a>
+            <a href="" style="background: #fe6c00; color:#FFF;" >积分提现记录</a>
+        </div>
+        <!--右侧开始-->
+        <div class="grDiv1">
+            <div class="grDiv1_1"><label>积分明细</label></div>
+            <div class="grDiv1_2">
+
+                <table class="cwTab">
+                    <tbody>
+                        <tr>
+                            <th style="width:6%"></th>
+                            <th>提现积分</th>
+                            <th>提现状态</th>
+                            <th>申请时间</th>
+                        </tr>
+                        @{int index = 1;}
+                        @foreach(ScoreCash item in Model.cashList.DataList)
+                        {
+                            <tr>
+                                <td style="width:6%">@index</td>
+                                <td>@item.c_amount</td>
+                                @if (item.c_cash_state == 0)
+                                {
+                                    <td>受理中</td>
+                                }
+                                else if (item.c_cash_state == 1)
+                                {
+                                    <td>已受理</td>
+                                }
+                                else
+                                {
+                                    <td><span style="color:red" >已退回</span></td>
+                                }
+
+
+                                <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd hh:mm")</td>
+                                @{index += 1;}
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div style="padding-left:20%;padding-top:20px">
+                    @Html.Raw(Model.cashList.PagerHtml(size: 5)) 共 @Model.cashList.Total 条
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+        </script>
+        <!--右侧结束-->
+    </div>
+    <div class="clearB"></div>
+    @*</div>*@
+    <style>
+        .cwNav{ width:100%; height:36px; margin-bottom:15px;}
+        .cwNav a{ font-size:16px; height:36px; line-height:36px; padding:0 15px; display:block; float:left; background:#f2f2f2; color:#292929; border:1px solid #e1e1e1; border-radius:5px; margin-right:10px;}
+    </style>
+</body>
+</html>
