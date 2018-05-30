@@ -482,6 +482,7 @@
     <Content Include="Content\js\simditor\css\fonticon.scss" />
     <Content Include="Content\js\simditor\css\simditor.scss" />
     <Content Include="Content\d3\LICENSE" />
+    <None Include="Properties\PublishProfiles\Distribution.Web.En.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
