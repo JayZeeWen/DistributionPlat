@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>季无痕</title>
+    <meta name="author" content="季无痕官方唯一认证平台">
+    <meta name="keywords" content="季无痕官方唯一认证平台">
+    <meta name="description" content="季无痕官方唯一认证平台">
+    <link rel="icon" href="~/Content/img/forwardWeb/icon.jpg" type="image/x-icon" />
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+    <link href="~/Content/copy/idangerous.swiper.css" rel="stylesheet" />
+    <script src="~/Content/copy/idangerous.swiper.min.js"></script>
+
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-login.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/cookie/jquery.cookie.js"></script>
+    <script src="~/Content/js/md5/jquery.md5.js"></script>
+    <script src="~/Content/js/Share.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="bg" style="display:none;background-color: #ccc;width: 200%;position:absolute;height: 200%;opacity: 0.5;z-index: 1;"></div>
+    <script src="~/Content/js/bootstrap/bootstrap.js"></script>
+    <div id="popDiv" style="z-index:99;display:none;position:absolute;margin-top: 10%;margin-left: 30%;background-color: #FFF;
+                            width:40%;height:60%">
+        <table class="cwTab">
+            <tr>
+                <th colspan="4">Notice</th>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td id="pubTitle"></td>
+                <th>Notice Time</th>
+                <td id="pubDate">2018-05-13</td>
+            </tr>
+            <tr>
+                <th colspan="4">Content</th>
+            </tr>
+            <tr>
+                <td colspan="4" style="font-size:15px;height:300px" id="pubContent">测测测娃出色的擦违法地方给病人提供，得分测测测娃出色的擦违法地方给病人，提供得分测测测娃出色的擦违法地方给病人提供得分测，测测娃出色的，擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分测测测娃出色的擦违法地方给病人提供得分</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <a href="javascript:closeDiv()">Close</a>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="bHeader_bg">
+        <div class="bHeader">
+            <label>Hello，Welcome to Ji Wu Hen！</label><!-- <a class="bHeader1"></a><a class="bHeader2"></a> -->
+            <div class="bHeader3">
+                @if (!string.IsNullOrEmpty( ViewBag.UserId))
+                {
+                    <a href="~/Home/UserInfo" class="bHeader3_1">@ViewBag.User</a>
+                    <a href="~/Account/LogOut" class="bHeader3_2">Logout</a>
+                }
+                else
+                {
+                    <a href="~/Account/Login" class="bHeader3_2">Login in</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="bNav_bg">
+        <div class="bNav">
+            <a class="bNav1"><img src="~/Content/img/forwardWeb/icon.jpg"></a>
+            <ul>
+                <li><a href="~/Home/Index">Home</a></li>
+                <li><a href="~/Customer/Index">My Customers</a></li>
+                <li><a href="~/Home/UserInfo">Profile</a></li>
+                <li><a href="~/Home/ScoreManager">Point Management</a></li>
+                @if (Model != null && Model.agent != null && Model.agent.c_agnet_type != 0)
+                {
+                    <li><a href="~/Product/Index">Product</a></li>
+                }
+            </ul>
+           
+        </div>
+    </div>
+    <div>
+        <div id="service">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)" class="weixin_area">
+                        <img src="~/Content/img/l02.png" width="47" height="49" class="shows" />
+                        <img src="~/Content/img/a.png" width="57" height="49" class="hides" />
+                        <img src="~/Content/img/weixin.jpg" width="145" class="weixin" style="display:none;margin:-100px 57px 0 0" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=800022936&site=qq&menu=yes" target="_blank">
+                        <div class="hides" style="width:161px;display:none;" id="qq">
+                            <div class="hides" id="p1">
+                                <img src="~/Content/img/ll04.png">
+                            </div>
+                            <div class="hides" id="p2">
+                                <span style="color:#FFF;font-size:13px">service 1</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/img/l04.png" width="47" height="49" class="shows" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=800022936&site=qq&menu=yes" target="_blank">
+                        <div class="hides" style="width:161px;display:none;" id="qq">
+                            <div class="hides" id="p1">
+                                <img src="~/Content/img/ll04.png">
+                            </div>
+                            <div class="hides" id="p2">
+                                <span style="color:#FFF;font-size:13px">service 2</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/img/l04.png" width="47" height="49" class="shows" />
+                    </a>
+                </li>
+                <li>
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=800022936&site=qq&menu=yes" target="_blank">
+                        <div class="hides" style="width:161px;display:none;" id="qq">
+                            <div class="hides" id="p1">
+                                <img src="~/Content/img/ll04.png">
+                            </div>
+                            <div class="hides" id="p2">
+                                <span style="color:#FFF;font-size:13px">service 3</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/img/l04.png" width="47" height="49" class="shows" />
+                    </a>
+                </li>
+                <li id="tel">
+                    <a href="javascript:void(0)">
+                        <div class="hides" style="width:161px;display:none;" id="tels">
+                            <div class="hides" id="p1">
+                                <img src="~/Content/img/ll05.png">
+                            </div>
+                            <div class="hides" id="p3">
+                                <span style="color:#FFF;font-size:12px">0551-65371998</span>
+                            </div>
+                        </div>
+                        <img src="~/Content/img/l05.png" width="47" height="49" class="shows" />
+                    </a>
+                </li>
+                <li id="btn">
+                    <a id="top_btn">
+                        <div class="hides" style="width:161px;display:none">
+                            <img src="~/Content/img/ll06.png" width="161" height="49" />
+                        </div>
+                        <img src="~/Content/img/l06.png" width="47" height="49" class="shows" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        @RenderBody()
+        <div class="footer_box">
+            <div class="footer">
+                
+                <p></p>
+                <p>Copyright © 2016 Inc. All rights reserved 2017-2020 <span style="color:#666666;font-family:Verdana, Arial, Vrinda, Tahoma;font-weight:bold;text-align:right;background-color:#eef2f5;">Guangzhou Ji Wu Hen Biological Technology Co., Ltd. All Rights Reserved</span></p>
+                <p><!--电话：400-0000-000 -->粤ICP备17102192号</p>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+            $(function() {
+                $("#service a").hover(function() {
+                    if ($(this).prop("className") == "weixin_area") {
+                        $(this).children("img.hides").show();
+                    } else {
+                        $(this).children("div.hides").show();
+                        $(this).children("img.shows").hide();
+                        $(this).children("div.hides").animate({marginRight: '0px'}, '0');
+                    }
+                }, function() {
+                    if ($(this).prop("className") == "weixin_area") {
+                        $(this).children("img.hides").hide();
+                    } else {
+                        $(this).children("div.hides").animate({marginRight: '-163px'}, 0, function() {
+                            $(this).hide();
+                            $(this).next("img.shows").show();
+                        });
+                    }
+                });
+
+                $("#top_btn").click(function() {
+                    $("html,body").animate({scrollTop: 0}, 600);
+                });
+
+                //右侧导航 - 二维码
+                $(".weixin_area").hover(function() {
+                    $(this).children(".weixin").show();
+                },function(){
+                    $(this).children(".weixin").hide();
+                })
+
+
+                var showGG = getUrlPara('ShowGG');
+                if (showGG == 1) {
+                    
+                    $.ajax({
+                        url: '@Url.Action("GetPubNotice", "Home")',
+                        data: { keyValue: "1" },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                $("#pubContent").html(data.data.c_content);
+                                $("#pubDate").html(data.data.c_pub_time);
+                                $("#pubTitle").html(data.data.c_pub_title);
+                                
+                                showDiv();
+                            }
+                        }
+                    });
+                }
+                
+            });
+
+            function showDiv() {
+                document.getElementById('popDiv').style.display = 'block';
+                document.getElementById('bg').style.display = 'block';
+            }
+            function closeDiv() {
+                document.getElementById('popDiv').style.display = 'none';
+                document.getElementById('bg').style.display = 'none';
+            }
+
+            function getUrlPara (name) {
+                var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);
+                if (r != null) return unescape(r[2]); return null;
+            }
+    </script>
+    <style>
+        
+
+        #service {
+            width: 161px;
+            height: 290px;
+            position: fixed;
+            top: 350px;
+            right: 0px;
+            z-index: 100;
+        }
+
+        *html #service {
+            margin-top: 258px;
+            position: absolute;
+            top: expression(eval(document.documentElement.scrollTop));
+        }
+
+            #service li {
+                width: 161px;
+                height: 60px;
+            }
+
+                #service li img {
+                    float: right;
+                }
+
+                #service li a {
+                    height: 49px;
+                    float: right;
+                    display: block;
+                    min-width: 47px;
+                    max-width: 161px;
+                }
+
+                    #service li a .shows {
+                        display: block;
+                    }
+
+                    #service li a .hides {
+                        margin-right: -143px;
+                        cursor: pointer;
+                        cursor: hand;
+                    }
+
+                    #service li a.weixin_area .hides {
+                        display: none;
+                        position: absolute;
+                        right: 143px;
+                    }
+
+                    #service li a.weixin_area .weixin {
+                        display: none;
+                        position: absolute;
+                        right: 0;
+                        top: 48px;
+                    }
+
+        #p2 {
+            width: 112px;
+            background-color: #A7D2A9;
+            height: 47px;
+            margin-left: 47px;
+            border: 1px solid #8BC48D;
+            text-align: center;
+            line-height: 47px;
+        }
+
+        #p3 {
+            width: 112px;
+            background-color: #EC9890;
+            height: 47px;
+            margin-left: 47px;
+            border: 1px solid #E6776C;
+            text-align: center;
+            line-height: 47px;
+        }
+
+        #p1 {
+            width: 47px;
+            height: 49px;
+            float: left;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+</body>
+</html>

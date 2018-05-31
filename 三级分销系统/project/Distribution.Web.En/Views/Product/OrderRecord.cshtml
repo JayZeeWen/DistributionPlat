@@ -1,0 +1,304 @@
+﻿@using Distribution.Model;
+@model Distribution.Web.En.Models.OrderModel
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutForward.cshtml";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/style.css" media="all">
+    <link type="text/css" rel="stylesheet" href="~/Content/copy/z.css" media="all">
+</head>
+<body class="bBg">
+    @*<div class="bMain">*@
+    ﻿
+
+    <div class="bRight" style="height:950px;">
+        <div class="cwNav">
+            <a href="Index">产品商城</a>
+            <a style="background: #fe6c00; color:#FFF;">订单记录</a>
+        </div>
+        <!--右侧开始-->
+        <div class="grDiv1">
+            <div class="grDiv1_1"><label>历史订单</label></div>
+            <div class="grDiv1_2">
+
+                <table class="cwTab">
+                    <tbody>
+                        <tr>
+                            <th style="width:6%"></th>
+                            <th>订单号</th>
+                            <th>快递单号</th>
+                            <th>当前状态</th>
+                            <th>创建时间</th>
+                        </tr>
+                        @{int index = 1;}
+                        @foreach (Order item in Model.orderList.DataList)
+                        {
+                            <tr>
+                                <td style="width:6%">@index</td>
+                                <td><a href="#" onclick="ShowDetail('@item.F_Id','@item.c_state')">@item.c_order_num</a></td>
+                                <td>@item.c_express_num</td>
+                                @if (item.c_state == 0)
+                                {
+                                    <td><span style="color:red">未下单</span></td>
+                                }
+                                else if (item.c_state == 1)
+                                {
+                                    <td>未发货</td>
+                                }
+                                else
+                                {
+                                    <td>已受理</td>
+                                }
+                                <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
+                                @{index += 1;}
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div style="padding-left:20%;padding-top:20px">
+                    @Html.Raw(Model.orderList.PagerHtml(size: 5)) 共 @Model.orderList.Total 条
+                </div>
+            </div>
+        </div>
+        <div class="purPro">
+            <div class="tqjeDiaPro">
+                <h2>订单详情</h2>
+                <div class="tqjeDia1Pro">
+                    <table class="cwTab">
+                        <tr>
+                            <th style="width:30px"></th>
+                            <th>商品名称</th>
+                            <th>单价（分）</th>
+                            <th>数量</th>
+                            <th>总价</th>
+                            <th>操作</th>
+                        </tr>
+                        <tbody id="bodyDetail">
+                            <tr>
+                                @*<td tyle="width:30px">1</td>
+                                    <td>线雕提升套</td>
+                                    <td>700</td>
+                                    <td>2</td>
+                                    <td>1400</td>*@
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tqjeDetail" style="margin-bottom:10px">
+                    <input class="okPurPro" id="btnSubmitPur" type="button" value="下单" />
+                   
+                    <input class="closePurPro" onclick="proClose()" type="button" value="关闭">
+                </div>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+            function submitOrder(orderId) {
+                var r = confirm("确认下单吗？");
+                if (r) {
+                    $("#btnSubmitPur").attr("style","width:150px")
+                    $("#btnSubmitPur").attr("disabled", "disabled");
+                    $("#btnSubmitPur").val("正在提交订单...");
+                    $.ajax({
+                        url: '@Url.Action("PostOrder", "Product")',
+                        data: {
+                            OrderId: orderId
+                        },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                alert("下单成功，请等待发货");
+                                var indexUrl = '@Url.Action("OrderRecord", "Product")';
+                                window.location.href = indexUrl;
+                                return true;
+                            } else {
+                                alert("下单失败 ： " + data.message)
+                            }
+                        }
+                    });
+                }
+            }
+
+            function delOrderDetail(detailId) {
+                var r = confirm("确认删除吗？");
+                if (r) {
+                    $.ajax({
+                        url: '@Url.Action("DelOrderDetail", "Product")',
+                        data: {
+                            DetailId: detailId
+                        },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                alert("删除成功");
+                                var indexUrl = '@Url.Action("OrderRecord", "Product")';
+                                window.location.href = indexUrl;
+                                return true;
+                            } else {
+                                alert("失败 ： " + data.message)
+                            }
+                        }
+                    });
+                }
+            }
+
+            function ShowDetail(orderId, state) {
+                //alert(orderId);
+                $("#bodyDetail").html("");
+                if (state != 0) {
+                    $("#btnSubmitPur").hide();
+                }
+                $.ajax({
+                    url: '@Url.Action("GetOrderDetail", "Product")',
+                    data: {
+                        OrderId: orderId
+                    },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.state == "success") {
+                            var tbody = "";
+                            if (data.data != null) {
+                                for (var i = 0 ; i < data.data.length; i++) {
+                                    var item = data.data[i];
+                                    var id = '"' + item.F_Id + '"'
+                                    tbody += "<tr>"
+                                    tbody += "<td tyle='width:30px'>" + (i + 1) + "</td>"
+                                    tbody += "<td>" + item.Pro.c_name + "</td>"
+                                    tbody += "<td>" + item.Pro.c_price + "</td>"
+                                    tbody += "<td>" + item.c_amount + "</td>"
+                                    tbody += "<td>" + item.c_total + "</td>"
+                                    if (state == 0) {
+                                        tbody += "<td><input class='closePurPro' onclick='delOrderDetail(" + id + ")' value='删除' type='button' /></td>"
+                                    } else {
+                                        tbody += "<td></td>";
+                                    }
+                                    tbody += "</tr>"
+                                }
+                                $("#btnSubmitPur").attr("onclick", "submitOrder('" + orderId + "')");
+                                $("#bodyDetail").html(tbody);
+                            }
+                            $(".purPro").show();
+
+                        } else {
+                            alert("获取信息失败")
+                        }
+                    }
+                });
+                $(".purPro").show();
+
+            }
+            function proClose() {
+                $(".purPro").hide();
+            }
+
+
+        </script>
+        <!--右侧结束-->
+    </div>
+    <div class="clearB"></div>
+    @*</div>*@
+    <style>
+        .cwNav {
+            width: 100%;
+            height: 36px;
+            margin-bottom: 15px;
+        }
+
+            .cwNav a {
+                font-size: 16px;
+                height: 36px;
+                line-height: 36px;
+                padding: 0 15px;
+                display: block;
+                float: left;
+                background: #f2f2f2;
+                color: #292929;
+                border: 1px solid #e1e1e1;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+
+        .purPro, #prom {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            display: none;
+        }
+
+        .tqjeDiaPro {
+            width: 80%;
+            height: 50%;
+            overflow: hidden;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            border-radius: 7px;
+        }
+
+            .tqjeDiaPro h2 {
+                line-height: 50px;
+                padding-left: 20px;
+                font-weight: bold;
+                background: #eee;
+                font-size: 20px;
+                color: #333;
+            }
+
+        .tqjeDia1Pro {
+            height: 80px;
+        }
+
+
+        input.okPurPro {
+            border: 1px solid #1da75f;
+            color: #fff;
+            background: #1da75f;
+            margin-right: 100px;
+        }
+
+        input.closePurPro {
+            border: 1px solid #1da75f;
+            color: #1da75f;
+            background: #fff;
+        }
+
+        .tqjeDetail {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            padding-left: 35%;
+            padding-top: 20px;
+            margin-left: 20px;
+            border-top: 1px dashed #eeeeee;
+            position: absolute;
+            left: 0;
+            bottom: 20px;
+        }
+
+            .tqjeDetail input {
+                width: 78px;
+                height: 30px;
+                font-size: 14px;
+                border-radius: 5px;
+                display: block;
+                float: left;
+            }
+    </style>
+
+</body>
+</html>
