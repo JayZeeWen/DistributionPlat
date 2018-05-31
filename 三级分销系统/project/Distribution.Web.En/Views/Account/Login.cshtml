@@ -31,7 +31,7 @@
             </div>
             <form class="form">
                 <div class="row">
-                    <input id="txt_account" type="text" placeholder="Phone Number">
+                    <input id="txt_account" type="text" placeholder="Tel">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="row">
@@ -89,7 +89,7 @@
                     var $code = $("#txt_code");
                     if ($username.val() == "") {
                         $username.focus();
-                        $.login.formMessage('Phone Number can not be null.');
+                        $.login.formMessage('Tel can not be null.');
                         return false;
                     } else if ($password.val() == "") {
                         $password.focus();

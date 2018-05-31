@@ -17,37 +17,37 @@
         <div class="bRight">
             <!--右侧开始-->
             <div class="grDiv1">
-                <div class="grDiv1_1"><label>基本信息</label></div>
+                <div class="grDiv1_1"><label>Basic Information</label></div>
                 <div class="grDiv1_2">
                     <div class="grDiv1_21">
-                        <p><label>真实姓名：</label><input type="text" name="name" class="name" value="@Model.agent.c_name"></p>
-                        <p><label>手<i>空空</i>机：</label><input type="text" disabled="" name="mobile" class="mobile" value="@Model.agent.c_mobile"></p>
-                        <p><label>支付宝：</label><input type="text" class="aliAccount" value="@Model.agent.c_ali_account"></p>
+                        <p><label>Name：</label><input type="text" name="name" class="name" value="@Model.agent.c_name"></p>
+                        <p><label>Tel：</label><input type="text" disabled="" name="mobile" class="mobile" value="@Model.agent.c_mobile"></p>
+                        <p><label>Alipay：</label><input type="text" class="aliAccount" value="@Model.agent.c_ali_account"></p>
                         <p style="position: relative;">
-                            <label>推  荐  人：</label><input type="text" name="tj" disabled="" class="tj" value="@Model.RecomAgentName">
+                            <label>Referee：</label><input type="text" name="tj" disabled="" class="tj" value="@Model.RecomAgentName">
                             <span style="position: absolute;width:160px;left: 375px;top: 9px;font-size: 14px;color: #666;"></span>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="grDiv2">
-                <div class="grDiv2_1"><label>地址管理</label></div>
+                <div class="grDiv2_1"><label>Address Management</label></div>
                 <div class="grDiv2_2">
-                    <p><label>联系地址：</label><input type="text" name="address" class="address" value="@Model.agent.c_address"></p>
-                    <p><label>收件人：</label><input type="text" name="addressee" class="addressee" value="@Model.agent.c_rec_person"></p>
-                    <p><label>联系方式：</label><input type="text" name="tel" class="tel" value="@Model.agent.c_rec_mobile"></p>
+                    <p><label>Address：</label><input type="text" name="address" class="address" value="@Model.agent.c_address"></p>
+                    <p><label>Recipient：</label><input type="text" name="addressee" class="addressee" value="@Model.agent.c_rec_person"></p>
+                    <p><label>Tel：</label><input type="text" name="tel" class="tel" value="@Model.agent.c_rec_mobile"></p>
                 </div>
             </div>
             <div class="grDiv3">
-                <div class="grDiv3_1"><label>银行卡管理</label></div>
+                <div class="grDiv3_1"><label>Bank Card Management</label></div>
                 <div class="grDiv3_2">
-                    <p><label>开户行：</label><input type="text" name="bank_aXX" class="bank_aXX" value="@Model.agent.c_bank_name"></p>
-                    <p><label>持卡人：</label><input type="text" name="bank_holder" class="bank_holder" value="@Model.agent.c_bank_person"></p>
-                    <p><label>卡<i>空</i>号：</label><input type="text" name="bank_num" class="bank_num" value="@Model.agent.c_bank_account"></p>
+                    <p><label>Bank：</label><input type="text" name="bank_aXX" class="bank_aXX" value="@Model.agent.c_bank_name"></p>
+                    <p><label>Cardholder：</label><input type="text" name="bank_holder" class="bank_holder" value="@Model.agent.c_bank_person"></p>
+                    <p><label>Account：</label><input type="text" name="bank_num" class="bank_num" value="@Model.agent.c_bank_account"></p>
                 </div>
             </div>
             <div class="grDiv4">
-                <input type="submit" id="btnSubmit" onclick="SubmitInfo()" class="grDiv4_1" value="提交">
+                <input type="submit" id="btnSubmit" onclick="SubmitInfo()" class="grDiv4_1" value="Confirm">
             </div>
 
            
@@ -86,56 +86,56 @@
         var bank_num = $('.bank_num').val();
         var head_img = $('#head_img').val();
         if (name == '') {
-            alert('请输入真实姓名');
+            alert('Name can not be null.');
             return false;
         }
         if (mobile == '') {
-            alert('请输入手机');
+            alert('Tel can not be null.');
             return false;
         }
         if (address == '') {
-            alert('请输入联系地址');
+            alert('Address can not be null.');
             return false;
         }
         if (addressee == '') {
-            alert('请输入收件人');
+            alert('Recipient can not be null.');
             return false;
         }
         if (tel == '') {
-            alert('请输入联系方式');
+            alert('Contact Address can not be null.');
             return false;
         }
         if (bank_aXX == '') {
-            alert('请输入开户行');
+            alert('Bank can not be null.');
             return false;
         }
         if (bank_holder == '') {
-            alert('请输入持卡人');
+            alert('Cardholder can not be null.');
             return false;
         }
         if (bank_num == '') {
-            alert('请输入卡号');
+            alert('Account can not be null.');
             return false;
         }
 
-        if (!isChinese(name)) {
-            alert('姓名只允许输入纯中文');
-            return false;
-        }
-        if (!isChinese(bank_aXX)) {
-            alert('开户行只允许输入纯中文');
-            return false;
-        }
-        if (!isChinese(bank_holder)) {
-            alert('持卡人只允许输入纯中文');
-            return false;
-        }
+        //if (!isChinese(name)) {
+        //    alert('姓名只允许输入纯中文');
+        //    return false;
+        //}
+        //if (!isChinese(bank_aXX)) {
+        //    alert('开户行只允许输入纯中文');
+        //    return false;
+        //}
+        //if (!isChinese(bank_holder)) {
+        //    alert('持卡人只允许输入纯中文');
+        //    return false;
+        //}
 
         if (!(/^1[34578]\d{9}$/.test(tel))) {
-            alert("联系方式有误，请重填");
+            alert("Tel is wrong, please fill in it again.");
             return false;
         }
-        var r = confirm("提交信息后无法再次更改，确认提交吗？");
+        var r = confirm("Can not be change after submission, confirm the submission?");
         if (r) {
             $.ajax({
                 url: '@Url.Action("SubmitInfo", "Home")',
@@ -154,7 +154,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data.state == "success") {
-                        alert("信息保存成功");
+                        alert("Save success");
                         window.setTimeout(function () {
 
                             var indexUrl = '@Url.Action("UserInfo", "Home")';
@@ -162,7 +162,7 @@
                         }, 1000);
                         return true;
                     } else {
-                        alert("提交失败 ： " + data.message)
+                        alert("Save fail： " + data.message)
                     }
                 }
             });

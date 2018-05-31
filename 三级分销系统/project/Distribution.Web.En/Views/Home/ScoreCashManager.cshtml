@@ -16,21 +16,21 @@
 
     <div class="bRight" style="height:950px">
         <div class="cwNav">
-            <a href="ScoreManager">积分明细</a>
-            <a href="" style="background: #fe6c00; color:#FFF;" >积分提现记录</a>
+            <a href="ScoreManager">Point Detail</a>
+            <a href="" style="background: #fe6c00; color:#FFF;" >Exchange Record</a>
         </div>
         <!--右侧开始-->
         <div class="grDiv1">
-            <div class="grDiv1_1"><label>积分明细</label></div>
+            <div class="grDiv1_1"><label>Point Detail</label></div>
             <div class="grDiv1_2">
 
                 <table class="cwTab">
                     <tbody>
                         <tr>
                             <th style="width:6%"></th>
-                            <th>提现积分</th>
-                            <th>提现状态</th>
-                            <th>申请时间</th>
+                            <th>Exchange Point</th>
+                            <th>Exchange State</th>
+                            <th>Time</th>
                         </tr>
                         @{int index = 1;}
                         @foreach(ScoreCash item in Model.cashList.DataList)
@@ -40,15 +40,15 @@
                                 <td>@item.c_amount</td>
                                 @if (item.c_cash_state == 0)
                                 {
-                                    <td>受理中</td>
+                                    <td>In Processing</td>
                                 }
                                 else if (item.c_cash_state == 1)
                                 {
-                                    <td>已受理</td>
+                                    <td>Already Processed</td>
                                 }
                                 else
                                 {
-                                    <td><span style="color:red" >已退回</span></td>
+                                    <td><span style="color:red" >Already Returned</span></td>
                                 }
 
 
@@ -59,7 +59,7 @@
                     </tbody>
                 </table>
                 <div style="padding-left:20%;padding-top:20px">
-                    @Html.Raw(Model.cashList.PagerHtml(size: 5)) 共 @Model.cashList.Total 条
+                    @Html.Raw(Model.cashList.PagerHtmlEn(size: 5)) Total @Model.cashList.Total
                 </div>
             </div>
         </div>

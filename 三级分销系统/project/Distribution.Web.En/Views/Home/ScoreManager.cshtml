@@ -16,21 +16,21 @@
 
     <div class="bRight" style="height:950px">
         <div class="cwNav">
-            <a href="" style="background: #fe6c00; color:#FFF;">积分明细</a>
-            <a href="ScoreCashManager">积分提现记录</a>
+            <a href="" style="background: #fe6c00; color:#FFF;">Point Detail</a>
+            <a href="ScoreCashManager">Exchange Record</a>
         </div>
         <!--右侧开始-->
         <div class="grDiv1">
-            <div class="grDiv1_1"><label>积分明细</label></div>
+            <div class="grDiv1_1"><label>Point Detail</label></div>
             <div class="grDiv1_2">
 
                 <table class="cwTab">
                     <tbody>
                         <tr>
                             <th style="width:6%"></th>
-                            <th>变更积分</th>
-                            <th>变更原因</th>
-                            <th>变更时间</th>
+                            <th>Point</th>
+                            <th>Reason</th>
+                            <th>Time</th>
                         </tr>
                         @{int index = 1;}
                         @foreach(ScoreDetail item in Model.scoreList.DataList)
@@ -46,7 +46,7 @@
                     </tbody>
                 </table>
                 <div style="padding-left:20%;padding-top:20px">
-                    @Html.Raw(Model.scoreList.PagerHtml(size: 5)) 共 @Model.scoreList.Total 条
+                    @Html.Raw(Model.scoreList.PagerHtmlEn(size: 5)) Total @Model.scoreList.Total
                 </div>
             </div>
         </div>

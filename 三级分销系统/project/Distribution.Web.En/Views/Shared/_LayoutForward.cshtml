@@ -13,7 +13,7 @@
 <body class="bBg">
     <div class="bMain">
         <div class="bLeft">
-            <h2>季无痕</h2>
+            <h2>Ji Wu Hen</h2>
             <div class="bLeft1">
                 <img src="~/Content/img/samples/scarlet-159.png" />
                 
@@ -23,11 +23,11 @@
                 
             </div>
             <div class="bLeft2">
-                <p><label>职位级别：</label><span>@Model.Level</span></p>
-                <p><label>代理商级别：</label><span>
+                <p><label>Position Level:</label><span>@Model.Level</span></p>@*职位级别*@
+                <p><label>Agent Level:</label><span>@*代理商级别*@
                     @if(Model.agent != null && Model.agent.c_agnet_type == 0)
                     {
-                        <span>体验店</span>
+                        <span>Experience Store</span>
                     }
                     else
                     {
@@ -37,28 +37,28 @@
                 @if (Model.agent != null && Model.agent.c_agnet_type == 0)
                 {
                     <p>
-                        <label>体验状态：</label><span>
+                        <label>Experience State：</label><span>
                             @if (Model.agent.c_exp_state == null || Model.agent.c_exp_state == 0)
                             {
-                                <span>未体验</span>
+                                <span>Not Experience</span>
                             }
                             else
                             {
-                                <span>已体验</span>
+                                <span>Experienced</span>
                             }
                         </span>
                     </p>
                 }
-                <p><label>直推人数：</label><span>@Model.FirstCount</span></p>
-                <p><label>二代人数：</label><span>@Model.SecondCount</span></p>
-                <p><label>部门人数：</label><span>@Model.OtherCount</span></p>
-                <p><label>体验店数：</label><span>@Model.ExpCount</span></p>
-                <p><label>奖励总额：</label><span>@Model.TotalScore</span></p>
-                <p><label>当前积分：</label><span>@Model.agent.c_score 分</span></p>
-                <input type="button" value="积分兑换" onclick="tqOk()">
+                <p><label>Direct:</label><span>@Model.FirstCount</span></p>
+                <p><label>Generation:</label><span>@Model.SecondCount</span></p>
+                <p><label>Personnel:</label><span>@Model.OtherCount</span></p>
+                <p><label>Exp Count:</label><span>@Model.ExpCount</span></p>
+                <p><label>Total Point:</label><span>@Model.TotalScore</span></p>
+                <p><label>Current Point:</label><span>@Model.agent.c_score</span></p>
+                <input type="button" value="Exchange" onclick="tqOk()">
                 @if (Model.agent.c_agnet_type == 0)
                 {
-                    <input type="button" value="申请成为加盟店" onclick="applyUp()">
+                    <input type="button" value="Become an Agent" onclick="applyUp()">
                 }
                 <p></p>
                 <p></p>
@@ -68,21 +68,21 @@
         @RenderBody()
         <div class="tqjeDiaBg">
             <div class="tqjeDia">
-                <h2>积分兑换</h2>
+                <h2>Exchange</h2>
                 <div class="tqjeDia1">
-                    <div class="tqjeDia1_1">填写申请折现积分与打款银行卡信息，我们将在三个工作日内将积分打到您的银行卡中。</div>
-                    <div class="tqjeDia1_2"><label>可折现积分：</label><span>@Model.CanCashScore</span></div>
-                    <div class="tqjeDia1_3"><label>兑换积分：</label><input type="text" value="" id="money" pattern="金额"></div>
+                    <div class="tqjeDia1_1">Fill in the application information. We will put the money in your card within three working days.</div>
+                    <div class="tqjeDia1_2"><label>Total Exchange Point:</label><span>@Model.CanCashScore</span></div>
+                    <div class="tqjeDia1_3"><label>Exchange Point:</label><input type="text" value="" id="money" pattern="金额"></div>
                 </div>
-                <div class="tqjeDia2">银行卡信息<!-- <label>修改</label> --></div>
+                <div class="tqjeDia2">Card Information<!-- <label>修改</label> --></div>
                 <div class="tqjeDia3">
-                    <p>开户行：<input type="text" value="@Model.agent.c_bank_name" id="bank_acc" pattern="开户行"></p>
-                    <p>卡　号：<input type="text" value="@Model.agent.c_bank_account" id="bank_num" pattern="卡　号"></p>
-                    <p>持卡人：<input type="text" value="@Model.agent.c_bank_person" id="bank_holder" pattern="持卡人" readonly="true"></p>
+                    <p>Bank:<input type="text" value="@Model.agent.c_bank_name" id="bank_acc" pattern="开户行"></p>
+                    <p>Account:<input type="text" value="@Model.agent.c_bank_account" id="bank_num" pattern="卡　号"></p>
+                    <p>Cardholder:<input type="text" value="@Model.agent.c_bank_person" id="bank_holder" pattern="持卡人" readonly="true"></p>
                 </div>
                 <div class="tqjeDia4">
-                    <input class="tqjeDia4_1" type="button" value="确认">
-                    <input class="tqjeDia4_2" onclick="tqClose()" type="button" value="返回">
+                    <input class="tqjeDia4_1" type="button" value="Confirm">
+                    <input class="tqjeDia4_2" onclick="tqClose()" type="button" value="Return">
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
             $("#money").removeAttr("disabled");
             $(".tqjeDiaBg").show();
         }else {
-            alert("请先完善资料!");
+            alert("Please fill in the information first!");
         }
 
     }
@@ -111,7 +111,7 @@
     function applyUp(){
         var amount = @Model.expLevelUpScore;
         if(@Model.agent.c_score >= amount){
-            if(confirm("确定申请成为加盟店吗？")){
+            if(confirm("Do you decide to apply to become a franchisee?")){
                 $.ajax({
                     url: '@Url.Action("ApplyExpLevelUp", "Home")',
                     data: { keyValue:ag_id },
@@ -119,7 +119,7 @@
                         dataType: "json",
                         success: function (data) {
                             if (data.state == "success") {
-                                alert("申请成功，等待管理员审核");
+                                alert("Apply for success, please wait for audit.");
                                 window.setTimeout(function () {
                                     var indexUrl = '@Url.Action("UserInfo", "Home")';
                                     window.location.href = indexUrl;
@@ -133,7 +133,7 @@
                 }
 
             }else {
-                alert("积分不足"+ amount +"，不可以申请成为加盟店");
+            alert("Lack of point"+ amount +"，You can't apply to become a franchisee");
             }
 
         }
@@ -143,10 +143,10 @@
             var money = $('#money').val();
             var currentScore = @Model.CanCashScore;
         if(money && parseInt(money) < 100){
-            alert('100起提');
+            alert('At least 100');
             return false;
         } else if(money > currentScore){
-            alert('兑换积分大于可折现积分');
+            alert('Exchange Point Greater Than Total Exchange Point');
             return false;
         }
         return true;
@@ -159,7 +159,7 @@
             var bank_acc = $('#bank_acc').val();
             var bank_num = $('#bank_num').val();
             var bank_holder = $('#bank_holder').val();
-            var r = confirm("确认提交吗？");
+            var r = confirm("Do you confirm the submission？");
             if (r) {
                 $.ajax({
                     url: '@Url.Action("ScoreCash", "Home")',
@@ -174,14 +174,14 @@
                     dataType: "json",
                     success: function (data) {
                         if (data.state == "success") {
-                            alert("积分兑换提交成功，3个工作日内到账");
+                            alert("Successfully submitted, We will put the money in your card within three working days.");
                             window.setTimeout(function () {
                                 var indexUrl = '@Url.Action("UserInfo", "Home")';
                                 window.location.href = indexUrl;
                             }, 1000);
                             return true;
                         } else {
-                            alert("提交失败 ： " +  data.message)
+                            alert("Submission failure： " +  data.message)
                         }
                     }
                 });

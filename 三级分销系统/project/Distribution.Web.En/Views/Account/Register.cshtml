@@ -48,12 +48,12 @@
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="row">
-                    <input id="txt_account" type="text" placeholder="Phone Number">
+                    <input id="txt_account" type="text" placeholder="Tel">
                     <i class="fa fa-user"></i>
                 </div>
 
                 <div class="row">
-                    <input id="txt_recomm_account" type="text" placeholder="Phone Num of Referee">
+                    <input id="txt_recomm_account" type="text" placeholder="Tel of Referee">
                     <i class="fa fa-user"></i>
                 </div>
                 <div class="row">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="row">
                     <select id="agentType">
-                        <option value="1">Franchisee</option>
+                        <option value="1">Agent</option>
                         <option value="0">Experience Store</option>
                     </select>
                     <i class="fa fa-tag"></i>
@@ -160,11 +160,11 @@
                         return false;
                     } else if ($username.val() == "") {
                         $username.focus();
-                        $.login.formMessage('Phone Num can not be null.');
+                        $.login.formMessage('Tel can not be null.');
                         return false;
                     } else if ($recomm_mobile.val() == "") {
                         $recomm_mobile.focus();
-                        $.login.formMessage('Phone Num of Referee can not be null.');
+                        $.login.formMessage('Tel of Referee can not be null.');
                         return false;
                     } else if ($password.val() == "") {
                         $password.focus();

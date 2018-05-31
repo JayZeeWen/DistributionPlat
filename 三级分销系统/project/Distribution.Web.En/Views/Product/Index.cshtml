@@ -17,30 +17,29 @@
 
     <div class="bRight" style="height:950px">
         <div class="cwNav">
-            <a href="" style="background: #fe6c00; color:#FFF;">产品商城</a>
-            <a href="OrderRecord">订单记录</a>
+            <a href="" style="background: #fe6c00; color:#FFF;">Product Area</a>
+            <a href="OrderRecord">Order Record</a>
         </div>
         <!--右侧开始-->
         <div class="grDiv1">
-            <div class="grDiv1_1"><label>货品信息</label></div>
+            <div class="grDiv1_1"><label>Goods Information</label></div>
             <div class="spList" style="overflow:auto;height:600px">
                 @foreach (Product item in Model.productList.DataList)
                 {
                     <div class="spLi">
                         <div class="img"><img src="@ConfigurationManager.AppSettings["ProductImagePath"]@item.c_image" width="180" height="180" alt=""></div>
                         <div class="spName">@item.c_name</div>
-                        <div class="spPrice">积分 @item.c_price</div>
+                        <div class="spPrice">Point @item.c_price</div>
                         <div class="spBtm">
-                            <button class="spBtn-buy" onclick="showF('@item.F_Id','@item.c_price')">购买</button>
+                            <button class="spBtn-buy" onclick="showF('@item.F_Id','@item.c_price')">Buy</button>
                         </div>
                     </div>
                 }
             </div>
             <div style="padding-left:20%;padding-top:20px">
-                @Html.Raw(Model.productList.PagerHtml(size: 5)) 共 @Model.productList.Total 条
+                @Html.Raw(Model.productList.PagerHtmlEn(size: 5)) Total @Model.productList.Total
             </div>
         </div>
-
         <script type="text/javascript">
 
         </script>
@@ -48,19 +47,17 @@
     </div>
     <div class="purPro">
         <div class="tqjeDiaPro">
-            <h2>产品购买</h2>
+            <h2>Purchase of Products</h2>
             <div class="tqjeDia1Pro">
-
-                <div class="tqjeDia1_2"><label>可用积分：</label><span>@Model.CanCashScore</span></div>
+                <div class="tqjeDia1_2"><label>Available Point：</label><span>@Model.CanCashScore</span></div>
                 <div class="tqjeDia1_3">
-                    <label>购买数量：</label><input type="text" value="" id="amount" oninput="changeTotal()">  
-                    <label>总金额：</label> <label id="lblTotal"></label>
+                    <label>Purchase Quantity：</label><input type="text" value="" id="amount" oninput="changeTotal()">
+                    <label>Total Point：</label> <label id="lblTotal"></label>
                 </div>
             </div>
-
             <div class="tqjeDia4">
-                <input class="okPurPro" id="btnSubmitPur" type="button" value="加入购物车">
-                <input class="closePurPro" onclick="proClose()" type="button" value="返回">
+                <input class="okPurPro" id="btnSubmitPur" type="button" value="Add to Cart">
+                <input class="closePurPro" onclick="proClose()" type="button" value="Return">
             </div>
         </div>
     </div>
@@ -69,24 +66,24 @@
     <script type="text/javascript">
         var startAmount = @Model.prodStartAmount;
 
-    var singlePrice = 0;
-    function showF(goods_id, money) {
-        var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
-        singlePrice = money;
-        $("#lblTotal").html(singlePrice);
-        $("#amount").val(startAmount);
-        $("#btnSubmitPur").removeAttr("onclick");
-        $("#btnSubmitPur").attr("onclick", onclick)
-        $(".purPro").show();
-        changeTotal();
-    }
+        var singlePrice = 0;
+        function showF(goods_id, money) {
+            var onclick = 'submitPurPro("' + goods_id + '","' + money + '")'
+            singlePrice = money;
+            $("#lblTotal").html(singlePrice);
+            $("#amount").val(startAmount);
+            $("#btnSubmitPur").removeAttr("onclick");
+            $("#btnSubmitPur").attr("onclick", onclick)
+            $(".purPro").show();
+            changeTotal();
+        }
 
 
-    function changeTotal() {
-           
+        function changeTotal() {
+
             var amount = $("#amount").val();
             if (isNaN(parseFloat(amount)) || parseFloat(amount) < startAmount) {
-                alert(startAmount+"盒起购")
+                alert("At Least "+startAmount)
                 $("#amount").val(startAmount);
                 amount = startAmount;
             }
@@ -105,27 +102,26 @@
 
             $.ajax({
                 url: '@Url.Action("AddProToCard", "Product")',
-            data: {
-                Amount: amount
-                , productId: ProId
-                , Price: Price
-            },
-            type: "post",
-            dataType: "json",
-            success: function (data) {
-                if (data.state == "success") {
-                    alert("添加至购物车成功");
-                    proClose();
-                } else {
-                    alert("添加失败 ： " + data.message)
+                data: {
+                    Amount: amount
+                    , productId: ProId
+                    , Price: Price
+                },
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    if (data.state == "success") {
+                        alert("Add to cart success");
+                        proClose();
+                    } else {
+                        alert("Add to cart fail： " + data.message)
+                    }
                 }
-            }
-        });
-    }
+            });
+        }
 
 
     </script>
-
     <style>
         .cwNav {
             width: 100%;
@@ -213,7 +209,6 @@
             z-index: 1;
         }
     </style>
-
 
 </body>
 </html>

@@ -16,22 +16,22 @@
 
     <div class="bRight" style="height:950px;">
         <div class="cwNav">
-            <a href="Index">产品商城</a>
-            <a style="background: #fe6c00; color:#FFF;">订单记录</a>
+            <a href="Index">Product Area</a>
+            <a style="background: #fe6c00; color:#FFF;">Order Record</a>
         </div>
         <!--右侧开始-->
         <div class="grDiv1">
-            <div class="grDiv1_1"><label>历史订单</label></div>
+            <div class="grDiv1_1"><label>History of Order</label></div>
             <div class="grDiv1_2">
 
                 <table class="cwTab">
                     <tbody>
                         <tr>
                             <th style="width:6%"></th>
-                            <th>订单号</th>
-                            <th>快递单号</th>
-                            <th>当前状态</th>
-                            <th>创建时间</th>
+                            <th>Order Number</th>
+                            <th>Express Number</th>
+                            <th>Current State</th>
+                            <th>Time</th>
                         </tr>
                         @{int index = 1;}
                         @foreach (Order item in Model.orderList.DataList)
@@ -42,15 +42,15 @@
                                 <td>@item.c_express_num</td>
                                 @if (item.c_state == 0)
                                 {
-                                    <td><span style="color:red">未下单</span></td>
+                                    <td><span style="color:red">No Order</span></td>
                                 }
                                 else if (item.c_state == 1)
                                 {
-                                    <td>未发货</td>
+                                    <td>Unshipped Delivery</td>
                                 }
                                 else
                                 {
-                                    <td>已受理</td>
+                                    <td>Already Processed</td>
                                 }
                                 <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
                                 @{index += 1;}
@@ -59,22 +59,22 @@
                     </tbody>
                 </table>
                 <div style="padding-left:20%;padding-top:20px">
-                    @Html.Raw(Model.orderList.PagerHtml(size: 5)) 共 @Model.orderList.Total 条
+                    @Html.Raw(Model.orderList.PagerHtmlEn(size: 5)) Total @Model.orderList.Total
                 </div>
             </div>
         </div>
         <div class="purPro">
             <div class="tqjeDiaPro">
-                <h2>订单详情</h2>
+                <h2>Order Detail</h2>
                 <div class="tqjeDia1Pro">
                     <table class="cwTab">
                         <tr>
                             <th style="width:30px"></th>
-                            <th>商品名称</th>
-                            <th>单价（分）</th>
-                            <th>数量</th>
-                            <th>总价</th>
-                            <th>操作</th>
+                            <th>Product Name</th>
+                            <th>Price（Point）</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                            <th>Operation</th>
                         </tr>
                         <tbody id="bodyDetail">
                             <tr>
@@ -88,9 +88,9 @@
                     </table>
                 </div>
                 <div class="tqjeDetail" style="margin-bottom:10px">
-                    <input class="okPurPro" id="btnSubmitPur" type="button" value="下单" />
+                    <input class="okPurPro" id="btnSubmitPur" type="button" value="Order" />
                    
-                    <input class="closePurPro" onclick="proClose()" type="button" value="关闭">
+                    <input class="closePurPro" onclick="proClose()" type="button" value="Close">
                 </div>
             </div>
         </div>
@@ -98,11 +98,11 @@
 
         <script type="text/javascript">
             function submitOrder(orderId) {
-                var r = confirm("确认下单吗？");
+                var r = confirm("Do you confirm the order？");
                 if (r) {
                     $("#btnSubmitPur").attr("style","width:150px")
                     $("#btnSubmitPur").attr("disabled", "disabled");
-                    $("#btnSubmitPur").val("正在提交订单...");
+                    $("#btnSubmitPur").val("An order is being submitted...");
                     $.ajax({
                         url: '@Url.Action("PostOrder", "Product")',
                         data: {
@@ -112,12 +112,12 @@
                         dataType: "json",
                         success: function (data) {
                             if (data.state == "success") {
-                                alert("下单成功，请等待发货");
+                                alert("Order successful, please wait for the delivery.");
                                 var indexUrl = '@Url.Action("OrderRecord", "Product")';
                                 window.location.href = indexUrl;
                                 return true;
                             } else {
-                                alert("下单失败 ： " + data.message)
+                                alert("Order failure ： " + data.message)
                             }
                         }
                     });
@@ -125,7 +125,7 @@
             }
 
             function delOrderDetail(detailId) {
-                var r = confirm("确认删除吗？");
+                var r = confirm("Do you confirm the deletion?");
                 if (r) {
                     $.ajax({
                         url: '@Url.Action("DelOrderDetail", "Product")',
@@ -136,12 +136,12 @@
                         dataType: "json",
                         success: function (data) {
                             if (data.state == "success") {
-                                alert("删除成功");
+                                alert("Delete success");
                                 var indexUrl = '@Url.Action("OrderRecord", "Product")';
                                 window.location.href = indexUrl;
                                 return true;
                             } else {
-                                alert("失败 ： " + data.message)
+                                alert("Delete failure： " + data.message)
                             }
                         }
                     });
@@ -175,7 +175,7 @@
                                     tbody += "<td>" + item.c_amount + "</td>"
                                     tbody += "<td>" + item.c_total + "</td>"
                                     if (state == 0) {
-                                        tbody += "<td><input class='closePurPro' onclick='delOrderDetail(" + id + ")' value='删除' type='button' /></td>"
+                                        tbody += "<td><input class='closePurPro' onclick='delOrderDetail(" + id + ")' value='Delete' type='button' /></td>"
                                     } else {
                                         tbody += "<td></td>";
                                     }
@@ -187,7 +187,7 @@
                             $(".purPro").show();
 
                         } else {
-                            alert("获取信息失败")
+                            alert("Getting information failure.")
                         }
                     }
                 });
