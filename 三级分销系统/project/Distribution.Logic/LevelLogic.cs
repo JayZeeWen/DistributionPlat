@@ -22,6 +22,10 @@ namespace Distribution.Logic
             {
                 
                 context.SaveChanges();
+                if(RecomAgent.c_agnet_type == (int)AgentType.Exp)
+                {
+                    return result;
+                }
                 int currentLevel = (int)RecomAgent.c_levle;//当前等级
                 int maxLevel = (int)context.t_level_config.Where(t => t.c_is_delete == 0).Max(t => t.c_level);//当前系统的最高级别
                 if (currentLevel == maxLevel)
