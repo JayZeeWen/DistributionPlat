@@ -82,7 +82,7 @@ namespace Distribution.Web.En.Controllers
             {
                 if (Session["nfine_session_verifycode"].IsEmpty() || Md5.md5(authCode.ToLower(), 16) != Session["nfine_session_verifycode"].ToString())
                 {
-                    throw new Exception("验证码错误，请重新输入");
+                    throw new Exception("Verification code error, please retype.");
                 }
 
                 Agent user = AgentLogic.CheckLogin(username, password);
