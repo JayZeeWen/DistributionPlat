@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutForWeb.cshtml";
@@ -16,24 +15,60 @@
             <h2>Ji Wu Hen</h2>
             <div class="bLeft1">
                 <img src="~/Content/img/samples/scarlet-159.png" />
-                
-                
-                    <label>@Model.agent.c_name</label>
-                
-                
+
+
+                <label>@Model.agent.c_name</label>
+
+
             </div>
             <div class="bLeft2">
-                <p><label>Position Level:</label><span>@Model.Level</span></p>@*职位级别*@
-                <p><label>Agent Level:</label><span>@*代理商级别*@
-                    @if(Model.agent != null && Model.agent.c_agnet_type == 0)
+                <p>
+                    <label>Position Level：</label>
+                    @if (Model.Level == "代理商")
                     {
-                        <span>Experience Store</span>
+                        <span>Agent</span>
                     }
-                    else
+                    else if (Model.Level == "部门经理")
                     {
-                        @Model.AgLevel
-                    }                    
-                    </span></p>
+                        <span>Manager</span>
+                    }
+                    else if (Model.Level == "副总监")
+                    {
+                        <span>Deputy Director</span>
+                    }
+                    else if (Model.Level == "总监")
+                    {
+                        <span>Director</span>
+                    }
+                    else if (Model.Level == "总经理")
+                    {
+                        <span>General Manager</span>
+                    }
+                </p>@*职位级别*@
+                <p>
+                    <label>Agent Level：</label><span>
+                        @*代理商级别*@
+                        @if (Model.agent != null && Model.agent.c_agnet_type == 0)
+                        {
+                            <span>Experience Store</span>
+                        }
+                        else
+                        {
+                            if (Model.AgLevel == "加盟店")
+                            {
+                                <span>Franchisee</span>
+                            }
+                            else if (Model.AgLevel == "市级代理")
+                            {
+                                <span>City Agent</span>
+                            }
+                            else if (Model.AgLevel == "省级代理")
+                            {
+                                <span>Province Agent</span>
+                            }
+                        }
+                    </span>
+                </p>
                 @if (Model.agent != null && Model.agent.c_agnet_type == 0)
                 {
                     <p>
@@ -49,12 +84,12 @@
                         </span>
                     </p>
                 }
-                <p><label>Direct:</label><span>@Model.FirstCount</span></p>
-                <p><label>Generation:</label><span>@Model.SecondCount</span></p>
-                <p><label>Personnel:</label><span>@Model.OtherCount</span></p>
-                <p><label>Exp Count:</label><span>@Model.ExpCount</span></p>
-                <p><label>Total Point:</label><span>@Model.TotalScore</span></p>
-                <p><label>Current Point:</label><span>@Model.agent.c_score</span></p>
+                <p><label>Direct：</label><span>@Model.FirstCount</span></p>
+                <p><label>Generation：</label><span>@Model.SecondCount</span></p>
+                <p><label>Personnel：</label><span>@Model.OtherCount</span></p>
+                <p><label>Exp Count：</label><span>@Model.ExpCount</span></p>
+                <p><label>Total Point：</label><span>@Model.TotalScore</span></p>
+                <p><label>Current Point：</label><span>@Model.agent.c_score</span></p>
                 <input type="button" value="Exchange" onclick="tqOk()">
                 @if (Model.agent.c_agnet_type == 0)
                 {
@@ -88,33 +123,33 @@
         </div>
     </div>
     <script>
-    var state = @Model.agent.c_state;
-    var ag_id = '@Model.agent.c_id';
-    $(document).ready(function(){
-        $('#money').attr("disabled","");
-        $('#bank_acc').attr("disabled","");
-        $('#bank_num').attr("disabled","");
-    })
-    function tqOk() {
-        if(state == 2){
-            $("#money").removeAttr("disabled");
-            $(".tqjeDiaBg").show();
-        }else {
-            alert("Please fill in the information first!");
+        var state = @Model.agent.c_state;
+        var ag_id = '@Model.agent.c_id';
+        $(document).ready(function(){
+            $('#money').attr("disabled","");
+            $('#bank_acc').attr("disabled","");
+            $('#bank_num').attr("disabled","");
+        })
+        function tqOk() {
+            if(state == 2){
+                $("#money").removeAttr("disabled");
+                $(".tqjeDiaBg").show();
+            }else {
+                alert("Please fill in the information first!");
+            }
+
+        }
+        function tqClose() {
+            $(".tqjeDiaBg").hide();
         }
 
-    }
-    function tqClose() {
-        $(".tqjeDiaBg").hide();
-    }
-
-    function applyUp(){
-        var amount = @Model.expLevelUpScore;
-        if(@Model.agent.c_score >= amount){
-            if(confirm("Do you decide to apply to become a franchisee?")){
-                $.ajax({
-                    url: '@Url.Action("ApplyExpLevelUp", "Home")',
-                    data: { keyValue:ag_id },
+        function applyUp(){
+            var amount = @Model.expLevelUpScore;
+            if(@Model.agent.c_score >= amount){
+                if(confirm("Do you decide to apply to become a franchisee?")){
+                    $.ajax({
+                        url: '@Url.Action("ApplyExpLevelUp", "Home")',
+                        data: { keyValue:ag_id },
                         type: "post",
                         dataType: "json",
                         success: function (data) {
@@ -133,7 +168,7 @@
                 }
 
             }else {
-            alert("Lack of point"+ amount +"，You can't apply to become a franchisee");
+                alert("Lack of point"+ amount +"，You can't apply to become a franchisee");
             }
 
         }
@@ -142,53 +177,53 @@
         function chk_money() {
             var money = $('#money').val();
             var currentScore = @Model.CanCashScore;
-        if(money && parseInt(money) < 100){
-            alert('At least 100');
-            return false;
-        } else if(money > currentScore){
-            alert('Exchange Point Greater Than Total Exchange Point');
-            return false;
-        }
-        return true;
-    }
-
-
-    $('.tqjeDia4_1').click(function () {
-        if(chk_money()){
-            var money = $('#money').val();
-            var bank_acc = $('#bank_acc').val();
-            var bank_num = $('#bank_num').val();
-            var bank_holder = $('#bank_holder').val();
-            var r = confirm("Do you confirm the submission？");
-            if (r) {
-                $.ajax({
-                    url: '@Url.Action("ScoreCash", "Home")',
-                    data: {
-                        amount: money
-                        , bankName: bank_acc
-                        , bankAccount: bank_num
-                        , bankPerson: bank_holder
-                        ,agentId : ag_id
-                    },
-                    type: "post",
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.state == "success") {
-                            alert("Successfully submitted, We will put the money in your card within three working days.");
-                            window.setTimeout(function () {
-                                var indexUrl = '@Url.Action("UserInfo", "Home")';
-                                window.location.href = indexUrl;
-                            }, 1000);
-                            return true;
-                        } else {
-                            alert("Submission failure： " +  data.message)
-                        }
-                    }
-                });
+            if(money && parseInt(money) < 100){
+                alert('At least 100');
+                return false;
+            } else if(money > currentScore){
+                alert('Exchange Point Greater Than Total Exchange Point');
+                return false;
             }
+            return true;
         }
-    });
-</script>
+
+
+        $('.tqjeDia4_1').click(function () {
+            if(chk_money()){
+                var money = $('#money').val();
+                var bank_acc = $('#bank_acc').val();
+                var bank_num = $('#bank_num').val();
+                var bank_holder = $('#bank_holder').val();
+                var r = confirm("Do you confirm the submission？");
+                if (r) {
+                    $.ajax({
+                        url: '@Url.Action("ScoreCash", "Home")',
+                        data: {
+                            amount: money
+                            , bankName: bank_acc
+                            , bankAccount: bank_num
+                            , bankPerson: bank_holder
+                            ,agentId : ag_id
+                        },
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                alert("Successfully submitted, We will put the money in your card within three working days.");
+                                window.setTimeout(function () {
+                                    var indexUrl = '@Url.Action("UserInfo", "Home")';
+                                    window.location.href = indexUrl;
+                                }, 1000);
+                                return true;
+                            } else {
+                                alert("Submission failure： " +  data.message)
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    </script>
     <style>
         .tqjeDiaBg, #prom {
             width: 100%;
@@ -347,6 +382,5 @@
             background: #fff;
         }
     </style>
-
 </body>
 </html>
