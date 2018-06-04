@@ -13,7 +13,10 @@ using NFine.Domain.Entity.AgentManage;
 using NFine.Domain.Entity.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 
@@ -37,6 +40,8 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             };
             return Content(data.ToJson());
         }
+
+        
 
         
 
@@ -100,5 +105,53 @@ namespace NFine.Web.Areas.AgentManage.Controllers
             levelApp.SubmitForm(commEntity, keyValue);
             return Success("操作成功。");
         }
+
+        [HttpGet]
+        [HandlerAuthorize]
+        public virtual ActionResult HPConfig()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetHPConfigJson(Pagination pagination, string keyword)
+        {
+            var list = configApp.GetList(pagination, ((int)ConfigCategory.HPConfig), keyword);
+            var data = new
+            {
+                rows = list,
+                total = pagination.total,
+                page = pagination.page,
+                records = pagination.records
+            };
+            return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAuthorize]
+        public virtual ActionResult HPConfigForm()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetHPConfigFormJson(string keyValue)
+        {
+            var data = configApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitHPConfigForm(CommConfigEntity commEntity, string keyValue)
+        {
+            configApp.SubmitForm(commEntity, keyValue);
+            return Success("操作成功。");
+        }
+
+       
     }
 }

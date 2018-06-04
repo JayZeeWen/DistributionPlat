@@ -670,6 +670,8 @@
     <Content Include="Areas\AgentManage\Views\PubNotice\Index.cshtml" />
     <Content Include="Areas\AgentManage\Views\ExpApply\Index.cshtml" />
     <Content Include="Areas\ReportManage\Views\Highcharts\ScoreReport.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Config\HPConfig.cshtml" />
+    <Content Include="Areas\AgentManage\Views\Config\HPConfigForm.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
     <None Include="Properties\PublishProfiles\post.pubxml" />
   </ItemGroup>

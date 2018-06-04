@@ -83,7 +83,12 @@ namespace Distribution.Model
         /// <summary>
         /// 积分奖励配置
         /// </summary>
-        ScoreConfigCate = 3 
+        ScoreConfigCate = 3 ,
+
+        /// <summary>
+        /// 首页配置
+        /// </summary>
+        HPConfig = 4 
     }
 
     public enum OrderState

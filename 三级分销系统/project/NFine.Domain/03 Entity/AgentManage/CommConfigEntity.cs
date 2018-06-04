@@ -16,7 +16,6 @@ namespace NFine.Domain.Entity.AgentManage
 
         public int? c_key { get; set; }
 
-        [StringLength(32)]
         public string c_value { get; set; }
 
         public int? c_is_delete { get; set; }
