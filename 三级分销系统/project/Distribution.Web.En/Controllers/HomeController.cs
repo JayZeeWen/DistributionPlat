@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Distribution.Model;
 using Distribution.Logic;
 using Distribution.Web.En.Models;
+using System.Configuration;
 
 namespace Distribution.Web.En.Controllers
 {
@@ -14,6 +15,15 @@ namespace Distribution.Web.En.Controllers
     {
         public ActionResult Index()
         {
+            var list = CommConfigLogic.GetConfigListByCate((int)ConfigCategory.HPConfig).ToList();
+
+            foreach (var item in list)
+            {
+                item.c_value = ConfigurationManager.AppSettings["ProductImagePath"] + item.c_value;
+            }
+            int[] spanKeys = new int[4] { 1, 2, 3, 4 };
+            ViewBag.spanList = list.Where(f => spanKeys.Contains((int)f.c_key)).ToList();
+            ViewBag.IntroImage = list.Where(f => f.c_key == 5).First().c_value;
             return View();
         }
         public ActionResult UserInfo(AgentInfoModel model)

@@ -9,29 +9,28 @@
 </head>
 <body class="bBg">
 
-
     <div class="device">
         <div class="swiper-container bSwiper" style="cursor: -webkit-grab;">
             <div class="swiper-wrapper" style="width: 1263px; height: 400px; transform: translate3d(-2526px, 0px, 0px); -webkit-transform: translate3d(-2526px, 0px, 0px); transition-duration: 0.3s; -webkit-transition-duration: 0.3s;">
-                <div class="swiper-slide swiper-slide-duplicate" style="width: 1263px; height: 400px; 
-                    background: url(../Content/img/forwardWeb/span1.jpg) 50% 0% / auto 100% no-repeat;">
-                </div>
-                <div class="swiper-slide swiper-slide-duplicate" style="width: 1263px; height: 400px;
-                    background: url(../Content/img/forwardWeb/span2.jpg) 50% 0% / auto 100% no-repeat;">
-                </div>
+                @foreach (var item in ViewBag.spanList)
+                {
+
+                    <div class="swiper-slide swiper-slide-duplicate" style="width: 1263px; height: 500px;background url('@item.c_value');background-size:100% 100%;background-repeat:no-repeat; ">
+                    </div>
+                }
             </div>
         </div>
         <div class="pagination bPosi"><span class="swiper-pagination-switch"></span><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span><span class="swiper-pagination-switch"></span></div>
     </div>
     <script>
-        var bSwiper = new Swiper('.bSwiper',{
+        var bSwiper = new Swiper('.bSwiper', {
             pagination: '.bPosi',
-            loop:true,
-            autoplay:3000,
+            loop: true,
+            autoplay: 3000,
             grabCursor: true,
             paginationClickable: true
         });
-        $(".green_top_ul li:last-child").css("border","none");
+        $(".green_top_ul li:last-child").css("border", "none");
     </script>
     <style type="text/css">
         .content_hidden {
@@ -85,17 +84,17 @@
         </ul>
     </div>
     <script>
-        function addVideo(obj){
+        function addVideo(obj) {
             var url = obj.attr("url");
-            var vHtml = "<embed src='"+url+"' allowFullScreen='true' quality='high' width='824' height='617' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>";
+            var vHtml = "<embed src='" + url + "' allowFullScreen='true' quality='high' width='824' height='617' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>";
             $('.video').html(vHtml);
             $('.video_bg').show();
         }
-        function closeI(){
+        function closeI() {
             $(".video").html();
             $('.video_bg').hide();
         }
-        $('.green_top_ul li').click(function(){
+        $('.green_top_ul li').click(function () {
             var content = $(this).find('.content_hidden').html();
             var title = $(this).find('h2').text();
             layer.open({
@@ -114,7 +113,7 @@
 
     </script>
     <!--底部-->
-    
+
     <style>
         .tqjeDiaBg, #prom {
             width: 100%;
@@ -274,7 +273,6 @@
         }
     </style>
     <div class="promotion" id="prom"></div>
-
     <div class="layui-layer-move"></div>
 </body>
 </html>
