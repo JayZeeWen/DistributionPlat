@@ -57,9 +57,8 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         public ActionResult DeleteForm(string keyValue)
         {
             PubNoticeEntity entity = productApp.GetForm(keyValue);
-            entity.F_DeleteMark = true;
-            productApp.SubmitForm(entity, keyValue);
-            return Success("下架成功。");
+            productApp.DeleteForm( keyValue);
+            return Success("删除成功。");
         }
 
         [HttpGet]

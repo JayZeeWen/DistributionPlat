@@ -30,6 +30,7 @@
                             <th style="width:6%"></th>
                             <th>订单号</th>
                             <th>快递单号</th>
+                            <th>快递公司</th>
                             <th>当前状态</th>
                             <th>创建时间</th>
                         </tr>
@@ -38,21 +39,22 @@
                         {
                             <tr>
                                 <td style="width:6%">@index</td>
-                                <td><a href="#" onclick="ShowDetail('@item.F_Id','@item.c_state')">@item.c_order_num</a></td>
+                                <td style="width:200px"><a href="#" onclick="ShowDetail('@item.F_Id','@item.c_state')">@item.c_order_num</a></td>
+                                <td style="">@item.c_express_name</td>
                                 <td>@item.c_express_num</td>
                                 @if (item.c_state == 0)
                                 {
-                                    <td><span style="color:red">未下单</span></td>
+                                    <td style="width:100px"><span style="color:red">未下单</span></td>
                                 }
                                 else if (item.c_state == 1)
                                 {
-                                    <td>未发货</td>
+                                    <td style="width:100px">未发货</td>
                                 }
                                 else
                                 {
-                                    <td>已受理</td>
+                                    <td style="width:100px">已受理</td>
                                 }
-                                <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
+                                <td style="width:100px">@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
                                 @{index += 1;}
                             </tr>
                         }

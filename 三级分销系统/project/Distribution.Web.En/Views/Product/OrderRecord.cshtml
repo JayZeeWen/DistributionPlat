@@ -30,6 +30,7 @@
                             <th style="width:6%"></th>
                             <th>Order Number</th>
                             <th>Express Number</th>
+                            <th>Express Company</th>
                             <th>Current State</th>
                             <th>Time</th>
                         </tr>
@@ -38,21 +39,22 @@
                         {
                             <tr>
                                 <td style="width:6%">@index</td>
-                                <td><a href="#" onclick="ShowDetail('@item.F_Id','@item.c_state')">@item.c_order_num</a></td>
+                                <td style="width:200px"><a href="#" onclick="ShowDetail('@item.F_Id','@item.c_state')">@item.c_order_num</a></td>
+                                <td>@item.c_express_num</td>
                                 <td>@item.c_express_num</td>
                                 @if (item.c_state == 0)
                                 {
-                                    <td><span style="color:red">No Order</span></td>
+                                    <td style="width:100px"><span style="color:red">No Order</span></td>
                                 }
                                 else if (item.c_state == 1)
                                 {
-                                    <td>Unshipped Delivery</td>
+                                    <td style="width:100px">Unshipped Delivery</td>
                                 }
                                 else
                                 {
-                                    <td>Already Processed</td>
+                                    <td style="width:100px">Already Processed</td>
                                 }
-                                <td>@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
+                                <td style="width:100px">@Convert.ToDateTime(item.F_CreatorTime).ToString("yyyy-MM-dd")</td>
                                 @{index += 1;}
                             </tr>
                         }

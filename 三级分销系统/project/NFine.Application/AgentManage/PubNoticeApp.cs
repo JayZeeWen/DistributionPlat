@@ -22,6 +22,7 @@ namespace NFine.Application.SystemManage
         {
             var expression = ExtLinq.True<PubNoticeEntity>();
             
+            
             return service.FindList(expression, pagination);
         }
         
