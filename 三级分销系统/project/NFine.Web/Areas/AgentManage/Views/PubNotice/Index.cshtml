@@ -70,7 +70,7 @@
         return str.indexOf(substr) >= 0;
     }
     function btn_delete() {
-        $.modalConfirm("注：您确定要【删除】该用户吗？", function (r) {
+        $.modalConfirm("注：您确定要【删除】该公告吗？", function (r) {
             if (r) {
                 $.deleteForm({
                     url: "/AgentManage/PubNotice/DeleteForm",
