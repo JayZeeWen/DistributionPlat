@@ -116,11 +116,13 @@ namespace NFine.Web.Areas.AgentManage.Controllers
         }
         [HttpPost]
         [HandlerAjaxOnly]
-        [HandlerAuthorize]
         [ValidateAntiForgeryToken]
         public ActionResult SubmitRevisePassword(string userPassword, string keyValue)
         {
             userLogOnApp.RevisePassword(userPassword, keyValue);
+            Agent ag = AgentLogic.GetEnityById(keyValue);
+            ag.c_login_pwd = userPassword;
+            AgentLogic.UpdateEntity(ag);
             return Success("重置密码成功。");
         }
         [HttpPost]
