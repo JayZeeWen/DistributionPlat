@@ -1,23 +1,23 @@
-IP:122.114.53.214:59159  ¶Ë¿Ú£º3389/59159/65138/59
-ÓÃ»§Ãû£ºadministrator
-ÃÜÂë£ºQcnb1V@yPLMVa$uY
+IP:122.114.53.214:59159  ç«¯å£ï¼š3389/59159/65138/59
+ç”¨æˆ·åï¼šadministrator
+å¯†ç ï¼šQcnb1V@yPLMVa$uY
 
 
-SQLServer: ·şÎñÆ÷ 122.114.53.214  µÇÂ¼Ãû sa   ÃÜÂë admin12345
+SQLServer: æœåŠ¡å™¨ 122.114.53.214  ç™»å½•å sa   å¯†ç  admin12345
 
 
-ÌÚÑ¶ÔÆ:
+è…¾è®¯äº‘:
 IP:193.112.205.187
-Ä¬ÈÏÕË»§Îª:Administrator
-³õÊ¼ÃÜÂëÎª:GCMeC9zKAqH
+é»˜è®¤è´¦æˆ·ä¸º:Administrator
+åˆå§‹å¯†ç ä¸º:GCMeC9zKAqH
 
 
-ĞÂ·şÎñÆ÷£º
-IP£º103.30.42.122
-¶Ë¿Ú£º3389
-ÓÃ»§Ãû£ºadministrator
-ÃÜÂë£ºqmRdSxWVV3Ynoh0C
+æ–°æœåŠ¡å™¨ï¼š
+IPï¼š103.30.42.122
+ç«¯å£ï¼š3389
+ç”¨æˆ·åï¼šadministrator
+å¯†ç ï¼š96XC5Y8F44UL4JS2
 
 
-Ç°Ì¨£ºjiwuhen.com
- ºóÌ¨£ºjiwuhen.com:8080
+å‰å°ï¼šjiwuhen.com
+ åå°ï¼šjiwuhen.com:8080
