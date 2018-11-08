@@ -16,7 +16,7 @@ IP:193.112.205.187
 IP：103.30.42.122
 端口：3389
 用户名：administrator
-密码：96XC5Y8F44UL4JS2
+密码：PamAhWarFMpRGESf
 
 
 前台：jiwuhen.com
